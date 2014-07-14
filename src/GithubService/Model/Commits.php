@@ -1,11 +1,11 @@
 <?php
 
 
-namespace AABTest\Github;
+namespace GithubService\Model;
 
 use ArtaxServiceBuilder\Operation;
 use Artax\Response;
-use AABTest\DataMapper;
+
 
 
 class Commits {
@@ -13,12 +13,12 @@ class Commits {
     use DataMapper;
 
     /**
-     * @var \AABTest\Github\Commit[]
+     * @var \GithubService\Model\Commit[]
      */
     public $commits = [];
 
     static protected $dataMap = array(
-        ['commits', [], 'class' => 'AABTest\Github\Commit', 'multiple' => true],
+        ['commits', [], 'class' => 'GithubService\Model\Commit', 'multiple' => true],
     );
 
 
@@ -30,7 +30,7 @@ class Commits {
     }
 
     /**
-     * @return \AABTest\Github\Commit[]
+     * @return \GithubService\Model\Commit[]
      */
     public function getIterator() {
         return new \ArrayIterator($this->commits);

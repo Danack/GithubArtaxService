@@ -4,7 +4,6 @@
 namespace GithubService\Model;
 
 use Artax\Response;
-use AABTest\DataMapper;
 use ArtaxServiceBuilder\Operation;
 
 class Authorization {
@@ -16,7 +15,7 @@ class Authorization {
     public $scopes;
     public $token;
     
-    /** @var  \AABTest\Github\Application */
+    /** @var  \GithubService\Model\Application */
     public $application;
     
     public $note;
@@ -29,7 +28,7 @@ class Authorization {
         ['url', 'url'],
         ['scopes', 'scopes', 'multiple' => true],
         ['token', 'token'],
-        ['application', ['app'], 'class' => '\AABTest\Github\Application'],
+        ['application', ['app'], 'class' => '\GithubService\Model\Application'],
         ['note', 'note'],
         ['noteURL', 'note_url'],
         ['updatedAt', 'updated_at'],

@@ -1,7 +1,7 @@
 <?php
 
 
-namespace ArtaxServiceBuilder\Service;
+namespace GithubService;
 
 
 // Fark RFC 5988
@@ -46,6 +46,7 @@ class Github {
     
     static public $scopeList = [
         self::SCOPE_USER => "Grants read/write access to profile info only. Note that this scope includes user:email and user:follow.",
+        self::SCOPE_USER_EMAIL => 'Grants read access to a user’s email addresses.',
         self::SCOPE_USER_FOLLOW => "Grants access to follow or unfollow other users.",
         self::SCOPE_PUBLIC_REPO => "Grants read/write access to code, commit statuses, and deployment statuses for public repositories and organizations.",
         self::SCOPE_REPO => "Grants read/write access to code, commit statuses, and deployment statuses for public and private repositories and organizations.",

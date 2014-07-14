@@ -5,9 +5,9 @@ namespace GithubService\Model;
 
 use ArtaxServiceBuilder\Operation;
 use Artax\Response;
-use AABTest\DataMapper;
 
-use AABTest\GithubAPI\GithubAPIException;
+
+use GithubService\GithubAPI\GithubAPIException;
 
 
 class AccessResponse {

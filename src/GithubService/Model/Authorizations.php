@@ -4,18 +4,17 @@
 namespace GithubService\Model;
 
 use Artax\Response;
-use AABTest\DataMapper;
 use ArtaxServiceBuilder\Operation;
 
 class Authorizations implements \IteratorAggregate  {
 
     use DataMapper;
 
-    /** @var  \AABTest\Github\Authorization[] */
+    /** @var  \GithubService\Model\Authorization[] */
     public $authorizations = [];
     
     static protected $dataMap = array(
-        ['authorizations', [], 'class' => 'AABTest\Github\Authorization', 'multiple' => true],
+        ['authorizations', [], 'class' => 'GithubService\Model\Authorization', 'multiple' => true],
     );
 
     static function createFromResponse(Response $response, Operation $operation) {
@@ -26,7 +25,7 @@ class Authorizations implements \IteratorAggregate  {
     }
 
     /**
-     * @return \AABTest\Github\Authorization[]
+     * @return \GithubService\Model\Authorization[]
      */
     public function getIterator() {
         return new \ArrayIterator($this->authorizations);

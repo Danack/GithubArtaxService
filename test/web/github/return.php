@@ -1,5 +1,8 @@
 <?php
 
+use GithubService\GithubAPI\GithubAPI;
+use GithubService\GithubAPI\GithubAPIException;
+
 require "githubBootstrap.php";
 
 echo <<< END
@@ -45,17 +48,18 @@ function checkAuthResult() {
         return;
     }
 
-    if ($state != $oauthUnguessable) {
+    if ($state !== $oauthUnguessable) {
         //Miss-match on what we're tring to validated.
         echo "Miss-match on secret'";
         return;
     }
 
     try {
-        $api = new \AABTest\GithubAPI\GithubAPI();
+        $api = new GithubAPI(GITHUB_USER_AGENT);
+        
+        echo "code is $code <br/>";
 
         $command = $api->accessToken(
-            GITHUB_CLIENT_ID,
             GITHUB_CLIENT_SECRET,
             $code,
             "http://".SERVER_HOSTNAME."/github/return.php"
@@ -64,13 +68,18 @@ function checkAuthResult() {
         $response = $command->execute();
         setSessionVariable('githubAccess', $response);
         
+        var_dump($response);
+        
+        var_dump($command->getResponse());
+        
+        
         echo "You are now authed for the following scopes:<br/>";
         
         foreach ($response->scopes as $scope) {
             echo $scope."<br/>";
         }
     }
-    catch(\AABTest\GithubAPI\GithubAPIException $fae) {
+    catch(GithubAPIException $fae) {
         echo "Exception processing response: ".$fae->getMessage();
     }
 }

@@ -15,6 +15,7 @@ return array (
                     "location" => "header",
                     "description" => "",
                     'default' =>  'application/json',
+                    //'default' =>  'application/vnd.github.v3+json',
                 ),
                 'userAgent' => array(
                     "location" => "header",
@@ -50,24 +51,27 @@ return array (
         'getAuthorizations' => array(
             'uri' => '/authorizations',
             'extends' => 'defaultGetOauthOperation',
-            "responseClass" => 'AABTest\Github\Authorizations',
+            "responseClass" => 'GithubService\Model\Authorizations',
+
+//            'parameters' => [
+//                'client_id' => array(
+//                    "location" => "uri",
+//                    "description" => "The id of the client.",
+//                ),
+//            ]
         ),
 
-    
-        
-        
-        
         //Accept: application/json
         'accessToken' => [
             'extends' => 'defaultGetOperation',
             'uri' => 'https://github.com/login/oauth/access_token',
             'httpMethod' => 'POST',
-            "responseClass" => 'AABTest\Github\AccessResponse',
+            "responseClass" => 'GithubService\Model\AccessResponse',
             'parameters' => [
-                'client_id' => [
-                    'description' => 'string Required. The client ID you received from GitHub when you registered.',
-                    'location' => 'query'
-                ],
+//                'client_id' => [
+//                    'description' => 'string Required. The client ID you received from GitHub when you registered.',
+//                    'location' => 'query'
+//                ],
                 'client_secret' => [
                     'description' => 'string Required. The client secret you received from GitHub when you registered.',
                     'location' => 'query'
@@ -104,7 +108,7 @@ return array (
             "uri" => "https://api.github.com/user/emails",
             'extends' => 'defaultGetOauthOperation',
             'summary' => 'Get users email addresses',
-            'responseClass' => 'AABTest\Github\Emails',
+            'responseClass' => 'GithubService\Model\Emails',
             'httpMethod' =>  'GET',
             'parameters' => array(
                 //No parameters - it works off the oauth bearer token
@@ -117,10 +121,10 @@ return array (
             'summary' => 'Get users email addresses',
             //TODO - It would be better to have scopes and permissions combined?
             'scopes' => [
-                [\ArtaxServiceBuilder\Service\Github::SCOPE_USER],
+                [\GithubService\Github::SCOPE_USER],
             ],
             
-            'responseClass' => 'AABTest\Github\Emails',
+            'responseClass' => 'GithubService\Model\Emails',
             'httpMethod' =>  'POST',
             'parameters' => array(
                 'emails' => array(
@@ -162,8 +166,20 @@ return array (
                 ),
             )
         ),
-        
-        
+
+
+        //Get a single user
+        'getUserInfo' => [
+            'extends' => 'defaultGetOauthOperation',
+            'uri' => '/users/{username}',
+
+            'parameters' => array(
+                'username' => array(
+                    "location" => "uri",
+                    "description" => "The username of the client.",
+                ),
+            ),
+        ],
         
         
         
@@ -249,7 +265,7 @@ return array (
             'uri' => '/repos/{owner}/{repo}/tags',  //'uri' => '/repos/:owner/:repo/tags',
             'extends' => 'defaultGetOauthOperation',
             'summary' => 'List tags for a repository. Response can be paged. This can be used either as a authed request (for private repos and higher rate limiting), or as unsigned, (public only, lower limit).',
-            "responseClass" => 'AABTest\Github\RepoTags',
+            "responseClass" => 'GithubService\Model\RepoTags',
 
             'parameters' => array(
                 'owner' => array(
@@ -264,7 +280,7 @@ return array (
         'listRepoCommitsPaginate' => array(
             'extends' => 'defaultGetOauthOperation',
             //'uri' => '{url}',
-            "responseClass" => 'AABTest\Github\Commits',
+            "responseClass" => 'GithubService\Model\Commits',
             'parameters' => array(
                 'pageURL' => array(
                     "location" => "absoluteURL",
@@ -276,7 +292,7 @@ return array (
         'listRepoCommits' => array(
             'extends' => 'defaultGetOauthOperation',
             'uri' => '/repos/{owner}/{repo}/commits',
-            "responseClass" => 'AABTest\Github\Commits',
+            "responseClass" => 'GithubService\Model\Commits',
             'parameters' => array(
                 'owner' => array(
                     "location" => "uri",
@@ -319,7 +335,7 @@ return array (
         'getSingleCommit' => array(
             'extends' => 'defaultGetOauthOperation',
             'uri' => '/repos/{owner}/{repo}/commits/{sha}',
-            "responseClass" => 'AABTest\Github\Commit',
+            "responseClass" => 'GithubService\Model\Commit',
 
             'parameters' => array(
                 'owner' => array(

@@ -5,7 +5,6 @@ namespace GithubService\Model;
 
 use ArtaxServiceBuilder\Operation;
 use Artax\Response;
-use AABTest\DataMapper;
 
 
 class Commit {
@@ -17,24 +16,24 @@ class Commit {
     public $htmlURL;
 
     /**
-     * @var \AABTest\Github\CommitInfo
+     * @var \GithubService\Model\CommitInfo
      */
     public $commitInfo;
 
     /**
      * Author can be null when Github doesn't know who they are
-     * @var \AABTest\Github\Person|null
+     * @var \GithubService\Model\Person|null
      */
     public $author;
     
     /**
      * Committer can be null when Github doesn't know who they are
-     * @var \AABTest\Github\Person|null
+     * @var \GithubService\Model\Person|null
      */
     public $committer;
 
     /**
-     * @var \AABTest\Github\CommitParent[]
+     * @var \GithubService\Model\CommitParent[]
      */
     public $parents;
 
@@ -42,10 +41,10 @@ class Commit {
         ['url', 'url'],
         ['sha', 'sha'],
         ['htmlURL', 'html_url'],
-        ['commitInfo', 'commit', 'class' => 'AABTest\Github\CommitInfo'],
-        ['author', 'author', 'class' => 'AABTest\Github\Person'],
-        ['committer', 'committer', 'class' => 'AABTest\Github\Person'],
-        ['parents', 'parents', 'class' => 'AABTest\Github\CommitParent', 'multiple' => 'true'],
+        ['commitInfo', 'commit', 'class' => 'GithubService\Model\CommitInfo'],
+        ['author', 'author', 'class' => 'GithubService\Model\Person'],
+        ['committer', 'committer', 'class' => 'GithubService\Model\Person'],
+        ['parents', 'parents', 'class' => 'GithubService\Model\CommitParent', 'multiple' => 'true'],
     );
 
 

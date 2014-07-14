@@ -1,24 +1,22 @@
 <?php
 
 
-namespace AABTest\Github;
+namespace GithubService\Model;
 
 use ArtaxServiceBuilder\Operation;
 use Artax\Response;
-use AABTest\DataMapper;
-
 
 
 class RepoTags implements \IteratorAggregate {
 
     use DataMapper;
 
-    /** @var  \AABTest\Github\RepoTag[] */
+    /** @var  \GithubService\Model\RepoTag[] */
     public $repoTags;
     
 
     static protected $dataMap = array(
-        ['repoTags', [], 'class' => 'AABTest\Github\RepoTag', 'multiple' => true],
+        ['repoTags', [], 'class' => 'GithubService\Model\RepoTag', 'multiple' => true],
     );
 
 
@@ -30,7 +28,7 @@ class RepoTags implements \IteratorAggregate {
     }
 
     /**
-     * @return \AABTest\Github\RepoTag[]
+     * @return \GithubService\Model\RepoTag[]
      */
     public function getIterator() {
         return new \ArrayIterator($this->repoTags);

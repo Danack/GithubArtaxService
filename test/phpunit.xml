@@ -24,7 +24,7 @@
 
     <testsuites>
         <testsuite name="GithubService Test Suite">
-            <directory suffix=".php">./GithubService/</directory>
+            <directory suffix=".php">./GithubServiceTest/</directory>
         </testsuite>
     </testsuites>
 

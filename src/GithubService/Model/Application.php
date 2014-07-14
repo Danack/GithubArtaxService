@@ -3,9 +3,6 @@
 
 namespace GithubService\Model;
 
-use Artax\Response;
-use AABTest\DataMapper;
-
 
 class Application {
 

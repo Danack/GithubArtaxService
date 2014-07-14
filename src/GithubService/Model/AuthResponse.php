@@ -5,8 +5,9 @@ namespace GithubService\Model;
 
 use ArtaxServiceBuilder\Operation;
 use Artax\Response;
-use AABTest\DataMapper;
 
+
+//TODO - delete it's unused
 
 class AuthResponse {
 

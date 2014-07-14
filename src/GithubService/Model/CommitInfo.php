@@ -1,9 +1,7 @@
 <?php
 
 
-namespace AABTest\Github;
-
-use AABTest\DataMapper;
+namespace GithubService\Model;
 
 
 class CommitInfo {

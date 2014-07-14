@@ -1,12 +1,12 @@
 <?php
 
 
-namespace AABTest\Github;
+namespace GithubService\Model;
 
 
 use ArtaxServiceBuilder\Operation;
 use Artax\Response;
-use AABTest\DataMapper;
+
 
 class CommitParent {
 
