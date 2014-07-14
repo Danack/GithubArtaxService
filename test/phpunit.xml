@@ -18,13 +18,13 @@
             <directory>./vendor/</directory>
         </blacklist> -->
         <whitelist>
-            <directory>../src/ArtaxServiceBuilder</directory>
+            <directory>../src/GithubService</directory>
         </whitelist>
     </filter>
 
     <testsuites>
-        <testsuite name="Intahwebz Test Suite">
-            <directory suffix=".php">./ArtaxServiceBuilder/</directory>
+        <testsuite name="GithubService Test Suite">
+            <directory suffix=".php">./GithubService/</directory>
         </testsuite>
     </testsuites>
 

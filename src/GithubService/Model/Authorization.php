@@ -1,7 +1,7 @@
 <?php
 
 
-namespace AABTest\Github;
+namespace GithubService\Model;
 
 use Artax\Response;
 use AABTest\DataMapper;
