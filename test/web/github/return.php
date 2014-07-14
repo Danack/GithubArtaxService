@@ -8,13 +8,9 @@ require "githubBootstrap.php";
 echo <<< END
 
 <html>
-
 <body>
-
 <h3><a href='/'>Oauth test home</a> </h3>
-
 <p>Checking oauth result</p>
-
 <p>
 END;
 
@@ -23,13 +19,10 @@ $currentOauthRequest = getSessionVariable('oauthRequest');
 checkAuthResult();
 
 echo <<< END
-
     </p>
-
     <p>
         Back to <a href='/github/index.php'>github start page</a>.
     </p>
-
 </body>
 </html>
 
@@ -55,24 +48,20 @@ function checkAuthResult() {
     }
 
     try {
-        $api = new GithubAPI(GITHUB_USER_AGENT);
+        $api = new DebugGithub(GITHUB_USER_AGENT);
         
         echo "code is $code <br/>";
 
         $command = $api->accessToken(
+            GITHUB_CLIENT_ID,
             GITHUB_CLIENT_SECRET,
             $code,
             "http://".SERVER_HOSTNAME."/github/return.php"
         );
-
+        
         $response = $command->execute();
         setSessionVariable('githubAccess', $response);
-        
-        var_dump($response);
-        
-        var_dump($command->getResponse());
-        
-        
+
         echo "You are now authed for the following scopes:<br/>";
         
         foreach ($response->scopes as $scope) {

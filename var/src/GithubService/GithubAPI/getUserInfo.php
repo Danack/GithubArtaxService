@@ -34,7 +34,7 @@ class getUserInfo implements \ArtaxServiceBuilder\Operation
         return $this->response;
     }
 
-    public function __construct(\GithubService\GithubAPI\GithubAPI $api, $Authorization, $userAgent, $username)
+    public function __construct(\GithubService\GithubAPI\GithubAPI $api, $Authorization, $userAgent)
     {
         $defaultParams = [
             'Accept' => 'application/json',
@@ -43,7 +43,6 @@ class getUserInfo implements \ArtaxServiceBuilder\Operation
         $this->api = $api;
         $this->parameters['Authorization'] = $Authorization;
         $this->parameters['userAgent'] = $userAgent;
-        $this->parameters['username'] = $username;
     }
 
     public function setAPI(\GithubService\GithubAPI\GithubAPI $api)
@@ -62,9 +61,6 @@ class getUserInfo implements \ArtaxServiceBuilder\Operation
         if (array_key_exists('userAgent', $params)) {
              $this->parameters['userAgent'] = $params['userAgent'];
         }
-        if (array_key_exists('username', $params)) {
-             $this->parameters['username'] = $params['username'];
-        }
     }
 
     public function setAccept($Accept)
@@ -82,11 +78,6 @@ class getUserInfo implements \ArtaxServiceBuilder\Operation
         $this->parameters['userAgent'] = $userAgent;
     }
 
-    public function setUsername($username)
-    {
-        $this->parameters['username'] = $username;
-    }
-
     public function getParameters()
     {
         return $this->parameters;
@@ -95,17 +86,14 @@ class getUserInfo implements \ArtaxServiceBuilder\Operation
     public function createRequest()
     {
         $request = new \Artax\Request();
-        $url = "https://api.github.com/users/{username}";
+        $url = "https://api.github.com/user";
         $request->setMethod('GET');
         $queryParameters = [];
 
 
-        $uriTemplate = new \ArtaxServiceBuilder\Service\UriTemplate\UriTemplate();
-        $url = $uriTemplate->expand($url, $this->parameters);
         $request->setHeader('Accept', $this->parameters['Accept']);
         $request->setHeader('Authorization', $this->parameters['Authorization']);
         $request->setHeader('User-Agent', $this->parameters['userAgent']);
-        $queryParameters['username'] = $this->parameters['username'];
 
         //Parameters are parsed and set, lets prepare the request
         $request->setUri($url);
@@ -130,27 +118,31 @@ class getUserInfo implements \ArtaxServiceBuilder\Operation
     /**
      * Execute the operation
      *
-     * @return mixed
+     * @return \GithubService\Model\User
      */
     public function execute()
     {
         $request = $this->createRequest();
         $response = $this->api->callAPI($request);
         $this->response = $response;
-        return $response->getBody();
+        $instance = \GithubService\Model\User::createFromResponse($response, $this);
+
+        return $instance;
     }
 
     /**
      * Dispatch the request for this operation and process the response.Allows you to
      * modify the request before it is sent.
      *
-     * @return mixed
+     * @return \GithubService\Model\User
      */
     public function dispatch(\Artax\Request $request)
     {
         $response = $this->api->callAPI($request);
         $this->response = $response;
-        return $response->getBody();
+        $instance = \GithubService\Model\User::createFromResponse($response, $this);
+
+        return $instance;
     }
 
 

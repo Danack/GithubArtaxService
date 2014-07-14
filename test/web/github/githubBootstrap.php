@@ -249,26 +249,34 @@ function showAuthorizations(AccessResponse $accessResponse) {
 }
 
 
-function showUser(AccessResponse $accessResponse, $username) {
-
-    $api = new GithubAPI(GITHUB_USER_AGENT);
-    $authCommand = $api->getUserInfo('token '.$accessResponse->accessToken, $username);
-    $authorisations = $authCommand->execute();
-
-    $response = $authCommand->getResponse();
-    
-    var_dump($response);
-
-//    foreach($authorisations->getIterator() as $authorisation) {
-//        echo "Application: ".$authorisation->application."<br/>";
-//        echo "Scopes:".implode($authorisation->scopes)."<br/>";
-//        echo "<br/>";
-//    }
-
+/**
+ * @param \GithubService\Model\User $user
+ */
+function renderUserInfo(\GithubService\Model\User $user) {
+    echo "Login: ".$user->login."<br/>";
+    echo "Repos URL: ".$user->reposUrl."<br/>";
+    echo "Email: ".$user->email."<br/>";
+    echo "Hireable: ".$user->hireable."<br/>";
+    echo "CreatedAt: ".$user->createdAt."<br/>";
+    echo "Scopes: ".implode(', ', $user->oauthScopes)."<br/>";
 }
 
 
+/**
+ * @param AccessResponse $accessResponse
+ * @param $username
+ */
+function showUser(AccessResponse $accessResponse, $username) {
+    $api = new GithubAPI(GITHUB_USER_AGENT);
+    $authCommand = $api->getUserInfo('token '.$accessResponse->accessToken);
+    $user = $authCommand->execute();
+    renderUserInfo($user);
+}
 
+
+/**
+ * @param Commits $commits
+ */
 function displayCommits(Commits $commits) {
 
     echo "<table style='font-size: 12px'>";
@@ -304,7 +312,6 @@ function displayCommits(Commits $commits) {
 function displayAndSaveLinks(\Artax\Response $response) {
     $pager = new \ArtaxServiceBuilder\Service\GithubLinkParser($response);
     $links = $pager->parseResponse();
-
 
     foreach ($links as $link) {
         $storedLink = new StoredLink($link);
@@ -365,9 +372,6 @@ function revokeAuthority(AccessResponse $accessResponse) {
 
     $blah = $command->execute();
 
-    var_dump($blah);
-
-
     echo "Diplomatic immunity, has been revoked?";
 
 }
@@ -380,6 +384,8 @@ function showRepoTags(AccessResponse $accessResponse, $username, $repo) {
     foreach ($repoTags->getIterator() as $repoTag) {
         echo "Tag name: ".$repoTag->name." sha ".$repoTag->commitSHA."<br/>";
     }
+    
+
 }
 
 
@@ -472,3 +478,13 @@ function showOauthRequest($scopes) {
 }
 
  
+
+class DebugGithub extends \GithubService\GithubAPI\GithubAPI {
+    function callAPI(\Artax\Request $request, array $successStatuses = array()) {
+        var_dump(toCurl($request));
+        $response = parent::callAPI($request, $successStatuses);
+        var_dump($response);
+
+        return $response;
+    }
+}

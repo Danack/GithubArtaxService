@@ -90,14 +90,16 @@ class GithubAPI implements \GithubService\GithubAPI
      *
      * @param client_id mixed string Required. The client ID you received from GitHub
      * when you registered.
+     * @param client_secret mixed string Required. The client secret you received from
+     * GitHub when you registered.
      * @param code mixed string Required. The code you received as a response to Step
      * 1.
      * @param redirect_uri mixed string The URL in your app where users will be sent
      * after authorization. See details below about redirect urls.
      */
-    public function accessToken($client_id, $code, $redirect_uri)
+    public function accessToken($client_id, $client_secret, $code, $redirect_uri)
     {
-        $instance = new accessToken($this, $this->getuserAgent(), $client_id, $code, $redirect_uri);
+        $instance = new accessToken($this, $this->getuserAgent(), $client_id, $client_secret, $code, $redirect_uri);
         return $instance;
     }
 
@@ -156,14 +158,25 @@ class GithubAPI implements \GithubService\GithubAPI
     }
 
     /**
-     * getUserInfo
+     * getUserInfoByName
      *
      * @param Authorization mixed The oauth2 bearer token
      * @param username mixed The username of the client.
      */
-    public function getUserInfo($Authorization, $username)
+    public function getUserInfoByName($Authorization, $username)
     {
-        $instance = new getUserInfo($this, $Authorization, $this->getuserAgent(), $username);
+        $instance = new getUserInfoByName($this, $Authorization, $this->getuserAgent(), $username);
+        return $instance;
+    }
+
+    /**
+     * getUserInfo
+     *
+     * @param Authorization mixed The oauth2 bearer token
+     */
+    public function getUserInfo($Authorization)
+    {
+        $instance = new getUserInfo($this, $Authorization, $this->getuserAgent());
         return $instance;
     }
 

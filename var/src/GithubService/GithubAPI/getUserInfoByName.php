@@ -6,7 +6,7 @@
 //
 namespace GithubService\GithubAPI;
 
-class accessToken implements \ArtaxServiceBuilder\Operation
+class getUserInfoByName implements \ArtaxServiceBuilder\Operation
 {
 
     /**
@@ -34,18 +34,16 @@ class accessToken implements \ArtaxServiceBuilder\Operation
         return $this->response;
     }
 
-    public function __construct(\GithubService\GithubAPI\GithubAPI $api, $userAgent, $client_id, $client_secret, $code, $redirect_uri)
+    public function __construct(\GithubService\GithubAPI\GithubAPI $api, $Authorization, $userAgent, $username)
     {
         $defaultParams = [
             'Accept' => 'application/json',
         ];
         $this->setParams($defaultParams);
         $this->api = $api;
+        $this->parameters['Authorization'] = $Authorization;
         $this->parameters['userAgent'] = $userAgent;
-        $this->parameters['client_id'] = $client_id;
-        $this->parameters['client_secret'] = $client_secret;
-        $this->parameters['code'] = $code;
-        $this->parameters['redirect_uri'] = $redirect_uri;
+        $this->parameters['username'] = $username;
     }
 
     public function setAPI(\GithubService\GithubAPI\GithubAPI $api)
@@ -58,20 +56,14 @@ class accessToken implements \ArtaxServiceBuilder\Operation
         if (array_key_exists('Accept', $params)) {
              $this->parameters['Accept'] = $params['Accept'];
         }
+        if (array_key_exists('Authorization', $params)) {
+             $this->parameters['Authorization'] = $params['Authorization'];
+        }
         if (array_key_exists('userAgent', $params)) {
              $this->parameters['userAgent'] = $params['userAgent'];
         }
-        if (array_key_exists('client_id', $params)) {
-             $this->parameters['client_id'] = $params['client_id'];
-        }
-        if (array_key_exists('client_secret', $params)) {
-             $this->parameters['client_secret'] = $params['client_secret'];
-        }
-        if (array_key_exists('code', $params)) {
-             $this->parameters['code'] = $params['code'];
-        }
-        if (array_key_exists('redirect_uri', $params)) {
-             $this->parameters['redirect_uri'] = $params['redirect_uri'];
+        if (array_key_exists('username', $params)) {
+             $this->parameters['username'] = $params['username'];
         }
     }
 
@@ -80,29 +72,19 @@ class accessToken implements \ArtaxServiceBuilder\Operation
         $this->parameters['Accept'] = $Accept;
     }
 
+    public function setAuthorization($Authorization)
+    {
+        $this->parameters['Authorization'] = $Authorization;
+    }
+
     public function setUserAgent($userAgent)
     {
         $this->parameters['userAgent'] = $userAgent;
     }
 
-    public function setClient_id($client_id)
+    public function setUsername($username)
     {
-        $this->parameters['client_id'] = $client_id;
-    }
-
-    public function setClient_secret($client_secret)
-    {
-        $this->parameters['client_secret'] = $client_secret;
-    }
-
-    public function setCode($code)
-    {
-        $this->parameters['code'] = $code;
-    }
-
-    public function setRedirect_uri($redirect_uri)
-    {
-        $this->parameters['redirect_uri'] = $redirect_uri;
+        $this->parameters['username'] = $username;
     }
 
     public function getParameters()
@@ -113,22 +95,19 @@ class accessToken implements \ArtaxServiceBuilder\Operation
     public function createRequest()
     {
         $request = new \Artax\Request();
-        $url = "https://github.com/login/oauth/access_token";
-        $request->setMethod('POST');
+        $url = "https://api.github.com/users/{username}";
+        $request->setMethod('GET');
         $queryParameters = [];
 
 
+        $uriTemplate = new \ArtaxServiceBuilder\Service\UriTemplate\UriTemplate();
+        $url = $uriTemplate->expand($url, $this->parameters);
         $request->setHeader('Accept', $this->parameters['Accept']);
+        $request->setHeader('Authorization', $this->parameters['Authorization']);
         $request->setHeader('User-Agent', $this->parameters['userAgent']);
-        $queryParameters['client_id'] = $this->parameters['client_id'];
-        $queryParameters['client_secret'] = $this->parameters['client_secret'];
-        $queryParameters['code'] = $this->parameters['code'];
-        $queryParameters['redirect_uri'] = $this->parameters['redirect_uri'];
+        $queryParameters['username'] = $this->parameters['username'];
 
         //Parameters are parsed and set, lets prepare the request
-        if (count($queryParameters)) {
-            $url = $url.'?'.http_build_query($queryParameters, '', '&', PHP_QUERY_RFC3986);
-        }
         $request->setUri($url);
 
         return $request;
@@ -151,14 +130,14 @@ class accessToken implements \ArtaxServiceBuilder\Operation
     /**
      * Execute the operation
      *
-     * @return \GithubService\Model\AccessResponse
+     * @return \GithubService\Model\User
      */
     public function execute()
     {
         $request = $this->createRequest();
         $response = $this->api->callAPI($request);
         $this->response = $response;
-        $instance = \GithubService\Model\AccessResponse::createFromResponse($response, $this);
+        $instance = \GithubService\Model\User::createFromResponse($response, $this);
 
         return $instance;
     }
@@ -167,13 +146,13 @@ class accessToken implements \ArtaxServiceBuilder\Operation
      * Dispatch the request for this operation and process the response.Allows you to
      * modify the request before it is sent.
      *
-     * @return \GithubService\Model\AccessResponse
+     * @return \GithubService\Model\User
      */
     public function dispatch(\Artax\Request $request)
     {
         $response = $this->api->callAPI($request);
         $this->response = $response;
-        $instance = \GithubService\Model\AccessResponse::createFromResponse($response, $this);
+        $instance = \GithubService\Model\User::createFromResponse($response, $this);
 
         return $instance;
     }

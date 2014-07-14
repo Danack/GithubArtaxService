@@ -39,6 +39,11 @@ class User {
     public $createdAt;
     public $updatedAt;
     
+    public $plan;
+
+    public $oauthScopes = [];
+    
+    
     use DataMapper;
 
     static protected $dataMap = array(
@@ -72,6 +77,11 @@ class User {
         ['following', 'following'],
         ['createdAt', 'created_at'],
         ['updatedAt', 'updated_at'],
+        ['oauthScopes', 'oauthScopes', 'optional' => true],
+
+        //I don't know if this is actually optional, but I doubt it's vital
+        //information
+        ['plan', 'plan', 'class' => 'GithubService\Model\Plan', 'optional' => true],
     );
 
 
@@ -85,9 +95,18 @@ class User {
         $data = $response->getBody();
         $jsonData = json_decode($data, true);
 
+        $oauthHeaderValues = $response->getHeader('X-OAuth-Scopes');
+
+        $oauthScopes = [];
+        
+        foreach ($oauthHeaderValues as $oauthHeaderValue) {
+            $oauthScopes = explode(', ', $oauthHeaderValue);
+        }
+
+        $jsonData['oauthScopes'] = $oauthScopes;
+
         return self::createFromJson($jsonData);
     }
-
 }
 
  

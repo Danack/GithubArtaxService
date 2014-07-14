@@ -68,10 +68,10 @@ return array (
             'httpMethod' => 'POST',
             "responseClass" => 'GithubService\Model\AccessResponse',
             'parameters' => [
-//                'client_id' => [
-//                    'description' => 'string Required. The client ID you received from GitHub when you registered.',
-//                    'location' => 'query'
-//                ],
+                'client_id' => [
+                    'description' => 'string Required. The client ID you received from GitHub when you registered.',
+                    'location' => 'query'
+                ],
                 'client_secret' => [
                     'description' => 'string Required. The client secret you received from GitHub when you registered.',
                     'location' => 'query'
@@ -169,10 +169,10 @@ return array (
 
 
         //Get a single user
-        'getUserInfo' => [
+        'getUserInfoByName' => [
             'extends' => 'defaultGetOauthOperation',
             'uri' => '/users/{username}',
-
+            'responseClass' => 'GithubService\Model\User',
             'parameters' => array(
                 'username' => array(
                     "location" => "uri",
@@ -180,10 +180,15 @@ return array (
                 ),
             ),
         ],
-        
-        
-        
-//https://developer.github.com/v3/rate_limit/
+
+        //Get a single user
+        'getUserInfo' => [
+            'extends' => 'defaultGetOauthOperation',
+            'uri' => '/user',
+            'responseClass' => 'GithubService\Model\User',
+        ],
+
+        //https://developer.github.com/v3/rate_limit/
         //GET /rate_limit
         /*
         
