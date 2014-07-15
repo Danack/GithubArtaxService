@@ -117,6 +117,36 @@ class addUserEmails implements \ArtaxServiceBuilder\Operation
         return $this->parameters;
     }
 
+    /**
+     * Apply any filters necessary to the parameter
+     *
+     * @return \GithubService\Model\Emails
+     */
+    public function getFilteredParameter($name)
+    {
+        if (array_key_exists($name, $this->parameters) == false) {
+            throw new \Exception('Parameter '.$name.' does not exist.');
+        }
+
+        $value = $this->parameters[$name];
+
+        switch ($name) {
+
+            case ('Authorization'): {
+                $args = [];
+                $args[] = $value;
+                $value = call_user_func_array('GithubService\Github::formatAuthToken', $args);
+                break;
+            }
+
+
+            default:{}
+
+        }
+
+        return $value;
+    }
+
     public function createRequest()
     {
         $request = new \Artax\Request();
@@ -126,10 +156,10 @@ class addUserEmails implements \ArtaxServiceBuilder\Operation
 
 
         $jsonParams = [];
-        $request->setHeader('Accept', $this->parameters['Accept']);
-        $request->setHeader('Authorization', $this->parameters['Authorization']);
-        $request->setHeader('User-Agent', $this->parameters['userAgent']);
-        $jsonParams['emails'] = $this->parameters['emails'];
+        $request->setHeader('Accept', $this->getFilteredParameter('Accept'));
+        $request->setHeader('Authorization', $this->getFilteredParameter('Authorization'));
+        $request->setHeader('User-Agent', $this->getFilteredParameter('userAgent'));
+        $jsonParams['emails'] = $this->getFilteredParameter('emails');
 
         //Parameters are parsed and set, lets prepare the request
         if (count($jsonParams)) {

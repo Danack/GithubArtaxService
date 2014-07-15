@@ -141,6 +141,36 @@ class listRepoCommits implements \ArtaxServiceBuilder\Operation
         return $this->parameters;
     }
 
+    /**
+     * Apply any filters necessary to the parameter
+     *
+     * @return \GithubService\Model\Commits
+     */
+    public function getFilteredParameter($name)
+    {
+        if (array_key_exists($name, $this->parameters) == false) {
+            throw new \Exception('Parameter '.$name.' does not exist.');
+        }
+
+        $value = $this->parameters[$name];
+
+        switch ($name) {
+
+            case ('Authorization'): {
+                $args = [];
+                $args[] = $value;
+                $value = call_user_func_array('GithubService\Github::formatAuthToken', $args);
+                break;
+            }
+
+
+            default:{}
+
+        }
+
+        return $value;
+    }
+
     public function createRequest()
     {
         $request = new \Artax\Request();
@@ -151,25 +181,25 @@ class listRepoCommits implements \ArtaxServiceBuilder\Operation
 
         $uriTemplate = new \ArtaxServiceBuilder\Service\UriTemplate\UriTemplate();
         $url = $uriTemplate->expand($url, $this->parameters);
-        $request->setHeader('Accept', $this->parameters['Accept']);
-        $request->setHeader('Authorization', $this->parameters['Authorization']);
-        $request->setHeader('User-Agent', $this->parameters['userAgent']);
-        $queryParameters['owner'] = $this->parameters['owner'];
-        $queryParameters['repo'] = $this->parameters['repo'];
+        $request->setHeader('Accept', $this->getFilteredParameter('Accept'));
+        $request->setHeader('Authorization', $this->getFilteredParameter('Authorization'));
+        $request->setHeader('User-Agent', $this->getFilteredParameter('userAgent'));
+        $queryParameters['owner'] = $this->getFilteredParameter('owner');
+        $queryParameters['repo'] = $this->getFilteredParameter('repo');
         if (array_key_exists('sha', $this->parameters) == true) {
-           $queryParameters['sha'] = $this->parameters['sha'];
+           $queryParameters['sha'] = $this->getFilteredParameter('sha');
         }
         if (array_key_exists('path', $this->parameters) == true) {
-           $queryParameters['path'] = $this->parameters['path'];
+           $queryParameters['path'] = $this->getFilteredParameter('path');
         }
         if (array_key_exists('author', $this->parameters) == true) {
-           $queryParameters['author'] = $this->parameters['author'];
+           $queryParameters['author'] = $this->getFilteredParameter('author');
         }
         if (array_key_exists('since', $this->parameters) == true) {
-           $queryParameters['since'] = $this->parameters['since'];
+           $queryParameters['since'] = $this->getFilteredParameter('since');
         }
         if (array_key_exists('until', $this->parameters) == true) {
-           $queryParameters['until'] = $this->parameters['until'];
+           $queryParameters['until'] = $this->getFilteredParameter('until');
         }
 
         //Parameters are parsed and set, lets prepare the request

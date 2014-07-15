@@ -109,6 +109,36 @@ class listUserRepos implements \ArtaxServiceBuilder\Operation
         return $this->parameters;
     }
 
+    /**
+     * Apply any filters necessary to the parameter
+     *
+     * @return mixed
+     */
+    public function getFilteredParameter($name)
+    {
+        if (array_key_exists($name, $this->parameters) == false) {
+            throw new \Exception('Parameter '.$name.' does not exist.');
+        }
+
+        $value = $this->parameters[$name];
+
+        switch ($name) {
+
+            case ('Authorization'): {
+                $args = [];
+                $args[] = $value;
+                $value = call_user_func_array('GithubService\Github::formatAuthToken', $args);
+                break;
+            }
+
+
+            default:{}
+
+        }
+
+        return $value;
+    }
+
     public function createRequest()
     {
         $request = new \Artax\Request();
@@ -118,17 +148,17 @@ class listUserRepos implements \ArtaxServiceBuilder\Operation
 
 
         $jsonParams = [];
-        $request->setHeader('Accept', $this->parameters['Accept']);
-        $request->setHeader('Authorization', $this->parameters['Authorization']);
-        $request->setHeader('User-Agent', $this->parameters['userAgent']);
+        $request->setHeader('Accept', $this->getFilteredParameter('Accept'));
+        $request->setHeader('Authorization', $this->getFilteredParameter('Authorization'));
+        $request->setHeader('User-Agent', $this->getFilteredParameter('userAgent'));
         if (array_key_exists('type', $this->parameters) == true) {
-           $jsonParams['type'] = $this->parameters['type'];
+           $jsonParams['type'] = $this->getFilteredParameter('type');
         }
         if (array_key_exists('sort', $this->parameters) == true) {
-           $jsonParams['sort'] = $this->parameters['sort'];
+           $jsonParams['sort'] = $this->getFilteredParameter('sort');
         }
         if (array_key_exists('direction', $this->parameters) == true) {
-           $jsonParams['direction'] = $this->parameters['direction'];
+           $jsonParams['direction'] = $this->getFilteredParameter('direction');
         }
 
         //Parameters are parsed and set, lets prepare the request

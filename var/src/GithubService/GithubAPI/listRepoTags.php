@@ -101,6 +101,36 @@ class listRepoTags implements \ArtaxServiceBuilder\Operation
         return $this->parameters;
     }
 
+    /**
+     * Apply any filters necessary to the parameter
+     *
+     * @return \GithubService\Model\RepoTags
+     */
+    public function getFilteredParameter($name)
+    {
+        if (array_key_exists($name, $this->parameters) == false) {
+            throw new \Exception('Parameter '.$name.' does not exist.');
+        }
+
+        $value = $this->parameters[$name];
+
+        switch ($name) {
+
+            case ('Authorization'): {
+                $args = [];
+                $args[] = $value;
+                $value = call_user_func_array('GithubService\Github::formatAuthToken', $args);
+                break;
+            }
+
+
+            default:{}
+
+        }
+
+        return $value;
+    }
+
     public function createRequest()
     {
         $request = new \Artax\Request();
@@ -111,11 +141,11 @@ class listRepoTags implements \ArtaxServiceBuilder\Operation
 
         $uriTemplate = new \ArtaxServiceBuilder\Service\UriTemplate\UriTemplate();
         $url = $uriTemplate->expand($url, $this->parameters);
-        $request->setHeader('Accept', $this->parameters['Accept']);
-        $request->setHeader('Authorization', $this->parameters['Authorization']);
-        $request->setHeader('User-Agent', $this->parameters['userAgent']);
-        $queryParameters['owner'] = $this->parameters['owner'];
-        $queryParameters['repo'] = $this->parameters['repo'];
+        $request->setHeader('Accept', $this->getFilteredParameter('Accept'));
+        $request->setHeader('Authorization', $this->getFilteredParameter('Authorization'));
+        $request->setHeader('User-Agent', $this->getFilteredParameter('userAgent'));
+        $queryParameters['owner'] = $this->getFilteredParameter('owner');
+        $queryParameters['repo'] = $this->getFilteredParameter('repo');
 
         //Parameters are parsed and set, lets prepare the request
         $request->setUri($url);

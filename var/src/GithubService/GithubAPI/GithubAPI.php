@@ -77,7 +77,7 @@ class GithubAPI implements \GithubService\GithubAPI
     /**
      * getAuthorizations
      *
-     * @param Authorization mixed The oauth2 bearer token
+     * @param Authorization mixed The stupid oauth2 bearer token
      */
     public function getAuthorizations($Authorization)
     {
@@ -106,7 +106,7 @@ class GithubAPI implements \GithubService\GithubAPI
     /**
      * revokeAllAuthority
      *
-     * @param Authorization mixed The oauth2 bearer token
+     * @param Authorization mixed The stupid oauth2 bearer token
      * @param client_id mixed The id of the client.
      */
     public function revokeAllAuthority($Authorization, $client_id)
@@ -120,7 +120,7 @@ class GithubAPI implements \GithubService\GithubAPI
      *
      * Get users email addresses
      *
-     * @param Authorization mixed The oauth2 bearer token
+     * @param Authorization mixed The stupid oauth2 bearer token
      */
     public function getUserEmails($Authorization)
     {
@@ -133,7 +133,7 @@ class GithubAPI implements \GithubService\GithubAPI
      *
      * Get users email addresses
      *
-     * @param Authorization mixed The oauth2 bearer token
+     * @param Authorization mixed The stupid oauth2 bearer token
      * @param emails mixed Array of the emails to add
      */
     public function addUserEmails($Authorization, $emails)
@@ -149,7 +149,7 @@ class GithubAPI implements \GithubService\GithubAPI
      * repositories owned by organizations which the user can access. You can list user
      * organizations and list organization repositories separately.
      *
-     * @param Authorization mixed The oauth2 bearer token
+     * @param Authorization mixed The stupid oauth2 bearer token
      */
     public function listUserRepos($Authorization)
     {
@@ -160,7 +160,7 @@ class GithubAPI implements \GithubService\GithubAPI
     /**
      * getUserInfoByName
      *
-     * @param Authorization mixed The oauth2 bearer token
+     * @param Authorization mixed The stupid oauth2 bearer token
      * @param username mixed The username of the client.
      */
     public function getUserInfoByName($Authorization, $username)
@@ -172,7 +172,7 @@ class GithubAPI implements \GithubService\GithubAPI
     /**
      * getUserInfo
      *
-     * @param Authorization mixed The oauth2 bearer token
+     * @param Authorization mixed The stupid oauth2 bearer token
      */
     public function getUserInfo($Authorization)
     {
@@ -187,7 +187,7 @@ class GithubAPI implements \GithubService\GithubAPI
      * authed request (for private repos and higher rate limiting), or as unsigned,
      * (public only, lower limit).
      *
-     * @param Authorization mixed The oauth2 bearer token
+     * @param Authorization mixed The stupid oauth2 bearer token
      * @param owner mixed 
      * @param repo mixed
      */
@@ -200,7 +200,7 @@ class GithubAPI implements \GithubService\GithubAPI
     /**
      * listRepoCommitsPaginate
      *
-     * @param Authorization mixed The oauth2 bearer token
+     * @param Authorization mixed The stupid oauth2 bearer token
      * @param pageURL mixed
      */
     public function listRepoCommitsPaginate($Authorization, $pageURL)
@@ -212,7 +212,7 @@ class GithubAPI implements \GithubService\GithubAPI
     /**
      * listRepoCommits
      *
-     * @param Authorization mixed The oauth2 bearer token
+     * @param Authorization mixed The stupid oauth2 bearer token
      * @param owner mixed 
      * @param repo mixed
      */
@@ -225,7 +225,7 @@ class GithubAPI implements \GithubService\GithubAPI
     /**
      * getSingleCommit
      *
-     * @param Authorization mixed The oauth2 bearer token
+     * @param Authorization mixed The stupid oauth2 bearer token
      * @param owner mixed 
      * @param repo mixed 
      * @param sha mixed SHA of the commit to get

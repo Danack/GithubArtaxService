@@ -110,6 +110,23 @@ class accessToken implements \ArtaxServiceBuilder\Operation
         return $this->parameters;
     }
 
+    /**
+     * Apply any filters necessary to the parameter
+     *
+     * @return \GithubService\Model\AccessResponse
+     */
+    public function getFilteredParameter($name)
+    {
+        if (array_key_exists($name, $this->parameters) == false) {
+            throw new \Exception('Parameter '.$name.' does not exist.');
+        }
+
+        $value = $this->parameters[$name];
+
+
+        return $value;
+    }
+
     public function createRequest()
     {
         $request = new \Artax\Request();
@@ -118,12 +135,12 @@ class accessToken implements \ArtaxServiceBuilder\Operation
         $queryParameters = [];
 
 
-        $request->setHeader('Accept', $this->parameters['Accept']);
-        $request->setHeader('User-Agent', $this->parameters['userAgent']);
-        $queryParameters['client_id'] = $this->parameters['client_id'];
-        $queryParameters['client_secret'] = $this->parameters['client_secret'];
-        $queryParameters['code'] = $this->parameters['code'];
-        $queryParameters['redirect_uri'] = $this->parameters['redirect_uri'];
+        $request->setHeader('Accept', $this->getFilteredParameter('Accept'));
+        $request->setHeader('User-Agent', $this->getFilteredParameter('userAgent'));
+        $queryParameters['client_id'] = $this->getFilteredParameter('client_id');
+        $queryParameters['client_secret'] = $this->getFilteredParameter('client_secret');
+        $queryParameters['code'] = $this->getFilteredParameter('code');
+        $queryParameters['redirect_uri'] = $this->getFilteredParameter('redirect_uri');
 
         //Parameters are parsed and set, lets prepare the request
         if (count($queryParameters)) {
