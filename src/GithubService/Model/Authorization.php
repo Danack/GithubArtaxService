@@ -34,14 +34,6 @@ class Authorization {
         ['updatedAt', 'updated_at'],
         ['createdAt', 'created_at']
     );
-    
-
-    static function createFromResponse(Response $response, Operation $operation) {
-        $data = $response->getBody();
-        $jsonData = json_decode($data, true);
-
-        return self::createFromJson($jsonData);
-    }
 }
 
  

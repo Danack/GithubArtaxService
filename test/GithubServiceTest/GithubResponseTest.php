@@ -23,9 +23,9 @@ class GithubResponseTest extends \PHPUnit_Framework_TestCase {
      * @dataProvider additionProvider
      */
     function testDataParsing($dataFile, $expectedClassname) {
-        $jsonData = file_get_contents(__DIR__.'/../fixtures/data/github/'.$dataFile);
-        $data = json_decode($jsonData, true);
-        $instance = $expectedClassname::createFromJson($data);
+        $json = file_get_contents(__DIR__.'/../fixtures/data/github/'.$dataFile);
+        
+        $instance = $expectedClassname::createFromJson($json);
         
         $this->assertInstanceOf(
             $expectedClassname,

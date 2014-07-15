@@ -19,8 +19,9 @@ return array (
                 ),
                 'userAgent' => array(
                     "location" => "header",
-                    "description" => "The shitty oauth2 bearer token", ////: token OAUTH-TOKEN
-                    'sentAs' => 'User-Agent'
+                    "description" => "The user-agent which allows Github to recognise your application.",
+                    'sentAs' => 'User-Agent',
+                    //'required' => 'true'
                 ),
             )
         ),
@@ -35,12 +36,20 @@ return array (
                 ),
                 'Authorization' => array(
                     "location" => "header",
-                    "description" => "The oauth2 bearer token", ////: token OAUTH-TOKEN
+                    "description" => "The stupid oauth2 bearer token",
+                    'sentAs' => 'Authorization',
+                    "filters" => array(
+                        array(
+                            "method" => 'GithubService\Github::formatAuthToken',
+                            "args" => ["@value"]
+                        )
+                    ),
                 ),
                 'userAgent' => array(
                     "location" => "header",
-                    "description" => "The shitty oauth2 bearer token", ////: token OAUTH-TOKEN
-                    'sentAs' => 'User-Agent'
+                    "description" => "The user-agent which allows Github to recognise your application.",
+                    'sentAs' => 'User-Agent',
+                    'required' => 'true',
                 ),
             )
         ),
@@ -121,7 +130,7 @@ return array (
             'summary' => 'Get users email addresses',
             //TODO - It would be better to have scopes and permissions combined?
             'scopes' => [
-                [\GithubService\Github::SCOPE_USER],
+                ['user']// [\GithubService\Github::SCOPE_USER],
             ],
             
             'responseClass' => 'GithubService\Model\Emails',
@@ -188,6 +197,25 @@ return array (
             'responseClass' => 'GithubService\Model\User',
         ],
 
+
+
+//
+//        Update the authenticated user
+//
+//PATCH /user
+//Parameters
+//
+//Name	Type	Description
+//name	string	The new name of the user
+//email	string	Publicly visible email address.
+//blog	string	The new blog URL of the user.
+//company	string	The new company of the user.
+//location	string	The new location of the user.
+//hireable	boolean	The new hiring availability of the user.
+//bio	string	The new short biography of the user.
+        
+        
+        
         //https://developer.github.com/v3/rate_limit/
         //GET /rate_limit
         /*
@@ -275,6 +303,7 @@ return array (
             'parameters' => array(
                 'owner' => array(
                     "location" => "uri",
+                    'required' => 'true'
                 ),
                 'repo' => array(
                     "location" => "uri",

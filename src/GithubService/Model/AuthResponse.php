@@ -7,7 +7,7 @@ use ArtaxServiceBuilder\Operation;
 use Artax\Response;
 
 
-//TODO - delete it's unused
+//TODO - delete it appears to be unused
 
 class AuthResponse {
 
@@ -23,15 +23,4 @@ class AuthResponse {
         ['primary', 'primary'],
     );
 
-    static function createFromResponse(Response $response, Operation $operation) {
-        $data = $response->getBody();
-        
-        var_dump($data);
-        
-        exit(0);
-        
-        //$jsonData = json_decode($data, true);
-
-        //return self::createFromJson($jsonData['photos']);
-    }
 }

@@ -23,24 +23,4 @@ class AccessResponse {
         ['scopes', 'scope'],
         ['tokenType', 'token_type'],
     );
-
-    static function createFromResponse(Response $response, Operation $operation) {
-        $json = $response->getBody();
-        $data = json_decode($json, true);
-
-        if (isset($data['error']) == true) {
-            $errorDescription = 'error_description not set, so cause unknown.';
-
-            if (isset($data["error_description"]) == true) {
-                $errorDescription = $data["error_description"];
-            }
-            
-            throw new GithubAPIException($response, 'Github error: '.$errorDescription);
-        }
-        
-        $instance =  self::createFromJson($data);
-        $instance->scopes = explode(',', $instance->scopes);
-
-        return $instance;
-    }
 }

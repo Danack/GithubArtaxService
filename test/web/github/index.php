@@ -53,8 +53,11 @@ try {
             processAction($accessResponse);
         }
         catch(GithubAPIException $gae) {
-            echo "Exception caught: ".$gae->getMessage();
+            echo "Exception caught: ".$gae->getMessage()."<br/>";
             var_dump($gae->getResponse()->getBody());
+        }
+        catch(Artax\DnsException $de) {
+            echo "DNS error: ".$de->getMessage()."<br/>";
         }
 
         showActionLinks();

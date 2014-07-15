@@ -20,12 +20,7 @@ class RepoTags implements \IteratorAggregate {
     );
 
 
-    static function createFromResponse(Response $response, Operation $operation) {
-        $data = $response->getBody();
-        $jsonData = json_decode($data, true);
-
-        return self::createFromJson($jsonData);
-    }
+    
 
     /**
      * @return \GithubService\Model\RepoTag[]

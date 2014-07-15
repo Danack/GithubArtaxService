@@ -2,6 +2,9 @@
 
 namespace GithubService\Model;
 
+use ArtaxServiceBuilder\Operation;
+use Artax\Response;
+use GithubService\GithubAPI\GithubAPIException;
 
 /**
  * Trait DataMapper
@@ -33,6 +36,7 @@ namespace GithubService\Model;
  * $jsonData['result']['property_name'] into multiple instances of the class 'PropertyName' name and assign them
  * as the property '$this->propertyName' in the class that uses this trait.
  *
+ * @property array $dataMap The mapping scheme to use from values to properties.
  * @package Intahwebz\FlickrGuzzle
  */
 trait DataMapper {
@@ -42,22 +46,56 @@ trait DataMapper {
      * @return static An instance of the class that the trait is used in. 'Static' is meant to be the 'late static class' - not many IDEs support this DOC comment yet.
      * @throws DataMapperException
      */
-    static function createFromJson($jsonData){
-        if (property_exists(__CLASS__, 'dataMap') == FALSE){
-            throw new DataMapperException("Class ".__CLASS__." is using DataMapper but has no DataMap property.");
-        }
-
+    static function createFromJson($json) {
         $instance = new static();
-        $instance->mapPropertiesFromJSON($jsonData);
+        $data = json_decode($json, true);
+        $instance->mapPropertiesFromJSON($data);
+        return $instance;
+    }
+
+    /**
+     * @param $data
+     * @return static
+     * @throws DataMapperException
+     */
+    static function createFromData($data) {
+        $instance = new static();
+        $instance->mapPropertiesFromJSON($data);
         return $instance;
     }
     
+    static function createFromResponse(Response $response, Operation $operation) {
+        $json = $response->getBody();
+        $data = json_decode($json, true);
+        
+        if (isset($data['error']) == true) {
+            $errorDescription = 'error_description not set, so cause unknown.';
+
+            if (isset($data["error_description"]) == true) {
+                $errorDescription = $data["error_description"];
+            }
+
+            throw new GithubAPIException($response, 'Github error: '.$errorDescription);
+        }
+
+        return self::createFromData($data);
+    }
+
+    
     
     /**
+     * Maps the properties that are in the $data param to the internal properties of the class,
+     * using the static::$dataMap 
+     * 
      * @param $data
      * @throws DataMapperException
      */
     function mapPropertiesFromJSON($data){
+
+        if (property_exists(__CLASS__, 'dataMap') == FALSE){
+            throw new DataMapperException("Class ".__CLASS__." is using DataMapper but has no DataMap property.");
+        }
+
         foreach(static::$dataMap as $dataMapElement){
             if (is_array($dataMapElement) == FALSE) {
                 $string = var_export(static::$dataMap, TRUE);
@@ -177,7 +215,7 @@ trait DataMapper {
 
             foreach($sourceValue as $sourceValueInstance){
                 if($className != FALSE){
-                    $object = $className::createFromJson($sourceValueInstance);
+                    $object = $className::createFromData($sourceValueInstance);
                     $this->{$classVariableName}[] = $object;
                 }
                 else{
@@ -187,7 +225,7 @@ trait DataMapper {
         }
         else{
             if($className != FALSE){
-                $object = $className::createFromJson($sourceValue);
+                $object = $className::createFromData($sourceValue);
                 $this->{$classVariableName} = $object;
             }
             else{

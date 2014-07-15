@@ -19,11 +19,4 @@ class Email {
         ['verified', 'verified'],
         ['primary', 'primary'],
     );
-
-    static function createFromResponse(Response $response, Operation $operation) {
-        $data = $response->getBody();
-        $jsonData = json_decode($data, true);
-
-        return self::createFromJson($jsonData['photos']);
-    }
 }

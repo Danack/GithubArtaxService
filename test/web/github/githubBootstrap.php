@@ -23,7 +23,7 @@ $autoloader->add('GithubService', [$outputDirectory]);
 
 require "webFunctions.php";
 
-include_once "../../../../githubKey.php";
+require "../../../../githubKey.php";
 
 $requiredDefines = [
     'GITHUB_USER_AGENT',
@@ -193,7 +193,7 @@ function processAddEmail($accessResponse) {
     $newEmail = getVariable('email');
 
     $emailCommand = $api->addUserEmails(
-        'token '.$accessResponse->accessToken,
+        $accessResponse->accessToken,
         [$newEmail]
     );
 
@@ -227,7 +227,7 @@ END;
 
 function showGithubEmails(AccessResponse $accessResponse) {
     $api = new GithubAPI(GITHUB_USER_AGENT);
-    $emailCommand = $api->getUserEmails('token '.$accessResponse->accessToken);
+    $emailCommand = $api->getUserEmails($accessResponse->accessToken);
     $emailList = $emailCommand->execute();
 
     foreach ($emailList->emails as $email) {
@@ -238,7 +238,7 @@ function showGithubEmails(AccessResponse $accessResponse) {
 
 function showAuthorizations(AccessResponse $accessResponse) {
     $api = new GithubAPI(GITHUB_USER_AGENT);
-    $authCommand = $api->getAuthorizations('token '.$accessResponse->accessToken);
+    $authCommand = $api->getAuthorizations($accessResponse->accessToken);
     $authorisations = $authCommand->execute();
 
     foreach($authorisations->getIterator() as $authorisation) {
@@ -268,7 +268,7 @@ function renderUserInfo(\GithubService\Model\User $user) {
  */
 function showUser(AccessResponse $accessResponse, $username) {
     $api = new GithubAPI(GITHUB_USER_AGENT);
-    $authCommand = $api->getUserInfo('token '.$accessResponse->accessToken);
+    $authCommand = $api->getUserInfo($accessResponse->accessToken);
     $user = $authCommand->execute();
     renderUserInfo($user);
 }
@@ -325,7 +325,7 @@ function displayAndSaveLinks(\Artax\Response $response) {
 
 function showRepoCommits(AccessResponse $accessResponse, $username, $repo) {
     $api = new GithubAPI(GITHUB_USER_AGENT);
-    $command = $api->listRepoCommits('token '.$accessResponse->accessToken, $username, $repo);
+    $command = $api->listRepoCommits($accessResponse->accessToken, $username, $repo);
     $command->setAuthor('Danack');
     $commits = $command->execute();
 
@@ -352,7 +352,7 @@ function showMoreResults(AccessResponse $accessResponse) {
 
     $api = new GithubAPI(GITHUB_USER_AGENT);
     $command = $api->listRepoCommitsPaginate(
-        'token '.$accessResponse->accessToken,
+        $accessResponse->accessToken,
         $storedLink->link->url
     );
 
@@ -365,27 +365,20 @@ function showMoreResults(AccessResponse $accessResponse) {
 
 
 function revokeAuthority(AccessResponse $accessResponse) {
-
-
     $api = new GithubAPI(GITHUB_USER_AGENT);
-    $command = $api->revokeAllAuthority('token '.$accessResponse->accessToken, GITHUB_CLIENT_ID);
-
+    $command = $api->revokeAllAuthority($accessResponse->accessToken, GITHUB_CLIENT_ID);
     $blah = $command->execute();
-
     echo "Diplomatic immunity, has been revoked?";
-
 }
 
 
 function showRepoTags(AccessResponse $accessResponse, $username, $repo) {
     $api = new GithubAPI(GITHUB_USER_AGENT);
-    $command = $api->listRepoTags('token '.$accessResponse->accessToken, $username, $repo);
+    $command = $api->listRepoTags($accessResponse->accessToken, $username, $repo);
     $repoTags = $command->execute();
     foreach ($repoTags->getIterator() as $repoTag) {
         echo "Tag name: ".$repoTag->name." sha ".$repoTag->commitSHA."<br/>";
     }
-    
-
 }
 
 

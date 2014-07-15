@@ -181,8 +181,11 @@ class Github {
         
     ]; 
 
-    
-    
+
+    public static function formatAuthToken($accessToken) {
+
+        return "token $accessToken";
+    }
     
     
     
