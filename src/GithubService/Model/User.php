@@ -105,7 +105,7 @@ class User {
 
         $jsonData['oauthScopes'] = $oauthScopes;
 
-        return self::createFromJson($jsonData);
+        return self::createFromData($jsonData);
     }
 }
 

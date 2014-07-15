@@ -5,7 +5,6 @@ require "githubBootstrap.php";
 use GithubService\GithubAPI\GithubAPIException;
 
 echo <<< END
-
 <html>
 <body>
 <h3><a href='/'>Oauth test home</a> </h3>
