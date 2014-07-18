@@ -12,23 +12,27 @@ END;
 
 
 /** @var \GithubService\Model\AccessResponse */
-$accessResponse = getSessionVariable('githubAccess');
-
+$accessResponse = getSessionVariable(GITHUB_ACCESS_RESPONSE_KEY);
 
 if ($accessResponse) {
     if (!($accessResponse instanceof GithubService\Model\AccessResponse)) {
         //class was renamed...or something else bad happened.
-        setSessionVariable('githubAccess', null);
+        setSessionVariable(GITHUB_ACCESS_RESPONSE_KEY, null);
         $accessResponse = null;
     }
 }
+
+$provider = createProvider(
+    [],
+    ['GithubService\Model\AccessResponse' => $accessResponse]
+);
 
 
 //These actions need to be done before the rest of the page.
 $action = getVariable('action');
 switch ($action) {
     case('delete') : {
-        unsetSessionVariable('githubAccess');
+        unsetSessionVariable(GITHUB_ACCESS_RESPONSE_KEY);
         $accessResponse = null;
         break;
     }
@@ -45,11 +49,9 @@ try {
         processUnauthorizedActions();
     }
     else {
-      
         echo "<p>You are github authorised.</p>";
-
         try {
-            processAction($accessResponse);
+            processAction($provider, $accessResponse);
         }
         catch(GithubAPIException $gae) {
             echo "Exception caught: ".$gae->getMessage()."<br/>";

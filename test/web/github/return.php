@@ -49,7 +49,7 @@ function checkAuthResult() {
 
     try {
         $api = new DebugGithub(GITHUB_USER_AGENT);
-        
+
         echo "code is $code <br/>";
 
         $command = $api->accessToken(
@@ -59,13 +59,15 @@ function checkAuthResult() {
             "http://".SERVER_HOSTNAME."/github/return.php"
         );
         
-        $response = $command->execute();
-        setSessionVariable('githubAccess', $response);
+        $accessResponse = $command->execute();
+        setSessionVariable(GITHUB_ACCESS_RESPONSE_KEY, $accessResponse);
 
-        echo "You are now authed for the following scopes:<br/>";
-        
-        foreach ($response->scopes as $scope) {
-            echo $scope."<br/>";
+        if ($accessResponse->oauthScopes) {
+            echo "You are now authed for the following scopes:<br/>";
+
+            foreach ($accessResponse->oauthScopes as $scope) {
+                echo $scope."<br/>";
+            }
         }
     }
     catch(GithubAPIException $fae) {
