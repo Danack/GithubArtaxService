@@ -14,8 +14,8 @@ return array (
                 'Accept' => array(
                     "location" => "header",
                     "description" => "",
-                    'default' =>  'application/json',
-                    //'default' =>  'application/vnd.github.v3+json',
+                    //'default' =>  'application/json',
+                    'default' =>  'application/vnd.github.v3+json',
                 ),
                 'userAgent' => array(
                     "location" => "header",
@@ -32,7 +32,7 @@ return array (
                 'Accept' => array(
                     "location" => "header",
                     "description" => "",
-                    'default' =>  'application/json',
+                    'default' =>  'application/vnd.github.v3+json',
                 ),
                 'Authorization' => array(
                     "location" => "header",
@@ -292,6 +292,18 @@ return array (
         //List Teams
         //GET /repos/:owner/:repo/teams
 
+
+        'listRepoTagsPaginate' => array(
+            'extends' => 'defaultGetOauthOperation',
+            "responseClass" => 'GithubService\Model\RepoTags',
+            'parameters' => array(
+                'pageURL' => array(
+                    "location" => "absoluteURL",
+                ),
+            ),
+        ),
+        
+        
         //List Tags
         //GET 
         'listRepoTags' => array(

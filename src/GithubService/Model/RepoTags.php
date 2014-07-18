@@ -14,13 +14,9 @@ class RepoTags implements \IteratorAggregate {
     /** @var  \GithubService\Model\RepoTag[] */
     public $repoTags;
     
-
     static protected $dataMap = array(
         ['repoTags', [], 'class' => 'GithubService\Model\RepoTag', 'multiple' => true],
     );
-
-
-    
 
     /**
      * @return \GithubService\Model\RepoTag[]

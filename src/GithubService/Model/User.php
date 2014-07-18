@@ -41,7 +41,7 @@ class User {
     
     public $plan;
 
-    public $oauthScopes = [];
+    //public $oauthScopes = [];
     
     
     use DataMapper;
@@ -77,7 +77,7 @@ class User {
         ['following', 'following'],
         ['createdAt', 'created_at'],
         ['updatedAt', 'updated_at'],
-        ['oauthScopes', 'oauthScopes', 'optional' => true],
+        //['oauthScopes', 'oauthScopes', 'optional' => true],
 
         //I don't know if this is actually optional, but I doubt it's vital
         //information
@@ -85,28 +85,28 @@ class User {
     );
 
 
-    /**
-     * @param Response $response
-     * @param Operation $operation
-     * @return \GithubService\Model\Emails
-     * @throws DataMapperException
-     */
-    static function createFromResponse(Response $response, Operation $operation) {
-        $data = $response->getBody();
-        $jsonData = json_decode($data, true);
-
-        $oauthHeaderValues = $response->getHeader('X-OAuth-Scopes');
-
-        $oauthScopes = [];
-        
-        foreach ($oauthHeaderValues as $oauthHeaderValue) {
-            $oauthScopes = explode(', ', $oauthHeaderValue);
-        }
-
-        $jsonData['oauthScopes'] = $oauthScopes;
-
-        return self::createFromData($jsonData);
-    }
+//    /**
+//     * @param Response $response
+//     * @param Operation $operation
+//     * @return \GithubService\Model\Emails
+//     * @throws DataMapperException
+//     */
+//    static function createFromResponse(Response $response, Operation $operation) {
+//        $data = $response->getBody();
+//        $jsonData = json_decode($data, true);
+//
+//        $oauthHeaderValues = $response->getHeader('X-OAuth-Scopes');
+//
+//        $oauthScopes = [];
+//        
+//        foreach ($oauthHeaderValues as $oauthHeaderValue) {
+//            $oauthScopes = explode(', ', $oauthHeaderValue);
+//        }
+//
+//        $jsonData['oauthScopes'] = $oauthScopes;
+//
+//        return self::createFromData($jsonData);
+//    }
 }
 
  

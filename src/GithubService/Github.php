@@ -172,22 +172,18 @@ class Github {
 //    const SCOPE_PUBLIC_KEY_ADMIN = 'admin:public_key'; //	Fully manage public keys.
 //    
 //        
-        
-        
-        
-        
-        
-        
-        
-    ]; 
+
+    ];
 
 
+    /**
+     * Format the auth/bearer token as Github expect it.
+     * @param $accessToken
+     * @return string
+     */
     public static function formatAuthToken($accessToken) {
 
         return "token $accessToken";
     }
-    
-    
-    
 }
 

@@ -6,6 +6,8 @@ use ArtaxServiceBuilder\Operation;
 use Artax\Response;
 use GithubService\GithubAPI\GithubAPIException;
 
+use ArtaxServiceBuilder\Service\GithubPaginator;
+
 /**
  * Trait DataMapper
  *
@@ -42,6 +44,17 @@ use GithubService\GithubAPI\GithubAPIException;
 trait DataMapper {
 
     /**
+     * @var  \ArtaxServiceBuilder\Service\GithubPaginator|null
+     */
+    public $pager;
+
+    /**
+     * @var
+     */
+    public $oauthScopes = null;
+    
+    
+    /**
      * @param $data array The map of how the data is mapped from the PHP object from the structure returned in the API.
      * @return static An instance of the class that the trait is used in. 'Static' is meant to be the 'late static class' - not many IDEs support this DOC comment yet.
      * @throws DataMapperException
@@ -49,7 +62,7 @@ trait DataMapper {
     static function createFromJson($json) {
         $instance = new static();
         $data = json_decode($json, true);
-        $instance->mapPropertiesFromJSON($data);
+        $instance->mapPropertiesFromData($data);
         return $instance;
     }
 
@@ -60,14 +73,28 @@ trait DataMapper {
      */
     static function createFromData($data) {
         $instance = new static();
-        $instance->mapPropertiesFromJSON($data);
+        $instance->mapPropertiesFromData($data);
         return $instance;
     }
-    
+
+    /**
+     * @param Response $response
+     * @param Operation $operation
+     * @return static
+     * @throws \GithubService\GithubAPI\GithubAPIException
+     */
     static function createFromResponse(Response $response, Operation $operation) {
         $json = $response->getBody();
         $data = json_decode($json, true);
+
+        if ($data === null) {
+            $lastJsonError = json_last_error();
+            throw new GithubAPIException($response, "Error parsing json, last json error: ".$lastJsonError);
+        }
+
         
+        
+        //An error is set...but presumably not an error code if we arrived here.
         if (isset($data['error']) == true) {
             $errorDescription = 'error_description not set, so cause unknown.';
 
@@ -78,7 +105,23 @@ trait DataMapper {
             throw new GithubAPIException($response, 'Github error: '.$errorDescription);
         }
 
-        return self::createFromData($data);
+        $instance = self::createFromData($data);
+
+        //Header based information needs to be added after the array
+        
+        //Some of the data is embedded in a header.
+        if ($response->hasHeader('X-OAuth-Scopes')) {
+            $oauthHeaderValues = $response->getHeader('X-OAuth-Scopes');
+            $oauthScopes = [];
+            foreach ($oauthHeaderValues as $oauthHeaderValue) {
+                $oauthScopes = explode(', ', $oauthHeaderValue);
+            }
+            $instance->oauthScopes = $oauthScopes;
+        }
+        
+        $instance->pager = GithubPaginator::constructFromResponse($response);
+
+        return $instance;
     }
 
     
@@ -90,7 +133,7 @@ trait DataMapper {
      * @param $data
      * @throws DataMapperException
      */
-    function mapPropertiesFromJSON($data){
+    function mapPropertiesFromData($data){
 
         if (property_exists(__CLASS__, 'dataMap') == FALSE){
             throw new DataMapperException("Class ".__CLASS__." is using DataMapper but has no DataMap property.");
