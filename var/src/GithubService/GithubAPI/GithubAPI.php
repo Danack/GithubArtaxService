@@ -15,31 +15,21 @@ class GithubAPI implements \GithubService\GithubAPI
     public $userAgent = null;
 
     /**
-     * @var \ArtaxServiceBuilder\Service\Oauth1 $oauthService
+     * @var \Artax\Client $client
      */
-    public $oauthService = null;
+    public $client = null;
 
-    public function __construct($userAgent, \ArtaxServiceBuilder\Service\Oauth1 $oauthService = null)
+    public function __construct(\Artax\Client $client, $userAgent)
     {
+        $this->client = $client;
         $this->userAgent = $userAgent;
-        $this->oauthService = $oauthService;
-    }
-
-    public function signRequest(\Artax\Request $request)
-    {
-        if ($this->oauthService == null) {
-            throw new \ArtaxServiceBuilder\ArtaxServiceException("oauthService is null, so cannot call request that requires oauth.");
-        }
-        return $this->oauthService->signRequest($request);
     }
 
     public function callAPI(\Artax\Request $request, array $successStatuses = array())
     {
-        $client = new \Artax\Client();
+        //$client->setOption('transfertimeout', 25);
 
-        $client->setOption('transfertimeout', 25);
-
-        $response = $client->request($request);
+        $response = $this->client->request($request);
         $status = $response->getStatus();
         $status = intval($status);
 
@@ -81,7 +71,7 @@ class GithubAPI implements \GithubService\GithubAPI
      */
     public function getAuthorizations($Authorization)
     {
-        $instance = new getAuthorizations($this, $Authorization, $this->getuserAgent());
+        $instance = new getAuthorizations($this, $Authorization, $this->getUserAgent());
         return $instance;
     }
 
@@ -99,7 +89,7 @@ class GithubAPI implements \GithubService\GithubAPI
      */
     public function accessToken($client_id, $client_secret, $code, $redirect_uri)
     {
-        $instance = new accessToken($this, $this->getuserAgent(), $client_id, $client_secret, $code, $redirect_uri);
+        $instance = new accessToken($this, $this->getUserAgent(), $client_id, $client_secret, $code, $redirect_uri);
         return $instance;
     }
 
@@ -111,7 +101,7 @@ class GithubAPI implements \GithubService\GithubAPI
      */
     public function revokeAllAuthority($Authorization, $client_id)
     {
-        $instance = new revokeAllAuthority($this, $Authorization, $this->getuserAgent(), $client_id);
+        $instance = new revokeAllAuthority($this, $Authorization, $this->getUserAgent(), $client_id);
         return $instance;
     }
 
@@ -124,7 +114,7 @@ class GithubAPI implements \GithubService\GithubAPI
      */
     public function getUserEmails($Authorization)
     {
-        $instance = new getUserEmails($this, $Authorization, $this->getuserAgent());
+        $instance = new getUserEmails($this, $Authorization, $this->getUserAgent());
         return $instance;
     }
 
@@ -138,7 +128,7 @@ class GithubAPI implements \GithubService\GithubAPI
      */
     public function addUserEmails($Authorization, $emails)
     {
-        $instance = new addUserEmails($this, $Authorization, $this->getuserAgent(), $emails);
+        $instance = new addUserEmails($this, $Authorization, $this->getUserAgent(), $emails);
         return $instance;
     }
 
@@ -153,7 +143,7 @@ class GithubAPI implements \GithubService\GithubAPI
      */
     public function listUserRepos($Authorization)
     {
-        $instance = new listUserRepos($this, $Authorization, $this->getuserAgent());
+        $instance = new listUserRepos($this, $Authorization, $this->getUserAgent());
         return $instance;
     }
 
@@ -165,7 +155,7 @@ class GithubAPI implements \GithubService\GithubAPI
      */
     public function getUserInfoByName($Authorization, $username)
     {
-        $instance = new getUserInfoByName($this, $Authorization, $this->getuserAgent(), $username);
+        $instance = new getUserInfoByName($this, $Authorization, $this->getUserAgent(), $username);
         return $instance;
     }
 
@@ -176,7 +166,19 @@ class GithubAPI implements \GithubService\GithubAPI
      */
     public function getUserInfo($Authorization)
     {
-        $instance = new getUserInfo($this, $Authorization, $this->getuserAgent());
+        $instance = new getUserInfo($this, $Authorization, $this->getUserAgent());
+        return $instance;
+    }
+
+    /**
+     * listRepoTagsPaginate
+     *
+     * @param Authorization mixed The stupid oauth2 bearer token
+     * @param pageURL mixed
+     */
+    public function listRepoTagsPaginate($Authorization, $pageURL)
+    {
+        $instance = new listRepoTagsPaginate($this, $Authorization, $this->getUserAgent(), $pageURL);
         return $instance;
     }
 
@@ -193,7 +195,7 @@ class GithubAPI implements \GithubService\GithubAPI
      */
     public function listRepoTags($Authorization, $owner, $repo)
     {
-        $instance = new listRepoTags($this, $Authorization, $this->getuserAgent(), $owner, $repo);
+        $instance = new listRepoTags($this, $Authorization, $this->getUserAgent(), $owner, $repo);
         return $instance;
     }
 
@@ -205,7 +207,7 @@ class GithubAPI implements \GithubService\GithubAPI
      */
     public function listRepoCommitsPaginate($Authorization, $pageURL)
     {
-        $instance = new listRepoCommitsPaginate($this, $Authorization, $this->getuserAgent(), $pageURL);
+        $instance = new listRepoCommitsPaginate($this, $Authorization, $this->getUserAgent(), $pageURL);
         return $instance;
     }
 
@@ -218,7 +220,7 @@ class GithubAPI implements \GithubService\GithubAPI
      */
     public function listRepoCommits($Authorization, $owner, $repo)
     {
-        $instance = new listRepoCommits($this, $Authorization, $this->getuserAgent(), $owner, $repo);
+        $instance = new listRepoCommits($this, $Authorization, $this->getUserAgent(), $owner, $repo);
         return $instance;
     }
 
@@ -232,7 +234,7 @@ class GithubAPI implements \GithubService\GithubAPI
      */
     public function getSingleCommit($Authorization, $owner, $repo, $sha)
     {
-        $instance = new getSingleCommit($this, $Authorization, $this->getuserAgent(), $owner, $repo, $sha);
+        $instance = new getSingleCommit($this, $Authorization, $this->getUserAgent(), $owner, $repo, $sha);
         return $instance;
     }
 

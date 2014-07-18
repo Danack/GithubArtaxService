@@ -6,7 +6,7 @@
 //
 namespace GithubService\GithubAPI;
 
-class getSingleCommit implements \ArtaxServiceBuilder\Operation
+class listRepoTagsPaginate implements \ArtaxServiceBuilder\Operation
 {
 
     /**
@@ -34,7 +34,7 @@ class getSingleCommit implements \ArtaxServiceBuilder\Operation
         return $this->response;
     }
 
-    public function __construct(\GithubService\GithubAPI\GithubAPI $api, $Authorization, $userAgent, $owner, $repo, $sha)
+    public function __construct(\GithubService\GithubAPI\GithubAPI $api, $Authorization, $userAgent, $pageURL)
     {
         $defaultParams = [
             'Accept' => 'application/vnd.github.v3+json',
@@ -43,9 +43,7 @@ class getSingleCommit implements \ArtaxServiceBuilder\Operation
         $this->api = $api;
         $this->parameters['Authorization'] = $Authorization;
         $this->parameters['userAgent'] = $userAgent;
-        $this->parameters['owner'] = $owner;
-        $this->parameters['repo'] = $repo;
-        $this->parameters['sha'] = $sha;
+        $this->parameters['pageURL'] = $pageURL;
     }
 
     public function setAPI(\GithubService\GithubAPI\GithubAPI $api)
@@ -64,14 +62,8 @@ class getSingleCommit implements \ArtaxServiceBuilder\Operation
         if (array_key_exists('userAgent', $params)) {
              $this->parameters['userAgent'] = $params['userAgent'];
         }
-        if (array_key_exists('owner', $params)) {
-             $this->parameters['owner'] = $params['owner'];
-        }
-        if (array_key_exists('repo', $params)) {
-             $this->parameters['repo'] = $params['repo'];
-        }
-        if (array_key_exists('sha', $params)) {
-             $this->parameters['sha'] = $params['sha'];
+        if (array_key_exists('pageURL', $params)) {
+             $this->parameters['pageURL'] = $params['pageURL'];
         }
     }
 
@@ -90,19 +82,9 @@ class getSingleCommit implements \ArtaxServiceBuilder\Operation
         $this->parameters['userAgent'] = $userAgent;
     }
 
-    public function setOwner($owner)
+    public function setPageURL($pageURL)
     {
-        $this->parameters['owner'] = $owner;
-    }
-
-    public function setRepo($repo)
-    {
-        $this->parameters['repo'] = $repo;
-    }
-
-    public function setSha($sha)
-    {
-        $this->parameters['sha'] = $sha;
+        $this->parameters['pageURL'] = $pageURL;
     }
 
     public function getParameters()
@@ -113,7 +95,7 @@ class getSingleCommit implements \ArtaxServiceBuilder\Operation
     /**
      * Apply any filters necessary to the parameter
      *
-     * @return \GithubService\Model\Commit
+     * @return \GithubService\Model\RepoTags
      */
     public function getFilteredParameter($name)
     {
@@ -143,19 +125,15 @@ class getSingleCommit implements \ArtaxServiceBuilder\Operation
     public function createRequest()
     {
         $request = new \Artax\Request();
-        $url = "https://api.github.com/repos/{owner}/{repo}/commits/{sha}";
+        $url = "https://api.github.com";
         $request->setMethod('GET');
         $queryParameters = [];
 
 
-        $uriTemplate = new \ArtaxServiceBuilder\Service\UriTemplate\UriTemplate();
-        $url = $uriTemplate->expand($url, $this->parameters);
         $request->setHeader('Accept', $this->getFilteredParameter('Accept'));
         $request->setHeader('Authorization', $this->getFilteredParameter('Authorization'));
         $request->setHeader('User-Agent', $this->getFilteredParameter('userAgent'));
-        $queryParameters['owner'] = $this->getFilteredParameter('owner');
-        $queryParameters['repo'] = $this->getFilteredParameter('repo');
-        $queryParameters['sha'] = $this->getFilteredParameter('sha');
+        $url = $this->parameters['pageURL'];
 
         //Parameters are parsed and set, lets prepare the request
         $request->setUri($url);
@@ -180,14 +158,14 @@ class getSingleCommit implements \ArtaxServiceBuilder\Operation
     /**
      * Execute the operation
      *
-     * @return \GithubService\Model\Commit
+     * @return \GithubService\Model\RepoTags
      */
     public function execute()
     {
         $request = $this->createRequest();
         $response = $this->api->callAPI($request);
         $this->response = $response;
-        $instance = \GithubService\Model\Commit::createFromResponse($response, $this);
+        $instance = \GithubService\Model\RepoTags::createFromResponse($response, $this);
 
         return $instance;
     }
@@ -196,13 +174,13 @@ class getSingleCommit implements \ArtaxServiceBuilder\Operation
      * Dispatch the request for this operation and process the response.Allows you to
      * modify the request before it is sent.
      *
-     * @return \GithubService\Model\Commit
+     * @return \GithubService\Model\RepoTags
      */
     public function dispatch(\Artax\Request $request)
     {
         $response = $this->api->callAPI($request);
         $this->response = $response;
-        $instance = \GithubService\Model\Commit::createFromResponse($response, $this);
+        $instance = \GithubService\Model\RepoTags::createFromResponse($response, $this);
 
         return $instance;
     }
@@ -211,11 +189,11 @@ class getSingleCommit implements \ArtaxServiceBuilder\Operation
      * Dispatch the request for this operation and process the response.Allows you to
      * modify the request before it is sent.
      *
-     * @return \GithubService\Model\Commit
+     * @return \GithubService\Model\RepoTags
      */
     public function processResponse(\Artax\Response $response)
     {
-        $instance = \GithubService\Model\Commit::createFromResponse($response, $this);
+        $instance = \GithubService\Model\RepoTags::createFromResponse($response, $this);
 
         return $instance;
     }

@@ -37,7 +37,7 @@ class getAuthorizations implements \ArtaxServiceBuilder\Operation
     public function __construct(\GithubService\GithubAPI\GithubAPI $api, $Authorization, $userAgent)
     {
         $defaultParams = [
-            'Accept' => 'application/json',
+            'Accept' => 'application/vnd.github.v3+json',
         ];
         $this->setParams($defaultParams);
         $this->api = $api;
@@ -170,6 +170,19 @@ class getAuthorizations implements \ArtaxServiceBuilder\Operation
     {
         $response = $this->api->callAPI($request);
         $this->response = $response;
+        $instance = \GithubService\Model\Authorizations::createFromResponse($response, $this);
+
+        return $instance;
+    }
+
+    /**
+     * Dispatch the request for this operation and process the response.Allows you to
+     * modify the request before it is sent.
+     *
+     * @return \GithubService\Model\Authorizations
+     */
+    public function processResponse(\Artax\Response $response)
+    {
         $instance = \GithubService\Model\Authorizations::createFromResponse($response, $this);
 
         return $instance;

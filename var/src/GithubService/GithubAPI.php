@@ -84,6 +84,14 @@ interface GithubAPI
     public function getUserInfo($Authorization);
 
     /**
+     * listRepoTagsPaginate
+     *
+     * @param Authorization mixed The stupid oauth2 bearer token
+     * @param pageURL mixed
+     */
+    public function listRepoTagsPaginate($Authorization, $pageURL);
+
+    /**
      * listRepoTags
      *
      * List tags for a repository. Response can be paged. This can be used either as a

@@ -37,7 +37,7 @@ class revokeAllAuthority implements \ArtaxServiceBuilder\Operation
     public function __construct(\GithubService\GithubAPI\GithubAPI $api, $Authorization, $userAgent, $client_id)
     {
         $defaultParams = [
-            'Accept' => 'application/json',
+            'Accept' => 'application/vnd.github.v3+json',
         ];
         $this->setParams($defaultParams);
         $this->api = $api;
@@ -180,6 +180,17 @@ class revokeAllAuthority implements \ArtaxServiceBuilder\Operation
     {
         $response = $this->api->callAPI($request);
         $this->response = $response;
+        return $response->getBody();
+    }
+
+    /**
+     * Dispatch the request for this operation and process the response.Allows you to
+     * modify the request before it is sent.
+     *
+     * @return mixed
+     */
+    public function processResponse(\Artax\Response $response)
+    {
         return $response->getBody();
     }
 
