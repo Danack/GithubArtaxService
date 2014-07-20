@@ -15,7 +15,13 @@ class GithubResponseTest extends \PHPUnit_Framework_TestCase {
             ['listEmailAddressesForUser.txt', 'GithubService\Model\Emails'],
             ['addEmailAddresses.txt', 'GithubService\Model\Emails'],
             ['listRepoTags.txt', 'GithubService\Model\RepoTags'],
-            ['listAuthorizations.txt', 'GithubService\Model\Authorizations']
+            ['listAuthorizations.txt', 'GithubService\Model\Authorizations'],
+
+            //Repos
+            ['repo/getBranch.txt', 'GithubService\Model\RepoBranch'], 
+            
+            
+            
         );
     }
 
@@ -30,6 +36,10 @@ class GithubResponseTest extends \PHPUnit_Framework_TestCase {
             $expectedClassname,
             $instance
         );
+        
+        if ($instance instanceof GithubService\Model\RepoBranch) {
+            var_dump($instance->links);
+        }
     }
 }
 

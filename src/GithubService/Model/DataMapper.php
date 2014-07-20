@@ -92,8 +92,6 @@ trait DataMapper {
             throw new GithubAPIException($response, "Error parsing json, last json error: ".$lastJsonError);
         }
 
-        
-        
         //An error is set...but presumably not an error code if we arrived here.
         if (isset($data['error']) == true) {
             $errorDescription = 'error_description not set, so cause unknown.';
@@ -244,6 +242,11 @@ trait DataMapper {
             $multiple = $dataMapElement['multiple'];
         }
 
+        $preserveKeys = false;
+        if(array_key_exists('preserveKeys', $dataMapElement) == TRUE){
+            $preserveKeys = $dataMapElement['preserveKeys'];
+        }
+
         if ($sourceValue === null) {
             //TODO - add 'optional' == true check
             //Or even better a nullable option?
@@ -256,13 +259,20 @@ trait DataMapper {
                 $this->{$classVariableName} = array();
             }
 
-            foreach($sourceValue as $sourceValueInstance){
+            foreach($sourceValue as $key => $sourceValueInstance){
                 if($className != FALSE){
                     $object = $className::createFromData($sourceValueInstance);
-                    $this->{$classVariableName}[] = $object;
+                    $value = $object;
                 }
                 else{
-                    $this->{$classVariableName}[] = $sourceValueInstance;
+                     $value = $sourceValueInstance;
+                }
+
+                if ($preserveKeys) {
+                    $this->{$classVariableName}[$key] = $value; 
+                }
+                else {
+                    $this->{$classVariableName}[] = $value;
                 }
             }
         }

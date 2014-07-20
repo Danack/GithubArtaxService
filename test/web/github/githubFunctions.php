@@ -6,9 +6,11 @@ use GithubService\Model\Commits;
 use GithubService\GithubAPI\GithubAPIException;
 use ArtaxServiceBuilder\Service\StoredLink;
 
+use Alert\NativeReactor;
 use Auryn\Provider;
 use Artax\Request;
-
+use Alert\ReactorFactory;
+use Addr\ResolverFactory;
 
 
 /**
@@ -745,6 +747,38 @@ function prepareArtaxClient(Artax\Client $client, Auryn\AurynInjector $provider)
 }
 
 
+
+function createArtaxClient(NativeReactor $reactor) {
+//    static $reactor = null;
+//    
+//    if ($reactor == null) {
+//        $reactor = new NativeReactor;
+//    }
+    
+    $dnsCache = new \Addr\ResultCache(new \PSR\Cache\APCCache);
+    $resolver = (new ResolverFactory)->createResolver(
+            $reactor,
+            null, //$serverAddr = null,
+            null, //$serverPort = null,
+            null, //$requestTimeout = null,
+            $dnsCache, //$dnsCache,// Cache $cache = null,
+            null //$hostsFilePath = null
+        );
+
+    $dnsResolver = new \Artax\AddrDnsResolver($resolver);
+
+    $asyncClient = new \Artax\AsyncClient(
+        $reactor,
+        null, //SocketFactory $sf = NULL, 
+        $dnsResolver//, DnsResolver $dnsResolver = NULL
+    );
+
+    $client = new Artax\Client($reactor, $asyncClient);
+    
+    return $client;
+}
+
+
 /**
  * @param array $implementations
  * @param array $shareClasses
@@ -754,24 +788,52 @@ function createProvider($implementations = array(), $shareClasses = array()) {
 
 
     $provider = new Provider();
-
-
+    
     $provider->define(
         'GithubService\GithubAPI\GithubAPI',
         [':userAgent' => GITHUB_USER_AGENT]
     );
+
+    $redisParameters = array(
+        'connection_timeout' => 30,
+        'read_write_timeout' => 30,
+    );
+
+
+    //$provider->delegate('Artax\Client', 'createArtaxClient');
+//    $redisOptions = [];
+//
+//    //This next line annoys phpstorm
+//    $provider->define(
+//        'Predis\Client',
+//        array(
+//            ':parameters' => $redisParameters,
+//            ':options' => $redisOptions,
+//        )
+//    );
 
     $provider->prepare('Artax\Client', 'prepareArtaxClient');
 
     $standardImplementations = [
 //        'Intahwebz\ObjectCache' => 'Intahwebz\Cache\InMemoryCache',
 //        'Psr\Log\LoggerInterface' => $standardLogger
-        'GithubService\GithubAPI\GithubAPI' => 'DebugGithub'
+        'GithubService\GithubAPI\GithubAPI' => 'DebugGithub',
+
+        //These are default
+        'Artax\AsyncClient'     => 'Artax\AsyncClient',
+        'Addr\ResultCache'      => 'Addr\ResultCache',
+        'Alert\Reactor'         => 'Alert\NativeReactor',
+        'Artax\AddrDnsResolver' => 'Artax\AddrDnsResolver',
+
+        //Non-standard
+        'PSR\Cache'     => 'PSR\Cache\APCCache',
+        'Addr\Cache'    => 'Addr\ResultCache'
     ];
 
     $standardShares = [
 //        'Intahwebz\Timer' => 'Intahwebz\Timer',
 //        'Monolog\Logger' => $standardLogger,
+        'Alert\Reactor' => 'Alert\Reactor'
     ];
 
     foreach ($standardImplementations as $interface => $implementation) {

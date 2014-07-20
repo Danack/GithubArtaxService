@@ -1,7 +1,7 @@
 <?php
 
 
-return array (
+$service = array (
 
     "name" => "Github",
     "baseUrl" => "https://api.github.com",
@@ -293,35 +293,7 @@ return array (
         //GET /repos/:owner/:repo/teams
 
 
-        'listRepoTagsPaginate' => array(
-            'extends' => 'defaultGetOauthOperation',
-            "responseClass" => 'GithubService\Model\RepoTags',
-            'parameters' => array(
-                'pageURL' => array(
-                    "location" => "absoluteURL",
-                ),
-            ),
-        ),
-        
-        
-        //List Tags
-        //GET 
-        'listRepoTags' => array(
-            'uri' => '/repos/{owner}/{repo}/tags',  //'uri' => '/repos/:owner/:repo/tags',
-            'extends' => 'defaultGetOauthOperation',
-            'summary' => 'List tags for a repository. Response can be paged. This can be used either as a authed request (for private repos and higher rate limiting), or as unsigned, (public only, lower limit).',
-            "responseClass" => 'GithubService\Model\RepoTags',
-
-            'parameters' => array(
-                'owner' => array(
-                    "location" => "uri",
-                    'required' => 'true'
-                ),
-                'repo' => array(
-                    "location" => "uri",
-                )
-            ),
-        ),
+      
         
         'listRepoCommitsPaginate' => array(
             'extends' => 'defaultGetOauthOperation',
@@ -402,8 +374,12 @@ return array (
     ),
 );
 
+$repoOperations = require_once "repositories.php";
+
+$service['operations'] = array_merge($service['operations'], $repoOperations);
 
 
+return $service;
 
 
 // Github uses web base authentication for Oauth2... which means you don't need to sign the

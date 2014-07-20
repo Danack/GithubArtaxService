@@ -34,7 +34,7 @@ class CommitInfo {
         ['message', 'message'],
         ['treeURL', ['tree', 'url']],
         ['treeSHA', ['tree', 'sha']],
-        ['commentCount', 'comment_count'],
+        ['commentCount', 'comment_count', 'optional' => true],
     );
     
     

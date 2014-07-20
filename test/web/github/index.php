@@ -14,6 +14,8 @@ END;
 /** @var \GithubService\Model\AccessResponse */
 $accessResponse = getSessionVariable(GITHUB_ACCESS_RESPONSE_KEY);
 
+
+
 if ($accessResponse) {
     if (!($accessResponse instanceof GithubService\Model\AccessResponse)) {
         //class was renamed...or something else bad happened.
@@ -22,9 +24,16 @@ if ($accessResponse) {
     }
 }
 
+$shareClasses = [];
+
+if ($accessResponse) {
+    $shareClasses['GithubService\Model\AccessResponse'] = $accessResponse;
+}
+
+
 $provider = createProvider(
     [],
-    ['GithubService\Model\AccessResponse' => $accessResponse]
+    $shareClasses
 );
 
 

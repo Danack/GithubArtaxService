@@ -35,19 +35,18 @@ class Person {
         ['avatarURL', 'avatar_url'],
         ['gravatarID', 'gravatar_id'],
         ['url', 'url'],
-        ['followersURL', 'followers_url'],
-        ['followingURL', 'following_url'],
-        ['gistsURL', 'gists_url'],
-        ['starredURL', 'starred_url'],
-        ['organizationsURL', 'organizations_url'],
-        ['reposURL', 'repos_url'],
-        ['eventsURL', 'events_url'],
-        ['receivedEventsURL', 'received_events_url'],
-        ['type', 'type'],
-        ['siteAdmin', 'site_admin'],
+        ['followersURL', 'followers_url', 'optional' => true],
+        ['followingURL', 'following_url', 'optional' => true],
+        ['gistsURL', 'gists_url', 'optional' => true],
+        ['starredURL', 'starred_url', 'optional' => true],
+        ['organizationsURL', 'organizations_url', 'optional' => true],
+        ['reposURL', 'repos_url', 'optional' => true],
+        ['eventsURL', 'events_url', 'optional' => true],
+        ['receivedEventsURL', 'received_events_url', 'optional' => true],
+        ['type', 'type', 'optional' => true],
+        ['siteAdmin', 'site_admin', 'optional' => true],
     );
-
-
+    
 
 //"author": {
 //"login": "octocat",

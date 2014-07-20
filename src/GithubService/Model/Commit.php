@@ -40,7 +40,7 @@ class Commit {
     static protected $dataMap = array(
         ['url', 'url'],
         ['sha', 'sha'],
-        ['htmlURL', 'html_url'],
+        ['htmlURL', 'html_url', 'optional' => true],
         ['commitInfo', 'commit', 'class' => 'GithubService\Model\CommitInfo'],
         ['author', 'author', 'class' => 'GithubService\Model\Person'],
         ['committer', 'committer', 'class' => 'GithubService\Model\Person'],
