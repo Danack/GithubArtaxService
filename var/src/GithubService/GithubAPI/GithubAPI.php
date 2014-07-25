@@ -151,11 +151,13 @@ class GithubAPI implements \GithubService\GithubAPI
      * getUserInfoByName
      *
      * @param Authorization mixed The stupid oauth2 bearer token
-     * @param username mixed The username of the client.
+     * @param owner mixed The owner of the repo to fetch contributors for.
+     * @param repo mixed The repo to fetch contributors for.
+     * @param anon mixed Set to 1 or true to include anonymous contributors in results.
      */
-    public function getUserInfoByName($Authorization, $username)
+    public function getUserInfoByName($Authorization, $owner, $repo, $anon)
     {
-        $instance = new getUserInfoByName($this, $Authorization, $this->getUserAgent(), $username);
+        $instance = new getUserInfoByName($this, $Authorization, $this->getUserAgent(), $owner, $repo, $anon);
         return $instance;
     }
 
@@ -167,35 +169,6 @@ class GithubAPI implements \GithubService\GithubAPI
     public function getUserInfo($Authorization)
     {
         $instance = new getUserInfo($this, $Authorization, $this->getUserAgent());
-        return $instance;
-    }
-
-    /**
-     * listRepoTagsPaginate
-     *
-     * @param Authorization mixed The stupid oauth2 bearer token
-     * @param pageURL mixed
-     */
-    public function listRepoTagsPaginate($Authorization, $pageURL)
-    {
-        $instance = new listRepoTagsPaginate($this, $Authorization, $this->getUserAgent(), $pageURL);
-        return $instance;
-    }
-
-    /**
-     * listRepoTags
-     *
-     * List tags for a repository. Response can be paged. This can be used either as a
-     * authed request (for private repos and higher rate limiting), or as unsigned,
-     * (public only, lower limit).
-     *
-     * @param Authorization mixed The stupid oauth2 bearer token
-     * @param owner mixed 
-     * @param repo mixed
-     */
-    public function listRepoTags($Authorization, $owner, $repo)
-    {
-        $instance = new listRepoTags($this, $Authorization, $this->getUserAgent(), $owner, $repo);
         return $instance;
     }
 
@@ -235,6 +208,177 @@ class GithubAPI implements \GithubService\GithubAPI
     public function getSingleCommit($Authorization, $owner, $repo, $sha)
     {
         $instance = new getSingleCommit($this, $Authorization, $this->getUserAgent(), $owner, $repo, $sha);
+        return $instance;
+    }
+
+    /**
+     * listRepositories
+     *
+     * @param Authorization mixed The stupid oauth2 bearer token
+     * @param type mixed Can be one of all, owner, public, private, member. Default:
+     * all
+     * @param sort mixed Can be one of created, updated, pushed, full_name. Default:
+     * full_name
+     * @param direction mixed Can be one of asc or desc. Default: when using full_name:
+     * asc; otherwise desc
+     */
+    public function listRepositories($Authorization, $type, $sort, $direction)
+    {
+        $instance = new listRepositories($this, $Authorization, $this->getUserAgent(), $type, $sort, $direction);
+        return $instance;
+    }
+
+    /**
+     * listUserRepositories
+     *
+     * @param Authorization mixed The stupid oauth2 bearer token
+     * @param username mixed The user to fetch the repos for.
+     * @param type mixed Can be one of all, owner, member. Default: owner
+     * @param sort mixed Can be one of created, updated, pushed, full_name. Default:
+     * full_name
+     * @param direction mixed Can be one of asc or desc. Default: when using full_name:
+     * asc, otherwise desc
+     */
+    public function listUserRepositories($Authorization, $username, $type, $sort, $direction)
+    {
+        $instance = new listUserRepositories($this, $Authorization, $this->getUserAgent(), $username, $type, $sort, $direction);
+        return $instance;
+    }
+
+    /**
+     * listOrganizationRepositories
+     *
+     * @param Authorization mixed The stupid oauth2 bearer token
+     * @param organisation mixed The organisation to fetch the repos for.
+     * @param type mixed Can be one of all, owner, member. Default: owner
+     */
+    public function listOrganizationRepositories($Authorization, $organisation, $type)
+    {
+        $instance = new listOrganizationRepositories($this, $Authorization, $this->getUserAgent(), $organisation, $type);
+        return $instance;
+    }
+
+    /**
+     * listAllPublicRepositories
+     *
+     * @param Authorization mixed The stupid oauth2 bearer token
+     * @param since mixed The integer ID of the last Repository that you’ve seen.
+     */
+    public function listAllPublicRepositories($Authorization, $since)
+    {
+        $instance = new listAllPublicRepositories($this, $Authorization, $this->getUserAgent(), $since);
+        return $instance;
+    }
+
+    /**
+     * getRepo
+     *
+     * @param Authorization mixed The stupid oauth2 bearer token
+     * @param username mixed The user to fetch the repos for.
+     * @param type mixed Can be one of all, owner, member. Default: owner
+     * @param sort mixed Can be one of created, updated, pushed, full_name. Default:
+     * full_name
+     * @param direction mixed Can be one of asc or desc. Default: when using full_name:
+     * asc, otherwise desc
+     */
+    public function getRepo($Authorization, $username, $type, $sort, $direction)
+    {
+        $instance = new getRepo($this, $Authorization, $this->getUserAgent(), $username, $type, $sort, $direction);
+        return $instance;
+    }
+
+    /**
+     * listRepoLanguages
+     *
+     * @param Authorization mixed The stupid oauth2 bearer token
+     * @param owner mixed The owner of the repo to fetch contributors for.
+     * @param repo mixed The repo to fetch contributors for.
+     */
+    public function listRepoLanguages($Authorization, $owner, $repo)
+    {
+        $instance = new listRepoLanguages($this, $Authorization, $this->getUserAgent(), $owner, $repo);
+        return $instance;
+    }
+
+    /**
+     * listRepoTeams
+     *
+     * @param Authorization mixed The stupid oauth2 bearer token
+     * @param owner mixed The owner of the repo to fetch contributors for.
+     * @param repo mixed The repo to fetch contributors for.
+     */
+    public function listRepoTeams($Authorization, $owner, $repo)
+    {
+        $instance = new listRepoTeams($this, $Authorization, $this->getUserAgent(), $owner, $repo);
+        return $instance;
+    }
+
+    /**
+     * listRepoTagsPaginate
+     *
+     * @param Authorization mixed The stupid oauth2 bearer token
+     * @param pageURL mixed
+     */
+    public function listRepoTagsPaginate($Authorization, $pageURL)
+    {
+        $instance = new listRepoTagsPaginate($this, $Authorization, $this->getUserAgent(), $pageURL);
+        return $instance;
+    }
+
+    /**
+     * listRepoTags
+     *
+     * List tags for a repository. Response can be paged. This can be used either as a
+     * authed request (for private repos and higher rate limiting), or as unsigned,
+     * (public only, lower limit).
+     *
+     * @param Authorization mixed The stupid oauth2 bearer token
+     * @param owner mixed 
+     * @param repo mixed
+     */
+    public function listRepoTags($Authorization, $owner, $repo)
+    {
+        $instance = new listRepoTags($this, $Authorization, $this->getUserAgent(), $owner, $repo);
+        return $instance;
+    }
+
+    /**
+     * listRepoBranches
+     *
+     * @param Authorization mixed The stupid oauth2 bearer token
+     * @param owner mixed 
+     * @param repo mixed
+     */
+    public function listRepoBranches($Authorization, $owner, $repo)
+    {
+        $instance = new listRepoBranches($this, $Authorization, $this->getUserAgent(), $owner, $repo);
+        return $instance;
+    }
+
+    /**
+     * getRepoBranch
+     *
+     * @param Authorization mixed The stupid oauth2 bearer token
+     * @param owner mixed 
+     * @param repo mixed 
+     * @param branch mixed
+     */
+    public function getRepoBranch($Authorization, $owner, $repo, $branch)
+    {
+        $instance = new getRepoBranch($this, $Authorization, $this->getUserAgent(), $owner, $repo, $branch);
+        return $instance;
+    }
+
+    /**
+     * deleteRepo
+     *
+     * @param Authorization mixed The stupid oauth2 bearer token
+     * @param owner mixed 
+     * @param repo mixed
+     */
+    public function deleteRepo($Authorization, $owner, $repo)
+    {
+        $instance = new deleteRepo($this, $Authorization, $this->getUserAgent(), $owner, $repo);
         return $instance;
     }
 

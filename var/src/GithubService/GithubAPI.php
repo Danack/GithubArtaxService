@@ -72,9 +72,11 @@ interface GithubAPI
      * getUserInfoByName
      *
      * @param Authorization mixed The stupid oauth2 bearer token
-     * @param username mixed The username of the client.
+     * @param owner mixed The owner of the repo to fetch contributors for.
+     * @param repo mixed The repo to fetch contributors for.
+     * @param anon mixed Set to 1 or true to include anonymous contributors in results.
      */
-    public function getUserInfoByName($Authorization, $username);
+    public function getUserInfoByName($Authorization, $owner, $repo, $anon);
 
     /**
      * getUserInfo
@@ -82,27 +84,6 @@ interface GithubAPI
      * @param Authorization mixed The stupid oauth2 bearer token
      */
     public function getUserInfo($Authorization);
-
-    /**
-     * listRepoTagsPaginate
-     *
-     * @param Authorization mixed The stupid oauth2 bearer token
-     * @param pageURL mixed
-     */
-    public function listRepoTagsPaginate($Authorization, $pageURL);
-
-    /**
-     * listRepoTags
-     *
-     * List tags for a repository. Response can be paged. This can be used either as a
-     * authed request (for private repos and higher rate limiting), or as unsigned,
-     * (public only, lower limit).
-     *
-     * @param Authorization mixed The stupid oauth2 bearer token
-     * @param owner mixed 
-     * @param repo mixed
-     */
-    public function listRepoTags($Authorization, $owner, $repo);
 
     /**
      * listRepoCommitsPaginate
@@ -130,6 +111,129 @@ interface GithubAPI
      * @param sha mixed SHA of the commit to get
      */
     public function getSingleCommit($Authorization, $owner, $repo, $sha);
+
+    /**
+     * listRepositories
+     *
+     * @param Authorization mixed The stupid oauth2 bearer token
+     * @param type mixed Can be one of all, owner, public, private, member. Default:
+     * all
+     * @param sort mixed Can be one of created, updated, pushed, full_name. Default:
+     * full_name
+     * @param direction mixed Can be one of asc or desc. Default: when using full_name:
+     * asc; otherwise desc
+     */
+    public function listRepositories($Authorization, $type, $sort, $direction);
+
+    /**
+     * listUserRepositories
+     *
+     * @param Authorization mixed The stupid oauth2 bearer token
+     * @param username mixed The user to fetch the repos for.
+     * @param type mixed Can be one of all, owner, member. Default: owner
+     * @param sort mixed Can be one of created, updated, pushed, full_name. Default:
+     * full_name
+     * @param direction mixed Can be one of asc or desc. Default: when using full_name:
+     * asc, otherwise desc
+     */
+    public function listUserRepositories($Authorization, $username, $type, $sort, $direction);
+
+    /**
+     * listOrganizationRepositories
+     *
+     * @param Authorization mixed The stupid oauth2 bearer token
+     * @param organisation mixed The organisation to fetch the repos for.
+     * @param type mixed Can be one of all, owner, member. Default: owner
+     */
+    public function listOrganizationRepositories($Authorization, $organisation, $type);
+
+    /**
+     * listAllPublicRepositories
+     *
+     * @param Authorization mixed The stupid oauth2 bearer token
+     * @param since mixed The integer ID of the last Repository that you’ve seen.
+     */
+    public function listAllPublicRepositories($Authorization, $since);
+
+    /**
+     * getRepo
+     *
+     * @param Authorization mixed The stupid oauth2 bearer token
+     * @param username mixed The user to fetch the repos for.
+     * @param type mixed Can be one of all, owner, member. Default: owner
+     * @param sort mixed Can be one of created, updated, pushed, full_name. Default:
+     * full_name
+     * @param direction mixed Can be one of asc or desc. Default: when using full_name:
+     * asc, otherwise desc
+     */
+    public function getRepo($Authorization, $username, $type, $sort, $direction);
+
+    /**
+     * listRepoLanguages
+     *
+     * @param Authorization mixed The stupid oauth2 bearer token
+     * @param owner mixed The owner of the repo to fetch contributors for.
+     * @param repo mixed The repo to fetch contributors for.
+     */
+    public function listRepoLanguages($Authorization, $owner, $repo);
+
+    /**
+     * listRepoTeams
+     *
+     * @param Authorization mixed The stupid oauth2 bearer token
+     * @param owner mixed The owner of the repo to fetch contributors for.
+     * @param repo mixed The repo to fetch contributors for.
+     */
+    public function listRepoTeams($Authorization, $owner, $repo);
+
+    /**
+     * listRepoTagsPaginate
+     *
+     * @param Authorization mixed The stupid oauth2 bearer token
+     * @param pageURL mixed
+     */
+    public function listRepoTagsPaginate($Authorization, $pageURL);
+
+    /**
+     * listRepoTags
+     *
+     * List tags for a repository. Response can be paged. This can be used either as a
+     * authed request (for private repos and higher rate limiting), or as unsigned,
+     * (public only, lower limit).
+     *
+     * @param Authorization mixed The stupid oauth2 bearer token
+     * @param owner mixed 
+     * @param repo mixed
+     */
+    public function listRepoTags($Authorization, $owner, $repo);
+
+    /**
+     * listRepoBranches
+     *
+     * @param Authorization mixed The stupid oauth2 bearer token
+     * @param owner mixed 
+     * @param repo mixed
+     */
+    public function listRepoBranches($Authorization, $owner, $repo);
+
+    /**
+     * getRepoBranch
+     *
+     * @param Authorization mixed The stupid oauth2 bearer token
+     * @param owner mixed 
+     * @param repo mixed 
+     * @param branch mixed
+     */
+    public function getRepoBranch($Authorization, $owner, $repo, $branch);
+
+    /**
+     * deleteRepo
+     *
+     * @param Authorization mixed The stupid oauth2 bearer token
+     * @param owner mixed 
+     * @param repo mixed
+     */
+    public function deleteRepo($Authorization, $owner, $repo);
 
 
 }

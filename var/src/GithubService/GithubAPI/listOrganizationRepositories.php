@@ -6,7 +6,7 @@
 //
 namespace GithubService\GithubAPI;
 
-class getUserInfoByName implements \ArtaxServiceBuilder\Operation
+class listOrganizationRepositories implements \ArtaxServiceBuilder\Operation
 {
 
     /**
@@ -34,7 +34,7 @@ class getUserInfoByName implements \ArtaxServiceBuilder\Operation
         return $this->response;
     }
 
-    public function __construct(\GithubService\GithubAPI\GithubAPI $api, $Authorization, $userAgent, $owner, $repo, $anon)
+    public function __construct(\GithubService\GithubAPI\GithubAPI $api, $Authorization, $userAgent, $organisation, $type)
     {
         $defaultParams = [
             'Accept' => 'application/vnd.github.v3+json',
@@ -43,9 +43,8 @@ class getUserInfoByName implements \ArtaxServiceBuilder\Operation
         $this->api = $api;
         $this->parameters['Authorization'] = $Authorization;
         $this->parameters['userAgent'] = $userAgent;
-        $this->parameters['owner'] = $owner;
-        $this->parameters['repo'] = $repo;
-        $this->parameters['anon'] = $anon;
+        $this->parameters['organisation'] = $organisation;
+        $this->parameters['type'] = $type;
     }
 
     public function setAPI(\GithubService\GithubAPI\GithubAPI $api)
@@ -64,14 +63,11 @@ class getUserInfoByName implements \ArtaxServiceBuilder\Operation
         if (array_key_exists('userAgent', $params)) {
              $this->parameters['userAgent'] = $params['userAgent'];
         }
-        if (array_key_exists('owner', $params)) {
-             $this->parameters['owner'] = $params['owner'];
+        if (array_key_exists('organisation', $params)) {
+             $this->parameters['organisation'] = $params['organisation'];
         }
-        if (array_key_exists('repo', $params)) {
-             $this->parameters['repo'] = $params['repo'];
-        }
-        if (array_key_exists('anon', $params)) {
-             $this->parameters['anon'] = $params['anon'];
+        if (array_key_exists('type', $params)) {
+             $this->parameters['type'] = $params['type'];
         }
     }
 
@@ -90,19 +86,14 @@ class getUserInfoByName implements \ArtaxServiceBuilder\Operation
         $this->parameters['userAgent'] = $userAgent;
     }
 
-    public function setOwner($owner)
+    public function setOrganisation($organisation)
     {
-        $this->parameters['owner'] = $owner;
+        $this->parameters['organisation'] = $organisation;
     }
 
-    public function setRepo($repo)
+    public function setType($type)
     {
-        $this->parameters['repo'] = $repo;
-    }
-
-    public function setAnon($anon)
-    {
-        $this->parameters['anon'] = $anon;
+        $this->parameters['type'] = $type;
     }
 
     public function getParameters()
@@ -143,7 +134,7 @@ class getUserInfoByName implements \ArtaxServiceBuilder\Operation
     public function createRequest()
     {
         $request = new \Artax\Request();
-        $url = "https://api.github.com/repos/{owner}/{repo}/contributors";
+        $url = "https://api.github.com/orgs/{organisation}/repos";
         $request->setMethod('GET');
         $queryParameters = [];
 
@@ -153,9 +144,8 @@ class getUserInfoByName implements \ArtaxServiceBuilder\Operation
         $request->setHeader('Accept', $this->getFilteredParameter('Accept'));
         $request->setHeader('Authorization', $this->getFilteredParameter('Authorization'));
         $request->setHeader('User-Agent', $this->getFilteredParameter('userAgent'));
-        $queryParameters['owner'] = $this->getFilteredParameter('owner');
-        $queryParameters['repo'] = $this->getFilteredParameter('repo');
-        $queryParameters['anon'] = $this->getFilteredParameter('anon');
+        $queryParameters['organisation'] = $this->getFilteredParameter('organisation');
+        $queryParameters['type'] = $this->getFilteredParameter('type');
 
         //Parameters are parsed and set, lets prepare the request
         if (count($queryParameters)) {

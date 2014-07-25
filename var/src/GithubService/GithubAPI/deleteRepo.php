@@ -6,7 +6,7 @@
 //
 namespace GithubService\GithubAPI;
 
-class getUserInfoByName implements \ArtaxServiceBuilder\Operation
+class deleteRepo implements \ArtaxServiceBuilder\Operation
 {
 
     /**
@@ -34,7 +34,7 @@ class getUserInfoByName implements \ArtaxServiceBuilder\Operation
         return $this->response;
     }
 
-    public function __construct(\GithubService\GithubAPI\GithubAPI $api, $Authorization, $userAgent, $owner, $repo, $anon)
+    public function __construct(\GithubService\GithubAPI\GithubAPI $api, $Authorization, $userAgent, $owner, $repo)
     {
         $defaultParams = [
             'Accept' => 'application/vnd.github.v3+json',
@@ -45,7 +45,6 @@ class getUserInfoByName implements \ArtaxServiceBuilder\Operation
         $this->parameters['userAgent'] = $userAgent;
         $this->parameters['owner'] = $owner;
         $this->parameters['repo'] = $repo;
-        $this->parameters['anon'] = $anon;
     }
 
     public function setAPI(\GithubService\GithubAPI\GithubAPI $api)
@@ -69,9 +68,6 @@ class getUserInfoByName implements \ArtaxServiceBuilder\Operation
         }
         if (array_key_exists('repo', $params)) {
              $this->parameters['repo'] = $params['repo'];
-        }
-        if (array_key_exists('anon', $params)) {
-             $this->parameters['anon'] = $params['anon'];
         }
     }
 
@@ -98,11 +94,6 @@ class getUserInfoByName implements \ArtaxServiceBuilder\Operation
     public function setRepo($repo)
     {
         $this->parameters['repo'] = $repo;
-    }
-
-    public function setAnon($anon)
-    {
-        $this->parameters['anon'] = $anon;
     }
 
     public function getParameters()
@@ -143,8 +134,8 @@ class getUserInfoByName implements \ArtaxServiceBuilder\Operation
     public function createRequest()
     {
         $request = new \Artax\Request();
-        $url = "https://api.github.com/repos/{owner}/{repo}/contributors";
-        $request->setMethod('GET');
+        $url = "https://api.github.com/repos/{owner}/{repo}";
+        $request->setMethod('DELETE');
         $queryParameters = [];
 
 
@@ -155,12 +146,8 @@ class getUserInfoByName implements \ArtaxServiceBuilder\Operation
         $request->setHeader('User-Agent', $this->getFilteredParameter('userAgent'));
         $queryParameters['owner'] = $this->getFilteredParameter('owner');
         $queryParameters['repo'] = $this->getFilteredParameter('repo');
-        $queryParameters['anon'] = $this->getFilteredParameter('anon');
 
         //Parameters are parsed and set, lets prepare the request
-        if (count($queryParameters)) {
-            $url = $url.'?'.http_build_query($queryParameters, '', '&', PHP_QUERY_RFC3986);
-        }
         $request->setUri($url);
 
         return $request;

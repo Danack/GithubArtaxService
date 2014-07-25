@@ -6,7 +6,7 @@
 //
 namespace GithubService\GithubAPI;
 
-class getUserInfoByName implements \ArtaxServiceBuilder\Operation
+class getRepoBranch implements \ArtaxServiceBuilder\Operation
 {
 
     /**
@@ -34,7 +34,7 @@ class getUserInfoByName implements \ArtaxServiceBuilder\Operation
         return $this->response;
     }
 
-    public function __construct(\GithubService\GithubAPI\GithubAPI $api, $Authorization, $userAgent, $owner, $repo, $anon)
+    public function __construct(\GithubService\GithubAPI\GithubAPI $api, $Authorization, $userAgent, $owner, $repo, $branch)
     {
         $defaultParams = [
             'Accept' => 'application/vnd.github.v3+json',
@@ -45,7 +45,7 @@ class getUserInfoByName implements \ArtaxServiceBuilder\Operation
         $this->parameters['userAgent'] = $userAgent;
         $this->parameters['owner'] = $owner;
         $this->parameters['repo'] = $repo;
-        $this->parameters['anon'] = $anon;
+        $this->parameters['branch'] = $branch;
     }
 
     public function setAPI(\GithubService\GithubAPI\GithubAPI $api)
@@ -70,8 +70,8 @@ class getUserInfoByName implements \ArtaxServiceBuilder\Operation
         if (array_key_exists('repo', $params)) {
              $this->parameters['repo'] = $params['repo'];
         }
-        if (array_key_exists('anon', $params)) {
-             $this->parameters['anon'] = $params['anon'];
+        if (array_key_exists('branch', $params)) {
+             $this->parameters['branch'] = $params['branch'];
         }
     }
 
@@ -100,9 +100,9 @@ class getUserInfoByName implements \ArtaxServiceBuilder\Operation
         $this->parameters['repo'] = $repo;
     }
 
-    public function setAnon($anon)
+    public function setBranch($branch)
     {
-        $this->parameters['anon'] = $anon;
+        $this->parameters['branch'] = $branch;
     }
 
     public function getParameters()
@@ -113,7 +113,7 @@ class getUserInfoByName implements \ArtaxServiceBuilder\Operation
     /**
      * Apply any filters necessary to the parameter
      *
-     * @return mixed
+     * @return \GithubService\Model\RepoBranch
      */
     public function getFilteredParameter($name)
     {
@@ -143,7 +143,7 @@ class getUserInfoByName implements \ArtaxServiceBuilder\Operation
     public function createRequest()
     {
         $request = new \Artax\Request();
-        $url = "https://api.github.com/repos/{owner}/{repo}/contributors";
+        $url = "https://api.github.com/repos/{owner}/{repo}/branches/{branch}";
         $request->setMethod('GET');
         $queryParameters = [];
 
@@ -155,12 +155,9 @@ class getUserInfoByName implements \ArtaxServiceBuilder\Operation
         $request->setHeader('User-Agent', $this->getFilteredParameter('userAgent'));
         $queryParameters['owner'] = $this->getFilteredParameter('owner');
         $queryParameters['repo'] = $this->getFilteredParameter('repo');
-        $queryParameters['anon'] = $this->getFilteredParameter('anon');
+        $queryParameters['branch'] = $this->getFilteredParameter('branch');
 
         //Parameters are parsed and set, lets prepare the request
-        if (count($queryParameters)) {
-            $url = $url.'?'.http_build_query($queryParameters, '', '&', PHP_QUERY_RFC3986);
-        }
         $request->setUri($url);
 
         return $request;
@@ -183,38 +180,44 @@ class getUserInfoByName implements \ArtaxServiceBuilder\Operation
     /**
      * Execute the operation
      *
-     * @return mixed
+     * @return \GithubService\Model\RepoBranch
      */
     public function execute()
     {
         $request = $this->createRequest();
         $response = $this->api->callAPI($request);
         $this->response = $response;
-        return $response->getBody();
+        $instance = \GithubService\Model\RepoBranch::createFromResponse($response, $this);
+
+        return $instance;
     }
 
     /**
      * Dispatch the request for this operation and process the response.Allows you to
      * modify the request before it is sent.
      *
-     * @return mixed
+     * @return \GithubService\Model\RepoBranch
      */
     public function dispatch(\Artax\Request $request)
     {
         $response = $this->api->callAPI($request);
         $this->response = $response;
-        return $response->getBody();
+        $instance = \GithubService\Model\RepoBranch::createFromResponse($response, $this);
+
+        return $instance;
     }
 
     /**
      * Dispatch the request for this operation and process the response.Allows you to
      * modify the request before it is sent.
      *
-     * @return mixed
+     * @return \GithubService\Model\RepoBranch
      */
     public function processResponse(\Artax\Response $response)
     {
-        return $response->getBody();
+        $instance = \GithubService\Model\RepoBranch::createFromResponse($response, $this);
+
+        return $instance;
     }
 
 
