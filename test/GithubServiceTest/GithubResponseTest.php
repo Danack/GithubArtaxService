@@ -18,9 +18,12 @@ class GithubResponseTest extends \PHPUnit_Framework_TestCase {
             ['listAuthorizations.txt', 'GithubService\Model\Authorizations'],
 
             //Repos
-            ['repo/getBranch.txt', 'GithubService\Model\RepoBranch'], 
-            
-            
+            ['repo/getBranch.txt', 'GithubService\Model\RepoBranch'],
+            ['repo/listBranches.txt', 'GithubService\Model\RepoBranches'],
+            ['repo/listLanguages.txt', 'GithubService\Model\Languages'],
+            ['repo/listTeams.txt', 'GithubService\Model\Teams'],
+            ['repo/listTags.txt', 'GithubService\Model\RepoTags'],
+            ['repo/listContributors.txt', 'GithubService\Model\Contributors'],
             
         );
     }
@@ -36,10 +39,10 @@ class GithubResponseTest extends \PHPUnit_Framework_TestCase {
             $expectedClassname,
             $instance
         );
-        
-        if ($instance instanceof GithubService\Model\RepoBranch) {
-            var_dump($instance->links);
-        }
+
+//        if ($expectedClassname == 'GithubService\Model\Languages') {
+//            var_dump($instance);
+//        }
     }
 }
 
