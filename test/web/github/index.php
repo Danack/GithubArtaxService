@@ -2,7 +2,7 @@
 
 require "githubBootstrap.php";
 
-use GithubService\GithubAPI\GithubAPIException;
+use \GithubService\GithubArtaxService\GithubArtaxServiceException;
 
 echo <<< END
 <html>
@@ -62,7 +62,7 @@ try {
         try {
             processAction($provider, $accessResponse);
         }
-        catch(GithubAPIException $gae) {
+        catch(GithubArtaxServiceException $gae) {
             echo "Exception caught: ".$gae->getMessage()."<br/>";
             var_dump($gae->getResponse()->getBody());
         }
@@ -73,7 +73,7 @@ try {
         showActionLinks();
     }
 }
-catch(GithubAPIException $gae) {
+catch(GithubArtaxServiceException $gae) {
     echo "Exception caught: ".$gae->getMessage();
     var_dump($gae->getResponse()->getBody());
 }

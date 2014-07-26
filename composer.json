@@ -37,7 +37,7 @@
 
     "autoload": {
         "psr-0": {
-            "GithubService": "src/"
+            "GithubService": "lib/"
         }
     }
 }

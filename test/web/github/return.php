@@ -1,7 +1,9 @@
 <?php
 
-use GithubService\GithubAPI\GithubAPI;
-use GithubService\GithubAPI\GithubAPIException;
+//use GithubService\GithubAPI\GithubAPI;
+//use GithubService\GithubAPI\GithubAPIException;
+
+use GithubService\GithubArtaxService\GithubArtaxServiceException;
 
 require "githubBootstrap.php";
 
@@ -35,8 +37,6 @@ function checkAuthResult() {
 
     $provider = createProvider([], []);
 
-    $client = $provider->make('Artax\Client');
-    
     $oauthUnguessable = getSessionVariable('oauthUnguessable', null);
 
     if (!$code ||
@@ -47,7 +47,7 @@ function checkAuthResult() {
 
     if ($state !== $oauthUnguessable) {
         //Miss-match on what we're tring to validated.
-        echo "Miss-match on secret'";
+        echo "Mismatch on secret'";
         return;
     }
 
@@ -58,8 +58,8 @@ function checkAuthResult() {
         $command = $api->accessToken(
             GITHUB_CLIENT_ID,
             GITHUB_CLIENT_SECRET,
-            $code//,
-            //"http://".SERVER_HOSTNAME."/github/return.php"
+            $code,
+            "http://".SERVER_HOSTNAME."/github/return.php"
         );
         
         $accessResponse = $command->execute();
@@ -73,7 +73,7 @@ function checkAuthResult() {
             }
         }
     }
-    catch(GithubAPIException $fae) {
+    catch(GithubArtaxServiceException $fae) {
         echo "Exception processing response: ".$fae->getMessage();
     }
 }

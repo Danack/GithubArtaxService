@@ -18,7 +18,7 @@
             <directory>./vendor/</directory>
         </blacklist> -->
         <whitelist>
-            <directory>../src/GithubService</directory>
+            <directory>../lib/GithubService</directory>
         </whitelist>
     </filter>
 

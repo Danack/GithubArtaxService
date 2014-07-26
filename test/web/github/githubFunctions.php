@@ -1,9 +1,10 @@
 <?php
 
-use GithubService\GithubAPI\GithubAPI;
+use GithubService\GithubArtaxService\GithubArtaxService;
+use GithubService\GithubService;
 use GithubService\Model\AccessResponse;
 use GithubService\Model\Commits;
-use GithubService\GithubAPI\GithubAPIException;
+use GithubService\GithubArtaxService\GithubArtaxServiceException;
 use ArtaxServiceBuilder\Service\StoredLink;
 
 use Alert\NativeReactor;
@@ -201,10 +202,10 @@ function getAuthorisations() {
 
 
 /**
- * @param GithubAPI $api
+ * @param GithubService $api
  * @param $accessResponse
  */
-function processAddEmail(GithubAPI $api, $accessResponse) {
+function processAddEmail(GithubService $api, $accessResponse) {
     $newEmail = getVariable('email');
 
     $emailCommand = $api->addUserEmails(
@@ -243,10 +244,10 @@ END;
 }
 
 /**
- * @param GithubAPI $api
+ * @param GithubService $api
  * @param AccessResponse $accessResponse
  */
-function showGithubEmails(GithubAPI $api, AccessResponse $accessResponse) {
+function showGithubEmails(GithubService $api, AccessResponse $accessResponse) {
     //$api = new GithubAPI(GITHUB_USER_AGENT);
     $emailCommand = $api->getUserEmails($accessResponse->accessToken);
     $emailList = $emailCommand->execute();
@@ -260,7 +261,7 @@ function showGithubEmails(GithubAPI $api, AccessResponse $accessResponse) {
 /**
  * @param AccessResponse $accessResponse
  */
-function showAuthorizations(GithubAPI $api, AccessResponse $accessResponse) {
+function showAuthorizations(GithubService $api, AccessResponse $accessResponse) {
 
     try {
 
@@ -276,7 +277,7 @@ function showAuthorizations(GithubAPI $api, AccessResponse $accessResponse) {
             echo "<br/>";
         }
     }
-    catch (\GithubService\GithubAPI\GithubAPIException $gae) {
+    catch (\GithubService\GithubArtaxService\GithubArtaxServiceException $gae) {
         echo "<p>Error in showAuthorizations: ";
         echo $gae->getMessage();
         echo "</p>";
@@ -301,7 +302,7 @@ function renderUserInfo(\GithubService\Model\User $user) {
  * @param AccessResponse $accessResponse
  * @param $username
  */
-function showUser(GithubAPI $api, AccessResponse $accessResponse, $username) {
+function showUser(GithubService $api, AccessResponse $accessResponse, $username) {
     //$api = new GithubAPI(GITHUB_USER_AGENT);
     $authCommand = $api->getUserInfo($accessResponse->accessToken);
     $user = $authCommand->execute();
@@ -360,12 +361,12 @@ function displayAndSaveLinks(\ArtaxServiceBuilder\Service\GithubPaginator $pager
 }
 
 /**
- * @param GithubAPI $api
+ * @param GithubService $api
  * @param AccessResponse $accessResponse
  * @param $username
  * @param $repo
  */
-function listRepoCommits(GithubAPI $api, AccessResponse $accessResponse, $username, $repo) {
+function listRepoCommits(GithubService $api, AccessResponse $accessResponse, $username, $repo) {
     $command = $api->listRepoCommits($accessResponse->accessToken, $username, $repo);
     $command->setAuthor('Danack');
     $commits = $command->execute();
@@ -381,14 +382,14 @@ function listRepoCommits(GithubAPI $api, AccessResponse $accessResponse, $userna
 
 
 /**
- * @param GithubAPI $api
+ * @param GithubService $api
  * @param AccessResponse $accessResponse
  * @param $username
  * @param $repo
  * @param int $pages
  */
 function listRepoCommitsIterator(
-    GithubAPI $api,
+    GithubService $api,
     AccessResponse $accessResponse,
     $username,
     $repo) 
@@ -407,14 +408,14 @@ function listRepoCommitsIterator(
 
 
 /**
- * @param GithubAPI $api
+ * @param GithubService $api
  * @param AccessResponse $accessResponse
  * @param $username
  * @param $repo
  * @param int $pages
  */
 function listRepoCommitsPages(
-    GithubAPI $api,
+    GithubService $api,
     AccessResponse $accessResponse,
     $username, 
     $repo,
@@ -448,10 +449,10 @@ function listRepoCommitsPages(
 
 
 /**
- * @param GithubAPI $api
+ * @param GithubService $api
  * @param AccessResponse $accessResponse
  */
-function showMoreResults(GithubAPI $api, AccessResponse $accessResponse) {
+function showMoreResults(GithubService $api, AccessResponse $accessResponse) {
 
     $resultKey = getVariable('resultKey');
 
@@ -483,11 +484,10 @@ function showMoreResults(GithubAPI $api, AccessResponse $accessResponse) {
 
 
 /**
- * @param GithubAPI $api
+ * @param GithubService $api
  * @param AccessResponse $accessResponse
  */
-function revokeAuthority(GithubAPI $api, AccessResponse $accessResponse) {
-    //$api = new GithubAPI(GITHUB_USER_AGENT);
+function revokeAuthority(GithubService $api, AccessResponse $accessResponse) {
     $command = $api->revokeAllAuthority($accessResponse->accessToken, GITHUB_CLIENT_ID);
     $blah = $command->execute();
     echo "Diplomatic immunity, has been revoked?";
@@ -499,8 +499,7 @@ function revokeAuthority(GithubAPI $api, AccessResponse $accessResponse) {
  * @param $username
  * @param $repo
  */
-function showRepoTags(GithubAPI $api, AccessResponse $accessResponse, $username, $repo) {
-    //$api = new GithubAPI(GITHUB_USER_AGENT);
+function showRepoTags(GithubService $api, AccessResponse $accessResponse, $username, $repo) {
     $command = $api->listRepoTags($accessResponse->accessToken, $username, $repo);
     $repoTags = $command->execute();
     foreach ($repoTags->getIterator() as $repoTag) {
@@ -509,13 +508,13 @@ function showRepoTags(GithubAPI $api, AccessResponse $accessResponse, $username,
 }
 
 /**
- * @param GithubAPI $api
+ * @param GithubService $api
  * @param AccessResponse $accessResponse
  * @param $username
  * @param $reponame
  */
 function showAllTagsForRepo(
-    GithubAPI $api,
+    GithubService $api,
     AccessResponse $accessResponse,
     $username,
     $reponame,
@@ -610,11 +609,11 @@ function showAllTagsForRepo(
 }
 
 /**
- * @param GithubAPI $api
+ * @param GithubService $api
  * @param AccessResponse $accessResponse
  * @param $repos
  */
-function showMultiRepoTags(GithubAPI $api, AccessResponse $accessResponse, $repos) {
+function showMultiRepoTags(GithubService $api, AccessResponse $accessResponse, $repos) {
     foreach ($repos as $repo) {
         list($username, $reponame) = explode('/', $repo);
         showAllTagsForRepo($api, $accessResponse, $username, $reponame);
@@ -719,7 +718,7 @@ function showOauthRequest($scopes) {
 /**
  * Class DebugGithub
  */
-class DebugGithub extends \GithubService\GithubAPI\GithubAPI {
+class DebugGithub extends \GithubService\GithubArtaxService\GithubArtaxService {
 
     public static $count = 0;
 
@@ -730,9 +729,6 @@ class DebugGithub extends \GithubService\GithubAPI\GithubAPI {
         if (self::$count > 20) {
             throw new \Exception("Too many api calls in one run - did I break something?");
         }
-
-        //echo "Calling to uri: ".$request->getUri()."<br/>";
-
         //var_dump(toCurl($request));
         $response = parent::callAPI($request, $successStatuses);
         //var_dump($response);
@@ -788,9 +784,12 @@ function createProvider($implementations = array(), $shareClasses = array()) {
 
 
     $provider = new Provider();
+
+
+    
     
     $provider->define(
-        'GithubService\GithubAPI\GithubAPI',
+        'GithubService\GithubArtaxService\GithubArtaxService',
         [':userAgent' => GITHUB_USER_AGENT]
     );
 
@@ -817,8 +816,9 @@ function createProvider($implementations = array(), $shareClasses = array()) {
     $standardImplementations = [
 //        'Intahwebz\ObjectCache' => 'Intahwebz\Cache\InMemoryCache',
 //        'Psr\Log\LoggerInterface' => $standardLogger
-        'GithubService\GithubAPI\GithubAPI' => 'DebugGithub',
-
+        'GithubService\GithubService' => 'DebugGithub',
+//        $provider->alias('GithubService\GithubService', 'GithubService\GithubArtaxService\GithubArtaxService');
+        
         //These are default
         'Artax\AsyncClient'     => 'Artax\AsyncClient',
         'Addr\ResultCache'      => 'Addr\ResultCache',
