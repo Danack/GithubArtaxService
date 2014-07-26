@@ -33,6 +33,10 @@ function checkAuthResult() {
     $code = getVariable('code', FALSE);
     $state = getVariable('state', FALSE);
 
+    $provider = createProvider([], []);
+
+    $client = $provider->make('Artax\Client');
+    
     $oauthUnguessable = getSessionVariable('oauthUnguessable', null);
 
     if (!$code ||
@@ -48,15 +52,14 @@ function checkAuthResult() {
     }
 
     try {
-        $api = new DebugGithub(GITHUB_USER_AGENT);
+        $api = $provider->make('DebugGithub');//$client
 
-        echo "code is $code <br/>";
-
+        /** @var  $api DebugGithub */
         $command = $api->accessToken(
             GITHUB_CLIENT_ID,
             GITHUB_CLIENT_SECRET,
-            $code,
-            "http://".SERVER_HOSTNAME."/github/return.php"
+            $code//,
+            //"http://".SERVER_HOSTNAME."/github/return.php"
         );
         
         $accessResponse = $command->execute();

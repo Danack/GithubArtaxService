@@ -10,6 +10,17 @@ interface GithubAPI
 {
 
     /**
+     * executeAsync
+     *
+     * Execute an operation asynchronously.
+     *
+     * @param \ArtaxServiceBuilder\Operation $operation The operation to perform
+     * @param callable $callback The callback to call on completion/response.
+     * Parameters should be blah blah blah
+     */
+    public function executeAsync(\ArtaxServiceBuilder\Operation $operation, callable $callback);
+
+    /**
      * getAuthorizations
      *
      * @param Authorization mixed The stupid oauth2 bearer token
@@ -25,10 +36,8 @@ interface GithubAPI
      * GitHub when you registered.
      * @param code mixed string Required. The code you received as a response to Step
      * 1.
-     * @param redirect_uri mixed string The URL in your app where users will be sent
-     * after authorization. See details below about redirect urls.
      */
-    public function accessToken($client_id, $client_secret, $code, $redirect_uri);
+    public function accessToken($client_id, $client_secret, $code);
 
     /**
      * revokeAllAuthority

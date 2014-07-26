@@ -32,7 +32,6 @@
     "require":{
         "Danack/danack-code": ">=2.4.3",
         "danack/artaxservicebuilder": "dev-master",
-        "predis/predis": "dev-v0.9/phpdoc-method-tags as v0.8.4",
         "rdlowrey/artax": "dev-master as 0.7.0"
     },
 

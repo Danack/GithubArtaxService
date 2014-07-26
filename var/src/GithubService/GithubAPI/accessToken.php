@@ -34,7 +34,7 @@ class accessToken implements \ArtaxServiceBuilder\Operation
         return $this->response;
     }
 
-    public function __construct(\GithubService\GithubAPI\GithubAPI $api, $userAgent, $client_id, $client_secret, $code, $redirect_uri)
+    public function __construct(\GithubService\GithubAPI\GithubAPI $api, $userAgent, $client_id, $client_secret, $code)
     {
         $defaultParams = [
             'Accept' => 'application/vnd.github.v3+json',
@@ -45,7 +45,6 @@ class accessToken implements \ArtaxServiceBuilder\Operation
         $this->parameters['client_id'] = $client_id;
         $this->parameters['client_secret'] = $client_secret;
         $this->parameters['code'] = $code;
-        $this->parameters['redirect_uri'] = $redirect_uri;
     }
 
     public function setAPI(\GithubService\GithubAPI\GithubAPI $api)
@@ -69,9 +68,6 @@ class accessToken implements \ArtaxServiceBuilder\Operation
         }
         if (array_key_exists('code', $params)) {
              $this->parameters['code'] = $params['code'];
-        }
-        if (array_key_exists('redirect_uri', $params)) {
-             $this->parameters['redirect_uri'] = $params['redirect_uri'];
         }
     }
 
@@ -98,11 +94,6 @@ class accessToken implements \ArtaxServiceBuilder\Operation
     public function setCode($code)
     {
         $this->parameters['code'] = $code;
-    }
-
-    public function setRedirect_uri($redirect_uri)
-    {
-        $this->parameters['redirect_uri'] = $redirect_uri;
     }
 
     public function getParameters()
@@ -140,7 +131,6 @@ class accessToken implements \ArtaxServiceBuilder\Operation
         $queryParameters['client_id'] = $this->getFilteredParameter('client_id');
         $queryParameters['client_secret'] = $this->getFilteredParameter('client_secret');
         $queryParameters['code'] = $this->getFilteredParameter('code');
-        $queryParameters['redirect_uri'] = $this->getFilteredParameter('redirect_uri');
 
         //Parameters are parsed and set, lets prepare the request
         if (count($queryParameters)) {

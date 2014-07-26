@@ -88,14 +88,34 @@ $service = array (
                 'code' => [
                     'description' =>  'string Required. The code you received as a response to Step 1.',
                     'location' => 'query'
-                ],
-                'redirect_uri' => [
-                    'location' => 'query',
-                    'description' =>  'string The URL in your app where users will be sent after authorization. See details below about redirect urls.'
                 ]
+//                'redirect_uri' => [
+//                    'location' => 'query',
+//                    'description' =>  'string The URL in your app where users will be sent after authorization. See details below about redirect urls.'
+//                ]
             ]
         ],
 
+//        
+//        'download' => [
+//            "httpMethod" => "GET",
+//            "parameters" => array(
+//                'uri' => array(
+//                    "location" => "absoluteURL",
+//                    "description" => "zipball_url",
+//                ),
+//                'access_token' => array(
+//                    "location" => "query",
+//                ),
+//            )
+//            
+//        ],
+//        
+//
+
+
+        
+        
 
         //https://developer.github.com/v3/oauth_authorizations/#revoke-all-authorizations-for-an-application
         

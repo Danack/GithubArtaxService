@@ -52,6 +52,25 @@ class GithubAPI implements \GithubService\GithubAPI
     }
 
     /**
+     * executeAsync
+     *
+     * Execute an operation asynchronously.
+     *
+     * @param \ArtaxServiceBuilder\Operation $operation The operation to perform
+     * @param callable $callback The callback to call on completion/response.
+     * Parameters should be blah blah blah
+     */
+    public function executeAsync(\ArtaxServiceBuilder\Operation $operation, callable $callback)
+    {
+        $request = $operation->createRequest();
+        $onError = function() {
+            echo "Something is borked.";
+        };
+
+        $this->client->request($request, $callback, $onError);
+    }
+
+    /**
      * @return
      */
     public function getUserAgent()
@@ -84,12 +103,10 @@ class GithubAPI implements \GithubService\GithubAPI
      * GitHub when you registered.
      * @param code mixed string Required. The code you received as a response to Step
      * 1.
-     * @param redirect_uri mixed string The URL in your app where users will be sent
-     * after authorization. See details below about redirect urls.
      */
-    public function accessToken($client_id, $client_secret, $code, $redirect_uri)
+    public function accessToken($client_id, $client_secret, $code)
     {
-        $instance = new accessToken($this, $this->getUserAgent(), $client_id, $client_secret, $code, $redirect_uri);
+        $instance = new accessToken($this, $this->getUserAgent(), $client_id, $client_secret, $code);
         return $instance;
     }
 
