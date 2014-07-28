@@ -182,7 +182,10 @@ class Github {
      * @return string
      */
     public static function formatAuthToken($accessToken) {
-
+        if ($accessToken === null) {
+            return null;
+        }
+        
         return "token $accessToken";
     }
 }
