@@ -10,17 +10,6 @@ interface GithubService
 {
 
     /**
-     * executeAsync
-     *
-     * Execute an operation asynchronously.
-     *
-     * @param \ArtaxServiceBuilder\Operation $operation The operation to perform
-     * @param callable $callback The callback to call on completion/response.
-     * Parameters should be blah blah blah
-     */
-    public function executeAsync(\ArtaxServiceBuilder\Operation $operation, callable $callback);
-
-    /**
      * getAuthorizations
      *
      * @param Authorization mixed The stupid oauth2 bearer token
@@ -268,6 +257,17 @@ interface GithubService
      * @return \GithubService\Operation\deleteRepo The new operation
      */
     public function deleteRepo($Authorization, $owner, $repo);
+
+    /**
+     * executeAsync
+     *
+     * Execute an operation asynchronously.
+     *
+     * @param \ArtaxServiceBuilder\Operation $operation The operation to perform
+     * @param callable $callback The callback to call on completion/response.
+     * Parameters should be blah blah blah
+     */
+    public function executeAsync(\ArtaxServiceBuilder\Operation $operation, callable $callback);
 
 
 }

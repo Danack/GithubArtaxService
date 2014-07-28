@@ -148,12 +148,22 @@ class listRepositories implements \ArtaxServiceBuilder\Operation
         $queryParameters = [];
 
 
-        $request->setHeader('Accept', $this->getFilteredParameter('Accept'));
-        $request->setHeader('Authorization', $this->getFilteredParameter('Authorization'));
-        $request->setHeader('User-Agent', $this->getFilteredParameter('userAgent'));
-        $queryParameters['type'] = $this->getFilteredParameter('type');
-        $queryParameters['sort'] = $this->getFilteredParameter('sort');
-        $queryParameters['direction'] = $this->getFilteredParameter('direction');
+        if (array_key_exists('Accept', $this->parameters) == true) {
+        $value = $this->getFilteredParameter('Accept');
+           $request->setHeader('Accept', $value);
+        }
+        $value = $this->getFilteredParameter('Authorization');
+        if ($value != null) {
+            $request->setHeader('Authorization', $value);
+        }
+        $value = $this->getFilteredParameter('userAgent');
+        $request->setHeader('User-Agent', $value);
+        $value = $this->getFilteredParameter('type');
+        $queryParameters['type'] = $value;
+        $value = $this->getFilteredParameter('sort');
+        $queryParameters['sort'] = $value;
+        $value = $this->getFilteredParameter('direction');
+        $queryParameters['direction'] = $value;
 
         //Parameters are parsed and set, lets prepare the request
         if (count($queryParameters)) {
@@ -172,7 +182,7 @@ class listRepositories implements \ArtaxServiceBuilder\Operation
     public function createAndCall()
     {
         $request = $this->createRequest();
-        $response = $this->api->callAPI($request);
+        $response = $this->api->execute($request);
         $this->response = $response;
 
         return $response;
@@ -186,7 +196,7 @@ class listRepositories implements \ArtaxServiceBuilder\Operation
     public function execute()
     {
         $request = $this->createRequest();
-        $response = $this->api->callAPI($request);
+        $response = $this->api->execute($request);
         $this->response = $response;
         return $response->getBody();
     }
@@ -199,7 +209,7 @@ class listRepositories implements \ArtaxServiceBuilder\Operation
      */
     public function dispatch(\Artax\Request $request)
     {
-        $response = $this->api->callAPI($request);
+        $response = $this->api->execute($request);
         $this->response = $response;
         return $response->getBody();
     }

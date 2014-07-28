@@ -135,12 +135,20 @@ class accessToken implements \ArtaxServiceBuilder\Operation
         $queryParameters = [];
 
 
-        $request->setHeader('User-Agent', $this->getFilteredParameter('userAgent'));
-        $request->setHeader('Accept', $this->getFilteredParameter('Accept'));
-        $queryParameters['client_id'] = $this->getFilteredParameter('client_id');
-        $queryParameters['client_secret'] = $this->getFilteredParameter('client_secret');
-        $queryParameters['code'] = $this->getFilteredParameter('code');
-        $queryParameters['redirect_uri'] = $this->getFilteredParameter('redirect_uri');
+        $value = $this->getFilteredParameter('userAgent');
+        $request->setHeader('User-Agent', $value);
+        if (array_key_exists('Accept', $this->parameters) == true) {
+        $value = $this->getFilteredParameter('Accept');
+           $request->setHeader('Accept', $value);
+        }
+        $value = $this->getFilteredParameter('client_id');
+        $queryParameters['client_id'] = $value;
+        $value = $this->getFilteredParameter('client_secret');
+        $queryParameters['client_secret'] = $value;
+        $value = $this->getFilteredParameter('code');
+        $queryParameters['code'] = $value;
+        $value = $this->getFilteredParameter('redirect_uri');
+        $queryParameters['redirect_uri'] = $value;
 
         //Parameters are parsed and set, lets prepare the request
         if (count($queryParameters)) {
@@ -159,7 +167,7 @@ class accessToken implements \ArtaxServiceBuilder\Operation
     public function createAndCall()
     {
         $request = $this->createRequest();
-        $response = $this->api->callAPI($request);
+        $response = $this->api->execute($request);
         $this->response = $response;
 
         return $response;
@@ -173,7 +181,7 @@ class accessToken implements \ArtaxServiceBuilder\Operation
     public function execute()
     {
         $request = $this->createRequest();
-        $response = $this->api->callAPI($request);
+        $response = $this->api->execute($request);
         $this->response = $response;
         $instance = \GithubService\Model\AccessResponse::createFromResponse($response, $this);
 
@@ -188,7 +196,7 @@ class accessToken implements \ArtaxServiceBuilder\Operation
      */
     public function dispatch(\Artax\Request $request)
     {
-        $response = $this->api->callAPI($request);
+        $response = $this->api->execute($request);
         $this->response = $response;
         $instance = \GithubService\Model\AccessResponse::createFromResponse($response, $this);
 

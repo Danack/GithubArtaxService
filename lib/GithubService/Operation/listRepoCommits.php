@@ -181,25 +181,39 @@ class listRepoCommits implements \ArtaxServiceBuilder\Operation
 
         $uriTemplate = new \ArtaxServiceBuilder\Service\UriTemplate\UriTemplate();
         $url = $uriTemplate->expand($url, $this->parameters);
-        $request->setHeader('Accept', $this->getFilteredParameter('Accept'));
-        $request->setHeader('Authorization', $this->getFilteredParameter('Authorization'));
-        $request->setHeader('User-Agent', $this->getFilteredParameter('userAgent'));
-        $queryParameters['owner'] = $this->getFilteredParameter('owner');
-        $queryParameters['repo'] = $this->getFilteredParameter('repo');
+        if (array_key_exists('Accept', $this->parameters) == true) {
+        $value = $this->getFilteredParameter('Accept');
+           $request->setHeader('Accept', $value);
+        }
+        $value = $this->getFilteredParameter('Authorization');
+        if ($value != null) {
+            $request->setHeader('Authorization', $value);
+        }
+        $value = $this->getFilteredParameter('userAgent');
+        $request->setHeader('User-Agent', $value);
+        $value = $this->getFilteredParameter('owner');
+        $queryParameters['owner'] = $value;
+        $value = $this->getFilteredParameter('repo');
+        $queryParameters['repo'] = $value;
         if (array_key_exists('sha', $this->parameters) == true) {
-           $queryParameters['sha'] = $this->getFilteredParameter('sha');
+        $value = $this->getFilteredParameter('sha');
+           $queryParameters['sha'] = $value;
         }
         if (array_key_exists('path', $this->parameters) == true) {
-           $queryParameters['path'] = $this->getFilteredParameter('path');
+        $value = $this->getFilteredParameter('path');
+           $queryParameters['path'] = $value;
         }
         if (array_key_exists('author', $this->parameters) == true) {
-           $queryParameters['author'] = $this->getFilteredParameter('author');
+        $value = $this->getFilteredParameter('author');
+           $queryParameters['author'] = $value;
         }
         if (array_key_exists('since', $this->parameters) == true) {
-           $queryParameters['since'] = $this->getFilteredParameter('since');
+        $value = $this->getFilteredParameter('since');
+           $queryParameters['since'] = $value;
         }
         if (array_key_exists('until', $this->parameters) == true) {
-           $queryParameters['until'] = $this->getFilteredParameter('until');
+        $value = $this->getFilteredParameter('until');
+           $queryParameters['until'] = $value;
         }
 
         //Parameters are parsed and set, lets prepare the request
@@ -216,7 +230,7 @@ class listRepoCommits implements \ArtaxServiceBuilder\Operation
     public function createAndCall()
     {
         $request = $this->createRequest();
-        $response = $this->api->callAPI($request);
+        $response = $this->api->execute($request);
         $this->response = $response;
 
         return $response;
@@ -230,7 +244,7 @@ class listRepoCommits implements \ArtaxServiceBuilder\Operation
     public function execute()
     {
         $request = $this->createRequest();
-        $response = $this->api->callAPI($request);
+        $response = $this->api->execute($request);
         $this->response = $response;
         $instance = \GithubService\Model\Commits::createFromResponse($response, $this);
 
@@ -245,7 +259,7 @@ class listRepoCommits implements \ArtaxServiceBuilder\Operation
      */
     public function dispatch(\Artax\Request $request)
     {
-        $response = $this->api->callAPI($request);
+        $response = $this->api->execute($request);
         $this->response = $response;
         $instance = \GithubService\Model\Commits::createFromResponse($response, $this);
 

@@ -7,6 +7,8 @@
 namespace GithubService\GithubArtaxService;
 
 use GithubService\Operation\getAuthorizations;
+use Artax\Response;
+use Alert\ReactorFactory;
 use GithubService\Operation\accessToken;
 use GithubService\Operation\revokeAllAuthority;
 use GithubService\Operation\getUserEmails;
@@ -33,72 +35,10 @@ use GithubService\Operation\deleteRepo;
 class GithubArtaxService implements \GithubService\GithubService
 {
 
-    /**
-     * @var \ $userAgent
-     */
-    public $userAgent = null;
-
-    /**
-     * @var \Artax\Client $client
-     */
-    public $client = null;
-
-    public function __construct(\Artax\Client $client, $userAgent)
+    public function __construct(\Artax\AsyncClient $client, $userAgent)
     {
         $this->client = $client;
         $this->userAgent = $userAgent;
-    }
-
-    /**
-     * callAPI
-     *
-     * Sends a request to the API
-     *
-     * @param $request \Artax\Request The request to send.
-     * @param $successStatuses array A list of acceptable success statuses.
-     * @return \Artax\Response  The response from Artax
-     */
-    public function callAPI(\Artax\Request $request, array $successStatuses = array())
-    {
-        $response = $this->client->request($request);
-        $status = $response->getStatus();
-        $status = intval($status);
-
-        if ($successStatuses != null  && in_array($status, $successStatuses)) {
-            throw new \GithubService\GithubArtaxService\GithubArtaxServiceException(
-                $response, 
-                "Status does not match one of ".implode(', ', $successStatuses)
-            );
-        }
-        else {
-            if ($status < 200 || $status >= 300) {
-                throw new \GithubService\GithubArtaxService\GithubArtaxServiceException(
-                    $response, 
-                    "Status $status is not 20x success."
-                );
-            }
-        }
-
-        return $response;
-    }
-
-    /**
-     * executeAsync
-     *
-     * Execute an operation asynchronously.
-     *
-     * @param \ArtaxServiceBuilder\Operation $operation The operation to perform
-     * @param callable $callback The callback to call on completion/response.
-     * Parameters should be blah blah blah
-     */
-    public function executeAsync(\ArtaxServiceBuilder\Operation $operation, callable $callback)
-    {
-        $request = $operation->createRequest();
-        $onError = function() {
-            echo "Something is borked.";
-        };
-
-        $this->client->request($request, $callback, $onError);
     }
 
     /**
@@ -453,6 +393,99 @@ class GithubArtaxService implements \GithubService\GithubService
     public function setUserAgent($value)
     {
         $this->userAgent = $value;
+    }
+
+    /**
+     * Get the last response.
+     *
+     * @param \Artax\Request $request
+     * @return \Artax\Response
+     * @throws \Exception
+     */
+    private function request(\Artax\Request $request)
+    {
+        $client = new \Artax\Client();
+
+        return $client->request($request);
+        //
+        //$response = null;
+        //$exception = null;
+        //
+        //$onError = function(\Exception $exceptionResult) use(&$exception) { $exception = $exceptionResult; };
+        //$onResponse = function(Response $responseResult) use (&$response)  { $response = $responseResult; };
+        //
+        //$reactor = (new ReactorFactory)->select();
+        //
+        //$reactor->immediately(function() use ($onResponse, $onError, $request) {
+        //        $this->client->request($request, $onResponse, $onError);
+        //    });
+        //
+        //while (!($response || $exception)) {
+        //    $reactor->tick();
+        //}
+        //
+        //if ($response) {
+        //    return $response;
+        //}
+        //
+        //if ($exception) {
+        //    /** @var $exception \Exception */
+        //    throw $exception;
+        //}
+        //
+        //throw new \LogicException("Neither response nor exception were set.");
+    }
+
+    /**
+     * execute
+     *
+     * Sends a request to the API synchronously
+     *
+     * @param $request \Artax\Request The request to send.
+     * @param $successStatuses array A list of acceptable success statuses.
+     * @return \Artax\Response  The response from Artax
+     */
+    public function execute(\Artax\Request $request, array $successStatuses = array())
+    {
+        $response = $this->request($request);
+        $status = $response->getStatus();
+        $status = intval($status);
+
+        if ($successStatuses != null  && in_array($status, $successStatuses)) {
+            throw new \GithubService\GithubArtaxService\GithubArtaxServiceException(
+                $response, 
+                "Status does not match one of ".implode(', ', $successStatuses)
+            );
+        }
+        else {
+            if ($status < 200 || $status >= 300) {
+                throw new \GithubService\GithubArtaxService\GithubArtaxServiceException(
+                    $response, 
+                    "Status $status is not 20x success."
+                );
+            }
+        }
+
+        return $response;
+    }
+
+    /**
+     * executeAsync
+     *
+     * Execute an operation asynchronously.
+     *
+     * @param \ArtaxServiceBuilder\Operation $operation The operation to perform
+     * @param callable $callback The callback to call on completion/response.
+     * Parameters should be blah blah blah
+     */
+    public function executeAsync(\ArtaxServiceBuilder\Operation $operation, callable $callback)
+    {
+        $request = $operation->createRequest();
+        $onError = function() {
+            echo "Something is borked.";
+        };
+
+        $this->client->request($request, $callback, $onError);
     }
 
 

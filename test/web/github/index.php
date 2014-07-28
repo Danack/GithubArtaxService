@@ -11,7 +11,7 @@ echo <<< END
 END;
 
 
-/** @var \GithubService\Model\AccessResponse */
+/** @var  $accessResponse \GithubService\Model\AccessResponse */
 $accessResponse = getSessionVariable(GITHUB_ACCESS_RESPONSE_KEY);
 
 

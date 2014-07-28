@@ -150,12 +150,22 @@ class getUserInfoByName implements \ArtaxServiceBuilder\Operation
 
         $uriTemplate = new \ArtaxServiceBuilder\Service\UriTemplate\UriTemplate();
         $url = $uriTemplate->expand($url, $this->parameters);
-        $request->setHeader('Accept', $this->getFilteredParameter('Accept'));
-        $request->setHeader('Authorization', $this->getFilteredParameter('Authorization'));
-        $request->setHeader('User-Agent', $this->getFilteredParameter('userAgent'));
-        $queryParameters['owner'] = $this->getFilteredParameter('owner');
-        $queryParameters['repo'] = $this->getFilteredParameter('repo');
-        $queryParameters['anon'] = $this->getFilteredParameter('anon');
+        if (array_key_exists('Accept', $this->parameters) == true) {
+        $value = $this->getFilteredParameter('Accept');
+           $request->setHeader('Accept', $value);
+        }
+        $value = $this->getFilteredParameter('Authorization');
+        if ($value != null) {
+            $request->setHeader('Authorization', $value);
+        }
+        $value = $this->getFilteredParameter('userAgent');
+        $request->setHeader('User-Agent', $value);
+        $value = $this->getFilteredParameter('owner');
+        $queryParameters['owner'] = $value;
+        $value = $this->getFilteredParameter('repo');
+        $queryParameters['repo'] = $value;
+        $value = $this->getFilteredParameter('anon');
+        $queryParameters['anon'] = $value;
 
         //Parameters are parsed and set, lets prepare the request
         if (count($queryParameters)) {
@@ -174,7 +184,7 @@ class getUserInfoByName implements \ArtaxServiceBuilder\Operation
     public function createAndCall()
     {
         $request = $this->createRequest();
-        $response = $this->api->callAPI($request);
+        $response = $this->api->execute($request);
         $this->response = $response;
 
         return $response;
@@ -188,7 +198,7 @@ class getUserInfoByName implements \ArtaxServiceBuilder\Operation
     public function execute()
     {
         $request = $this->createRequest();
-        $response = $this->api->callAPI($request);
+        $response = $this->api->execute($request);
         $this->response = $response;
         return $response->getBody();
     }
@@ -201,7 +211,7 @@ class getUserInfoByName implements \ArtaxServiceBuilder\Operation
      */
     public function dispatch(\Artax\Request $request)
     {
-        $response = $this->api->callAPI($request);
+        $response = $this->api->execute($request);
         $this->response = $response;
         return $response->getBody();
     }

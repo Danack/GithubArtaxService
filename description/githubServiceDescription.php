@@ -44,6 +44,7 @@ $service = array (
                             "args" => ["@value"]
                         )
                     ),
+                    'skipIfNull' => true,
                 ),
                 'userAgent' => array(
                     "location" => "header",

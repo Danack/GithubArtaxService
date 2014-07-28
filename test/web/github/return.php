@@ -67,7 +67,6 @@ function checkAuthResult() {
 
         if ($accessResponse->oauthScopes) {
             echo "You are now authed for the following scopes:<br/>";
-
             foreach ($accessResponse->oauthScopes as $scope) {
                 echo $scope."<br/>";
             }
