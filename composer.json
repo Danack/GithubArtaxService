@@ -26,13 +26,12 @@
 
     "require-dev": {
         "phpunit/phpunit": "4.1.3",
-        "danack/auryn": "~0.9.5",
-        "rdlowrey/artax": "dev-master as 0.7.0"
+        "danack/auryn": "~0.9.5"
     },
     "require":{
         "Danack/danack-code": ">=2.4.3",
-        "danack/artaxservicebuilder": "dev-master",
-        "rdlowrey/artax": "dev-master as 0.7.0"
+        "danack/artaxservicebuilder": "~0.1.0",
+        "rdlowrey/artax": "0.7.1"
     },
 
     "autoload": {
