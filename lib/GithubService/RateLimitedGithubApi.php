@@ -4,7 +4,7 @@
 namespace GithubService;
 
 
-class RateLimitedGithubApi extends \GithubService\GithubAPI\GithubAPI {
+class RateLimitedGithubApi extends \GithubService\GithubArtaxService\GithubArtaxService {
     
     /**
      * @var \GithubService\RateLimit
@@ -12,7 +12,7 @@ class RateLimitedGithubApi extends \GithubService\GithubAPI\GithubAPI {
     private $rateLimit;
 
     public function callAPI(\Artax\Request $request, array $successStatuses = array()){
-        $response = parent::callAPI($request, $successStatuses);
+        $response = parent::execute($request, $successStatuses);
         $newRateLimit = \GithubService\RateLimit::createFromResponse($response);
 
         if ($newRateLimit != null) {

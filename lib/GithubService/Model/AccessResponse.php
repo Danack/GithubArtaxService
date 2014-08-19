@@ -3,12 +3,6 @@
 
 namespace GithubService\Model;
 
-use ArtaxServiceBuilder\Operation;
-use Artax\Response;
-
-
-use GithubService\GithubAPI\GithubAPIException;
-
 
 class AccessResponse {
 

@@ -2,7 +2,7 @@
 
 namespace GithubService\Iterator;
 
-use GithubService\GithubAPI\GithubAPI;
+use GithubService\GithubService;
 use GithubService\Model\AccessResponse;
 
 class ListRepoCommitsIterator implements \Iterator {
@@ -15,7 +15,7 @@ class ListRepoCommitsIterator implements \Iterator {
     private $commits = null;
 
     /**
-     * @var  \GithubService\GithubAPI\listRepoCommits
+     * @var  \GithubService\Operation\listRepoCommits
      */
     private $command;
 
@@ -31,9 +31,9 @@ class ListRepoCommitsIterator implements \Iterator {
     private $nextHasBeenCalled;
 
     function __construct(
-        GithubAPI $api,
+        GithubService $api,
         AccessResponse $accessResponse,
-        \GithubService\GithubAPI\listRepoCommits $listRepoCommits,
+        \GithubService\Operation\listRepoCommits $listRepoCommits,
         $maxPages = 5
     ) {
         $this->api = $api;

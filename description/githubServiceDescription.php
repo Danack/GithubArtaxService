@@ -11,12 +11,11 @@ $service = array (
         'defaultGetOperation' => array(
             "httpMethod" => "GET",
             "parameters" => array(
-//                'Accept' => array(
-//                    "location" => "header",
-//                    "description" => "",
-//                    //'default' =>  'application/json',
-//                    'default' =>  'application/vnd.github.v3+json',
-//                ),
+                'Accept' => array(
+                    "location" => "header",
+                    "description" => "",
+                    'default' =>  'application/vnd.github.v3+json',
+                ),
                 'userAgent' => array(
                     "location" => "header",
                     "description" => "The user-agent which allows Github to recognise your application.",

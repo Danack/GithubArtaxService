@@ -3,8 +3,6 @@
 
 namespace GithubService\Model;
 
-use Artax\Response;
-use ArtaxServiceBuilder\Operation;
 
 class User {
     

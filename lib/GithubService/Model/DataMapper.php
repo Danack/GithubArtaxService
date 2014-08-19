@@ -52,10 +52,9 @@ trait DataMapper {
      * @var
      */
     public $oauthScopes = null;
-    
-    
+
     /**
-     * @param $data array The map of how the data is mapped from the PHP object from the structure returned in the API.
+     * @param string $json The raw JSON string to decode. 
      * @return static An instance of the class that the trait is used in. 'Static' is meant to be the 'late static class' - not many IDEs support this DOC comment yet.
      * @throws DataMapperException
      */
@@ -79,7 +78,8 @@ trait DataMapper {
 
     /**
      * @param Response $response
-     * @param Operation $operation
+     * @param Operation $operation Unused by the Github API currently. It maybe be required for other apis
+     * where some data from the request is required to interpret the resonse.
      * @return static
      * @throws \GithubService\GithubArtaxService\GithubArtaxServiceException
      */
@@ -157,8 +157,9 @@ trait DataMapper {
      *
      * @param $data
      * @param $dataMapElement
-     * @return array|null
+     * @param $dataFound
      * @throws DataMapperException
+     * @return array|null
      */
     static function extractValueFromData($data, $dataMapElement, &$dataFound){
         $dataFound = FALSE;

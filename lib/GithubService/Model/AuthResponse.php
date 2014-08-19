@@ -3,9 +3,6 @@
 
 namespace GithubService\Model;
 
-use ArtaxServiceBuilder\Operation;
-use Artax\Response;
-
 
 //TODO - delete it appears to be unused
 

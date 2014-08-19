@@ -2,8 +2,6 @@
 
 namespace GithubService\Model;
 
-use ArtaxServiceBuilder\Operation;
-use Artax\Response;
 
 class Emails {
 
