@@ -13,6 +13,15 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals(200, $response->getStatus());
     }
 
+    function testError() {
+        $this->setExpectedException('Acesync\DnsException');
+        $client = new \Artax\Client();
+        $client->setOption(\Artax\Client::OP_HOST_CONNECTION_LIMIT, 3);
+        $future = $client->request("http://doesntexist.test");
+        /** @var $result After\Future */
+        $future->wait();
+    }
+
 
     /**
      * Test that calling listRepoTags
@@ -31,8 +40,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase {
     function testAsynchronousGithub() {
         $provider = createProvider([], []);
         $githubArtaxService = $provider->make('GithubService\GithubArtaxService\GithubArtaxService');
-        
-        
+
         $errorExternal = null;
 
         /** @var  $repoTagsExternal \GithubService\Model\RepoTags */
