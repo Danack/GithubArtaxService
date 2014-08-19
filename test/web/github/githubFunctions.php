@@ -730,7 +730,7 @@ class DebugGithub extends \GithubService\GithubArtaxService\GithubArtaxService {
             throw new \Exception("Too many api calls in one run - did I break something?");
         }
         //var_dump(toCurl($request));
-        $response = parent::callAPI($request, $successStatuses);
+        $response = parent::execute($request, $successStatuses);
         //var_dump($response);
 
         return $response;
@@ -739,7 +739,7 @@ class DebugGithub extends \GithubService\GithubArtaxService\GithubArtaxService {
 
 
 function prepareArtaxClient(Artax\Client $client, Auryn\AurynInjector $provider) {
-    $client->setOption('transfertimeout', 25);
+    $client->setOption(\Artax\Client::OP_MS_CONNECT_TIMEOUT, 25);
 }
 
 
@@ -751,13 +751,13 @@ function createArtaxClient(NativeReactor $reactor) {
 //        $reactor = new NativeReactor;
 //    }
     
-    $dnsCache = new \Addr\ResultCache(new \PSR\Cache\APCCache);
+    //$dnsCache = new \Addr\ResultCache(new \PSR\Cache\APCCache);
     $resolver = (new ResolverFactory)->createResolver(
             $reactor,
             null, //$serverAddr = null,
             null, //$serverPort = null,
             null, //$requestTimeout = null,
-            $dnsCache, //$dnsCache,// Cache $cache = null,
+            null, //$dnsCache,// Cache $cache = null,
             null //$hostsFilePath = null
         );
 
@@ -786,8 +786,7 @@ function createProvider($implementations = array(), $shareClasses = array()) {
     $provider = new Provider();
 
 
-    
-    
+
     $provider->define(
         'GithubService\GithubArtaxService\GithubArtaxService',
         [':userAgent' => GITHUB_USER_AGENT]
@@ -821,13 +820,13 @@ function createProvider($implementations = array(), $shareClasses = array()) {
         
         //These are default
         'Artax\AsyncClient'     => 'Artax\AsyncClient',
-        'Addr\ResultCache'      => 'Addr\ResultCache',
+        //'Addr\ResultCache'      => 'Addr\ResultCache',
         'Alert\Reactor'         => 'Alert\NativeReactor',
         'Artax\AddrDnsResolver' => 'Artax\AddrDnsResolver',
 
         //Non-standard
         'PSR\Cache'     => 'PSR\Cache\APCCache',
-        'Addr\Cache'    => 'Addr\ResultCache'
+        'Addr\Cache'    => 'Addr\MemoryCache'
     ];
 
     $standardShares = [
