@@ -64,7 +64,7 @@
         "Danack/danack-code": ">=2.4.3",
         "danack/danackhttp2": ">=1.2.0",
         "danack/artaxservicebuilder": "~0.2.0",
-        "rdlowrey/artax": "~0.8.0"
+        "rdlowrey/artax": "v1.0.0-alpha"
     },
     "autoload": {
         "psr-0": {
