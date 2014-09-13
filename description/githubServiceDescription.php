@@ -44,6 +44,7 @@ $service = array (
                         )
                     ),
                     'skipIfNull' => true,
+                    'type' => 'string'
                 ),
                 'userAgent' => array(
                     "location" => "header",
@@ -56,7 +57,6 @@ $service = array (
 
 
 //https://developer.github.com/v3/oauth_authorizations/
-
         'getAuthorizations' => array(
             'uri' => '/authorizations',
             'extends' => 'defaultGetOauthOperation',
