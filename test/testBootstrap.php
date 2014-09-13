@@ -29,63 +29,32 @@ function prepareArtaxClient(Artax\Client $client, Auryn\AurynInjector $provider)
     $client->setOption(\Artax\Client::OP_MS_CONNECT_TIMEOUT, 25);
 }
 
-
-
 /**
  * @param array $implementations
  * @param array $shareClasses
  * @return Provider
  */
 function createProvider($implementations = array(), $shareClasses = array()) {
-
-
     $provider = new Provider();
 
     $provider->define(
         'GithubService\GithubArtaxService\GithubArtaxService',
         [':userAgent' => 'Danack_test']
     );
-
-//    $redisParameters = array(
-//        'connection_timeout' => 30,
-//        'read_write_timeout' => 30,
-//    );
-
-
-    //$provider->delegate('Artax\Client', 'createArtaxClient');
-//    $redisOptions = [];
-//
-//    //This next line annoys phpstorm
-//    $provider->define(
-//        'Predis\Client',
-//        array(
-//            ':parameters' => $redisParameters,
-//            ':options' => $redisOptions,
-//        )
-//    );
-
+    
     $provider->prepare('Artax\Client', 'prepareArtaxClient');
 
     $standardImplementations = [
-//        'Intahwebz\ObjectCache' => 'Intahwebz\Cache\InMemoryCache',
-//        'Psr\Log\LoggerInterface' => $standardLogger
         'GithubService\GithubService' => 'DebugGithub',
-//        $provider->alias('GithubService\GithubService', 'GithubService\GithubArtaxService\GithubArtaxService');
-
-        //These are default
         'Artax\AsyncClient'     => 'Artax\AsyncClient',
-        //'Addr\ResultCache'      => 'Addr\ResultCache',
         'Alert\Reactor'         => 'Alert\NativeReactor',
         'Artax\AddrDnsResolver' => 'Artax\AddrDnsResolver',
-
-        //Non-standard
+        'ArtaxServiceBuilder\ResponseCache' => 'ArtaxServiceBuilder\ResponseCache\NullResponseCache',
         'PSR\Cache'     => 'PSR\Cache\APCCache',
         'Addr\Cache'    => 'Addr\MemoryCache'
     ];
 
     $standardShares = [
-//        'Intahwebz\Timer' => 'Intahwebz\Timer',
-//        'Monolog\Logger' => $standardLogger,
         'Alert\Reactor' => 'Alert\Reactor'
     ];
 
