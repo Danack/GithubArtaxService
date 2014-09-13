@@ -8,6 +8,7 @@ namespace GithubService\GithubArtaxService;
 
 use GithubService\Operation\getAuthorizations;
 use Artax\Response;
+use ArtaxServiceBuilder\ArtaxServiceException;
 use GithubService\Operation\accessToken;
 use GithubService\Operation\revokeAllAuthority;
 use GithubService\Operation\getUserEmails;
@@ -30,6 +31,7 @@ use GithubService\Operation\listRepoTags;
 use GithubService\Operation\listRepoBranches;
 use GithubService\Operation\getRepoBranch;
 use GithubService\Operation\deleteRepo;
+use ArtaxServiceBuilder\ResponseCache;
 
 class GithubArtaxService implements \GithubService\GithubService
 {
@@ -39,16 +41,22 @@ class GithubArtaxService implements \GithubService\GithubService
      */
     public $userAgent = null;
 
-    public function __construct(\Artax\Client $client, $userAgent)
+    /**
+     * @var \ArtaxServiceBuilder\ResponseCache $responseCache
+     */
+    public $responseCache = null;
+
+    public function __construct(\Artax\Client $client, \ArtaxServiceBuilder\ResponseCache $responseCache, $userAgent)
     {
         $this->client = $client;
+        $this->responseCache = $responseCache;
         $this->userAgent = $userAgent;
     }
 
     /**
      * getAuthorizations
      *
-     * @param  \$Authorization The stupid oauth2 bearer token
+     * @param string $Authorization The stupid oauth2 bearer token
      * @return \GithubService\Operation\getAuthorizations The new operation
      */
     public function getAuthorizations($Authorization)
@@ -60,13 +68,14 @@ class GithubArtaxService implements \GithubService\GithubService
     /**
      * accessToken
      *
-     * @param  \$client_id string Required. The client ID you received from GitHub when
-     * you registered.
-     * @param  \$client_secret string Required. The client secret you received from
+     * @param mixed $client_id string Required. The client ID you received from GitHub
+     * when you registered.
+     * @param mixed $client_secret string Required. The client secret you received from
      * GitHub when you registered.
-     * @param  \$code string Required. The code you received as a response to Step 1.
-     * @param  \$redirect_uri string The URL in your app where users will be sent after
-     * authorization. See details below about redirect urls.
+     * @param mixed $code string Required. The code you received as a response to Step
+     * 1.
+     * @param mixed $redirect_uri string The URL in your app where users will be sent
+     * after authorization. See details below about redirect urls.
      * @return \GithubService\Operation\accessToken The new operation
      */
     public function accessToken($client_id, $client_secret, $code, $redirect_uri)
@@ -78,8 +87,8 @@ class GithubArtaxService implements \GithubService\GithubService
     /**
      * revokeAllAuthority
      *
-     * @param  \$Authorization The stupid oauth2 bearer token
-     * @param  \$client_id The id of the client.
+     * @param string $Authorization The stupid oauth2 bearer token
+     * @param mixed $client_id The id of the client.
      * @return \GithubService\Operation\revokeAllAuthority The new operation
      */
     public function revokeAllAuthority($Authorization, $client_id)
@@ -93,7 +102,7 @@ class GithubArtaxService implements \GithubService\GithubService
      *
      * Get users email addresses
      *
-     * @param  \$Authorization The stupid oauth2 bearer token
+     * @param string $Authorization The stupid oauth2 bearer token
      * @return \GithubService\Operation\getUserEmails The new operation
      */
     public function getUserEmails($Authorization)
@@ -107,8 +116,8 @@ class GithubArtaxService implements \GithubService\GithubService
      *
      * Get users email addresses
      *
-     * @param  \$Authorization The stupid oauth2 bearer token
-     * @param  \$emails Array of the emails to add
+     * @param string $Authorization The stupid oauth2 bearer token
+     * @param mixed $emails Array of the emails to add
      * @return \GithubService\Operation\addUserEmails The new operation
      */
     public function addUserEmails($Authorization, $emails)
@@ -124,7 +133,7 @@ class GithubArtaxService implements \GithubService\GithubService
      * repositories owned by organizations which the user can access. You can list user
      * organizations and list organization repositories separately.
      *
-     * @param  \$Authorization The stupid oauth2 bearer token
+     * @param string $Authorization The stupid oauth2 bearer token
      * @return \GithubService\Operation\listUserRepos The new operation
      */
     public function listUserRepos($Authorization)
@@ -136,10 +145,11 @@ class GithubArtaxService implements \GithubService\GithubService
     /**
      * getUserInfoByName
      *
-     * @param  \$Authorization The stupid oauth2 bearer token
-     * @param  \$owner The owner of the repo to fetch contributors for.
-     * @param  \$repo The repo to fetch contributors for.
-     * @param  \$anon Set to 1 or true to include anonymous contributors in results.
+     * @param string $Authorization The stupid oauth2 bearer token
+     * @param string $owner The owner of the repo to fetch contributors for.
+     * @param string $repo The repo to fetch contributors for.
+     * @param string $anon Set to 1 or true to include anonymous contributors in
+     * results.
      * @return \GithubService\Operation\getUserInfoByName The new operation
      */
     public function getUserInfoByName($Authorization, $owner, $repo, $anon)
@@ -151,7 +161,7 @@ class GithubArtaxService implements \GithubService\GithubService
     /**
      * getUserInfo
      *
-     * @param  \$Authorization The stupid oauth2 bearer token
+     * @param string $Authorization The stupid oauth2 bearer token
      * @return \GithubService\Operation\getUserInfo The new operation
      */
     public function getUserInfo($Authorization)
@@ -163,8 +173,8 @@ class GithubArtaxService implements \GithubService\GithubService
     /**
      * listRepoCommitsPaginate
      *
-     * @param  \$Authorization The stupid oauth2 bearer token
-     * @param  \$pageURL 
+     * @param string $Authorization The stupid oauth2 bearer token
+     * @param mixed $pageURL 
      * @return \GithubService\Operation\listRepoCommitsPaginate The new operation
      */
     public function listRepoCommitsPaginate($Authorization, $pageURL)
@@ -176,9 +186,9 @@ class GithubArtaxService implements \GithubService\GithubService
     /**
      * listRepoCommits
      *
-     * @param  \$Authorization The stupid oauth2 bearer token
-     * @param  \$owner 
-     * @param  \$repo 
+     * @param string $Authorization The stupid oauth2 bearer token
+     * @param mixed $owner 
+     * @param mixed $repo 
      * @return \GithubService\Operation\listRepoCommits The new operation
      */
     public function listRepoCommits($Authorization, $owner, $repo)
@@ -190,10 +200,10 @@ class GithubArtaxService implements \GithubService\GithubService
     /**
      * getSingleCommit
      *
-     * @param  \$Authorization The stupid oauth2 bearer token
-     * @param  \$owner 
-     * @param  \$repo 
-     * @param  \$sha SHA of the commit to get
+     * @param string $Authorization The stupid oauth2 bearer token
+     * @param mixed $owner 
+     * @param mixed $repo 
+     * @param string $sha SHA of the commit to get
      * @return \GithubService\Operation\getSingleCommit The new operation
      */
     public function getSingleCommit($Authorization, $owner, $repo, $sha)
@@ -205,12 +215,13 @@ class GithubArtaxService implements \GithubService\GithubService
     /**
      * listRepositories
      *
-     * @param  \$Authorization The stupid oauth2 bearer token
-     * @param  \$type Can be one of all, owner, public, private, member. Default: all
-     * @param  \$sort Can be one of created, updated, pushed, full_name. Default:
+     * @param string $Authorization The stupid oauth2 bearer token
+     * @param string $type Can be one of all, owner, public, private, member. Default:
+     * all
+     * @param string $sort Can be one of created, updated, pushed, full_name. Default:
      * full_name
-     * @param  \$direction Can be one of asc or desc. Default: when using full_name:
-     * asc; otherwise desc
+     * @param string $direction Can be one of asc or desc. Default: when using
+     * full_name: asc; otherwise desc
      * @return \GithubService\Operation\listRepositories The new operation
      */
     public function listRepositories($Authorization, $type, $sort, $direction)
@@ -222,13 +233,13 @@ class GithubArtaxService implements \GithubService\GithubService
     /**
      * listUserRepositories
      *
-     * @param  \$Authorization The stupid oauth2 bearer token
-     * @param  \$username The user to fetch the repos for.
-     * @param  \$type Can be one of all, owner, member. Default: owner
-     * @param  \$sort Can be one of created, updated, pushed, full_name. Default:
+     * @param string $Authorization The stupid oauth2 bearer token
+     * @param string $username The user to fetch the repos for.
+     * @param string $type Can be one of all, owner, member. Default: owner
+     * @param string $sort Can be one of created, updated, pushed, full_name. Default:
      * full_name
-     * @param  \$direction Can be one of asc or desc. Default: when using full_name:
-     * asc, otherwise desc
+     * @param string $direction Can be one of asc or desc. Default: when using
+     * full_name: asc, otherwise desc
      * @return \GithubService\Operation\listUserRepositories The new operation
      */
     public function listUserRepositories($Authorization, $username, $type, $sort, $direction)
@@ -240,9 +251,9 @@ class GithubArtaxService implements \GithubService\GithubService
     /**
      * listOrganizationRepositories
      *
-     * @param  \$Authorization The stupid oauth2 bearer token
-     * @param  \$organisation The organisation to fetch the repos for.
-     * @param  \$type Can be one of all, owner, member. Default: owner
+     * @param string $Authorization The stupid oauth2 bearer token
+     * @param string $organisation The organisation to fetch the repos for.
+     * @param string $type Can be one of all, owner, member. Default: owner
      * @return \GithubService\Operation\listOrganizationRepositories The new operation
      */
     public function listOrganizationRepositories($Authorization, $organisation, $type)
@@ -254,8 +265,8 @@ class GithubArtaxService implements \GithubService\GithubService
     /**
      * listAllPublicRepositories
      *
-     * @param  \$Authorization The stupid oauth2 bearer token
-     * @param  \$since The integer ID of the last Repository that you’ve seen.
+     * @param string $Authorization The stupid oauth2 bearer token
+     * @param string $since The integer ID of the last Repository that you’ve seen.
      * @return \GithubService\Operation\listAllPublicRepositories The new operation
      */
     public function listAllPublicRepositories($Authorization, $since)
@@ -267,13 +278,13 @@ class GithubArtaxService implements \GithubService\GithubService
     /**
      * getRepo
      *
-     * @param  \$Authorization The stupid oauth2 bearer token
-     * @param  \$username The user to fetch the repos for.
-     * @param  \$type Can be one of all, owner, member. Default: owner
-     * @param  \$sort Can be one of created, updated, pushed, full_name. Default:
+     * @param string $Authorization The stupid oauth2 bearer token
+     * @param string $username The user to fetch the repos for.
+     * @param string $type Can be one of all, owner, member. Default: owner
+     * @param string $sort Can be one of created, updated, pushed, full_name. Default:
      * full_name
-     * @param  \$direction Can be one of asc or desc. Default: when using full_name:
-     * asc, otherwise desc
+     * @param string $direction Can be one of asc or desc. Default: when using
+     * full_name: asc, otherwise desc
      * @return \GithubService\Operation\getRepo The new operation
      */
     public function getRepo($Authorization, $username, $type, $sort, $direction)
@@ -285,9 +296,9 @@ class GithubArtaxService implements \GithubService\GithubService
     /**
      * listRepoLanguages
      *
-     * @param  \$Authorization The stupid oauth2 bearer token
-     * @param  \$owner The owner of the repo to fetch contributors for.
-     * @param  \$repo The repo to fetch contributors for.
+     * @param string $Authorization The stupid oauth2 bearer token
+     * @param string $owner The owner of the repo to fetch contributors for.
+     * @param string $repo The repo to fetch contributors for.
      * @return \GithubService\Operation\listRepoLanguages The new operation
      */
     public function listRepoLanguages($Authorization, $owner, $repo)
@@ -299,9 +310,9 @@ class GithubArtaxService implements \GithubService\GithubService
     /**
      * listRepoTeams
      *
-     * @param  \$Authorization The stupid oauth2 bearer token
-     * @param  \$owner The owner of the repo to fetch contributors for.
-     * @param  \$repo The repo to fetch contributors for.
+     * @param string $Authorization The stupid oauth2 bearer token
+     * @param string $owner The owner of the repo to fetch contributors for.
+     * @param string $repo The repo to fetch contributors for.
      * @return \GithubService\Operation\listRepoTeams The new operation
      */
     public function listRepoTeams($Authorization, $owner, $repo)
@@ -313,8 +324,8 @@ class GithubArtaxService implements \GithubService\GithubService
     /**
      * listRepoTagsPaginate
      *
-     * @param  \$Authorization The stupid oauth2 bearer token
-     * @param  \$pageURL 
+     * @param string $Authorization The stupid oauth2 bearer token
+     * @param mixed $pageURL 
      * @return \GithubService\Operation\listRepoTagsPaginate The new operation
      */
     public function listRepoTagsPaginate($Authorization, $pageURL)
@@ -330,9 +341,9 @@ class GithubArtaxService implements \GithubService\GithubService
      * authed request (for private repos and higher rate limiting), or as unsigned,
      * (public only, lower limit).
      *
-     * @param  \$Authorization The stupid oauth2 bearer token
-     * @param  \$owner 
-     * @param  \$repo 
+     * @param string $Authorization The stupid oauth2 bearer token
+     * @param mixed $owner 
+     * @param mixed $repo 
      * @return \GithubService\Operation\listRepoTags The new operation
      */
     public function listRepoTags($Authorization, $owner, $repo)
@@ -344,9 +355,9 @@ class GithubArtaxService implements \GithubService\GithubService
     /**
      * listRepoBranches
      *
-     * @param  \$Authorization The stupid oauth2 bearer token
-     * @param  \$owner 
-     * @param  \$repo 
+     * @param string $Authorization The stupid oauth2 bearer token
+     * @param mixed $owner 
+     * @param mixed $repo 
      * @return \GithubService\Operation\listRepoBranches The new operation
      */
     public function listRepoBranches($Authorization, $owner, $repo)
@@ -358,10 +369,10 @@ class GithubArtaxService implements \GithubService\GithubService
     /**
      * getRepoBranch
      *
-     * @param  \$Authorization The stupid oauth2 bearer token
-     * @param  \$owner 
-     * @param  \$repo 
-     * @param  \$branch 
+     * @param string $Authorization The stupid oauth2 bearer token
+     * @param mixed $owner 
+     * @param mixed $repo 
+     * @param mixed $branch 
      * @return \GithubService\Operation\getRepoBranch The new operation
      */
     public function getRepoBranch($Authorization, $owner, $repo, $branch)
@@ -373,9 +384,9 @@ class GithubArtaxService implements \GithubService\GithubService
     /**
      * deleteRepo
      *
-     * @param  \$Authorization The stupid oauth2 bearer token
-     * @param  \$owner 
-     * @param  \$repo 
+     * @param string $Authorization The stupid oauth2 bearer token
+     * @param mixed $owner 
+     * @param mixed $repo 
      * @return \GithubService\Operation\deleteRepo The new operation
      */
     public function deleteRepo($Authorization, $owner, $repo)
@@ -408,25 +419,23 @@ class GithubArtaxService implements \GithubService\GithubService
      */
     public function execute(\Artax\Request $request, array $successStatuses = array())
     {
+        $originalRequest = clone $request;
+        $cachingHeaders = $this->responseCache->getCachingHeaders($request);
+        $request->setAllHeaders($cachingHeaders);
         $promise = $this->client->request($request);
         $response = $promise->wait();
         /** @var $response \Artax\Response */
         $status = $response->getStatus();
         $status = intval($status);
-
-        if ($successStatuses != null  && in_array($status, $successStatuses)) {
-            throw new \GithubService\GithubArtaxService\GithubArtaxServiceException(
-                $response, 
-                "Status does not match one of ".implode(', ', $successStatuses)
-            );
+                
+        if ($status == 200) {
+            $this->responseCache->storeResponse($originalRequest, $response);
         }
-        else {
-            if ($status < 200 || $status >= 300) {
-                throw new \GithubService\GithubArtaxService\GithubArtaxServiceException(
-                    $response, 
-                    "Status $status is not 20x success."
-                );
-            }
+        else if ($status == 304) {
+            $response = $this->responseCache->getResponse($request);
+        }
+        else if ($status < 200 || $status >= 300 ) {
+            throw new ArtaxServiceException("Status $status is not treated as OK.");
         }
 
         return $response;
@@ -444,8 +453,11 @@ class GithubArtaxService implements \GithubService\GithubService
      */
     public function executeAsync(\Artax\Request $request, \ArtaxServiceBuilder\Operation $operation, callable $callback)
     {
+        $originalRequest = clone $request;
+        $cachingHeaders = $this->responseCache->getCachingHeaders($request);
+        $request->setAllHeaders($cachingHeaders);
         $promise = $this->client->request($request);
-        $promise->when(function($error, Response $response) use ($callback, $operation) {
+        $promise->when(function(\Exception $error = null, Response $response = null) use ($originalRequest, $callback, $operation) {
 
             if($error) {
                 $callback($error, $response);
@@ -453,8 +465,15 @@ class GithubArtaxService implements \GithubService\GithubService
             }
 
             $status = $response->getStatus();
-            if ($status < 200 || $status >= 300) {
-                $exception = new \Exception("Status $status is not treated as OK.");
+                
+            if ($status == 200) {
+                $this->responseCache->storeResponse($originalRequest, $response);
+            }
+            else if ($status == 304) {
+                $response = $this->responseCache->getResponse($originalRequest);
+            }
+            else if ($status < 200 || $status >= 300 ) {
+                $exception = new ArtaxServiceException("Status $status is not treated as OK.");
                 $callback($exception, $response);
                 return;
             }

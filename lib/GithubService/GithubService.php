@@ -12,7 +12,7 @@ interface GithubService
     /**
      * getAuthorizations
      *
-     * @param  \$Authorization The stupid oauth2 bearer token
+     * @param string $Authorization The stupid oauth2 bearer token
      * @return \GithubService\Operation\getAuthorizations The new operation
      */
     public function getAuthorizations($Authorization);
@@ -20,13 +20,14 @@ interface GithubService
     /**
      * accessToken
      *
-     * @param  \$client_id string Required. The client ID you received from GitHub when
-     * you registered.
-     * @param  \$client_secret string Required. The client secret you received from
+     * @param mixed $client_id string Required. The client ID you received from GitHub
+     * when you registered.
+     * @param mixed $client_secret string Required. The client secret you received from
      * GitHub when you registered.
-     * @param  \$code string Required. The code you received as a response to Step 1.
-     * @param  \$redirect_uri string The URL in your app where users will be sent after
-     * authorization. See details below about redirect urls.
+     * @param mixed $code string Required. The code you received as a response to Step
+     * 1.
+     * @param mixed $redirect_uri string The URL in your app where users will be sent
+     * after authorization. See details below about redirect urls.
      * @return \GithubService\Operation\accessToken The new operation
      */
     public function accessToken($client_id, $client_secret, $code, $redirect_uri);
@@ -34,8 +35,8 @@ interface GithubService
     /**
      * revokeAllAuthority
      *
-     * @param  \$Authorization The stupid oauth2 bearer token
-     * @param  \$client_id The id of the client.
+     * @param string $Authorization The stupid oauth2 bearer token
+     * @param mixed $client_id The id of the client.
      * @return \GithubService\Operation\revokeAllAuthority The new operation
      */
     public function revokeAllAuthority($Authorization, $client_id);
@@ -45,7 +46,7 @@ interface GithubService
      *
      * Get users email addresses
      *
-     * @param  \$Authorization The stupid oauth2 bearer token
+     * @param string $Authorization The stupid oauth2 bearer token
      * @return \GithubService\Operation\getUserEmails The new operation
      */
     public function getUserEmails($Authorization);
@@ -55,8 +56,8 @@ interface GithubService
      *
      * Get users email addresses
      *
-     * @param  \$Authorization The stupid oauth2 bearer token
-     * @param  \$emails Array of the emails to add
+     * @param string $Authorization The stupid oauth2 bearer token
+     * @param mixed $emails Array of the emails to add
      * @return \GithubService\Operation\addUserEmails The new operation
      */
     public function addUserEmails($Authorization, $emails);
@@ -68,7 +69,7 @@ interface GithubService
      * repositories owned by organizations which the user can access. You can list user
      * organizations and list organization repositories separately.
      *
-     * @param  \$Authorization The stupid oauth2 bearer token
+     * @param string $Authorization The stupid oauth2 bearer token
      * @return \GithubService\Operation\listUserRepos The new operation
      */
     public function listUserRepos($Authorization);
@@ -76,10 +77,11 @@ interface GithubService
     /**
      * getUserInfoByName
      *
-     * @param  \$Authorization The stupid oauth2 bearer token
-     * @param  \$owner The owner of the repo to fetch contributors for.
-     * @param  \$repo The repo to fetch contributors for.
-     * @param  \$anon Set to 1 or true to include anonymous contributors in results.
+     * @param string $Authorization The stupid oauth2 bearer token
+     * @param string $owner The owner of the repo to fetch contributors for.
+     * @param string $repo The repo to fetch contributors for.
+     * @param string $anon Set to 1 or true to include anonymous contributors in
+     * results.
      * @return \GithubService\Operation\getUserInfoByName The new operation
      */
     public function getUserInfoByName($Authorization, $owner, $repo, $anon);
@@ -87,7 +89,7 @@ interface GithubService
     /**
      * getUserInfo
      *
-     * @param  \$Authorization The stupid oauth2 bearer token
+     * @param string $Authorization The stupid oauth2 bearer token
      * @return \GithubService\Operation\getUserInfo The new operation
      */
     public function getUserInfo($Authorization);
@@ -95,8 +97,8 @@ interface GithubService
     /**
      * listRepoCommitsPaginate
      *
-     * @param  \$Authorization The stupid oauth2 bearer token
-     * @param  \$pageURL 
+     * @param string $Authorization The stupid oauth2 bearer token
+     * @param mixed $pageURL 
      * @return \GithubService\Operation\listRepoCommitsPaginate The new operation
      */
     public function listRepoCommitsPaginate($Authorization, $pageURL);
@@ -104,9 +106,9 @@ interface GithubService
     /**
      * listRepoCommits
      *
-     * @param  \$Authorization The stupid oauth2 bearer token
-     * @param  \$owner 
-     * @param  \$repo 
+     * @param string $Authorization The stupid oauth2 bearer token
+     * @param mixed $owner 
+     * @param mixed $repo 
      * @return \GithubService\Operation\listRepoCommits The new operation
      */
     public function listRepoCommits($Authorization, $owner, $repo);
@@ -114,10 +116,10 @@ interface GithubService
     /**
      * getSingleCommit
      *
-     * @param  \$Authorization The stupid oauth2 bearer token
-     * @param  \$owner 
-     * @param  \$repo 
-     * @param  \$sha SHA of the commit to get
+     * @param string $Authorization The stupid oauth2 bearer token
+     * @param mixed $owner 
+     * @param mixed $repo 
+     * @param string $sha SHA of the commit to get
      * @return \GithubService\Operation\getSingleCommit The new operation
      */
     public function getSingleCommit($Authorization, $owner, $repo, $sha);
@@ -125,12 +127,13 @@ interface GithubService
     /**
      * listRepositories
      *
-     * @param  \$Authorization The stupid oauth2 bearer token
-     * @param  \$type Can be one of all, owner, public, private, member. Default: all
-     * @param  \$sort Can be one of created, updated, pushed, full_name. Default:
+     * @param string $Authorization The stupid oauth2 bearer token
+     * @param string $type Can be one of all, owner, public, private, member. Default:
+     * all
+     * @param string $sort Can be one of created, updated, pushed, full_name. Default:
      * full_name
-     * @param  \$direction Can be one of asc or desc. Default: when using full_name:
-     * asc; otherwise desc
+     * @param string $direction Can be one of asc or desc. Default: when using
+     * full_name: asc; otherwise desc
      * @return \GithubService\Operation\listRepositories The new operation
      */
     public function listRepositories($Authorization, $type, $sort, $direction);
@@ -138,13 +141,13 @@ interface GithubService
     /**
      * listUserRepositories
      *
-     * @param  \$Authorization The stupid oauth2 bearer token
-     * @param  \$username The user to fetch the repos for.
-     * @param  \$type Can be one of all, owner, member. Default: owner
-     * @param  \$sort Can be one of created, updated, pushed, full_name. Default:
+     * @param string $Authorization The stupid oauth2 bearer token
+     * @param string $username The user to fetch the repos for.
+     * @param string $type Can be one of all, owner, member. Default: owner
+     * @param string $sort Can be one of created, updated, pushed, full_name. Default:
      * full_name
-     * @param  \$direction Can be one of asc or desc. Default: when using full_name:
-     * asc, otherwise desc
+     * @param string $direction Can be one of asc or desc. Default: when using
+     * full_name: asc, otherwise desc
      * @return \GithubService\Operation\listUserRepositories The new operation
      */
     public function listUserRepositories($Authorization, $username, $type, $sort, $direction);
@@ -152,9 +155,9 @@ interface GithubService
     /**
      * listOrganizationRepositories
      *
-     * @param  \$Authorization The stupid oauth2 bearer token
-     * @param  \$organisation The organisation to fetch the repos for.
-     * @param  \$type Can be one of all, owner, member. Default: owner
+     * @param string $Authorization The stupid oauth2 bearer token
+     * @param string $organisation The organisation to fetch the repos for.
+     * @param string $type Can be one of all, owner, member. Default: owner
      * @return \GithubService\Operation\listOrganizationRepositories The new operation
      */
     public function listOrganizationRepositories($Authorization, $organisation, $type);
@@ -162,8 +165,8 @@ interface GithubService
     /**
      * listAllPublicRepositories
      *
-     * @param  \$Authorization The stupid oauth2 bearer token
-     * @param  \$since The integer ID of the last Repository that you’ve seen.
+     * @param string $Authorization The stupid oauth2 bearer token
+     * @param string $since The integer ID of the last Repository that you’ve seen.
      * @return \GithubService\Operation\listAllPublicRepositories The new operation
      */
     public function listAllPublicRepositories($Authorization, $since);
@@ -171,13 +174,13 @@ interface GithubService
     /**
      * getRepo
      *
-     * @param  \$Authorization The stupid oauth2 bearer token
-     * @param  \$username The user to fetch the repos for.
-     * @param  \$type Can be one of all, owner, member. Default: owner
-     * @param  \$sort Can be one of created, updated, pushed, full_name. Default:
+     * @param string $Authorization The stupid oauth2 bearer token
+     * @param string $username The user to fetch the repos for.
+     * @param string $type Can be one of all, owner, member. Default: owner
+     * @param string $sort Can be one of created, updated, pushed, full_name. Default:
      * full_name
-     * @param  \$direction Can be one of asc or desc. Default: when using full_name:
-     * asc, otherwise desc
+     * @param string $direction Can be one of asc or desc. Default: when using
+     * full_name: asc, otherwise desc
      * @return \GithubService\Operation\getRepo The new operation
      */
     public function getRepo($Authorization, $username, $type, $sort, $direction);
@@ -185,9 +188,9 @@ interface GithubService
     /**
      * listRepoLanguages
      *
-     * @param  \$Authorization The stupid oauth2 bearer token
-     * @param  \$owner The owner of the repo to fetch contributors for.
-     * @param  \$repo The repo to fetch contributors for.
+     * @param string $Authorization The stupid oauth2 bearer token
+     * @param string $owner The owner of the repo to fetch contributors for.
+     * @param string $repo The repo to fetch contributors for.
      * @return \GithubService\Operation\listRepoLanguages The new operation
      */
     public function listRepoLanguages($Authorization, $owner, $repo);
@@ -195,9 +198,9 @@ interface GithubService
     /**
      * listRepoTeams
      *
-     * @param  \$Authorization The stupid oauth2 bearer token
-     * @param  \$owner The owner of the repo to fetch contributors for.
-     * @param  \$repo The repo to fetch contributors for.
+     * @param string $Authorization The stupid oauth2 bearer token
+     * @param string $owner The owner of the repo to fetch contributors for.
+     * @param string $repo The repo to fetch contributors for.
      * @return \GithubService\Operation\listRepoTeams The new operation
      */
     public function listRepoTeams($Authorization, $owner, $repo);
@@ -205,8 +208,8 @@ interface GithubService
     /**
      * listRepoTagsPaginate
      *
-     * @param  \$Authorization The stupid oauth2 bearer token
-     * @param  \$pageURL 
+     * @param string $Authorization The stupid oauth2 bearer token
+     * @param mixed $pageURL 
      * @return \GithubService\Operation\listRepoTagsPaginate The new operation
      */
     public function listRepoTagsPaginate($Authorization, $pageURL);
@@ -218,9 +221,9 @@ interface GithubService
      * authed request (for private repos and higher rate limiting), or as unsigned,
      * (public only, lower limit).
      *
-     * @param  \$Authorization The stupid oauth2 bearer token
-     * @param  \$owner 
-     * @param  \$repo 
+     * @param string $Authorization The stupid oauth2 bearer token
+     * @param mixed $owner 
+     * @param mixed $repo 
      * @return \GithubService\Operation\listRepoTags The new operation
      */
     public function listRepoTags($Authorization, $owner, $repo);
@@ -228,9 +231,9 @@ interface GithubService
     /**
      * listRepoBranches
      *
-     * @param  \$Authorization The stupid oauth2 bearer token
-     * @param  \$owner 
-     * @param  \$repo 
+     * @param string $Authorization The stupid oauth2 bearer token
+     * @param mixed $owner 
+     * @param mixed $repo 
      * @return \GithubService\Operation\listRepoBranches The new operation
      */
     public function listRepoBranches($Authorization, $owner, $repo);
@@ -238,10 +241,10 @@ interface GithubService
     /**
      * getRepoBranch
      *
-     * @param  \$Authorization The stupid oauth2 bearer token
-     * @param  \$owner 
-     * @param  \$repo 
-     * @param  \$branch 
+     * @param string $Authorization The stupid oauth2 bearer token
+     * @param mixed $owner 
+     * @param mixed $repo 
+     * @param mixed $branch 
      * @return \GithubService\Operation\getRepoBranch The new operation
      */
     public function getRepoBranch($Authorization, $owner, $repo, $branch);
@@ -249,9 +252,9 @@ interface GithubService
     /**
      * deleteRepo
      *
-     * @param  \$Authorization The stupid oauth2 bearer token
-     * @param  \$owner 
-     * @param  \$repo 
+     * @param string $Authorization The stupid oauth2 bearer token
+     * @param mixed $owner 
+     * @param mixed $repo 
      * @return \GithubService\Operation\deleteRepo The new operation
      */
     public function deleteRepo($Authorization, $owner, $repo);
