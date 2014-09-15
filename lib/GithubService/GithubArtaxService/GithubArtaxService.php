@@ -8,7 +8,7 @@ namespace GithubService\GithubArtaxService;
 
 use GithubService\Operation\getAuthorizations;
 use Artax\Response;
-use ArtaxServiceBuilder\ArtaxServiceException;
+use ArtaxServiceBuilder\BadResponseException;
 use GithubService\Operation\accessToken;
 use GithubService\Operation\revokeAllAuthority;
 use GithubService\Operation\getUserEmails;
@@ -33,8 +33,7 @@ use GithubService\Operation\getRepoBranch;
 use GithubService\Operation\deleteRepo;
 use ArtaxServiceBuilder\ResponseCache;
 
-class GithubArtaxService implements \GithubService\GithubService
-{
+class GithubArtaxService implements \GithubService\GithubService {
 
     /**
      * @var  $userAgent
@@ -46,8 +45,7 @@ class GithubArtaxService implements \GithubService\GithubService
      */
     public $responseCache = null;
 
-    public function __construct(\Artax\Client $client, \ArtaxServiceBuilder\ResponseCache $responseCache, $userAgent)
-    {
+    public function __construct(\Artax\Client $client, \ArtaxServiceBuilder\ResponseCache $responseCache, $userAgent) {
         $this->client = $client;
         $this->responseCache = $responseCache;
         $this->userAgent = $userAgent;
@@ -59,8 +57,7 @@ class GithubArtaxService implements \GithubService\GithubService
      * @param string $Authorization The stupid oauth2 bearer token
      * @return \GithubService\Operation\getAuthorizations The new operation
      */
-    public function getAuthorizations($Authorization)
-    {
+    public function getAuthorizations($Authorization) {
         $instance = new getAuthorizations($this, $Authorization, $this->getUserAgent());
         return $instance;
     }
@@ -78,8 +75,7 @@ class GithubArtaxService implements \GithubService\GithubService
      * after authorization. See details below about redirect urls.
      * @return \GithubService\Operation\accessToken The new operation
      */
-    public function accessToken($client_id, $client_secret, $code, $redirect_uri)
-    {
+    public function accessToken($client_id, $client_secret, $code, $redirect_uri) {
         $instance = new accessToken($this, $this->getUserAgent(), $client_id, $client_secret, $code, $redirect_uri);
         return $instance;
     }
@@ -91,8 +87,7 @@ class GithubArtaxService implements \GithubService\GithubService
      * @param mixed $client_id The id of the client.
      * @return \GithubService\Operation\revokeAllAuthority The new operation
      */
-    public function revokeAllAuthority($Authorization, $client_id)
-    {
+    public function revokeAllAuthority($Authorization, $client_id) {
         $instance = new revokeAllAuthority($this, $Authorization, $this->getUserAgent(), $client_id);
         return $instance;
     }
@@ -105,8 +100,7 @@ class GithubArtaxService implements \GithubService\GithubService
      * @param string $Authorization The stupid oauth2 bearer token
      * @return \GithubService\Operation\getUserEmails The new operation
      */
-    public function getUserEmails($Authorization)
-    {
+    public function getUserEmails($Authorization) {
         $instance = new getUserEmails($this, $Authorization, $this->getUserAgent());
         return $instance;
     }
@@ -120,8 +114,7 @@ class GithubArtaxService implements \GithubService\GithubService
      * @param mixed $emails Array of the emails to add
      * @return \GithubService\Operation\addUserEmails The new operation
      */
-    public function addUserEmails($Authorization, $emails)
-    {
+    public function addUserEmails($Authorization, $emails) {
         $instance = new addUserEmails($this, $Authorization, $this->getUserAgent(), $emails);
         return $instance;
     }
@@ -136,8 +129,7 @@ class GithubArtaxService implements \GithubService\GithubService
      * @param string $Authorization The stupid oauth2 bearer token
      * @return \GithubService\Operation\listUserRepos The new operation
      */
-    public function listUserRepos($Authorization)
-    {
+    public function listUserRepos($Authorization) {
         $instance = new listUserRepos($this, $Authorization, $this->getUserAgent());
         return $instance;
     }
@@ -152,8 +144,7 @@ class GithubArtaxService implements \GithubService\GithubService
      * results.
      * @return \GithubService\Operation\getUserInfoByName The new operation
      */
-    public function getUserInfoByName($Authorization, $owner, $repo, $anon)
-    {
+    public function getUserInfoByName($Authorization, $owner, $repo, $anon) {
         $instance = new getUserInfoByName($this, $Authorization, $this->getUserAgent(), $owner, $repo, $anon);
         return $instance;
     }
@@ -164,8 +155,7 @@ class GithubArtaxService implements \GithubService\GithubService
      * @param string $Authorization The stupid oauth2 bearer token
      * @return \GithubService\Operation\getUserInfo The new operation
      */
-    public function getUserInfo($Authorization)
-    {
+    public function getUserInfo($Authorization) {
         $instance = new getUserInfo($this, $Authorization, $this->getUserAgent());
         return $instance;
     }
@@ -177,8 +167,7 @@ class GithubArtaxService implements \GithubService\GithubService
      * @param mixed $pageURL 
      * @return \GithubService\Operation\listRepoCommitsPaginate The new operation
      */
-    public function listRepoCommitsPaginate($Authorization, $pageURL)
-    {
+    public function listRepoCommitsPaginate($Authorization, $pageURL) {
         $instance = new listRepoCommitsPaginate($this, $Authorization, $this->getUserAgent(), $pageURL);
         return $instance;
     }
@@ -191,8 +180,7 @@ class GithubArtaxService implements \GithubService\GithubService
      * @param mixed $repo 
      * @return \GithubService\Operation\listRepoCommits The new operation
      */
-    public function listRepoCommits($Authorization, $owner, $repo)
-    {
+    public function listRepoCommits($Authorization, $owner, $repo) {
         $instance = new listRepoCommits($this, $Authorization, $this->getUserAgent(), $owner, $repo);
         return $instance;
     }
@@ -206,8 +194,7 @@ class GithubArtaxService implements \GithubService\GithubService
      * @param string $sha SHA of the commit to get
      * @return \GithubService\Operation\getSingleCommit The new operation
      */
-    public function getSingleCommit($Authorization, $owner, $repo, $sha)
-    {
+    public function getSingleCommit($Authorization, $owner, $repo, $sha) {
         $instance = new getSingleCommit($this, $Authorization, $this->getUserAgent(), $owner, $repo, $sha);
         return $instance;
     }
@@ -224,8 +211,7 @@ class GithubArtaxService implements \GithubService\GithubService
      * full_name: asc; otherwise desc
      * @return \GithubService\Operation\listRepositories The new operation
      */
-    public function listRepositories($Authorization, $type, $sort, $direction)
-    {
+    public function listRepositories($Authorization, $type, $sort, $direction) {
         $instance = new listRepositories($this, $Authorization, $this->getUserAgent(), $type, $sort, $direction);
         return $instance;
     }
@@ -242,8 +228,7 @@ class GithubArtaxService implements \GithubService\GithubService
      * full_name: asc, otherwise desc
      * @return \GithubService\Operation\listUserRepositories The new operation
      */
-    public function listUserRepositories($Authorization, $username, $type, $sort, $direction)
-    {
+    public function listUserRepositories($Authorization, $username, $type, $sort, $direction) {
         $instance = new listUserRepositories($this, $Authorization, $this->getUserAgent(), $username, $type, $sort, $direction);
         return $instance;
     }
@@ -256,8 +241,7 @@ class GithubArtaxService implements \GithubService\GithubService
      * @param string $type Can be one of all, owner, member. Default: owner
      * @return \GithubService\Operation\listOrganizationRepositories The new operation
      */
-    public function listOrganizationRepositories($Authorization, $organisation, $type)
-    {
+    public function listOrganizationRepositories($Authorization, $organisation, $type) {
         $instance = new listOrganizationRepositories($this, $Authorization, $this->getUserAgent(), $organisation, $type);
         return $instance;
     }
@@ -269,8 +253,7 @@ class GithubArtaxService implements \GithubService\GithubService
      * @param string $since The integer ID of the last Repository that you’ve seen.
      * @return \GithubService\Operation\listAllPublicRepositories The new operation
      */
-    public function listAllPublicRepositories($Authorization, $since)
-    {
+    public function listAllPublicRepositories($Authorization, $since) {
         $instance = new listAllPublicRepositories($this, $Authorization, $this->getUserAgent(), $since);
         return $instance;
     }
@@ -287,8 +270,7 @@ class GithubArtaxService implements \GithubService\GithubService
      * full_name: asc, otherwise desc
      * @return \GithubService\Operation\getRepo The new operation
      */
-    public function getRepo($Authorization, $username, $type, $sort, $direction)
-    {
+    public function getRepo($Authorization, $username, $type, $sort, $direction) {
         $instance = new getRepo($this, $Authorization, $this->getUserAgent(), $username, $type, $sort, $direction);
         return $instance;
     }
@@ -301,8 +283,7 @@ class GithubArtaxService implements \GithubService\GithubService
      * @param string $repo The repo to fetch contributors for.
      * @return \GithubService\Operation\listRepoLanguages The new operation
      */
-    public function listRepoLanguages($Authorization, $owner, $repo)
-    {
+    public function listRepoLanguages($Authorization, $owner, $repo) {
         $instance = new listRepoLanguages($this, $Authorization, $this->getUserAgent(), $owner, $repo);
         return $instance;
     }
@@ -315,8 +296,7 @@ class GithubArtaxService implements \GithubService\GithubService
      * @param string $repo The repo to fetch contributors for.
      * @return \GithubService\Operation\listRepoTeams The new operation
      */
-    public function listRepoTeams($Authorization, $owner, $repo)
-    {
+    public function listRepoTeams($Authorization, $owner, $repo) {
         $instance = new listRepoTeams($this, $Authorization, $this->getUserAgent(), $owner, $repo);
         return $instance;
     }
@@ -328,8 +308,7 @@ class GithubArtaxService implements \GithubService\GithubService
      * @param mixed $pageURL 
      * @return \GithubService\Operation\listRepoTagsPaginate The new operation
      */
-    public function listRepoTagsPaginate($Authorization, $pageURL)
-    {
+    public function listRepoTagsPaginate($Authorization, $pageURL) {
         $instance = new listRepoTagsPaginate($this, $Authorization, $this->getUserAgent(), $pageURL);
         return $instance;
     }
@@ -346,8 +325,7 @@ class GithubArtaxService implements \GithubService\GithubService
      * @param mixed $repo 
      * @return \GithubService\Operation\listRepoTags The new operation
      */
-    public function listRepoTags($Authorization, $owner, $repo)
-    {
+    public function listRepoTags($Authorization, $owner, $repo) {
         $instance = new listRepoTags($this, $Authorization, $this->getUserAgent(), $owner, $repo);
         return $instance;
     }
@@ -360,8 +338,7 @@ class GithubArtaxService implements \GithubService\GithubService
      * @param mixed $repo 
      * @return \GithubService\Operation\listRepoBranches The new operation
      */
-    public function listRepoBranches($Authorization, $owner, $repo)
-    {
+    public function listRepoBranches($Authorization, $owner, $repo) {
         $instance = new listRepoBranches($this, $Authorization, $this->getUserAgent(), $owner, $repo);
         return $instance;
     }
@@ -375,8 +352,7 @@ class GithubArtaxService implements \GithubService\GithubService
      * @param mixed $branch 
      * @return \GithubService\Operation\getRepoBranch The new operation
      */
-    public function getRepoBranch($Authorization, $owner, $repo, $branch)
-    {
+    public function getRepoBranch($Authorization, $owner, $repo, $branch) {
         $instance = new getRepoBranch($this, $Authorization, $this->getUserAgent(), $owner, $repo, $branch);
         return $instance;
     }
@@ -389,8 +365,7 @@ class GithubArtaxService implements \GithubService\GithubService
      * @param mixed $repo 
      * @return \GithubService\Operation\deleteRepo The new operation
      */
-    public function deleteRepo($Authorization, $owner, $repo)
-    {
+    public function deleteRepo($Authorization, $owner, $repo) {
         $instance = new deleteRepo($this, $Authorization, $this->getUserAgent(), $owner, $repo);
         return $instance;
     }
@@ -398,13 +373,11 @@ class GithubArtaxService implements \GithubService\GithubService
     /**
      * @return
      */
-    public function getUserAgent()
-    {
+    public function getUserAgent() {
         return $this->userAgent;
     }
 
-    public function setUserAgent($value)
-    {
+    public function setUserAgent($value) {
         $this->userAgent = $value;
     }
 
@@ -417,8 +390,7 @@ class GithubArtaxService implements \GithubService\GithubService
      * @param $successStatuses array A list of acceptable success statuses.
      * @return \Artax\Response  The response from Artax
      */
-    public function execute(\Artax\Request $request, array $successStatuses = array())
-    {
+    public function execute(\Artax\Request $request, array $successStatuses = array()) {
         $originalRequest = clone $request;
         $cachingHeaders = $this->responseCache->getCachingHeaders($request);
         $request->setAllHeaders($cachingHeaders);
@@ -435,7 +407,11 @@ class GithubArtaxService implements \GithubService\GithubService
             $response = $this->responseCache->getResponse($request);
         }
         else if ($status < 200 || $status >= 300 ) {
-            throw new ArtaxServiceException("Status $status is not treated as OK.");
+            throw new BadResponseException(
+                "Status $status is not treated as OK.",
+                $originalRequest,
+                $response
+            );
         }
 
         return $response;
@@ -451,8 +427,7 @@ class GithubArtaxService implements \GithubService\GithubService
      * Parameters should be blah blah blah
      * @return \After\Promise A promise to resolve the call at some time.
      */
-    public function executeAsync(\Artax\Request $request, \ArtaxServiceBuilder\Operation $operation, callable $callback)
-    {
+    public function executeAsync(\Artax\Request $request, \ArtaxServiceBuilder\Operation $operation, callable $callback) {
         $originalRequest = clone $request;
         $cachingHeaders = $this->responseCache->getCachingHeaders($request);
         $request->setAllHeaders($cachingHeaders);
@@ -473,7 +448,11 @@ class GithubArtaxService implements \GithubService\GithubService
                 $response = $this->responseCache->getResponse($originalRequest);
             }
             else if ($status < 200 || $status >= 300 ) {
-                $exception = new ArtaxServiceException("Status $status is not treated as OK.");
+                $exception = new BadResponseException(
+                    "Status $status is not treated as OK.",
+                    $originalRequest,
+                    $response
+                );
                 $callback($exception, $response);
                 return;
             }

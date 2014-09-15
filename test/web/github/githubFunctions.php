@@ -115,16 +115,14 @@ function processAction(Provider $provider, AccessResponse $accessResponse) {
             $provider->execute('listRepoCommitsIterator', [':username' => 'Danack', ':repo' => 'Auryn']);
             break;
         }
-
-             
             
 
         case('showRepoTags'): {
             $provider->execute(
                 'showRepoTags', 
                 [
-                    ':username' => 'Danack',
-                    ':repo' => 'Auryn',
+                    ':username' => 'michelf',
+                    ':repo' => 'php-markdown',
                 ]
             );
             break;
@@ -501,6 +499,7 @@ function revokeAuthority(GithubService $api, AccessResponse $accessResponse) {
  */
 function showRepoTags(GithubService $api, AccessResponse $accessResponse, $username, $repo) {
     $command = $api->listRepoTags($accessResponse->accessToken, $username, $repo);
+    $command->setPerPage(100);
     $repoTags = $command->execute();
     foreach ($repoTags->getIterator() as $repoTag) {
         echo "Tag name: ".$repoTag->name." sha ".$repoTag->commitSHA."<br/>";

@@ -6,8 +6,7 @@
 //
 namespace GithubService\Operation;
 
-class addUserEmails implements \ArtaxServiceBuilder\Operation
-{
+class addUserEmails implements \ArtaxServiceBuilder\Operation {
 
     /**
      * @var $api \GithubService\GithubArtaxService\GithubArtaxService
@@ -29,13 +28,11 @@ class addUserEmails implements \ArtaxServiceBuilder\Operation
      *
      * @return \Artax\Response
      */
-    public function getResponse()
-    {
+    public function getResponse() {
         return $this->response;
     }
 
-    public function __construct(\GithubService\GithubArtaxService\GithubArtaxService $api, $Authorization, $userAgent, $emails)
-    {
+    public function __construct(\GithubService\GithubArtaxService\GithubArtaxService $api, $Authorization, $userAgent, $emails) {
         $defaultParams = [
             'Accept' => 'application/vnd.github.v3+json',
         ];
@@ -46,13 +43,11 @@ class addUserEmails implements \ArtaxServiceBuilder\Operation
         $this->parameters['emails'] = $emails;
     }
 
-    public function setAPI(\GithubService\GithubArtaxService\GithubArtaxService $api)
-    {
+    public function setAPI(\GithubService\GithubArtaxService\GithubArtaxService $api) {
         $this->api = $api;
     }
 
-    public function setParams(array $params)
-    {
+    public function setParams(array $params) {
         if (array_key_exists('Accept', $params)) {
              $this->parameters['Accept'] = $params['Accept'];
         }
@@ -70,8 +65,7 @@ class addUserEmails implements \ArtaxServiceBuilder\Operation
         }
     }
 
-    public function checkScopeRequirement(array $allowedScopes)
-    {
+    public function checkScopeRequirement(array $allowedScopes) {
         //For each of the elements, all of the scopes in that element
         //must be satisfied
         $requiredScopesArray = [
@@ -95,33 +89,27 @@ class addUserEmails implements \ArtaxServiceBuilder\Operation
         return false;
     }
 
-    public function setAccept($Accept)
-    {
+    public function setAccept($Accept) {
         $this->parameters['Accept'] = $Accept;
     }
 
-    public function setAuthorization($Authorization)
-    {
+    public function setAuthorization($Authorization) {
         $this->parameters['Authorization'] = $Authorization;
     }
 
-    public function setUserAgent($userAgent)
-    {
+    public function setUserAgent($userAgent) {
         $this->parameters['userAgent'] = $userAgent;
     }
 
-    public function setPerPage($perPage)
-    {
+    public function setPerPage($perPage) {
         $this->parameters['perPage'] = $perPage;
     }
 
-    public function setEmails($emails)
-    {
+    public function setEmails($emails) {
         $this->parameters['emails'] = $emails;
     }
 
-    public function getParameters()
-    {
+    public function getParameters() {
         return $this->parameters;
     }
 
@@ -131,8 +119,7 @@ class addUserEmails implements \ArtaxServiceBuilder\Operation
      * @return \GithubService\Model\Emails
      * @param string $name The name of the parameter to get.
      */
-    public function getFilteredParameter($name)
-    {
+    public function getFilteredParameter($name) {
         if (array_key_exists($name, $this->parameters) == false) {
             throw new \Exception('Parameter '.$name.' does not exist.');
         }
@@ -156,8 +143,7 @@ class addUserEmails implements \ArtaxServiceBuilder\Operation
         return $value;
     }
 
-    public function createRequest()
-    {
+    public function createRequest() {
         $request = new \Artax\Request();
         $url = null;
         $request->setMethod('POST');
@@ -177,7 +163,7 @@ class addUserEmails implements \ArtaxServiceBuilder\Operation
         $request->setHeader('User-Agent', $value);
         if (array_key_exists('perPage', $this->parameters) == true) {
         $value = $this->getFilteredParameter('perPage');
-           $queryParameters['perPage'] = $value;
+           $queryParameters['per_page'] = $value;
         }
         $value = $this->getFilteredParameter('emails');
         $jsonParams['emails'] = $value;
@@ -204,8 +190,7 @@ class addUserEmails implements \ArtaxServiceBuilder\Operation
      *
      * @return \Artax\Response
      */
-    public function createAndCall()
-    {
+    public function createAndCall() {
         $request = $this->createRequest();
         $response = $this->api->execute($request);
         $this->response = $response;
@@ -218,8 +203,7 @@ class addUserEmails implements \ArtaxServiceBuilder\Operation
      *
      * @return \GithubService\Model\Emails
      */
-    public function execute()
-    {
+    public function execute() {
         $request = $this->createRequest();
         $response = $this->api->execute($request);
         $this->response = $response;
@@ -228,8 +212,7 @@ class addUserEmails implements \ArtaxServiceBuilder\Operation
         return $instance;
     }
 
-    public function executeAsync(callable $callable)
-    {
+    public function executeAsync(callable $callable) {
         $request = $this->createRequest();
         return $this->api->executeAsync($request, $this, $callable);
     }
@@ -241,8 +224,7 @@ class addUserEmails implements \ArtaxServiceBuilder\Operation
      * @return \GithubService\Model\Emails
      * @param \Artax\Request $request The request to be processed
      */
-    public function dispatch(\Artax\Request $request)
-    {
+    public function dispatch(\Artax\Request $request) {
         $response = $this->api->execute($request);
         $this->response = $response;
         $instance = \GithubService\Model\Emails::createFromResponse($response, $this);
@@ -257,8 +239,7 @@ class addUserEmails implements \ArtaxServiceBuilder\Operation
      * @return \GithubService\Model\Emails
      * @param \Artax\Response $response The HTTP response.
      */
-    public function processResponse(\Artax\Response $response)
-    {
+    public function processResponse(\Artax\Response $response) {
         $instance = \GithubService\Model\Emails::createFromResponse($response, $this);
 
         return $instance;

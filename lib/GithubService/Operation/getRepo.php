@@ -6,8 +6,7 @@
 //
 namespace GithubService\Operation;
 
-class getRepo implements \ArtaxServiceBuilder\Operation
-{
+class getRepo implements \ArtaxServiceBuilder\Operation {
 
     /**
      * @var $api \GithubService\GithubArtaxService\GithubArtaxService
@@ -29,13 +28,11 @@ class getRepo implements \ArtaxServiceBuilder\Operation
      *
      * @return \Artax\Response
      */
-    public function getResponse()
-    {
+    public function getResponse() {
         return $this->response;
     }
 
-    public function __construct(\GithubService\GithubArtaxService\GithubArtaxService $api, $Authorization, $userAgent, $username, $type, $sort, $direction)
-    {
+    public function __construct(\GithubService\GithubArtaxService\GithubArtaxService $api, $Authorization, $userAgent, $username, $type, $sort, $direction) {
         $defaultParams = [
             'Accept' => 'application/vnd.github.v3+json',
         ];
@@ -49,13 +46,11 @@ class getRepo implements \ArtaxServiceBuilder\Operation
         $this->parameters['direction'] = $direction;
     }
 
-    public function setAPI(\GithubService\GithubArtaxService\GithubArtaxService $api)
-    {
+    public function setAPI(\GithubService\GithubArtaxService\GithubArtaxService $api) {
         $this->api = $api;
     }
 
-    public function setParams(array $params)
-    {
+    public function setParams(array $params) {
         if (array_key_exists('Accept', $params)) {
              $this->parameters['Accept'] = $params['Accept'];
         }
@@ -82,48 +77,39 @@ class getRepo implements \ArtaxServiceBuilder\Operation
         }
     }
 
-    public function setAccept($Accept)
-    {
+    public function setAccept($Accept) {
         $this->parameters['Accept'] = $Accept;
     }
 
-    public function setAuthorization($Authorization)
-    {
+    public function setAuthorization($Authorization) {
         $this->parameters['Authorization'] = $Authorization;
     }
 
-    public function setUserAgent($userAgent)
-    {
+    public function setUserAgent($userAgent) {
         $this->parameters['userAgent'] = $userAgent;
     }
 
-    public function setPerPage($perPage)
-    {
+    public function setPerPage($perPage) {
         $this->parameters['perPage'] = $perPage;
     }
 
-    public function setUsername($username)
-    {
+    public function setUsername($username) {
         $this->parameters['username'] = $username;
     }
 
-    public function setType($type)
-    {
+    public function setType($type) {
         $this->parameters['type'] = $type;
     }
 
-    public function setSort($sort)
-    {
+    public function setSort($sort) {
         $this->parameters['sort'] = $sort;
     }
 
-    public function setDirection($direction)
-    {
+    public function setDirection($direction) {
         $this->parameters['direction'] = $direction;
     }
 
-    public function getParameters()
-    {
+    public function getParameters() {
         return $this->parameters;
     }
 
@@ -133,8 +119,7 @@ class getRepo implements \ArtaxServiceBuilder\Operation
      * @return mixed
      * @param string $name The name of the parameter to get.
      */
-    public function getFilteredParameter($name)
-    {
+    public function getFilteredParameter($name) {
         if (array_key_exists($name, $this->parameters) == false) {
             throw new \Exception('Parameter '.$name.' does not exist.');
         }
@@ -158,8 +143,7 @@ class getRepo implements \ArtaxServiceBuilder\Operation
         return $value;
     }
 
-    public function createRequest()
-    {
+    public function createRequest() {
         $request = new \Artax\Request();
         $url = null;
         $request->setMethod('GET');
@@ -178,7 +162,7 @@ class getRepo implements \ArtaxServiceBuilder\Operation
         $request->setHeader('User-Agent', $value);
         if (array_key_exists('perPage', $this->parameters) == true) {
         $value = $this->getFilteredParameter('perPage');
-           $queryParameters['perPage'] = $value;
+           $queryParameters['per_page'] = $value;
         }
         $value = $this->getFilteredParameter('username');
         $queryParameters['username'] = $value;
@@ -208,8 +192,7 @@ class getRepo implements \ArtaxServiceBuilder\Operation
      *
      * @return \Artax\Response
      */
-    public function createAndCall()
-    {
+    public function createAndCall() {
         $request = $this->createRequest();
         $response = $this->api->execute($request);
         $this->response = $response;
@@ -222,16 +205,14 @@ class getRepo implements \ArtaxServiceBuilder\Operation
      *
      * @return mixed
      */
-    public function execute()
-    {
+    public function execute() {
         $request = $this->createRequest();
         $response = $this->api->execute($request);
         $this->response = $response;
         return $response->getBody();
     }
 
-    public function executeAsync(callable $callable)
-    {
+    public function executeAsync(callable $callable) {
         $request = $this->createRequest();
         return $this->api->executeAsync($request, $this, $callable);
     }
@@ -243,8 +224,7 @@ class getRepo implements \ArtaxServiceBuilder\Operation
      * @return mixed
      * @param \Artax\Request $request The request to be processed
      */
-    public function dispatch(\Artax\Request $request)
-    {
+    public function dispatch(\Artax\Request $request) {
         $response = $this->api->execute($request);
         $this->response = $response;
         return $response->getBody();
@@ -257,8 +237,7 @@ class getRepo implements \ArtaxServiceBuilder\Operation
      * @return mixed
      * @param \Artax\Response $response The HTTP response.
      */
-    public function processResponse(\Artax\Response $response)
-    {
+    public function processResponse(\Artax\Response $response) {
         return $response->getBody();
     }
 

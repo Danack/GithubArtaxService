@@ -6,8 +6,7 @@
 //
 namespace GithubService\Operation;
 
-class listRepoCommitsPaginate implements \ArtaxServiceBuilder\Operation
-{
+class listRepoCommitsPaginate implements \ArtaxServiceBuilder\Operation {
 
     /**
      * @var $api \GithubService\GithubArtaxService\GithubArtaxService
@@ -29,13 +28,11 @@ class listRepoCommitsPaginate implements \ArtaxServiceBuilder\Operation
      *
      * @return \Artax\Response
      */
-    public function getResponse()
-    {
+    public function getResponse() {
         return $this->response;
     }
 
-    public function __construct(\GithubService\GithubArtaxService\GithubArtaxService $api, $Authorization, $userAgent, $pageURL)
-    {
+    public function __construct(\GithubService\GithubArtaxService\GithubArtaxService $api, $Authorization, $userAgent, $pageURL) {
         $defaultParams = [
             'Accept' => 'application/vnd.github.v3+json',
         ];
@@ -46,13 +43,11 @@ class listRepoCommitsPaginate implements \ArtaxServiceBuilder\Operation
         $this->parameters['pageURL'] = $pageURL;
     }
 
-    public function setAPI(\GithubService\GithubArtaxService\GithubArtaxService $api)
-    {
+    public function setAPI(\GithubService\GithubArtaxService\GithubArtaxService $api) {
         $this->api = $api;
     }
 
-    public function setParams(array $params)
-    {
+    public function setParams(array $params) {
         if (array_key_exists('Accept', $params)) {
              $this->parameters['Accept'] = $params['Accept'];
         }
@@ -70,33 +65,27 @@ class listRepoCommitsPaginate implements \ArtaxServiceBuilder\Operation
         }
     }
 
-    public function setAccept($Accept)
-    {
+    public function setAccept($Accept) {
         $this->parameters['Accept'] = $Accept;
     }
 
-    public function setAuthorization($Authorization)
-    {
+    public function setAuthorization($Authorization) {
         $this->parameters['Authorization'] = $Authorization;
     }
 
-    public function setUserAgent($userAgent)
-    {
+    public function setUserAgent($userAgent) {
         $this->parameters['userAgent'] = $userAgent;
     }
 
-    public function setPerPage($perPage)
-    {
+    public function setPerPage($perPage) {
         $this->parameters['perPage'] = $perPage;
     }
 
-    public function setPageURL($pageURL)
-    {
+    public function setPageURL($pageURL) {
         $this->parameters['pageURL'] = $pageURL;
     }
 
-    public function getParameters()
-    {
+    public function getParameters() {
         return $this->parameters;
     }
 
@@ -106,8 +95,7 @@ class listRepoCommitsPaginate implements \ArtaxServiceBuilder\Operation
      * @return \GithubService\Model\Commits
      * @param string $name The name of the parameter to get.
      */
-    public function getFilteredParameter($name)
-    {
+    public function getFilteredParameter($name) {
         if (array_key_exists($name, $this->parameters) == false) {
             throw new \Exception('Parameter '.$name.' does not exist.');
         }
@@ -131,8 +119,7 @@ class listRepoCommitsPaginate implements \ArtaxServiceBuilder\Operation
         return $value;
     }
 
-    public function createRequest()
-    {
+    public function createRequest() {
         $request = new \Artax\Request();
         $url = null;
         $request->setMethod('GET');
@@ -151,7 +138,7 @@ class listRepoCommitsPaginate implements \ArtaxServiceBuilder\Operation
         $request->setHeader('User-Agent', $value);
         if (array_key_exists('perPage', $this->parameters) == true) {
         $value = $this->getFilteredParameter('perPage');
-           $queryParameters['perPage'] = $value;
+           $queryParameters['per_page'] = $value;
         }
         $value = $this->getFilteredParameter('pageURL');
         $url = $value;
@@ -173,8 +160,7 @@ class listRepoCommitsPaginate implements \ArtaxServiceBuilder\Operation
      *
      * @return \Artax\Response
      */
-    public function createAndCall()
-    {
+    public function createAndCall() {
         $request = $this->createRequest();
         $response = $this->api->execute($request);
         $this->response = $response;
@@ -187,8 +173,7 @@ class listRepoCommitsPaginate implements \ArtaxServiceBuilder\Operation
      *
      * @return \GithubService\Model\Commits
      */
-    public function execute()
-    {
+    public function execute() {
         $request = $this->createRequest();
         $response = $this->api->execute($request);
         $this->response = $response;
@@ -197,8 +182,7 @@ class listRepoCommitsPaginate implements \ArtaxServiceBuilder\Operation
         return $instance;
     }
 
-    public function executeAsync(callable $callable)
-    {
+    public function executeAsync(callable $callable) {
         $request = $this->createRequest();
         return $this->api->executeAsync($request, $this, $callable);
     }
@@ -210,8 +194,7 @@ class listRepoCommitsPaginate implements \ArtaxServiceBuilder\Operation
      * @return \GithubService\Model\Commits
      * @param \Artax\Request $request The request to be processed
      */
-    public function dispatch(\Artax\Request $request)
-    {
+    public function dispatch(\Artax\Request $request) {
         $response = $this->api->execute($request);
         $this->response = $response;
         $instance = \GithubService\Model\Commits::createFromResponse($response, $this);
@@ -226,8 +209,7 @@ class listRepoCommitsPaginate implements \ArtaxServiceBuilder\Operation
      * @return \GithubService\Model\Commits
      * @param \Artax\Response $response The HTTP response.
      */
-    public function processResponse(\Artax\Response $response)
-    {
+    public function processResponse(\Artax\Response $response) {
         $instance = \GithubService\Model\Commits::createFromResponse($response, $this);
 
         return $instance;

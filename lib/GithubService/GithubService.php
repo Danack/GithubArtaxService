@@ -6,8 +6,7 @@
 //
 namespace GithubService;
 
-interface GithubService
-{
+interface GithubService {
 
     /**
      * getAuthorizations

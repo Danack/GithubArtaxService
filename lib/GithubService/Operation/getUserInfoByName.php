@@ -6,8 +6,7 @@
 //
 namespace GithubService\Operation;
 
-class getUserInfoByName implements \ArtaxServiceBuilder\Operation
-{
+class getUserInfoByName implements \ArtaxServiceBuilder\Operation {
 
     /**
      * @var $api \GithubService\GithubArtaxService\GithubArtaxService
@@ -29,13 +28,11 @@ class getUserInfoByName implements \ArtaxServiceBuilder\Operation
      *
      * @return \Artax\Response
      */
-    public function getResponse()
-    {
+    public function getResponse() {
         return $this->response;
     }
 
-    public function __construct(\GithubService\GithubArtaxService\GithubArtaxService $api, $Authorization, $userAgent, $owner, $repo, $anon)
-    {
+    public function __construct(\GithubService\GithubArtaxService\GithubArtaxService $api, $Authorization, $userAgent, $owner, $repo, $anon) {
         $defaultParams = [
             'Accept' => 'application/vnd.github.v3+json',
         ];
@@ -48,13 +45,11 @@ class getUserInfoByName implements \ArtaxServiceBuilder\Operation
         $this->parameters['anon'] = $anon;
     }
 
-    public function setAPI(\GithubService\GithubArtaxService\GithubArtaxService $api)
-    {
+    public function setAPI(\GithubService\GithubArtaxService\GithubArtaxService $api) {
         $this->api = $api;
     }
 
-    public function setParams(array $params)
-    {
+    public function setParams(array $params) {
         if (array_key_exists('Accept', $params)) {
              $this->parameters['Accept'] = $params['Accept'];
         }
@@ -78,43 +73,35 @@ class getUserInfoByName implements \ArtaxServiceBuilder\Operation
         }
     }
 
-    public function setAccept($Accept)
-    {
+    public function setAccept($Accept) {
         $this->parameters['Accept'] = $Accept;
     }
 
-    public function setAuthorization($Authorization)
-    {
+    public function setAuthorization($Authorization) {
         $this->parameters['Authorization'] = $Authorization;
     }
 
-    public function setUserAgent($userAgent)
-    {
+    public function setUserAgent($userAgent) {
         $this->parameters['userAgent'] = $userAgent;
     }
 
-    public function setPerPage($perPage)
-    {
+    public function setPerPage($perPage) {
         $this->parameters['perPage'] = $perPage;
     }
 
-    public function setOwner($owner)
-    {
+    public function setOwner($owner) {
         $this->parameters['owner'] = $owner;
     }
 
-    public function setRepo($repo)
-    {
+    public function setRepo($repo) {
         $this->parameters['repo'] = $repo;
     }
 
-    public function setAnon($anon)
-    {
+    public function setAnon($anon) {
         $this->parameters['anon'] = $anon;
     }
 
-    public function getParameters()
-    {
+    public function getParameters() {
         return $this->parameters;
     }
 
@@ -124,8 +111,7 @@ class getUserInfoByName implements \ArtaxServiceBuilder\Operation
      * @return mixed
      * @param string $name The name of the parameter to get.
      */
-    public function getFilteredParameter($name)
-    {
+    public function getFilteredParameter($name) {
         if (array_key_exists($name, $this->parameters) == false) {
             throw new \Exception('Parameter '.$name.' does not exist.');
         }
@@ -149,8 +135,7 @@ class getUserInfoByName implements \ArtaxServiceBuilder\Operation
         return $value;
     }
 
-    public function createRequest()
-    {
+    public function createRequest() {
         $request = new \Artax\Request();
         $url = null;
         $request->setMethod('GET');
@@ -169,7 +154,7 @@ class getUserInfoByName implements \ArtaxServiceBuilder\Operation
         $request->setHeader('User-Agent', $value);
         if (array_key_exists('perPage', $this->parameters) == true) {
         $value = $this->getFilteredParameter('perPage');
-           $queryParameters['perPage'] = $value;
+           $queryParameters['per_page'] = $value;
         }
         $value = $this->getFilteredParameter('owner');
         $queryParameters['owner'] = $value;
@@ -197,8 +182,7 @@ class getUserInfoByName implements \ArtaxServiceBuilder\Operation
      *
      * @return \Artax\Response
      */
-    public function createAndCall()
-    {
+    public function createAndCall() {
         $request = $this->createRequest();
         $response = $this->api->execute($request);
         $this->response = $response;
@@ -211,16 +195,14 @@ class getUserInfoByName implements \ArtaxServiceBuilder\Operation
      *
      * @return mixed
      */
-    public function execute()
-    {
+    public function execute() {
         $request = $this->createRequest();
         $response = $this->api->execute($request);
         $this->response = $response;
         return $response->getBody();
     }
 
-    public function executeAsync(callable $callable)
-    {
+    public function executeAsync(callable $callable) {
         $request = $this->createRequest();
         return $this->api->executeAsync($request, $this, $callable);
     }
@@ -232,8 +214,7 @@ class getUserInfoByName implements \ArtaxServiceBuilder\Operation
      * @return mixed
      * @param \Artax\Request $request The request to be processed
      */
-    public function dispatch(\Artax\Request $request)
-    {
+    public function dispatch(\Artax\Request $request) {
         $response = $this->api->execute($request);
         $this->response = $response;
         return $response->getBody();
@@ -246,8 +227,7 @@ class getUserInfoByName implements \ArtaxServiceBuilder\Operation
      * @return mixed
      * @param \Artax\Response $response The HTTP response.
      */
-    public function processResponse(\Artax\Response $response)
-    {
+    public function processResponse(\Artax\Response $response) {
         return $response->getBody();
     }
 
