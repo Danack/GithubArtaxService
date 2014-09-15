@@ -65,6 +65,9 @@ class getRepo implements \ArtaxServiceBuilder\Operation
         if (array_key_exists('userAgent', $params)) {
              $this->parameters['userAgent'] = $params['userAgent'];
         }
+        if (array_key_exists('perPage', $params)) {
+             $this->parameters['perPage'] = $params['perPage'];
+        }
         if (array_key_exists('username', $params)) {
              $this->parameters['username'] = $params['username'];
         }
@@ -92,6 +95,11 @@ class getRepo implements \ArtaxServiceBuilder\Operation
     public function setUserAgent($userAgent)
     {
         $this->parameters['userAgent'] = $userAgent;
+    }
+
+    public function setPerPage($perPage)
+    {
+        $this->parameters['perPage'] = $perPage;
     }
 
     public function setUsername($username)
@@ -168,6 +176,10 @@ class getRepo implements \ArtaxServiceBuilder\Operation
         }
         $value = $this->getFilteredParameter('userAgent');
         $request->setHeader('User-Agent', $value);
+        if (array_key_exists('perPage', $this->parameters) == true) {
+        $value = $this->getFilteredParameter('perPage');
+           $queryParameters['perPage'] = $value;
+        }
         $value = $this->getFilteredParameter('username');
         $queryParameters['username'] = $value;
         $value = $this->getFilteredParameter('type');

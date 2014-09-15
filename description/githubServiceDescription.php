@@ -52,11 +52,21 @@ $service = array (
                     'sentAs' => 'User-Agent',
                     'required' => 'true',
                 ),
+
+                'perPage' => array(
+                    "location" => "query",
+                    "description" => "The number of items to get per page.",
+                    'sentAs' => 'per_page',
+                    'required' => 'false',
+                    'type' => 'int',
+                    'optional' => true
+                ),
+                
             )
         ),
 
 
-//https://developer.github.com/v3/oauth_authorizations/
+        //https://developer.github.com/v3/oauth_authorizations/
         'getAuthorizations' => array(
             'uri' => '/authorizations',
             'extends' => 'defaultGetOauthOperation',

@@ -62,6 +62,9 @@ class listRepoCommitsPaginate implements \ArtaxServiceBuilder\Operation
         if (array_key_exists('userAgent', $params)) {
              $this->parameters['userAgent'] = $params['userAgent'];
         }
+        if (array_key_exists('perPage', $params)) {
+             $this->parameters['perPage'] = $params['perPage'];
+        }
         if (array_key_exists('pageURL', $params)) {
              $this->parameters['pageURL'] = $params['pageURL'];
         }
@@ -80,6 +83,11 @@ class listRepoCommitsPaginate implements \ArtaxServiceBuilder\Operation
     public function setUserAgent($userAgent)
     {
         $this->parameters['userAgent'] = $userAgent;
+    }
+
+    public function setPerPage($perPage)
+    {
+        $this->parameters['perPage'] = $perPage;
     }
 
     public function setPageURL($pageURL)
@@ -129,6 +137,7 @@ class listRepoCommitsPaginate implements \ArtaxServiceBuilder\Operation
         $url = null;
         $request->setMethod('GET');
 
+        $queryParameters = [];
 
         if (array_key_exists('Accept', $this->parameters) == true) {
         $value = $this->getFilteredParameter('Accept');
@@ -140,12 +149,19 @@ class listRepoCommitsPaginate implements \ArtaxServiceBuilder\Operation
         }
         $value = $this->getFilteredParameter('userAgent');
         $request->setHeader('User-Agent', $value);
+        if (array_key_exists('perPage', $this->parameters) == true) {
+        $value = $this->getFilteredParameter('perPage');
+           $queryParameters['perPage'] = $value;
+        }
         $value = $this->getFilteredParameter('pageURL');
         $url = $value;
 
         //Parameters are parsed and set, lets prepare the request
         if ($url == null) {
             $url = "https://api.github.com";
+        }
+        if (count($queryParameters)) {
+            $url = $url.'?'.http_build_query($queryParameters, '', '&', PHP_QUERY_RFC3986);
         }
         $request->setUri($url);
 

@@ -64,6 +64,9 @@ class listRepositories implements \ArtaxServiceBuilder\Operation
         if (array_key_exists('userAgent', $params)) {
              $this->parameters['userAgent'] = $params['userAgent'];
         }
+        if (array_key_exists('perPage', $params)) {
+             $this->parameters['perPage'] = $params['perPage'];
+        }
         if (array_key_exists('type', $params)) {
              $this->parameters['type'] = $params['type'];
         }
@@ -88,6 +91,11 @@ class listRepositories implements \ArtaxServiceBuilder\Operation
     public function setUserAgent($userAgent)
     {
         $this->parameters['userAgent'] = $userAgent;
+    }
+
+    public function setPerPage($perPage)
+    {
+        $this->parameters['perPage'] = $perPage;
     }
 
     public function setType($type)
@@ -159,6 +167,10 @@ class listRepositories implements \ArtaxServiceBuilder\Operation
         }
         $value = $this->getFilteredParameter('userAgent');
         $request->setHeader('User-Agent', $value);
+        if (array_key_exists('perPage', $this->parameters) == true) {
+        $value = $this->getFilteredParameter('perPage');
+           $queryParameters['perPage'] = $value;
+        }
         $value = $this->getFilteredParameter('type');
         $queryParameters['type'] = $value;
         $value = $this->getFilteredParameter('sort');

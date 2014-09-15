@@ -62,6 +62,9 @@ class revokeAllAuthority implements \ArtaxServiceBuilder\Operation
         if (array_key_exists('userAgent', $params)) {
              $this->parameters['userAgent'] = $params['userAgent'];
         }
+        if (array_key_exists('perPage', $params)) {
+             $this->parameters['perPage'] = $params['perPage'];
+        }
         if (array_key_exists('client_id', $params)) {
              $this->parameters['client_id'] = $params['client_id'];
         }
@@ -80,6 +83,11 @@ class revokeAllAuthority implements \ArtaxServiceBuilder\Operation
     public function setUserAgent($userAgent)
     {
         $this->parameters['userAgent'] = $userAgent;
+    }
+
+    public function setPerPage($perPage)
+    {
+        $this->parameters['perPage'] = $perPage;
     }
 
     public function setClient_id($client_id)
@@ -129,6 +137,7 @@ class revokeAllAuthority implements \ArtaxServiceBuilder\Operation
         $url = null;
         $request->setMethod('GET');
 
+        $queryParameters = [];
 
         if (array_key_exists('Accept', $this->parameters) == true) {
         $value = $this->getFilteredParameter('Accept');
@@ -140,6 +149,10 @@ class revokeAllAuthority implements \ArtaxServiceBuilder\Operation
         }
         $value = $this->getFilteredParameter('userAgent');
         $request->setHeader('User-Agent', $value);
+        if (array_key_exists('perPage', $this->parameters) == true) {
+        $value = $this->getFilteredParameter('perPage');
+           $queryParameters['perPage'] = $value;
+        }
         $value = $this->getFilteredParameter('client_id');
         $queryParameters['client_id'] = $value;
 
@@ -149,6 +162,9 @@ class revokeAllAuthority implements \ArtaxServiceBuilder\Operation
         }
         $uriTemplate = new \ArtaxServiceBuilder\Service\UriTemplate\UriTemplate();
         $url = $uriTemplate->expand($url, $this->parameters);
+        if (count($queryParameters)) {
+            $url = $url.'?'.http_build_query($queryParameters, '', '&', PHP_QUERY_RFC3986);
+        }
         $request->setUri($url);
 
         return $request;

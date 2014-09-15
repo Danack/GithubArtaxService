@@ -63,6 +63,9 @@ class listUserRepos implements \ArtaxServiceBuilder\Operation
         if (array_key_exists('userAgent', $params)) {
              $this->parameters['userAgent'] = $params['userAgent'];
         }
+        if (array_key_exists('perPage', $params)) {
+             $this->parameters['perPage'] = $params['perPage'];
+        }
         if (array_key_exists('type', $params)) {
              $this->parameters['type'] = $params['type'];
         }
@@ -87,6 +90,11 @@ class listUserRepos implements \ArtaxServiceBuilder\Operation
     public function setUserAgent($userAgent)
     {
         $this->parameters['userAgent'] = $userAgent;
+    }
+
+    public function setPerPage($perPage)
+    {
+        $this->parameters['perPage'] = $perPage;
     }
 
     public function setType($type)
@@ -146,6 +154,7 @@ class listUserRepos implements \ArtaxServiceBuilder\Operation
         $url = null;
         $request->setMethod('GET');
 
+        $queryParameters = [];
 
         $jsonParams = [];
         if (array_key_exists('Accept', $this->parameters) == true) {
@@ -158,6 +167,10 @@ class listUserRepos implements \ArtaxServiceBuilder\Operation
         }
         $value = $this->getFilteredParameter('userAgent');
         $request->setHeader('User-Agent', $value);
+        if (array_key_exists('perPage', $this->parameters) == true) {
+        $value = $this->getFilteredParameter('perPage');
+           $queryParameters['perPage'] = $value;
+        }
         if (array_key_exists('type', $this->parameters) == true) {
         $value = $this->getFilteredParameter('type');
            $jsonParams['type'] = $value;
@@ -179,6 +192,9 @@ class listUserRepos implements \ArtaxServiceBuilder\Operation
         }
         if ($url == null) {
             $url = "https://api.github.com/user/repos";
+        }
+        if (count($queryParameters)) {
+            $url = $url.'?'.http_build_query($queryParameters, '', '&', PHP_QUERY_RFC3986);
         }
         $request->setUri($url);
 
