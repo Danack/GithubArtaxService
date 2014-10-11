@@ -63,7 +63,7 @@
     "require":{
         "Danack/danack-code": ">=2.4.5",
         "danack/danackhttp2": ">=1.2.0",
-        "danack/artaxservicebuilder": "~0.2.0",
+        "danack/artaxservicebuilder": "~0.2.1",
         "rdlowrey/artax": "v1.0.0-alpha"
     },
     "autoload": {
