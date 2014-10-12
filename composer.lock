@@ -1,0 +1,1206 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "hash": "e47499122710a69c45ac10afef7cc8db",
+    "packages": [
+        {
+            "name": "bagder/ca-bundle",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bagder/ca-bundle",
+                "reference": "origin/master"
+            },
+            "type": "library",
+            "time": "2014-07-17 23:29:50"
+        },
+        {
+            "name": "danack/artaxservicebuilder",
+            "version": "0.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Danack/ArtaxServiceBuilder.git",
+                "reference": "6eb0e927579d42f3e36cd8a30c035cc94c075e9d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Danack/ArtaxServiceBuilder/zipball/6eb0e927579d42f3e36cd8a30c035cc94c075e9d",
+                "reference": "6eb0e927579d42f3e36cd8a30c035cc94c075e9d",
+                "shasum": ""
+            },
+            "require": {
+                "danack/danack-code": ">=2.4.4"
+            },
+            "require-dev": {
+                "danack/auryn": "~0.9.5",
+                "fzaninotto/faker": "*",
+                "mockery/mockery": "0.9.1",
+                "phpunit/phpunit": "4.1.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "ArtaxServiceBuilder": "src/"
+                }
+            },
+            "support": {
+                "source": "https://github.com/Danack/ArtaxServiceBuilder/tree/0.2.1",
+                "issues": "https://github.com/Danack/ArtaxServiceBuilder/issues"
+            },
+            "time": "2014-10-11 00:43:12"
+        },
+        {
+            "name": "danack/danack-code",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "/documents/projects/github/DanackCode",
+                "reference": "b82c83aa61cfbdf236f86ae0874cfc7423465dd9"
+            },
+            "require": {
+                "php": ">=5.3.23"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Danack\\Code\\": ""
+                }
+            },
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "provides facilities to generate arbitrary code using an object oriented interface",
+            "keywords": [
+                "code",
+                "zf2"
+            ],
+            "time": "2014-07-27 14:31:53"
+        },
+        {
+            "name": "danack/danackhttp2",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Danack/HTTP2.git",
+                "reference": "616eadd3acc058eb56e7a1076a94d74d2484024e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Danack/HTTP2/zipball/616eadd3acc058eb56e7a1076a94d74d2484024e",
+                "reference": "616eadd3acc058eb56e7a1076a94d74d2484024e",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "HTTP2": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "include-path": [
+                "./"
+            ],
+            "license": [
+                "New BSD License"
+            ],
+            "authors": [
+                {
+                    "name": "Dan Ackroyd",
+                    "email": "Danack@basereality.com",
+                    "homepage": "http://www.basereality.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A fork of HTTP for PHP5 and autoloading",
+            "time": "2014-07-13 21:04:06"
+        },
+        {
+            "name": "daverandom/addr",
+            "version": "0.2.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/daverandom/addr.git",
+                "reference": "c90bea0e4482844631258c1fdc315cea4b10565d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/daverandom/addr/zipball/c90bea0e4482844631258c1fdc315cea4b10565d",
+                "reference": "c90bea0e4482844631258c1fdc315cea4b10565d",
+                "shasum": ""
+            },
+            "require": {
+                "daverandom/libdns": "~0.2.1",
+                "php": ">=5.4.0",
+                "rdlowrey/alert": "~0.10.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Addr\\": "lib/Addr/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Chris Wright",
+                    "email": "addr@daverandom.com",
+                    "role": "Creator / Lead Developer"
+                }
+            ],
+            "description": "Asynchronous DNS resolver using Alert",
+            "homepage": "https://github.com/DaveRandom/Addr",
+            "keywords": [
+                "async",
+                "client",
+                "dns",
+                "resolve"
+            ],
+            "support": {
+                "source": "https://github.com/DaveRandom/Addr/tree/0.2",
+                "issues": "https://github.com/DaveRandom/Addr/issues"
+            },
+            "time": "2014-08-05 21:41:32"
+        },
+        {
+            "name": "daverandom/libdns",
+            "version": "v0.2.1",
+            "dist": {
+                "type": "zip",
+                "url": "http://satis.basereality.com/packages/DaveRandom/LibDNS/DaveRandom_LibDNS_v0.2.1.zip",
+                "reference": "DaveRandom_LibDNS_v0.2.1.zip",
+                "shasum": "2f654b7cbc18c4da4c2d95247c50411803d9f42b"
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "LibDNS": "src"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "DNS protocol implementation written in pure PHP",
+            "keywords": [
+                "dns"
+            ],
+            "support": {
+                "issues": "https://github.com/DaveRandom/LibDNS/issues"
+            }
+        },
+        {
+            "name": "rdlowrey/acesync",
+            "version": "v0.2.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rdlowrey/acesync.git",
+                "reference": "47a3a9671f8565ac839be8c689fa16d0395962f8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rdlowrey/acesync/zipball/47a3a9671f8565ac839be8c689fa16d0395962f8",
+                "reference": "47a3a9671f8565ac839be8c689fa16d0395962f8",
+                "shasum": ""
+            },
+            "require": {
+                "bagder/ca-bundle": "dev-master",
+                "daverandom/addr": "~0.2.0",
+                "php": ">=5.4.0",
+                "rdlowrey/after": "~0.3.0",
+                "rdlowrey/alert": "~0.10.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Acesync\\": "lib/"
+                },
+                "files": [
+                    "lib/functions.php"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Daniel Lowrey",
+                    "email": "rdlowrey@gmail.com",
+                    "role": "Creator / Lead Developer"
+                }
+            ],
+            "description": "Non-blocking TCP socket connection/encryption tools",
+            "homepage": "https://github.com/rdlowrey/Acesync",
+            "keywords": [
+                "async",
+                "encryption",
+                "non-blocking",
+                "sockets",
+                "tcp",
+                "tls"
+            ],
+            "support": {
+                "source": "https://github.com/rdlowrey/acesync/tree/v0.2.7",
+                "issues": "https://github.com/rdlowrey/acesync/issues"
+            },
+            "time": "2014-08-26 13:11:57"
+        },
+        {
+            "name": "rdlowrey/after",
+            "version": "v0.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rdlowrey/after.git",
+                "reference": "5b154dc90252f886e39dfac508e2b2f2b5cd9640"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rdlowrey/after/zipball/5b154dc90252f886e39dfac508e2b2f2b5cd9640",
+                "reference": "5b154dc90252f886e39dfac508e2b2f2b5cd9640",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0",
+                "rdlowrey/alert": "~0.10.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "After\\": "lib/"
+                },
+                "files": [
+                    "lib/functions.php"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Daniel Lowrey",
+                    "email": "rdlowrey@php.net",
+                    "role": "Creator / Lead Developer"
+                }
+            ],
+            "description": "Simple PHP concurrency primitives",
+            "homepage": "https://github.com/rdlowrey/after",
+            "keywords": [
+                "async",
+                "future",
+                "promise"
+            ],
+            "support": {
+                "source": "https://github.com/rdlowrey/after/tree/v0.3.0",
+                "issues": "https://github.com/rdlowrey/after/issues"
+            },
+            "time": "2014-08-20 18:48:25"
+        },
+        {
+            "name": "rdlowrey/alert",
+            "version": "v0.10.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rdlowrey/alert.git",
+                "reference": "1807f340419f22c41728969d39c8af824f0535e7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rdlowrey/alert/zipball/1807f340419f22c41728969d39c8af824f0535e7",
+                "reference": "1807f340419f22c41728969d39c8af824f0535e7",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Alert\\": "lib/"
+                },
+                "files": [
+                    "lib/functions.php"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Daniel Lowrey",
+                    "email": "rdlowrey@php.net",
+                    "role": "Creator / Lead Developer"
+                }
+            ],
+            "description": "Event loops and stream IO reactors for non-blocking PHP applications",
+            "homepage": "https://github.com/rdlowrey/alert",
+            "keywords": [
+                "async",
+                "libevent",
+                "libuv",
+                "non-blocking"
+            ],
+            "support": {
+                "source": "https://github.com/rdlowrey/alert/tree/v0.10.2",
+                "issues": "https://github.com/rdlowrey/alert/issues"
+            },
+            "time": "2014-08-02 06:21:32"
+        },
+        {
+            "name": "rdlowrey/artax",
+            "version": "v1.0.0-alpha",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rdlowrey/artax.git",
+                "reference": "82ff90f3b1759418b2965bf454a7084694d85bf9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rdlowrey/artax/zipball/82ff90f3b1759418b2965bf454a7084694d85bf9",
+                "reference": "82ff90f3b1759418b2965bf454a7084694d85bf9",
+                "shasum": ""
+            },
+            "require": {
+                "bagder/ca-bundle": "dev-master",
+                "php": ">=5.4.0",
+                "rdlowrey/acesync": "~0.2",
+                "rdlowrey/after": "~0.2",
+                "rdlowrey/alert": "~0.10"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Artax\\": "lib/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Daniel Lowrey",
+                    "email": "rdlowrey@gmail.com",
+                    "role": "Creator / Lead Developer"
+                }
+            ],
+            "description": "Non-blocking HTTP/1.1 client",
+            "homepage": "https://github.com/rdlowrey/Artax",
+            "keywords": [
+                "async",
+                "client",
+                "http",
+                "non-blocking",
+                "parallel",
+                "rest"
+            ],
+            "support": {
+                "source": "https://github.com/rdlowrey/artax/tree/v1.0.0-alpha",
+                "issues": "https://github.com/rdlowrey/artax/issues"
+            },
+            "time": "2014-08-29 14:59:56"
+        }
+    ],
+    "packages-dev": [
+        {
+            "name": "danack/auryn",
+            "version": "0.9.5",
+            "dist": {
+                "type": "zip",
+                "url": "http://satis.basereality.com/packages/Danack/Auryn/Danack_Auryn_0.9.5.zip",
+                "reference": "Danack_Auryn_0.9.5.zip",
+                "shasum": "174a54552967ed3bf6c2e27b982ed788bc48f824"
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.0.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Auryn\\": "lib/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Daniel Lowrey",
+                    "email": "rdlowrey@gmail.com",
+                    "role": "Creator / Main Developer"
+                },
+                {
+                    "name": "Levi Morrison",
+                    "email": "levim@php.net",
+                    "homepage": "http://morrisonlevi.github.com/",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Dan Ackroyd",
+                    "email": "Danack@basereality.com",
+                    "homepage": "http://www.basereality.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Auryn is a dependency injector for bootstrapping object-oriented PHP applications.",
+            "homepage": "https://github.com/rdlowrey/Auryn",
+            "keywords": [
+                "dependency injection",
+                "dic",
+                "ioc"
+            ]
+        },
+        {
+            "name": "doctrine/instantiator",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/doctrine/instantiator.git",
+                "reference": "4bdc0421209a00e6f425f4c3554d1b0df3a7e897"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/doctrine/instantiator/zipball/4bdc0421209a00e6f425f4c3554d1b0df3a7e897",
+                "reference": "4bdc0421209a00e6f425f4c3554d1b0df3a7e897",
+                "shasum": ""
+            },
+            "require": {
+                "php": "~5.3"
+            },
+            "require-dev": {
+                "athletic/athletic": "~0.1.8",
+                "ext-pdo": "*",
+                "ext-phar": "*",
+                "phpunit/phpunit": "~4.0",
+                "squizlabs/php_codesniffer": "2.0.*@ALPHA"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Doctrine\\Instantiator\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marco Pivetta",
+                    "email": "ocramius@gmail.com",
+                    "homepage": "http://ocramius.github.com/"
+                }
+            ],
+            "description": "A small, lightweight utility to instantiate objects in PHP without invoking their constructors",
+            "homepage": "https://github.com/doctrine/instantiator",
+            "keywords": [
+                "constructor",
+                "instantiate"
+            ],
+            "time": "2014-10-05 00:20:37"
+        },
+        {
+            "name": "phpunit/php-code-coverage",
+            "version": "2.0.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
+                "reference": "62f8cd539ab2e2c25077aeb5f5ed3209acee3612"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/62f8cd539ab2e2c25077aeb5f5ed3209acee3612",
+                "reference": "62f8cd539ab2e2c25077aeb5f5ed3209acee3612",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "phpunit/php-file-iterator": "~1.3",
+                "phpunit/php-text-template": "~1.2",
+                "phpunit/php-token-stream": "~1.3",
+                "sebastian/environment": "~1.0",
+                "sebastian/version": "~1.0"
+            },
+            "require-dev": {
+                "ext-xdebug": ">=2.1.4",
+                "phpunit/phpunit": "~4.1"
+            },
+            "suggest": {
+                "ext-dom": "*",
+                "ext-xdebug": ">=2.2.1",
+                "ext-xmlwriter": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "include-path": [
+                ""
+            ],
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Sebastian Bergmann",
+                    "email": "sb@sebastian-bergmann.de",
+                    "role": "lead"
+                }
+            ],
+            "description": "Library that provides collection, processing, and rendering functionality for PHP code coverage information.",
+            "homepage": "https://github.com/sebastianbergmann/php-code-coverage",
+            "keywords": [
+                "coverage",
+                "testing",
+                "xunit"
+            ],
+            "time": "2014-09-01 22:04:15"
+        },
+        {
+            "name": "phpunit/php-file-iterator",
+            "version": "1.3.4",
+            "dist": {
+                "type": "zip",
+                "url": "http://satis.basereality.com/packages/sebastianbergmann/php-file-iterator/sebastianbergmann_php-file-iterator_1.3.4.zip",
+                "reference": "sebastianbergmann_php-file-iterator_1.3.4.zip",
+                "shasum": "a70cb551610f74adae2411b5a5e924312d9ba93b"
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "File/"
+                ]
+            },
+            "include-path": [
+                ""
+            ],
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Sebastian Bergmann",
+                    "email": "sb@sebastian-bergmann.de",
+                    "role": "lead"
+                }
+            ],
+            "description": "FilterIterator implementation that filters files based on a list of suffixes.",
+            "homepage": "https://github.com/sebastianbergmann/php-file-iterator/",
+            "keywords": [
+                "filesystem",
+                "iterator"
+            ],
+            "support": {
+                "issues": "https://github.com/sebastianbergmann/php-file-iterator/issues",
+                "irc": "irc://irc.freenode.net/phpunit"
+            }
+        },
+        {
+            "name": "phpunit/php-text-template",
+            "version": "1.2.0",
+            "dist": {
+                "type": "zip",
+                "url": "http://satis.basereality.com/packages/sebastianbergmann/php-text-template/sebastianbergmann_php-text-template_1.2.0.zip",
+                "reference": "sebastianbergmann_php-text-template_1.2.0.zip",
+                "shasum": "d4ef634706b56020680d52e6f41b4d92912fe064"
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "Text/"
+                ]
+            },
+            "include-path": [
+                ""
+            ],
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Sebastian Bergmann",
+                    "email": "sb@sebastian-bergmann.de",
+                    "role": "lead"
+                }
+            ],
+            "description": "Simple template engine.",
+            "homepage": "https://github.com/sebastianbergmann/php-text-template/",
+            "keywords": [
+                "template"
+            ],
+            "support": {
+                "issues": "https://github.com/sebastianbergmann/php-text-template/issues",
+                "irc": "irc://irc.freenode.net/phpunit"
+            }
+        },
+        {
+            "name": "phpunit/php-timer",
+            "version": "1.0.5",
+            "dist": {
+                "type": "zip",
+                "url": "http://satis.basereality.com/packages/sebastianbergmann/php-timer/sebastianbergmann_php-timer_1.0.5.zip",
+                "reference": "sebastianbergmann_php-timer_1.0.5.zip",
+                "shasum": "cd2712d9fca8430cc7764dd73fe9e5a687ae1d03"
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "PHP/"
+                ]
+            },
+            "include-path": [
+                ""
+            ],
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Sebastian Bergmann",
+                    "email": "sb@sebastian-bergmann.de",
+                    "role": "lead"
+                }
+            ],
+            "description": "Utility class for timing",
+            "homepage": "https://github.com/sebastianbergmann/php-timer/",
+            "keywords": [
+                "timer"
+            ],
+            "support": {
+                "issues": "https://github.com/sebastianbergmann/php-timer/issues",
+                "irc": "irc://irc.freenode.net/phpunit"
+            }
+        },
+        {
+            "name": "phpunit/php-token-stream",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/php-token-stream.git",
+                "reference": "f8d5d08c56de5cfd592b3340424a81733259a876"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-token-stream/zipball/f8d5d08c56de5cfd592b3340424a81733259a876",
+                "reference": "f8d5d08c56de5cfd592b3340424a81733259a876",
+                "shasum": ""
+            },
+            "require": {
+                "ext-tokenizer": "*",
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.2"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.3-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Sebastian Bergmann",
+                    "email": "sebastian@phpunit.de"
+                }
+            ],
+            "description": "Wrapper around PHP's tokenizer extension.",
+            "homepage": "https://github.com/sebastianbergmann/php-token-stream/",
+            "keywords": [
+                "tokenizer"
+            ],
+            "time": "2014-08-31 06:12:13"
+        },
+        {
+            "name": "phpunit/phpunit",
+            "version": "4.1.3",
+            "dist": {
+                "type": "zip",
+                "url": "http://satis.basereality.com/packages/sebastianbergmann/phpunit/sebastianbergmann_phpunit_4.1.3.zip",
+                "reference": "sebastianbergmann_phpunit_4.1.3.zip",
+                "shasum": "cf3f2e800e39a4ff927fab29707d233b812b2bda"
+            },
+            "require": {
+                "ext-dom": "*",
+                "ext-json": "*",
+                "ext-pcre": "*",
+                "ext-reflection": "*",
+                "ext-spl": "*",
+                "php": ">=5.3.3",
+                "phpunit/php-code-coverage": "~2.0",
+                "phpunit/php-file-iterator": "~1.3.1",
+                "phpunit/php-text-template": "~1.2",
+                "phpunit/php-timer": "~1.0.2",
+                "phpunit/phpunit-mock-objects": "~2.1",
+                "sebastian/comparator": "~1.0",
+                "sebastian/diff": "~1.1",
+                "sebastian/environment": "~1.0",
+                "sebastian/exporter": "~1.0",
+                "sebastian/version": "~1.0",
+                "symfony/yaml": "~2.0"
+            },
+            "suggest": {
+                "phpunit/php-invoker": "~1.1"
+            },
+            "bin": [
+                "phpunit"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.1.x-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "include-path": [
+                "",
+                "../../symfony/yaml/"
+            ],
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Sebastian Bergmann",
+                    "email": "sebastian@phpunit.de",
+                    "role": "lead"
+                }
+            ],
+            "description": "The PHP Unit Testing framework.",
+            "homepage": "http://www.phpunit.de/",
+            "keywords": [
+                "phpunit",
+                "testing",
+                "xunit"
+            ],
+            "support": {
+                "issues": "https://github.com/sebastianbergmann/phpunit/issues",
+                "irc": "irc://irc.freenode.net/phpunit"
+            }
+        },
+        {
+            "name": "phpunit/phpunit-mock-objects",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/phpunit-mock-objects.git",
+                "reference": "96c5b81f9842f38fe6c73ad0020306cc4862a9e3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/96c5b81f9842f38fe6c73ad0020306cc4862a9e3",
+                "reference": "96c5b81f9842f38fe6c73ad0020306cc4862a9e3",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/instantiator": "~1.0,>=1.0.2",
+                "php": ">=5.3.3",
+                "phpunit/php-text-template": "~1.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.4.*@dev"
+            },
+            "suggest": {
+                "ext-soap": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.4.x-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Sebastian Bergmann",
+                    "email": "sb@sebastian-bergmann.de",
+                    "role": "lead"
+                }
+            ],
+            "description": "Mock Object library for PHPUnit",
+            "homepage": "https://github.com/sebastianbergmann/phpunit-mock-objects/",
+            "keywords": [
+                "mock",
+                "xunit"
+            ],
+            "time": "2014-10-04 10:04:20"
+        },
+        {
+            "name": "sebastian/comparator",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/comparator.git",
+                "reference": "e54a01c0da1b87db3c5a3c4c5277ddf331da4aef"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/e54a01c0da1b87db3c5a3c4c5277ddf331da4aef",
+                "reference": "e54a01c0da1b87db3c5a3c4c5277ddf331da4aef",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "sebastian/diff": "~1.1",
+                "sebastian/exporter": "~1.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.1"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Sebastian Bergmann",
+                    "email": "sebastian@phpunit.de",
+                    "role": "lead"
+                },
+                {
+                    "name": "Jeff Welch",
+                    "email": "whatthejeff@gmail.com"
+                },
+                {
+                    "name": "Volker Dusch",
+                    "email": "github@wallbash.com"
+                },
+                {
+                    "name": "Bernhard Schussek",
+                    "email": "bschussek@2bepublished.at"
+                }
+            ],
+            "description": "Provides the functionality to compare PHP values for equality",
+            "homepage": "http://www.github.com/sebastianbergmann/comparator",
+            "keywords": [
+                "comparator",
+                "compare",
+                "equality"
+            ],
+            "time": "2014-05-11 23:00:21"
+        },
+        {
+            "name": "sebastian/diff",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/diff.git",
+                "reference": "5843509fed39dee4b356a306401e9dd1a931fec7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sebastianbergmann/diff/zipball/5843509fed39dee4b356a306401e9dd1a931fec7",
+                "reference": "5843509fed39dee4b356a306401e9dd1a931fec7",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.2"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.2-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kore Nordmann",
+                    "email": "mail@kore-nordmann.de"
+                },
+                {
+                    "name": "Sebastian Bergmann",
+                    "email": "sebastian@phpunit.de"
+                }
+            ],
+            "description": "Diff implementation",
+            "homepage": "http://www.github.com/sebastianbergmann/diff",
+            "keywords": [
+                "diff"
+            ],
+            "time": "2014-08-15 10:29:00"
+        },
+        {
+            "name": "sebastian/environment",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/environment.git",
+                "reference": "205fcef5998953ec69cb79bc1ea9fee1277c8714"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sebastianbergmann/environment/zipball/205fcef5998953ec69cb79bc1ea9fee1277c8714",
+                "reference": "205fcef5998953ec69cb79bc1ea9fee1277c8714",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1.x-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Sebastian Bergmann",
+                    "email": "sebastian@phpunit.de"
+                }
+            ],
+            "description": "Provides functionality to handle HHVM/PHP environments",
+            "homepage": "http://www.github.com/sebastianbergmann/environment",
+            "keywords": [
+                "Xdebug",
+                "environment",
+                "hhvm"
+            ],
+            "time": "2014-10-08 05:30:43"
+        },
+        {
+            "name": "sebastian/exporter",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/exporter.git",
+                "reference": "c7d59948d6e82818e1bdff7cadb6c34710eb7dc0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sebastianbergmann/exporter/zipball/c7d59948d6e82818e1bdff7cadb6c34710eb7dc0",
+                "reference": "c7d59948d6e82818e1bdff7cadb6c34710eb7dc0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Jeff Welch",
+                    "email": "whatthejeff@gmail.com"
+                },
+                {
+                    "name": "Volker Dusch",
+                    "email": "github@wallbash.com"
+                },
+                {
+                    "name": "Bernhard Schussek",
+                    "email": "bschussek@2bepublished.at"
+                },
+                {
+                    "name": "Sebastian Bergmann",
+                    "email": "sebastian@phpunit.de"
+                },
+                {
+                    "name": "Adam Harvey",
+                    "email": "aharvey@php.net"
+                }
+            ],
+            "description": "Provides the functionality to export PHP variables for visualization",
+            "homepage": "http://www.github.com/sebastianbergmann/exporter",
+            "keywords": [
+                "export",
+                "exporter"
+            ],
+            "time": "2014-09-10 00:51:36"
+        },
+        {
+            "name": "sebastian/version",
+            "version": "1.0.3",
+            "dist": {
+                "type": "zip",
+                "url": "http://satis.basereality.com/packages/sebastianbergmann/version/sebastianbergmann_version_1.0.3.zip",
+                "reference": "sebastianbergmann_version_1.0.3.zip",
+                "shasum": "e1298d979bee00e4b5e97b0a52a2bf6d74bcad41"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Sebastian Bergmann",
+                    "email": "sebastian@phpunit.de",
+                    "role": "lead"
+                }
+            ],
+            "description": "Library that helps with managing the version number of Git-hosted PHP projects",
+            "homepage": "https://github.com/sebastianbergmann/version",
+            "support": {
+                "issues": "https://github.com/sebastianbergmann/version/issues"
+            }
+        },
+        {
+            "name": "symfony/yaml",
+            "version": "dev-master",
+            "target-dir": "Symfony/Component/Yaml",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/Yaml.git",
+                "reference": "499f7d7aa96747ad97940089bd7a1fb24ad8182a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/Yaml/zipball/499f7d7aa96747ad97940089bd7a1fb24ad8182a",
+                "reference": "499f7d7aa96747ad97940089bd7a1fb24ad8182a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.6-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Symfony\\Component\\Yaml\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://symfony.com/contributors"
+                },
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                }
+            ],
+            "description": "Symfony Yaml Component",
+            "homepage": "http://symfony.com",
+            "time": "2014-10-05 13:53:50"
+        }
+    ],
+    "aliases": [
+
+    ],
+    "minimum-stability": "dev",
+    "stability-flags": [
+
+    ],
+    "prefer-stable": false,
+    "platform": [
+
+    ],
+    "platform-dev": [
+
+    ]
+}
