@@ -387,10 +387,11 @@ class GithubArtaxService implements \GithubService\GithubService {
      * Sends a request to the API synchronously
      *
      * @param $request \Artax\Request The request to send.
-     * @param $successStatuses array A list of acceptable success statuses.
-     * @return \Artax\Response  The response from Artax
+     * @param $operation \ArtaxServiceBuilder\Operation The response that is called the
+     * execute.
+     * @return \Artax\Response The response from Artax
      */
-    public function execute(\Artax\Request $request, array $successStatuses = array()) {
+    public function execute(\Artax\Request $request, \ArtaxServiceBuilder\Operation $operation) {
         $originalRequest = clone $request;
         $cachingHeaders = $this->responseCache->getCachingHeaders($request);
         $request->setAllHeaders($cachingHeaders);
@@ -400,13 +401,15 @@ class GithubArtaxService implements \GithubService\GithubService {
         $status = $response->getStatus();
         $status = intval($status);
                 
+        $isErrorResponse = $operation->isErrorResponse($response);
+                
         if ($status == 200) {
             $this->responseCache->storeResponse($originalRequest, $response);
         }
         else if ($status == 304) {
             $response = $this->responseCache->getResponse($request);
         }
-        else if ($status < 200 || $status >= 300 ) {
+        else if ($isErrorResponse) {
             throw new BadResponseException(
                 "Status $status is not treated as OK.",
                 $originalRequest,
@@ -434,12 +437,17 @@ class GithubArtaxService implements \GithubService\GithubService {
         $promise = $this->client->request($request);
         $promise->when(function(\Exception $error = null, Response $response = null) use ($originalRequest, $callback, $operation) {
 
+            $operation->setResponse($response);
+
             if($error) {
-                $callback($error, $response);
+                $callback($error, null, null);
                 return;
             }
 
             $status = $response->getStatus();
+            $body .= '$this->response = $response;'.PHP_EOL;
+            
+            $isErrorResponse = $operation->isErrorResponse($response);
                 
             if ($status == 200) {
                 $this->responseCache->storeResponse($originalRequest, $response);
@@ -447,27 +455,55 @@ class GithubArtaxService implements \GithubService\GithubService {
             else if ($status == 304) {
                 $response = $this->responseCache->getResponse($originalRequest);
             }
-            else if ($status < 200 || $status >= 300 ) {
+            else if ($isErrorResponse) {
                 $exception = new BadResponseException(
                     "Status $status is not treated as OK.",
                     $originalRequest,
                     $response
                 );
-                $callback($exception, $response);
+                $callback($exception, null, $response);
                 return;
             }
 
-            try {
-                $parsedResponse = $operation->processResponse($response);
-                $callback(null, $parsedResponse);
+            if ($operation->shouldResponseBeProcessed($response)) {
+                try {
+                    $parsedResponse = $operation->processResponse($response);
+                    $callback(null, $parsedResponse, $response);
+                }
+                catch(\Exception $e) {
+                    $exception = new \Exception("Exception parsing response: ".$e->getMessage(), 0, $e);
+                    $callback($exception, null, $response);
+                }
             }
-            catch(\Exception $e) {
-                $exception = new \Exception("Exception parsing response: ".$e->getMessage(), 0, $e);
-                $callback($exception, "Error parsing response", null);
+            else {
+                $callback(null, null, $response);
             }
         });
 
         return $promise;
+    }
+
+    /**
+     * Determine whether the response should be processed.
+     *
+     * @return boolean
+     */
+    public function shouldResponseBeProcessed(\Artax\Response $response) {
+        return true;
+    }
+
+    /**
+     * Determine whether the response should be processed.
+     *
+     * @return boolean
+     */
+    public function isErrorResponse(\Artax\Response $response) {
+        $status = $response->getStatus();
+        if ($status < 200 || $status >= 300 ) {
+            return true;
+        }
+
+        return false;
     }
 
 

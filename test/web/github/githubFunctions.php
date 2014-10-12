@@ -370,7 +370,7 @@ function listRepoCommits(GithubService $api, AccessResponse $accessResponse, $us
     $commits = $command->execute();
 
     displayCommits($commits);
-    $response = $command->getResponse();
+    //$response = $command->getResponse();
 
     if ($commits->pager) {
         displayAndSaveLinks($commits->pager);
@@ -473,7 +473,7 @@ function showMoreResults(GithubService $api, AccessResponse $accessResponse) {
     $commits = $command->execute();
 
     displayCommits($commits);
-    $response = $command->getResponse();
+    //$response = $command->getResponse();
 
     if ($commits->pager) {
         displayAndSaveLinks($commits->pager);

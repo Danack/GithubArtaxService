@@ -54,7 +54,7 @@ switch ($action) {
 
 try {
     if ($accessResponse == null) {
-        echo "<p>You are not github authorised.</p>";
+        echo "<p>You are not github authorised. Please choose the permissions you want to test with:</p>";
         processUnauthorizedActions();
     }
     else {

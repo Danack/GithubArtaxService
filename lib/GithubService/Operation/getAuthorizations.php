@@ -32,6 +32,16 @@ class getAuthorizations implements \ArtaxServiceBuilder\Operation {
         return $this->response;
     }
 
+    /**
+     * Set the last response. This should only be used by the API class when the
+     * operation has been dispatched. Storing the response is required as some APIs
+     * store out-of-bound information in the headers e.g. rate-limit info, pagination
+     * that is not really part of the operation.
+     */
+    public function setResponse(\Artax\Response $response) {
+        $this->response = $response;
+    }
+
     public function __construct(\GithubService\GithubArtaxService\GithubArtaxService $api, $Authorization, $userAgent) {
         $defaultParams = [
             'Accept' => 'application/vnd.github.v3+json',
@@ -111,6 +121,11 @@ class getAuthorizations implements \ArtaxServiceBuilder\Operation {
         return $value;
     }
 
+    /**
+     * Create an Artax\Request object from the operation.
+     *
+     * @return \Artax\Request
+     */
     public function createRequest() {
         $request = new \Artax\Request();
         $url = null;
@@ -146,35 +161,55 @@ class getAuthorizations implements \ArtaxServiceBuilder\Operation {
     }
 
     /**
-     * Create and call the operation, returning the raw response from the server.
+     * Create and execute the operation, returning the raw response from the server.
      *
      * @return \Artax\Response
      */
-    public function createAndCall() {
+    public function createAndExecute() {
         $request = $this->createRequest();
-        $response = $this->api->execute($request);
+        $response = $this->api->execute($request, $this);
         $this->response = $response;
 
         return $response;
     }
 
     /**
-     * Execute the operation
+     * Create and execute the operation, then return the processed  response.
+     *
+     * @return mixed|\GithubService\Model\Authorizations
+     */
+    public function call() {
+        $request = $this->createRequest();
+        $response = $this->api->execute($request, $this);
+        $this->response = $response;
+
+        if ($this->shouldResponseBeProcessed($response)) {
+            $instance = \GithubService\Model\Authorizations::createFromResponse($response, $this);
+
+            return $instance;
+        }
+        return $response;
+    }
+
+    /**
+     * Execute the operation, returning the parsed response
      *
      * @return \GithubService\Model\Authorizations
      */
     public function execute() {
         $request = $this->createRequest();
-        $response = $this->api->execute($request);
-        $this->response = $response;
-        $instance = \GithubService\Model\Authorizations::createFromResponse($response, $this);
-
-        return $instance;
+        return $this->dispatch($request);
     }
 
+    /**
+     * Execute the operation asynchronously, passing the parsed response to the
+     * callback
+     *
+     * @return \GithubService\Model\Authorizations
+     */
     public function executeAsync(callable $callable) {
         $request = $this->createRequest();
-        return $this->api->executeAsync($request, $this, $callable);
+        return $this->dispatchAsync($request, $callable);
     }
 
     /**
@@ -185,11 +220,23 @@ class getAuthorizations implements \ArtaxServiceBuilder\Operation {
      * @param \Artax\Request $request The request to be processed
      */
     public function dispatch(\Artax\Request $request) {
-        $response = $this->api->execute($request);
+        $response = $this->api->execute($request, $this);
         $this->response = $response;
         $instance = \GithubService\Model\Authorizations::createFromResponse($response, $this);
 
         return $instance;
+    }
+
+    /**
+     * Dispatch the request for this operation and process the response asynchronously.
+     * Allows you to modify the request before it is sent.
+     *
+     * @return \GithubService\Model\Authorizations
+     * @param \Artax\Request $request The request to be processed
+     * @param callable $callable The callable that processes the response
+     */
+    public function dispatchAsync(\Artax\Request $request, callable $callable) {
+        return $this->api->executeAsync($request, $this, $callable);
     }
 
     /**
@@ -203,6 +250,26 @@ class getAuthorizations implements \ArtaxServiceBuilder\Operation {
         $instance = \GithubService\Model\Authorizations::createFromResponse($response, $this);
 
         return $instance;
+    }
+
+    /**
+     * Determine whether the response is an error. Override this method to have a
+     * per-operation decision, otherwise the function is the API class will be used.
+     *
+     * @return \GithubService\Model\Authorizations
+     */
+    public function isErrorResponse(\Artax\Response $response) {
+        return $this->api->isErrorResponse($response);
+    }
+
+    /**
+     * Determine whether the response should be processed. Override this method to have
+     * a per-operation decision, otherwise the function is the API class will be used.
+     *
+     * @return \GithubService\Model\Authorizations
+     */
+    public function shouldResponseBeProcessed(\Artax\Response $response) {
+        return $this->api->shouldResponseBeProcessed($response);
     }
 
 
