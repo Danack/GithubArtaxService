@@ -3,56 +3,13 @@
 
 
     "repositories": [
-        {
-            "packagist": false
-        },
-        {
-            "type": "package",
-            "package": {
-                "name": "bagder/ca-bundle",
-                "version": "dev-master",
-                "source": {
-                    "url": "https://github.com/bagder/ca-bundle",
-                    "type": "git",
-                    "reference": "origin/master"
-                }
-            }
-        },
         { 
             "type": "composer", 
             "url": "http://satis.basereality.com"
         },
         {
-             "type": "vcs",
-             "url": "https://github.com/daverandom/addr"
-        },
-        {
-             "type": "vcs",
-             "url": "https://github.com/rdlowrey/acesync"
-        },
-        {
-             "type": "vcs",
-             "url": "https://github.com/rdlowrey/after"
-        },
-        {
-             "type": "vcs",
-             "url": "https://github.com/rdlowrey/alert"
-        },
-        {
-             "type": "vcs",
-             "url": "https://github.com/rdlowrey/artax"
-        },
-        {
-             "type": "vcs",
-             "url": "https://github.com/rdlowrey/auryn"
-        },
-        { 
-            "type": "vcs", 
-            "url": "/documents/projects/github/ArtaxServiceBuilder"
-        },
-        { 
-            "type": "vcs", 
-            "url": "/documents/projects/github/DanackCode"
+            "type": "vcs",
+            "url": "https://github.com/danack/artaxservicebuilder"
         }
     ],
 
