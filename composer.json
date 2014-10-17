@@ -28,5 +28,6 @@
             "GithubService": "lib/"
         }
     },
-    "minimum-stability": "dev"
+    "minimum-stability": "dev",
+    "bin": ["bin/generateGithubArtaxService.php"]
 }

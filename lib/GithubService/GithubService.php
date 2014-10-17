@@ -9,6 +9,25 @@ namespace GithubService;
 interface GithubService {
 
     /**
+     * basicAuthToOauth
+     *
+     * @param mixed $Authorization The basic auth.
+     * @param mixed $scopes 
+     * @param mixed $note 
+     * @param mixed $note_url 
+     * @return \GithubService\Operation\basicAuthToOauth The new operation
+     */
+    public function basicAuthToOauth($Authorization, $scopes, $note, $note_url);
+
+    /**
+     * basicListAuthorizations
+     *
+     * @param mixed $Authorization The basic auth.
+     * @return \GithubService\Operation\basicListAuthorizations The new operation
+     */
+    public function basicListAuthorizations($Authorization);
+
+    /**
      * getAuthorizations
      *
      * @param string $Authorization The stupid oauth2 bearer token
@@ -263,9 +282,14 @@ interface GithubService {
      *
      * Execute an operation asynchronously.
      *
+     * @param $request \Artax\Request The request to send.
      * @param \ArtaxServiceBuilder\Operation $operation The operation to perform
-     * @param callable $callback The callback to call on completion/response.
-     * Parameters should be blah blah blah
+     * @param callable $callback The callback to call on completion/response. Function
+     * signature should be:
+     *              '(Exception $e, $processedData, \Artax\Response $response)'. The
+     * processedData may have a 
+     *              type-hint of the type expected to be returned by the operation's
+     * processResponse function.
      * @return \After\Promise A promise to resolve the call at some time.
      */
     public function executeAsync(\Artax\Request $request, \ArtaxServiceBuilder\Operation $operation, callable $callback);

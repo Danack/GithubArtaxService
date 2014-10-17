@@ -5,7 +5,7 @@ $service = array (
 
     "name" => "Github",
     "baseUrl" => "https://api.github.com",
-    "description" => "Flickr API using Guzzle as a backend",
+    "description" => "Github API using Artax as a backend",
     "operations" => array(
         
         'defaultGetOperation' => array(
@@ -39,7 +39,7 @@ $service = array (
                     'sentAs' => 'Authorization',
                     "filters" => array(
                         array(
-                            "method" => 'GithubService\Github::formatAuthToken',
+                            "method" => 'GithubService\Github::formatBasicAuthToken',
                             "args" => ["@value"]
                         )
                     ),
@@ -64,6 +64,91 @@ $service = array (
                 
             )
         ),
+
+        'basicAuthToOauth' => array(
+            "httpMethod" => "POST",
+            'uri' => '/authorizations',
+            "parameters" => array(
+                'Accept' => array(
+                    "location" => "header",
+                    "description" => "",
+                    'default' =>  'application/vnd.github.v3+json',
+                ),
+                'userAgent' => array(
+                    "location" => "header",
+                    "description" => "The user-agent which allows Github to recognise your application.",
+                    'sentAs' => 'User-Agent',
+                ),
+                
+                'Authorization' => array(
+                    "location" => "header",
+                    "description" => "The basic auth.",
+                    //'Basic ' . base64_encode($this->_user . ':' . $this->_pass)
+
+                    "filters" => array(
+                        array(
+                            "method" => 'GithubService\Github::formatBasicAuthToken',
+                            "args" => ["@value"]
+                        )
+                    ),
+                ),
+                'scopes' => [
+                    'description' => '',
+                    'location' => 'json'
+                ],
+                'note' => [
+                    'description' => '',
+                    'location' => 'json'
+                ],
+                'note_url' => [
+                    'description' => '',
+                    'location' => 'json'
+                ],
+            )
+        ),
+
+
+
+        
+        
+        'basicListAuthorizations' => array(
+            "httpMethod" => "GET",
+            'uri' => '/authorizations',
+            "responseClass" => 'GithubService\Model\Authorizations',
+            "parameters" => array(
+                'Accept' => array(
+                    "location" => "header",
+                    "description" => "",
+                    'default' =>  'application/vnd.github.v3+json',
+                ),
+                'userAgent' => array(
+                    "location" => "header",
+                    "description" => "The user-agent which allows Github to recognise your application.",
+                    'sentAs' => 'User-Agent',
+                ),
+                'Authorization' => array(
+                    "location" => "header",
+                    "description" => "The basic auth.",
+                    "filters" => array(
+                        array(
+                            "method" => 'GithubService\Github::formatBasicAuthToken',
+                            "args" => ["@value"]
+                        )
+                    ),
+                ),
+                'otp' => array(
+                    "location" => "header",
+                    "description" => "The one time password.",
+                    'sentAs' => 'X-GitHub-OTP',
+                    'optional' => true,
+                ),
+            )
+        ),
+
+
+
+
+
 
 
         //https://developer.github.com/v3/oauth_authorizations/

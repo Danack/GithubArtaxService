@@ -1,6 +1,6 @@
 <?php
 
-$autoloader = require_once(__DIR__ . '/../vendor/autoload.php');
+$autoloader = require_once(__DIR__.'/../vendor/autoload.php');
 
 $outputDirectory = realpath(__DIR__).'/../lib';
 

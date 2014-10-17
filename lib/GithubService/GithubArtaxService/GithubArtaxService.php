@@ -6,9 +6,11 @@
 //
 namespace GithubService\GithubArtaxService;
 
-use GithubService\Operation\getAuthorizations;
+use GithubService\Operation\basicAuthToOauth;
 use Artax\Response;
 use ArtaxServiceBuilder\BadResponseException;
+use GithubService\Operation\basicListAuthorizations;
+use GithubService\Operation\getAuthorizations;
 use GithubService\Operation\accessToken;
 use GithubService\Operation\revokeAllAuthority;
 use GithubService\Operation\getUserEmails;
@@ -49,6 +51,31 @@ class GithubArtaxService implements \GithubService\GithubService {
         $this->client = $client;
         $this->responseCache = $responseCache;
         $this->userAgent = $userAgent;
+    }
+
+    /**
+     * basicAuthToOauth
+     *
+     * @param mixed $Authorization The basic auth.
+     * @param mixed $scopes 
+     * @param mixed $note 
+     * @param mixed $note_url 
+     * @return \GithubService\Operation\basicAuthToOauth The new operation
+     */
+    public function basicAuthToOauth($Authorization, $scopes, $note, $note_url) {
+        $instance = new basicAuthToOauth($this, $this->getUserAgent(), $Authorization, $scopes, $note, $note_url);
+        return $instance;
+    }
+
+    /**
+     * basicListAuthorizations
+     *
+     * @param mixed $Authorization The basic auth.
+     * @return \GithubService\Operation\basicListAuthorizations The new operation
+     */
+    public function basicListAuthorizations($Authorization) {
+        $instance = new basicListAuthorizations($this, $this->getUserAgent(), $Authorization);
+        return $instance;
     }
 
     /**
@@ -397,24 +424,24 @@ class GithubArtaxService implements \GithubService\GithubService {
         $request->setAllHeaders($cachingHeaders);
         $promise = $this->client->request($request);
         $response = $promise->wait();
-        /** @var $response \Artax\Response */
-        $status = $response->getStatus();
-        $status = intval($status);
-                
-        $isErrorResponse = $operation->isErrorResponse($response);
-                
-        if ($status == 200) {
+
+        if ($operation->shouldResponseBeCached($response)) {
             $this->responseCache->storeResponse($originalRequest, $response);
         }
-        else if ($status == 304) {
-            $response = $this->responseCache->getResponse($request);
+
+        if ($operation->shouldUseCachedResponse($response)) {
+            $cachedResponse = $this->responseCache->getResponse($originalRequest);
+            if ($cachedResponse) {
+                $response = $cachedResponse; 
+            }
+            //@TODO This code should only be reached if the cache entry was deleted
+            //so throw an exception? Or just leave the 304 to error?
         }
-        else if ($isErrorResponse) {
-            throw new BadResponseException(
-                "Status $status is not treated as OK.",
-                $originalRequest,
-                $response
-            );
+
+        $exception = $operation->translateResponseToException($response);
+
+        if ($exception) {
+            throw $exception;
         }
 
         return $response;
@@ -425,9 +452,14 @@ class GithubArtaxService implements \GithubService\GithubService {
      *
      * Execute an operation asynchronously.
      *
+     * @param $request \Artax\Request The request to send.
      * @param \ArtaxServiceBuilder\Operation $operation The operation to perform
-     * @param callable $callback The callback to call on completion/response.
-     * Parameters should be blah blah blah
+     * @param callable $callback The callback to call on completion/response. Function
+     * signature should be:
+     *              '(Exception $e, $processedData, \Artax\Response $response)'. The
+     * processedData may have a 
+     *              type-hint of the type expected to be returned by the operation's
+     * processResponse function.
      * @return \After\Promise A promise to resolve the call at some time.
      */
     public function executeAsync(\Artax\Request $request, \ArtaxServiceBuilder\Operation $operation, callable $callback) {
@@ -444,24 +476,20 @@ class GithubArtaxService implements \GithubService\GithubService {
                 return;
             }
 
-            $status = $response->getStatus();
-            $body .= '$this->response = $response;'.PHP_EOL;
-            
-            $isErrorResponse = $operation->isErrorResponse($response);
-                
-            if ($status == 200) {
+            if ($operation->shouldResponseBeCached($originalRequest, $response)) {
                 $this->responseCache->storeResponse($originalRequest, $response);
             }
-            else if ($status == 304) {
-                $response = $this->responseCache->getResponse($originalRequest);
+
+            if ($operation->shouldUseCachedResponse($originalRequest, $response)) {
+                $cachedResponse = $this->responseCache->getResponse($originalRequest);
+                if ($cachedResponse) {
+                    $response = $cachedResponse; 
+                }
             }
-            else if ($isErrorResponse) {
-                $exception = new BadResponseException(
-                    "Status $status is not treated as OK.",
-                    $originalRequest,
-                    $response
-                );
-                $callback($exception, null, $response);
+
+            $responseException = $operation->translateResponseToException($originalRequest, $response);
+            if ($responseException) {
+                $callback($responseException, null, $response);
                 return;
             }
 
@@ -487,23 +515,59 @@ class GithubArtaxService implements \GithubService\GithubService {
      * Determine whether the response should be processed.
      *
      * @return boolean
+     * @param \Artax\Response $response
      */
     public function shouldResponseBeProcessed(\Artax\Response $response) {
         return true;
     }
 
     /**
-     * Determine whether the response should be processed.
+     * Determine whether the response says the cached version should be used.
      *
      * @return boolean
+     * @param \Artax\Response $response
      */
-    public function isErrorResponse(\Artax\Response $response) {
+    public function shouldUseCachedResponse(\Artax\Response $response) {
         $status = $response->getStatus();
-        if ($status < 200 || $status >= 300 ) {
+        if ($status == 304) {
             return true;
         }
 
         return false;
+    }
+
+    /**
+     * Determine whether the response should be cached.
+     *
+     * @return boolean
+     * @param \Artax\Response $response
+     */
+    public function shouldResponseBeCached(\Artax\Response $response) {
+        $status = $response->getStatus();
+        if ($status == 200) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Inspect the response and return an exception if it is an error response.
+     * Exceptions should extend \ArtaxServiceBuilder\BadResponseException
+     *
+     * @return \ArtaxServiceBuilder\BadResponseException
+     * @param \Artax\Response $response
+     */
+    public function translateResponseToException(\Artax\Response $response) {
+        $status = $response->getStatus();
+        if ($status < 200 || $status >= 300) {
+            return new BadResponseException(
+                "Status $status is not treated as OK.",
+                $response
+            );
+        }
+
+        return null;
     }
 
 

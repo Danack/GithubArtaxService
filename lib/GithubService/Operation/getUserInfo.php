@@ -37,6 +37,8 @@ class getUserInfo implements \ArtaxServiceBuilder\Operation {
      * operation has been dispatched. Storing the response is required as some APIs
      * store out-of-bound information in the headers e.g. rate-limit info, pagination
      * that is not really part of the operation.
+     *
+     * @param \Artax\Response $response
      */
     public function setResponse(\Artax\Response $response) {
         $this->response = $response;
@@ -92,9 +94,9 @@ class getUserInfo implements \ArtaxServiceBuilder\Operation {
     }
 
     /**
-     * Apply any filters necessary to the parameter
+     * Apply any filters necessary to the parameter.
      *
-     * @return \GithubService\Model\User
+     * @return mixed
      * @param string $name The name of the parameter to get.
      */
     public function getFilteredParameter($name) {
@@ -109,7 +111,7 @@ class getUserInfo implements \ArtaxServiceBuilder\Operation {
             case ('Authorization'): {
                 $args = [];
                 $args[] = $value;
-                $value = call_user_func_array('GithubService\Github::formatAuthToken', $args);
+                $value = call_user_func_array('GithubService\Github::formatBasicAuthToken', $args);
                 break;
             }
 
@@ -192,7 +194,7 @@ class getUserInfo implements \ArtaxServiceBuilder\Operation {
     }
 
     /**
-     * Execute the operation, returning the parsed response
+     * Execute the operation, returning the parsed response.
      *
      * @return \GithubService\Model\User
      */
@@ -203,9 +205,10 @@ class getUserInfo implements \ArtaxServiceBuilder\Operation {
 
     /**
      * Execute the operation asynchronously, passing the parsed response to the
-     * callback
+     * callback.
      *
      * @return \GithubService\Model\User
+     * @param callable $callable
      */
     public function executeAsync(callable $callable) {
         $request = $this->createRequest();
@@ -254,22 +257,48 @@ class getUserInfo implements \ArtaxServiceBuilder\Operation {
 
     /**
      * Determine whether the response is an error. Override this method to have a
-     * per-operation decision, otherwise the function is the API class will be used.
+     * per-operation decision, otherwise the function from the API class will be used.
      *
-     * @return \GithubService\Model\User
+     * @param \Artax\Response $response
+     * @return \null|\ArtaxServiceBuilder\BadResponseException
      */
-    public function isErrorResponse(\Artax\Response $response) {
-        return $this->api->isErrorResponse($response);
+    public function translateResponseToException(\Artax\Response $response) {
+        return $this->api->translateResponseToException($response);
     }
 
     /**
      * Determine whether the response should be processed. Override this method to have
-     * a per-operation decision, otherwise the function is the API class will be used.
+     * a per-operation decision, otherwise the function from the API class will be
+     * used.
      *
-     * @return \GithubService\Model\User
+     * @param \Artax\Response $response
+     * @return boolean
      */
     public function shouldResponseBeProcessed(\Artax\Response $response) {
         return $this->api->shouldResponseBeProcessed($response);
+    }
+
+    /**
+     * Determine whether the response indicates that we should use a cached response.
+     * Override this method to have a per-operation decision, otherwise the function
+     * from the API class will be used.
+     *
+     * @param \Artax\Response $response
+     * @return boolean
+     */
+    public function shouldUseCachedResponse(\Artax\Response $response) {
+        return $this->api->shouldUseCachedResponse($response);
+    }
+
+    /**
+     * Determine whether the response should be cached. Override this method to have a
+     * per-operation decision, otherwise the function from the API class will be used.
+     *
+     * @param \Artax\Response $response
+     * @return boolean
+     */
+    public function shouldResponseBeCached(\Artax\Response $response) {
+        return $this->api->shouldResponseBeCached($response);
     }
 
 

@@ -4,9 +4,11 @@ use GithubService\GithubArtaxService\GithubArtaxService;
 use ArtaxServiceBuilder\ResponseCache\NullResponseCache;
 use Artax\Client as ArtaxClient;
 use Alert\NativeReactor;
+use ArtaxServiceBuilder\BadResponseException;
+
+include_once dirname(__DIR__)."/../../githubArtaxServiceConfig.php";
 
 class GithubTest extends \PHPUnit_Framework_TestCase {
-
 
     private function  getReactorAndAPI() {
 
@@ -32,8 +34,47 @@ class GithubTest extends \PHPUnit_Framework_TestCase {
         $numberOfTags = count($repoTags->repoTags);
         $this->assertGreaterThanOrEqual(4, $numberOfTags);
     }
-    
 
+    /**
+     * @group oauth
+     */
+    function testBasicOauth() {
+
+        list($reactor, $githubAPI) = $this->getReactorAndAPI();
+        /** @var  $githubAPI GithubArtaxService */
+        
+        try {
+
+            $listCommand = $githubAPI->basicListAuthorizations(
+                GITHUB_USERNAME.':'.GITHUB_PASSWORD
+            );
+
+            $listCommand->setOtp("506351");
+
+            $authorizations = $listCommand->call();
+            /** @var  $authorization \GithubService\Model\Authorization */
+            foreach ($authorizations as $authorization) {
+                echo "Name: ".$authorization->application->name."\n";
+            }
+        }
+        catch (BadResponseException $bre) {
+
+            $response = $bre->getResponse();
+            if ($response->hasHeader('X-GitHub-OTP')) {
+                $otp = $response->getHeader('X-GitHub-OTP');
+                
+                echo "Need to:";
+                var_dump($otp);
+                exit(0);
+            }
+            
+            echo "Bad response, status: ".$bre->getResponse()->getStatus().PHP_EOL;
+            var_dump($bre->getResponse());
+        }
+    }
+    
+    
+    
     /**
      * @group internet
      */

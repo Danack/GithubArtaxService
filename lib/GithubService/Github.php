@@ -188,5 +188,18 @@ class Github {
         
         return "token $accessToken";
     }
+
+    /**
+     * Format the basic auth token as Github expect it.
+     * @param $usernameColonpassword
+     * @return null|string
+     */
+    public static function formatBasicAuthToken($usernameColonpassword) {
+        if ($usernameColonpassword === null) {
+            return null;
+        }
+
+        return "Basic ".base64_encode($usernameColonpassword);
+    }
 }
 
