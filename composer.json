@@ -20,7 +20,7 @@
     "require":{
         "Danack/danack-code": ">=2.4.5",
         "danack/danackhttp2": ">=1.2.0",
-        "danack/artaxservicebuilder": "~0.2.1",
+        "danack/artaxservicebuilder": "~0.3.0",
         "amphp/artax": "v1.0.0-rc2"
     },
     "autoload": {
