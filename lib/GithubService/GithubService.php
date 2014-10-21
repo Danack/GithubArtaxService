@@ -60,27 +60,6 @@ interface GithubService {
     public function revokeAllAuthority($Authorization, $client_id);
 
     /**
-     * getUserEmails
-     *
-     * Get users email addresses
-     *
-     * @param string $Authorization The stupid oauth2 bearer token
-     * @return \GithubService\Operation\getUserEmails The new operation
-     */
-    public function getUserEmails($Authorization);
-
-    /**
-     * addUserEmails
-     *
-     * Get users email addresses
-     *
-     * @param string $Authorization The stupid oauth2 bearer token
-     * @param mixed $emails Array of the emails to add
-     * @return \GithubService\Operation\addUserEmails The new operation
-     */
-    public function addUserEmails($Authorization, $emails);
-
-    /**
      * listUserRepos
      *
      * List repositories for the authenticated user. Note that this does not include
@@ -91,26 +70,6 @@ interface GithubService {
      * @return \GithubService\Operation\listUserRepos The new operation
      */
     public function listUserRepos($Authorization);
-
-    /**
-     * getUserInfoByName
-     *
-     * @param string $Authorization The stupid oauth2 bearer token
-     * @param string $owner The owner of the repo to fetch contributors for.
-     * @param string $repo The repo to fetch contributors for.
-     * @param string $anon Set to 1 or true to include anonymous contributors in
-     * results.
-     * @return \GithubService\Operation\getUserInfoByName The new operation
-     */
-    public function getUserInfoByName($Authorization, $owner, $repo, $anon);
-
-    /**
-     * getUserInfo
-     *
-     * @param string $Authorization The stupid oauth2 bearer token
-     * @return \GithubService\Operation\getUserInfo The new operation
-     */
-    public function getUserInfo($Authorization);
 
     /**
      * listRepoCommitsPaginate
@@ -204,6 +163,15 @@ interface GithubService {
     public function getRepo($Authorization, $username, $type, $sort, $direction);
 
     /**
+     * getUserInfoByName
+     *
+     * @param string $Authorization The stupid oauth2 bearer token
+     * @param mixed $username The username of the client.
+     * @return \GithubService\Operation\getUserInfoByName The new operation
+     */
+    public function getUserInfoByName($Authorization, $username);
+
+    /**
      * listRepoLanguages
      *
      * @param string $Authorization The stupid oauth2 bearer token
@@ -278,21 +246,45 @@ interface GithubService {
     public function deleteRepo($Authorization, $owner, $repo);
 
     /**
+     * getUserInfo
+     *
+     * @param string $Authorization The stupid oauth2 bearer token
+     * @return \GithubService\Operation\getUserInfo The new operation
+     */
+    public function getUserInfo($Authorization);
+
+    /**
+     * getUserEmails
+     *
+     * Get users email addresses
+     *
+     * @param string $Authorization The stupid oauth2 bearer token
+     * @return \GithubService\Operation\getUserEmails The new operation
+     */
+    public function getUserEmails($Authorization);
+
+    /**
+     * addUserEmails
+     *
+     * Get users email addresses
+     *
+     * @param string $Authorization The stupid oauth2 bearer token
+     * @param mixed $emails Array of the emails to add
+     * @return \GithubService\Operation\addUserEmails The new operation
+     */
+    public function addUserEmails($Authorization, $emails);
+
+    /**
      * executeAsync
      *
      * Execute an operation asynchronously.
      *
-     * @param $request \Artax\Request The request to send.
      * @param \ArtaxServiceBuilder\Operation $operation The operation to perform
-     * @param callable $callback The callback to call on completion/response. Function
-     * signature should be:
-     *              '(Exception $e, $processedData, \Artax\Response $response)'. The
-     * processedData may have a 
-     *              type-hint of the type expected to be returned by the operation's
-     * processResponse function.
-     * @return \After\Promise A promise to resolve the call at some time.
+     * @param callable $callback The callback to call on completion/response.
+     * Parameters should be blah blah blah
+     * @return \Amp\Promise A promise to resolve the call at some time.
      */
-    public function executeAsync(\Artax\Request $request, \ArtaxServiceBuilder\Operation $operation, callable $callback);
+    public function executeAsync(\Amp\Artax\Request $request, \ArtaxServiceBuilder\Operation $operation, callable $callback);
 
 
 }

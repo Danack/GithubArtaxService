@@ -3,7 +3,7 @@
 namespace GithubService\Model;
 
 use ArtaxServiceBuilder\Operation;
-use Artax\Response;
+use Amp\Artax\Response;
 use GithubService\GithubArtaxService\GithubArtaxServiceException;
 
 use ArtaxServiceBuilder\Service\GithubPaginator;

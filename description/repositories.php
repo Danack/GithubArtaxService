@@ -1,6 +1,24 @@
 <?php
 
 
+//https://developer.github.com/v3/repos/
+//List your repositories
+//List user repositories
+//List organization repositories
+//List all public repositories
+//Create
+//Get
+//Edit
+//List contributors
+//List languages
+//List Teams
+//List Tags
+//List Branches
+//Get Branch
+//Delete a Repository
+
+
+
 return array (
 
 

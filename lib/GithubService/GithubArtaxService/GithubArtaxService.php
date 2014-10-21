@@ -7,17 +7,13 @@
 namespace GithubService\GithubArtaxService;
 
 use GithubService\Operation\basicAuthToOauth;
-use Artax\Response;
+use Amp\Artax\Response;
 use ArtaxServiceBuilder\BadResponseException;
 use GithubService\Operation\basicListAuthorizations;
 use GithubService\Operation\getAuthorizations;
 use GithubService\Operation\accessToken;
 use GithubService\Operation\revokeAllAuthority;
-use GithubService\Operation\getUserEmails;
-use GithubService\Operation\addUserEmails;
 use GithubService\Operation\listUserRepos;
-use GithubService\Operation\getUserInfoByName;
-use GithubService\Operation\getUserInfo;
 use GithubService\Operation\listRepoCommitsPaginate;
 use GithubService\Operation\listRepoCommits;
 use GithubService\Operation\getSingleCommit;
@@ -26,6 +22,7 @@ use GithubService\Operation\listUserRepositories;
 use GithubService\Operation\listOrganizationRepositories;
 use GithubService\Operation\listAllPublicRepositories;
 use GithubService\Operation\getRepo;
+use GithubService\Operation\getUserInfoByName;
 use GithubService\Operation\listRepoLanguages;
 use GithubService\Operation\listRepoTeams;
 use GithubService\Operation\listRepoTagsPaginate;
@@ -33,6 +30,9 @@ use GithubService\Operation\listRepoTags;
 use GithubService\Operation\listRepoBranches;
 use GithubService\Operation\getRepoBranch;
 use GithubService\Operation\deleteRepo;
+use GithubService\Operation\getUserInfo;
+use GithubService\Operation\getUserEmails;
+use GithubService\Operation\addUserEmails;
 use ArtaxServiceBuilder\ResponseCache;
 
 class GithubArtaxService implements \GithubService\GithubService {
@@ -47,7 +47,7 @@ class GithubArtaxService implements \GithubService\GithubService {
      */
     public $responseCache = null;
 
-    public function __construct(\Artax\Client $client, \ArtaxServiceBuilder\ResponseCache $responseCache, $userAgent) {
+    public function __construct(\Amp\Artax\Client $client, \ArtaxServiceBuilder\ResponseCache $responseCache, $userAgent) {
         $this->client = $client;
         $this->responseCache = $responseCache;
         $this->userAgent = $userAgent;
@@ -120,33 +120,6 @@ class GithubArtaxService implements \GithubService\GithubService {
     }
 
     /**
-     * getUserEmails
-     *
-     * Get users email addresses
-     *
-     * @param string $Authorization The stupid oauth2 bearer token
-     * @return \GithubService\Operation\getUserEmails The new operation
-     */
-    public function getUserEmails($Authorization) {
-        $instance = new getUserEmails($this, $Authorization, $this->getUserAgent());
-        return $instance;
-    }
-
-    /**
-     * addUserEmails
-     *
-     * Get users email addresses
-     *
-     * @param string $Authorization The stupid oauth2 bearer token
-     * @param mixed $emails Array of the emails to add
-     * @return \GithubService\Operation\addUserEmails The new operation
-     */
-    public function addUserEmails($Authorization, $emails) {
-        $instance = new addUserEmails($this, $Authorization, $this->getUserAgent(), $emails);
-        return $instance;
-    }
-
-    /**
      * listUserRepos
      *
      * List repositories for the authenticated user. Note that this does not include
@@ -158,32 +131,6 @@ class GithubArtaxService implements \GithubService\GithubService {
      */
     public function listUserRepos($Authorization) {
         $instance = new listUserRepos($this, $Authorization, $this->getUserAgent());
-        return $instance;
-    }
-
-    /**
-     * getUserInfoByName
-     *
-     * @param string $Authorization The stupid oauth2 bearer token
-     * @param string $owner The owner of the repo to fetch contributors for.
-     * @param string $repo The repo to fetch contributors for.
-     * @param string $anon Set to 1 or true to include anonymous contributors in
-     * results.
-     * @return \GithubService\Operation\getUserInfoByName The new operation
-     */
-    public function getUserInfoByName($Authorization, $owner, $repo, $anon) {
-        $instance = new getUserInfoByName($this, $Authorization, $this->getUserAgent(), $owner, $repo, $anon);
-        return $instance;
-    }
-
-    /**
-     * getUserInfo
-     *
-     * @param string $Authorization The stupid oauth2 bearer token
-     * @return \GithubService\Operation\getUserInfo The new operation
-     */
-    public function getUserInfo($Authorization) {
-        $instance = new getUserInfo($this, $Authorization, $this->getUserAgent());
         return $instance;
     }
 
@@ -303,6 +250,18 @@ class GithubArtaxService implements \GithubService\GithubService {
     }
 
     /**
+     * getUserInfoByName
+     *
+     * @param string $Authorization The stupid oauth2 bearer token
+     * @param mixed $username The username of the client.
+     * @return \GithubService\Operation\getUserInfoByName The new operation
+     */
+    public function getUserInfoByName($Authorization, $username) {
+        $instance = new getUserInfoByName($this, $Authorization, $this->getUserAgent(), $username);
+        return $instance;
+    }
+
+    /**
      * listRepoLanguages
      *
      * @param string $Authorization The stupid oauth2 bearer token
@@ -398,6 +357,44 @@ class GithubArtaxService implements \GithubService\GithubService {
     }
 
     /**
+     * getUserInfo
+     *
+     * @param string $Authorization The stupid oauth2 bearer token
+     * @return \GithubService\Operation\getUserInfo The new operation
+     */
+    public function getUserInfo($Authorization) {
+        $instance = new getUserInfo($this, $Authorization, $this->getUserAgent());
+        return $instance;
+    }
+
+    /**
+     * getUserEmails
+     *
+     * Get users email addresses
+     *
+     * @param string $Authorization The stupid oauth2 bearer token
+     * @return \GithubService\Operation\getUserEmails The new operation
+     */
+    public function getUserEmails($Authorization) {
+        $instance = new getUserEmails($this, $Authorization, $this->getUserAgent());
+        return $instance;
+    }
+
+    /**
+     * addUserEmails
+     *
+     * Get users email addresses
+     *
+     * @param string $Authorization The stupid oauth2 bearer token
+     * @param mixed $emails Array of the emails to add
+     * @return \GithubService\Operation\addUserEmails The new operation
+     */
+    public function addUserEmails($Authorization, $emails) {
+        $instance = new addUserEmails($this, $Authorization, $this->getUserAgent(), $emails);
+        return $instance;
+    }
+
+    /**
      * @return
      */
     public function getUserAgent() {
@@ -413,35 +410,35 @@ class GithubArtaxService implements \GithubService\GithubService {
      *
      * Sends a request to the API synchronously
      *
-     * @param $request \Artax\Request The request to send.
+     * @param $request \Amp\Artax\Request The request to send.
      * @param $operation \ArtaxServiceBuilder\Operation The response that is called the
      * execute.
-     * @return \Artax\Response The response from Artax
+     * @return \Amp\Artax\Response The response from Artax
      */
-    public function execute(\Artax\Request $request, \ArtaxServiceBuilder\Operation $operation) {
+    public function execute(\Amp\Artax\Request $request, \ArtaxServiceBuilder\Operation $operation) {
         $originalRequest = clone $request;
         $cachingHeaders = $this->responseCache->getCachingHeaders($request);
         $request->setAllHeaders($cachingHeaders);
         $promise = $this->client->request($request);
         $response = $promise->wait();
-
-        if ($operation->shouldResponseBeCached($response)) {
+        /** @var $response \Amp\Artax\Response */
+        $status = $response->getStatus();
+        $status = intval($status);
+                
+        $isErrorResponse = $operation->isErrorResponse($response);
+                
+        if ($status == 200) {
             $this->responseCache->storeResponse($originalRequest, $response);
         }
-
-        if ($operation->shouldUseCachedResponse($response)) {
-            $cachedResponse = $this->responseCache->getResponse($originalRequest);
-            if ($cachedResponse) {
-                $response = $cachedResponse; 
-            }
-            //@TODO This code should only be reached if the cache entry was deleted
-            //so throw an exception? Or just leave the 304 to error?
+        else if ($status == 304) {
+            $response = $this->responseCache->getResponse($request);
         }
-
-        $exception = $operation->translateResponseToException($response);
-
-        if ($exception) {
-            throw $exception;
+        else if ($isErrorResponse) {
+            throw new BadResponseException(
+                "Status $status is not treated as OK.",
+                $originalRequest,
+                $response
+            );
         }
 
         return $response;
@@ -452,17 +449,12 @@ class GithubArtaxService implements \GithubService\GithubService {
      *
      * Execute an operation asynchronously.
      *
-     * @param $request \Artax\Request The request to send.
      * @param \ArtaxServiceBuilder\Operation $operation The operation to perform
-     * @param callable $callback The callback to call on completion/response. Function
-     * signature should be:
-     *              '(Exception $e, $processedData, \Artax\Response $response)'. The
-     * processedData may have a 
-     *              type-hint of the type expected to be returned by the operation's
-     * processResponse function.
-     * @return \After\Promise A promise to resolve the call at some time.
+     * @param callable $callback The callback to call on completion/response.
+     * Parameters should be blah blah blah
+     * @return \Amp\Promise A promise to resolve the call at some time.
      */
-    public function executeAsync(\Artax\Request $request, \ArtaxServiceBuilder\Operation $operation, callable $callback) {
+    public function executeAsync(\Amp\Artax\Request $request, \ArtaxServiceBuilder\Operation $operation, callable $callback) {
         $originalRequest = clone $request;
         $cachingHeaders = $this->responseCache->getCachingHeaders($request);
         $request->setAllHeaders($cachingHeaders);
@@ -476,20 +468,23 @@ class GithubArtaxService implements \GithubService\GithubService {
                 return;
             }
 
-            if ($operation->shouldResponseBeCached($originalRequest, $response)) {
+            $status = $response->getStatus();
+            
+            $isErrorResponse = $operation->isErrorResponse($response);
+                
+            if ($status == 200) {
                 $this->responseCache->storeResponse($originalRequest, $response);
             }
-
-            if ($operation->shouldUseCachedResponse($originalRequest, $response)) {
-                $cachedResponse = $this->responseCache->getResponse($originalRequest);
-                if ($cachedResponse) {
-                    $response = $cachedResponse; 
-                }
+            else if ($status == 304) {
+                $response = $this->responseCache->getResponse($originalRequest);
             }
-
-            $responseException = $operation->translateResponseToException($originalRequest, $response);
-            if ($responseException) {
-                $callback($responseException, null, $response);
+            else if ($isErrorResponse) {
+                $exception = new BadResponseException(
+                    "Status $status is not treated as OK.",
+                    $originalRequest,
+                    $response
+                );
+                $callback($exception, null, $response);
                 return;
             }
 
@@ -515,59 +510,23 @@ class GithubArtaxService implements \GithubService\GithubService {
      * Determine whether the response should be processed.
      *
      * @return boolean
-     * @param \Artax\Response $response
      */
-    public function shouldResponseBeProcessed(\Artax\Response $response) {
+    public function shouldResponseBeProcessed(\Amp\Artax\Response $response) {
         return true;
     }
 
     /**
-     * Determine whether the response says the cached version should be used.
+     * Determine whether the response should be processed.
      *
      * @return boolean
-     * @param \Artax\Response $response
      */
-    public function shouldUseCachedResponse(\Artax\Response $response) {
+    public function isErrorResponse(\Amp\Artax\Response $response) {
         $status = $response->getStatus();
-        if ($status == 304) {
+        if ($status < 200 || $status >= 300 ) {
             return true;
         }
 
         return false;
-    }
-
-    /**
-     * Determine whether the response should be cached.
-     *
-     * @return boolean
-     * @param \Artax\Response $response
-     */
-    public function shouldResponseBeCached(\Artax\Response $response) {
-        $status = $response->getStatus();
-        if ($status == 200) {
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
-     * Inspect the response and return an exception if it is an error response.
-     * Exceptions should extend \ArtaxServiceBuilder\BadResponseException
-     *
-     * @return \ArtaxServiceBuilder\BadResponseException
-     * @param \Artax\Response $response
-     */
-    public function translateResponseToException(\Artax\Response $response) {
-        $status = $response->getStatus();
-        if ($status < 200 || $status >= 300) {
-            return new BadResponseException(
-                "Status $status is not treated as OK.",
-                $response
-            );
-        }
-
-        return null;
     }
 
 

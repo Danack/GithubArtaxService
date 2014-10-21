@@ -19,14 +19,14 @@ class listRepoTagsPaginate implements \ArtaxServiceBuilder\Operation {
     public $parameters = null;
 
     /**
-     * @var $api \Artax\Response
+     * @var $api \Amp\Artax\Response
      */
     public $response = null;
 
     /**
      * Get the last response.
      *
-     * @return \Artax\Response
+     * @return \Amp\Artax\Response
      */
     public function getResponse() {
         return $this->response;
@@ -37,10 +37,8 @@ class listRepoTagsPaginate implements \ArtaxServiceBuilder\Operation {
      * operation has been dispatched. Storing the response is required as some APIs
      * store out-of-bound information in the headers e.g. rate-limit info, pagination
      * that is not really part of the operation.
-     *
-     * @param \Artax\Response $response
      */
-    public function setResponse(\Artax\Response $response) {
+    public function setResponse(\Amp\Artax\Response $response) {
         $this->response = $response;
     }
 
@@ -102,9 +100,9 @@ class listRepoTagsPaginate implements \ArtaxServiceBuilder\Operation {
     }
 
     /**
-     * Apply any filters necessary to the parameter.
+     * Apply any filters necessary to the parameter
      *
-     * @return mixed
+     * @return \GithubService\Model\RepoTags
      * @param string $name The name of the parameter to get.
      */
     public function getFilteredParameter($name) {
@@ -132,12 +130,12 @@ class listRepoTagsPaginate implements \ArtaxServiceBuilder\Operation {
     }
 
     /**
-     * Create an Artax\Request object from the operation.
+     * Create an Amp\Artax\Request object from the operation.
      *
-     * @return \Artax\Request
+     * @return \Amp\Artax\Request
      */
     public function createRequest() {
-        $request = new \Artax\Request();
+        $request = new \Amp\Artax\Request();
         $url = null;
         $request->setMethod('GET');
 
@@ -175,7 +173,7 @@ class listRepoTagsPaginate implements \ArtaxServiceBuilder\Operation {
     /**
      * Create and execute the operation, returning the raw response from the server.
      *
-     * @return \Artax\Response
+     * @return \Amp\Artax\Response
      */
     public function createAndExecute() {
         $request = $this->createRequest();
@@ -204,7 +202,7 @@ class listRepoTagsPaginate implements \ArtaxServiceBuilder\Operation {
     }
 
     /**
-     * Execute the operation, returning the parsed response.
+     * Execute the operation, returning the parsed response
      *
      * @return \GithubService\Model\RepoTags
      */
@@ -215,10 +213,9 @@ class listRepoTagsPaginate implements \ArtaxServiceBuilder\Operation {
 
     /**
      * Execute the operation asynchronously, passing the parsed response to the
-     * callback.
+     * callback
      *
      * @return \GithubService\Model\RepoTags
-     * @param callable $callable
      */
     public function executeAsync(callable $callable) {
         $request = $this->createRequest();
@@ -230,9 +227,9 @@ class listRepoTagsPaginate implements \ArtaxServiceBuilder\Operation {
      * modify the request before it is sent.
      *
      * @return \GithubService\Model\RepoTags
-     * @param \Artax\Request $request The request to be processed
+     * @param \Amp\Artax\Request $request The request to be processed
      */
-    public function dispatch(\Artax\Request $request) {
+    public function dispatch(\Amp\Artax\Request $request) {
         $response = $this->api->execute($request, $this);
         $this->response = $response;
         $instance = \GithubService\Model\RepoTags::createFromResponse($response, $this);
@@ -245,10 +242,10 @@ class listRepoTagsPaginate implements \ArtaxServiceBuilder\Operation {
      * Allows you to modify the request before it is sent.
      *
      * @return \GithubService\Model\RepoTags
-     * @param \Artax\Request $request The request to be processed
+     * @param \Amp\Artax\Request $request The request to be processed
      * @param callable $callable The callable that processes the response
      */
-    public function dispatchAsync(\Artax\Request $request, callable $callable) {
+    public function dispatchAsync(\Amp\Artax\Request $request, callable $callable) {
         return $this->api->executeAsync($request, $this, $callable);
     }
 
@@ -257,9 +254,9 @@ class listRepoTagsPaginate implements \ArtaxServiceBuilder\Operation {
      * modify the request before it is sent.
      *
      * @return \GithubService\Model\RepoTags
-     * @param \Artax\Response $response The HTTP response.
+     * @param \Amp\Artax\Response $response The HTTP response.
      */
-    public function processResponse(\Artax\Response $response) {
+    public function processResponse(\Amp\Artax\Response $response) {
         $instance = \GithubService\Model\RepoTags::createFromResponse($response, $this);
 
         return $instance;
@@ -267,48 +264,22 @@ class listRepoTagsPaginate implements \ArtaxServiceBuilder\Operation {
 
     /**
      * Determine whether the response is an error. Override this method to have a
-     * per-operation decision, otherwise the function from the API class will be used.
+     * per-operation decision, otherwise the function is the API class will be used.
      *
-     * @param \Artax\Response $response
-     * @return \null|\ArtaxServiceBuilder\BadResponseException
+     * @return \GithubService\Model\RepoTags
      */
-    public function translateResponseToException(\Artax\Response $response) {
-        return $this->api->translateResponseToException($response);
+    public function isErrorResponse(\Amp\Artax\Response $response) {
+        return $this->api->isErrorResponse($response);
     }
 
     /**
      * Determine whether the response should be processed. Override this method to have
-     * a per-operation decision, otherwise the function from the API class will be
-     * used.
+     * a per-operation decision, otherwise the function is the API class will be used.
      *
-     * @param \Artax\Response $response
-     * @return boolean
+     * @return \GithubService\Model\RepoTags
      */
-    public function shouldResponseBeProcessed(\Artax\Response $response) {
+    public function shouldResponseBeProcessed(\Amp\Artax\Response $response) {
         return $this->api->shouldResponseBeProcessed($response);
-    }
-
-    /**
-     * Determine whether the response indicates that we should use a cached response.
-     * Override this method to have a per-operation decision, otherwise the function
-     * from the API class will be used.
-     *
-     * @param \Artax\Response $response
-     * @return boolean
-     */
-    public function shouldUseCachedResponse(\Artax\Response $response) {
-        return $this->api->shouldUseCachedResponse($response);
-    }
-
-    /**
-     * Determine whether the response should be cached. Override this method to have a
-     * per-operation decision, otherwise the function from the API class will be used.
-     *
-     * @param \Artax\Response $response
-     * @return boolean
-     */
-    public function shouldResponseBeCached(\Artax\Response $response) {
-        return $this->api->shouldResponseBeCached($response);
     }
 
 

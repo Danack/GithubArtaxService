@@ -25,8 +25,8 @@ if (defined('FLICKR_SECRET') == false) {
 }
 
 
-function prepareArtaxClient(Artax\Client $client, Auryn\AurynInjector $provider) {
-    $client->setOption(\Artax\Client::OP_MS_CONNECT_TIMEOUT, 25);
+function prepareArtaxClient(Amp\Artax\Client $client, Auryn\AurynInjector $provider) {
+    $client->setOption(\Amp\Artax\Client::OP_MS_CONNECT_TIMEOUT, 25);
 }
 
 /**
@@ -42,20 +42,20 @@ function createProvider($implementations = array(), $shareClasses = array()) {
         [':userAgent' => 'Danack_test']
     );
     
-    $provider->prepare('Artax\Client', 'prepareArtaxClient');
+    $provider->prepare('Amp\Artax\Client', 'prepareArtaxClient');
 
     $standardImplementations = [
         'GithubService\GithubService' => 'DebugGithub',
-        'Artax\AsyncClient'     => 'Artax\AsyncClient',
-        'Alert\Reactor'         => 'Alert\NativeReactor',
-        'Artax\AddrDnsResolver' => 'Artax\AddrDnsResolver',
+        'Amp\Artax\AsyncClient'     => 'Amp\Artax\AsyncClient',
+        'Amp\Reactor'         => 'Amp\NativeReactor',
+        //'Amp\Artax\AddrDnsResolver' => 'Amp\Artax\AddrDnsResolver',
         'ArtaxServiceBuilder\ResponseCache' => 'ArtaxServiceBuilder\ResponseCache\NullResponseCache',
         'PSR\Cache'     => 'PSR\Cache\APCCache',
-        'Addr\Cache'    => 'Addr\MemoryCache'
+        'Amp\Addr\Cache'    => 'Amp\Addr\MemoryCache'
     ];
 
     $standardShares = [
-        'Alert\Reactor' => 'Alert\Reactor'
+        'Amp\Alert\Reactor' => 'Amp\Alert\Reactor'
     ];
 
     foreach ($standardImplementations as $interface => $implementation) {

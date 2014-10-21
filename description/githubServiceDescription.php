@@ -233,35 +233,6 @@ $service = array (
         ],
 
 
-        "getUserEmails" => array(
-            "uri" => "https://api.github.com/user/emails",
-            'extends' => 'defaultGetOauthOperation',
-            'summary' => 'Get users email addresses',
-            'responseClass' => 'GithubService\Model\Emails',
-            'httpMethod' =>  'GET',
-            'parameters' => array(
-                //No parameters - it works off the oauth bearer token
-            ),
-        ),
-
-        "addUserEmails" => array(
-            "uri" => "https://api.github.com/user/emails",
-            'extends' => 'defaultGetOauthOperation',
-            'summary' => 'Get users email addresses',
-            //TODO - It would be better to have scopes and permissions combined?
-            'scopes' => [
-                ['user']// [\GithubService\Github::SCOPE_USER],
-            ],
-            
-            'responseClass' => 'GithubService\Model\Emails',
-            'httpMethod' =>  'POST',
-            'parameters' => array(
-                'emails' => array(
-                    "location" => "json",
-                    "description" => "Array of the emails to add",
-                ),
-            ),
-        ),
 
 
         //List your repositories
@@ -297,44 +268,9 @@ $service = array (
         ),
 
 
-        //Get a single user
-        'getUserInfoByName' => [
-            'extends' => 'defaultGetOauthOperation',
-            'uri' => '/users/{username}',
-            'responseClass' => 'GithubService\Model\User',
-            'parameters' => array(
-                'username' => array(
-                    "location" => "uri",
-                    "description" => "The username of the client.",
-                ),
-            ),
-        ],
-
-        //Get a single user
-        'getUserInfo' => [
-            'extends' => 'defaultGetOauthOperation',
-            'uri' => '/user',
-            'responseClass' => 'GithubService\Model\User',
-        ],
 
 
 
-//
-//        Update the authenticated user
-//
-//PATCH /user
-//Parameters
-//
-//Name	Type	Description
-//name	string	The new name of the user
-//email	string	Publicly visible email address.
-//blog	string	The new blog URL of the user.
-//company	string	The new company of the user.
-//location	string	The new location of the user.
-//hireable	boolean	The new hiring availability of the user.
-//bio	string	The new short biography of the user.
-        
-        
         
         //https://developer.github.com/v3/rate_limit/
         //GET /rate_limit
@@ -494,9 +430,20 @@ $service = array (
     ),
 );
 
-$repoOperations = require_once "repositories.php";
 
-$service['operations'] = array_merge($service['operations'], $repoOperations);
+$externalFiles = array(
+    "repositories.php",
+    "users.php",
+    "usersEmails.php",
+    "usersFollowers.php",
+    "usersPublicKeys.php",
+);
+
+
+foreach ($externalFiles as $externalFile) {
+    $repoOperations = require_once $externalFile;
+    $service['operations'] = array_merge($service['operations'], $repoOperations);
+}
 
 
 return $service;

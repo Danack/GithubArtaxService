@@ -7,12 +7,12 @@
 
 namespace GithubService\GithubArtaxService;
 
-use Artax\Response;
+use Amp\Artax\Response;
 
 class GithubArtaxServiceException extends \Exception {
 
     /**
-     * @var \Artax\Response
+     * @var \Amp\Artax\Response
      */
     private $response;
     
