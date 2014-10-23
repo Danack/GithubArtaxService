@@ -3,10 +3,14 @@
 
 namespace GithubService\GithubArtaxService;
 
+use Amp\Artax\Response;
+use Amp\Artax\Request;
+use Amp\Promise;
 use ArtaxServiceBuilder\BadResponseException;
 use GithubService\OneTimePasswordAppException;
 use GithubService\OneTimePasswordSMSException;
 use GithubService\RateLimitException;
+
 
 /**
  * Class GithubService 
@@ -39,12 +43,12 @@ class GithubService extends GithubArtaxService {
     }
     
     /**
-     * @param \Artax\Request $request
+     * @param Request $request
      * @param \ArtaxServiceBuilder\Operation $operation
-     * @return \Artax\Response
+     * @return Response
      * @throws
      */
-    public function execute(\Artax\Request $request, \ArtaxServiceBuilder\Operation $operation) {
+    public function execute(Request $request, \ArtaxServiceBuilder\Operation $operation) {
         if ($this->isRateLimitExceeded() == true) {
             throw new RateLimitException();
         }
@@ -60,15 +64,15 @@ class GithubService extends GithubArtaxService {
     }
 
     /**
-     * @param \Artax\Request $request
+     * @param Request $request
      * @param \ArtaxServiceBuilder\Operation $operation
      * @param callable $callback
-     * @return \After\Promise|void
+     * @return Promise|void
      */
-    public function executeAsync(\Artax\Request $request, \ArtaxServiceBuilder\Operation $operation, callable $callback) {
+    public function executeAsync(Request $request, \ArtaxServiceBuilder\Operation $operation, callable $callback) {
 
         //We need to wrap the original callback to be able to get the rate limit info
-        $extractRateLimitCallable = function (\Exception $e, $processedData, \Artax\Response $response) use ($callback) {
+        $extractRateLimitCallable = function (\Exception $e, $processedData, Response $response) use ($callback) {
             $newRateLimit = \GithubService\RateLimit::createFromResponse($response);
             if ($newRateLimit != null) {
                 $this->rateLimit = $newRateLimit;
@@ -83,11 +87,11 @@ class GithubService extends GithubArtaxService {
     
     
     /**
-     * @param \Artax\Request $request
-     * @param \Artax\Response $response
+     * @param Request $request
+     * @param Response $response
      * @return BadResponseException|OneTimePasswordAppException|OneTimePasswordSMSException|null|string
      */
-    public function translateResponseToException(\Artax\Request $request, \Artax\Response $response) {
+    public function translateResponseToException(Request $request, Response $response) {
         $status = $response->getStatus();
         
         if ($status == 406) {
