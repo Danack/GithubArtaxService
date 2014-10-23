@@ -6,8 +6,9 @@
 //
 namespace GithubService\GithubArtaxService;
 
-use GithubService\Operation\basicAuthToOauth;
+use Amp\Artax\Request;
 use Amp\Artax\Response;
+use GithubService\Operation\basicAuthToOauth;
 use ArtaxServiceBuilder\BadResponseException;
 use GithubService\Operation\basicListAuthorizations;
 use GithubService\Operation\getAuthorizations;
@@ -421,24 +422,24 @@ class GithubArtaxService implements \GithubService\GithubService {
         $request->setAllHeaders($cachingHeaders);
         $promise = $this->client->request($request);
         $response = $promise->wait();
-        /** @var $response \Amp\Artax\Response */
-        $status = $response->getStatus();
-        $status = intval($status);
-                
-        $isErrorResponse = $operation->isErrorResponse($response);
-                
-        if ($status == 200) {
+
+        if ($operation->shouldResponseBeCached($response)) {
             $this->responseCache->storeResponse($originalRequest, $response);
         }
-        else if ($status == 304) {
-            $response = $this->responseCache->getResponse($request);
+
+        if ($operation->shouldUseCachedResponse($response)) {
+            $cachedResponse = $this->responseCache->getResponse($originalRequest);
+            if ($cachedResponse) {
+                $response = $cachedResponse; 
+            }
+            //@TODO This code should only be reached if the cache entry was deleted
+            //so throw an exception? Or just leave the 304 to error?
         }
-        else if ($isErrorResponse) {
-            throw new BadResponseException(
-                "Status $status is not treated as OK.",
-                $originalRequest,
-                $response
-            );
+
+        $exception = $operation->translateResponseToException($response);
+
+        if ($exception) {
+            throw $exception;
         }
 
         return $response;
@@ -468,23 +469,20 @@ class GithubArtaxService implements \GithubService\GithubService {
                 return;
             }
 
-            $status = $response->getStatus();
-            
-            $isErrorResponse = $operation->isErrorResponse($response);
-                
-            if ($status == 200) {
+            if ($operation->shouldResponseBeCached($originalRequest, $response)) {
                 $this->responseCache->storeResponse($originalRequest, $response);
             }
-            else if ($status == 304) {
-                $response = $this->responseCache->getResponse($originalRequest);
+
+            if ($operation->shouldUseCachedResponse($originalRequest, $response)) {
+                $cachedResponse = $this->responseCache->getResponse($originalRequest);
+                if ($cachedResponse) {
+                    $response = $cachedResponse; 
+                }
             }
-            else if ($isErrorResponse) {
-                $exception = new BadResponseException(
-                    "Status $status is not treated as OK.",
-                    $originalRequest,
-                    $response
-                );
-                $callback($exception, null, $response);
+
+            $responseException = $operation->translateResponseToException($originalRequest, $response);
+            if ($responseException) {
+                $callback($responseException, null, $response);
                 return;
             }
 
@@ -516,17 +514,49 @@ class GithubArtaxService implements \GithubService\GithubService {
     }
 
     /**
-     * Determine whether the response should be processed.
+     * Determine whether the response should be cached.
      *
      * @return boolean
      */
-    public function isErrorResponse(\Amp\Artax\Response $response) {
+    public function shouldResponseBeCached(\Amp\Artax\Response $response) {
         $status = $response->getStatus();
-        if ($status < 200 || $status >= 300 ) {
+        if ($status == 200) {
             return true;
         }
 
         return false;
+    }
+
+    /**
+     * Determine whether the cached response should be used.
+     *
+     * @return boolean
+     */
+    public function shouldUseCachedResponse(\Amp\Artax\Response $response) {
+        $status = $response->getStatus();
+        if ($status == 304) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Inspect the response and return an exception if it is an error response.
+     *      * Exceptions should extend \ArtaxServiceBuilder\BadResponseException
+     *
+     * @return BadResponseException
+     */
+    public function translateResponseToException(\Amp\Artax\Response $response) {
+        $status = $response->getStatus();
+        if ($status < 200 || $status >= 300) {
+            return new BadResponseException(
+                "Status $status is not treated as OK.",
+                $response
+            );
+        }
+
+        return null;
     }
 
 

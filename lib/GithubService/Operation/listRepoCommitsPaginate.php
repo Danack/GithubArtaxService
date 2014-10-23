@@ -263,16 +263,6 @@ class listRepoCommitsPaginate implements \ArtaxServiceBuilder\Operation {
     }
 
     /**
-     * Determine whether the response is an error. Override this method to have a
-     * per-operation decision, otherwise the function is the API class will be used.
-     *
-     * @return \GithubService\Model\Commits
-     */
-    public function isErrorResponse(\Amp\Artax\Response $response) {
-        return $this->api->isErrorResponse($response);
-    }
-
-    /**
      * Determine whether the response should be processed. Override this method to have
      * a per-operation decision, otherwise the function is the API class will be used.
      *
@@ -280,6 +270,37 @@ class listRepoCommitsPaginate implements \ArtaxServiceBuilder\Operation {
      */
     public function shouldResponseBeProcessed(\Amp\Artax\Response $response) {
         return $this->api->shouldResponseBeProcessed($response);
+    }
+
+    /**
+     * Determine whether the response is an error. Override this method to have a
+     * per-operation decision, otherwise the function from the API class will be used.
+     *
+     * @return null|\ArtaxServiceBuilder\BadResponseException
+     */
+    public function translateResponseToException(\Amp\Artax\Response $response) {
+        return $this->api->translateResponseToException($response);
+    }
+
+    /**
+     * Determine whether the response indicates that we should use a cached response.
+     * Override this method to have a per-operation decision, otherwise the
+     * functionfrom the API class will be used.
+     *
+     * @return \GithubService\Model\Commits
+     */
+    public function shouldUseCachedResponse(\Amp\Artax\Response $response) {
+        return $this->api->shouldUseCachedResponse($response);
+    }
+
+    /**
+     * Determine whether the response should be cached. Override this method to have a
+     * per-operation decision, otherwise the function from the API class will be used.
+     *
+     * @return \GithubService\Model\Commits
+     */
+    public function shouldResponseBeCached(\Amp\Artax\Response $response) {
+        return $this->api->shouldResponseBeCached($response);
     }
 
 

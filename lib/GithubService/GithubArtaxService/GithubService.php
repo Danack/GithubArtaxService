@@ -91,7 +91,7 @@ class GithubService extends GithubArtaxService {
      * @param Response $response
      * @return BadResponseException|OneTimePasswordAppException|OneTimePasswordSMSException|null|string
      */
-    public function translateResponseToException(Request $request, Response $response) {
+    public function translateResponseToException(Response $response) {
         $status = $response->getStatus();
         
         if ($status == 406) {
