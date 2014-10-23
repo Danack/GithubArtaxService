@@ -3,7 +3,7 @@
 
 namespace GithubService;
 
-use Artax\Response;
+use Amp\Artax\Response;
 
 class RateLimit {
 
@@ -29,7 +29,6 @@ class RateLimit {
      * @return \GithubService\RateLimit|null
      */
     public static function createFromResponse(Response $response) {
-    
         $limit = null;
         $remaining = null;
         $resetTime = null;

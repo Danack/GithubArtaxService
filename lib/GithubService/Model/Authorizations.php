@@ -21,6 +21,21 @@ class Authorizations implements \IteratorAggregate  {
     public function getIterator() {
         return new \ArrayIterator($this->authorizations);
     }
+
+    /**
+     * @param $note
+     * @return Authorization|null
+     */
+    public function findNoteAuthorization($note) {
+        foreach($this->authorizations as $authorization) {
+            if (strcmp($authorization->note, $note) === 0) {
+                return $authorization;
+            }
+        }
+        
+        return null;
+    }
+    
 }
 
  
