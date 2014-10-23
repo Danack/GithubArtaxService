@@ -469,7 +469,7 @@ class GithubArtaxService implements \GithubService\GithubService {
                 return;
             }
 
-            if ($operation->shouldResponseBeCached($originalRequest, $response)) {
+            if ($operation->shouldResponseBeCached($response)) {
                 $this->responseCache->storeResponse($originalRequest, $response);
             }
 
