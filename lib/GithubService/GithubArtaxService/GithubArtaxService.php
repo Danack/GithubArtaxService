@@ -423,6 +423,10 @@ class GithubArtaxService implements \GithubService\GithubService {
         $promise = $this->client->request($request);
         $response = $promise->wait();
 
+        if ($response) {
+            $operation->setResponse($response);
+        }
+
         if ($operation->shouldResponseBeCached($response)) {
             $this->responseCache->storeResponse($originalRequest, $response);
         }
@@ -462,7 +466,9 @@ class GithubArtaxService implements \GithubService\GithubService {
         $promise = $this->client->request($request);
         $promise->when(function(\Exception $error = null, Response $response = null) use ($originalRequest, $callback, $operation) {
 
-            $operation->setResponse($response);
+            if ($response) {
+                $operation->setResponse($response);
+            }
 
             if($error) {
                 $callback($error, null, null);
