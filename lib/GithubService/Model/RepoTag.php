@@ -23,6 +23,12 @@ class RepoTag {
         ['commitSHA', ['commit', 'sha']],
         ['commitURL', ['commit', 'url']],
     );
+
+
+    function __toString() {
+        return $this->name;
+    }
+
 }
 
  

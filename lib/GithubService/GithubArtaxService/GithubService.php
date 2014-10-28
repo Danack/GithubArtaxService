@@ -33,14 +33,7 @@ class GithubService extends GithubArtaxService {
         return $this->rateLimit;
     }
 
-    /**
-     * Checks the rate limit info. Returns false if the rate limit is not hit.
-     * Returns the time at which the rate limit will be reset if the rate limit
-     * has been exceeded.
-     */
-    public function isRateLimitExceeded() {
-        return false;
-    }
+
     
     /**
      * @param Request $request
@@ -49,8 +42,10 @@ class GithubService extends GithubArtaxService {
      * @throws
      */
     public function execute(Request $request, \ArtaxServiceBuilder\Operation $operation) {
-        if ($this->isRateLimitExceeded() == true) {
-            throw new RateLimitException();
+        $rateLimitException = $this->checkRateLimitException();
+        
+        if ($rateLimitException) {
+            throw $rateLimitException;
         }
         
         $response = parent::execute($request, $operation);
@@ -71,19 +66,57 @@ class GithubService extends GithubArtaxService {
      */
     public function executeAsync(Request $request, \ArtaxServiceBuilder\Operation $operation, callable $callback) {
 
+        $rateLimitException = $this->checkRateLimitException();
+        
+        if ($rateLimitException) {
+            $callback($rateLimitException, null, null);
+        }
+        
         //We need to wrap the original callback to be able to get the rate limit info
-        $extractRateLimitCallable = function (\Exception $e, $processedData, Response $response) use ($callback) {
-            $newRateLimit = \GithubService\RateLimit::createFromResponse($response);
-            if ($newRateLimit != null) {
-                $this->rateLimit = $newRateLimit;
+        $extractRateLimitCallable = function (
+            \Exception $e = null, 
+            $processedData,     //This will be of the type returned by the operation
+            Response $response = null
+        ) use ($callback) {
+            if ($response) {
+                $this->parseRateLimit($response);
             }
-            
             //Call the original callback
             $callback($e, $processedData, $response);
         };
-        
+
         parent::executeAsync($request, $operation, $extractRateLimitCallable);
     }
+
+    /**
+     * @return RateLimitException|null
+     */
+    function checkRateLimitException() {
+
+        if (!$this->rateLimit) {
+            return null;
+        }
+
+        $resetTime = $this->rateLimit->checkLimit(1);
+        if ($resetTime === true) {
+            return null;
+        }
+
+        return new RateLimitException($resetTime, "Rate limit reached, resets at $resetTime");
+    }
+    
+    /**
+     * Try to get some rate limiting info from the response, and store it if it is
+     * available.
+     * @param Response $response
+     */
+    function parseRateLimit(Response $response) {
+        $newRateLimit = \GithubService\RateLimit::createFromResponse($response);
+        if ($newRateLimit != null) {
+            $this->rateLimit = $newRateLimit;
+        }
+    }
+    
     
     
     /**

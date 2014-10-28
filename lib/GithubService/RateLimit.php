@@ -19,9 +19,21 @@ class RateLimit {
     //'X-RateLimit-Reset' => 1405170314
 
     public function __construct($limit, $remaining, $resetTime) {
-        $this->limit = $limit;
-        $this->remaining = $remaining;
-        $this->resetTime = $resetTime;
+        $this->limit = intval($limit);
+        $this->remaining = intval($remaining);
+        $this->resetTime = intval($resetTime);
+    }
+
+    /**
+     * @param $numberOfRequests
+     */
+    public function checkLimit($numberOfRequests) {
+        $this->remaining -= intval($numberOfRequests);
+        if ($this->remaining <= 0) {
+            return $this->resetTime;
+        }
+        
+        return true;
     }
     
     /**
