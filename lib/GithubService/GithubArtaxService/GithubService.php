@@ -146,6 +146,24 @@ class GithubService extends GithubArtaxService {
                 }
             }
         }
+        
+        try {
+            $newRateLimit = \GithubService\RateLimit::createFromResponse($response);
+            if ($newRateLimit) {
+                if ($newRateLimit->remaining <= 0) {
+                    $resetsInSeconds = $newRateLimit->resetTime - time();
+                    return new BadResponseException(
+                        "Request rate limit has been exceeded, try again in $resetsInSeconds seconds.",
+                        $response
+                    );
+                }
+            }
+        }
+        catch (\Exception $e) {
+            //We don't care.
+        }
+            
+        
 
         if ($status < 200 || ($status >= 300 && $status != 304)) {
             return new BadResponseException(
