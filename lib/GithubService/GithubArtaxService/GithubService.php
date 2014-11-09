@@ -162,10 +162,9 @@ class GithubService extends GithubArtaxService {
             }
         }
         catch (\Exception $e) {
-            //We don't care.
+            // Something went wrong when creating the ratelimit object
+            // We don't care, the user only cares about the actual request. 
         }
-            
-        
 
         if ($status < 200 || ($status >= 300 && $status != 304)) {
             return new BadResponseException(
@@ -185,7 +184,9 @@ class GithubService extends GithubArtaxService {
      * @param $password string The password of the user
      * @param $enterPasswordCallback callable A callback to get the one-time password
      * if the user has two factor auth enabled on their account.
-     * @param $scopes array The scopes/permissions that the token should have.
+     * @param $scopes array The scopes/permissions that the token should 
+     * have e.g. \GithubService\Github::SCOPE_USER_EMAIL and
+     * https://developer.github.com/v3/oauth/#scopes 
      * @param $applicationName string The name of the application
      * @param $noteURL string The URL of application i.e. where a user should go to
      * find help for the application.
@@ -219,7 +220,7 @@ class GithubService extends GithubArtaxService {
                 $currentAuth = $currentAuths->findNoteAuthorization($applicationName);
 
                 if ($currentAuth) {
-                    //echo "Already have current auth: ".$currentAuth->token;
+                    // Already have current auth, no need to create a new one.
                     return $currentAuth;
                 }
 
@@ -252,8 +253,6 @@ class GithubService extends GithubArtaxService {
 
         throw new GithubArtaxServiceException("Failed to create or retrieve oauth token.");
     }
-    
-    
 }
 
  
