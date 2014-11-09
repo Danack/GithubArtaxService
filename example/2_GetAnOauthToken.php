@@ -3,9 +3,7 @@
 use GithubService\GithubArtaxService\GithubService;
 use Amp\Artax\Client as ArtaxClient;
 use ArtaxServiceBuilder\ResponseCache\NullResponseCache;
-use ArtaxServiceBuilder\BasicAuthToken;
-use GithubService\OneTimePasswordAppException;
-use GithubService\OneTimePasswordSMSException;
+use ArtaxServiceBuilder\Oauth2Token;
 
 $autoloader = require __DIR__.'/../vendor/autoload.php';
 
@@ -58,9 +56,21 @@ try {
         $maxAttempts = 3
     );
 
-    echo "Token is: ".$authResult->token.", keep it secret.";
+    echo "Token is: ".$authResult->token.", keep it secret.\n";
 }
 catch(ArtaxServiceBuilder\BadResponseException $badResponseException) {
     echo "Something went wrong trying to retrieve an oauth token:\n";
     echo $badResponseException->getMessage();
+    exit(-1);
+}
+
+$repoTags = $github->listRepoTags(
+    $authResult,
+    'Danack',
+    'GithubArtaxService'
+)->execute();
+
+
+foreach ($repoTags as $nextRepoTag) {
+    echo "Found tag: ".$nextRepoTag->name."\n";
 }

@@ -32,6 +32,19 @@ class Authorization {
         ['updatedAt', 'updated_at'],
         ['createdAt', 'created_at']
     );
+
+    /**
+     * Allows this object to be used as an Authorization in
+     * the api calls.
+     * @return null|string
+     */
+    public function __toString() {
+        if ($this->token === null) {
+            return null;
+        }
+
+        return "token ".$this->token;
+    }
 }
 
  
