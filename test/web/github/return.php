@@ -55,7 +55,7 @@ function checkAuthResult() {
         $api = $provider->make('DebugGithub');//$client
 
         /** @var  $api DebugGithub */
-        $command = $api->accessToken(
+        $command = $api->oauthAuthorize(
             GITHUB_CLIENT_ID,
             GITHUB_CLIENT_SECRET,
             $code,

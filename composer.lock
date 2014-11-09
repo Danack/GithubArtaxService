@@ -4,20 +4,20 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9d8654cc2554a307a78dcd6a76228ad9",
+    "hash": "cb07fd42ee3b6d122fdc414a4c22669e",
     "packages": [
         {
             "name": "amphp/amp",
-            "version": "v0.11.4",
+            "version": "v0.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/amp.git",
-                "reference": "d719e302a63fc5c4a9015a7517cd21a252db04cd"
+                "reference": "2fd6538e47e173586649b8101a7a49845357a6c3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/amp/zipball/d719e302a63fc5c4a9015a7517cd21a252db04cd",
-                "reference": "d719e302a63fc5c4a9015a7517cd21a252db04cd",
+                "url": "https://api.github.com/repos/amphp/amp/zipball/2fd6538e47e173586649b8101a7a49845357a6c3",
+                "reference": "2fd6538e47e173586649b8101a7a49845357a6c3",
                 "shasum": ""
             },
             "require": {
@@ -59,24 +59,24 @@
                 "non-blocking",
                 "promise"
             ],
-            "time": "2014-10-20 16:08:09"
+            "time": "2014-10-23 02:18:34"
         },
         {
             "name": "amphp/artax",
-            "version": "v1.0.0-rc2",
+            "version": "v1.0.0-rc5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/artax.git",
-                "reference": "af8bb0d8f508eae92045ed165090a20d59a30a6e"
+                "reference": "84dff80fea3cda3ca34a9e732c56952324ae68f6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/artax/zipball/af8bb0d8f508eae92045ed165090a20d59a30a6e",
-                "reference": "af8bb0d8f508eae92045ed165090a20d59a30a6e",
+                "url": "https://api.github.com/repos/amphp/artax/zipball/84dff80fea3cda3ca34a9e732c56952324ae68f6",
+                "reference": "84dff80fea3cda3ca34a9e732c56952324ae68f6",
                 "shasum": ""
             },
             "require": {
-                "amphp/amp": "~0.11",
+                "amphp/amp": "~0.12",
                 "php": ">=5.4.0",
                 "rdlowrey/nbsock": "~0.4"
             },
@@ -112,24 +112,24 @@
                 "parallel",
                 "rest"
             ],
-            "time": "2014-10-20 13:46:47"
+            "time": "2014-10-28 15:33:30"
         },
         {
             "name": "amphp/dns",
-            "version": "v0.3.2",
+            "version": "v0.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/dns.git",
-                "reference": "5748155b4b7aae117c32c8063265fed54f1d78b8"
+                "reference": "980fd6a434dd58e373a8e3422d3a7350a6f633d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/dns/zipball/5748155b4b7aae117c32c8063265fed54f1d78b8",
-                "reference": "5748155b4b7aae117c32c8063265fed54f1d78b8",
+                "url": "https://api.github.com/repos/amphp/dns/zipball/980fd6a434dd58e373a8e3422d3a7350a6f633d9",
+                "reference": "980fd6a434dd58e373a8e3422d3a7350a6f633d9",
                 "shasum": ""
             },
             "require": {
-                "amphp/amp": "~0.11",
+                "amphp/amp": "~0.12",
                 "daverandom/libdns": "~0.2",
                 "php": ">=5.4.0"
             },
@@ -165,16 +165,21 @@
                 "dns",
                 "resolve"
             ],
-            "time": "2014-10-21 15:54:29"
+            "time": "2014-10-23 02:32:01"
         },
         {
             "name": "danack/artaxservicebuilder",
-            "version": "0.2.2",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Danack/ArtaxServiceBuilder.git",
+                "reference": "e78b3766cc0843e5f9ce2235ba2d4b3f7ebb63c5"
+            },
             "dist": {
                 "type": "zip",
-                "url": "http://satis.basereality.com/packages/Danack/ArtaxServiceBuilder/Danack_ArtaxServiceBuilder_0.2.2.zip",
-                "reference": null,
-                "shasum": "6bc5c2c24799f820520fd95daaa1bd00f2e7e68e"
+                "url": "https://api.github.com/repos/Danack/ArtaxServiceBuilder/zipball/e78b3766cc0843e5f9ce2235ba2d4b3f7ebb63c5",
+                "reference": "e78b3766cc0843e5f9ce2235ba2d4b3f7ebb63c5",
+                "shasum": ""
             },
             "require": {
                 "danack/danack-code": ">=2.4.4"
@@ -190,7 +195,12 @@
                 "psr-0": {
                     "ArtaxServiceBuilder": "src/"
                 }
-            }
+            },
+            "support": {
+                "source": "https://github.com/Danack/ArtaxServiceBuilder/tree/master",
+                "issues": "https://github.com/Danack/ArtaxServiceBuilder/issues"
+            },
+            "time": "2014-10-27 09:55:30"
         },
         {
             "name": "danack/danack-code",
@@ -221,12 +231,17 @@
         },
         {
             "name": "danack/danackhttp2",
-            "version": "1.2.0",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Danack/HTTP2.git",
+                "reference": "616eadd3acc058eb56e7a1076a94d74d2484024e"
+            },
             "dist": {
                 "type": "zip",
-                "url": "http://satis.basereality.com/packages/Danack/HTTP2/Danack_HTTP2_1.2.0.zip",
-                "reference": null,
-                "shasum": "7991e94c5d6689ffec29b8350239a8fb2ef41f68"
+                "url": "https://api.github.com/repos/Danack/HTTP2/zipball/616eadd3acc058eb56e7a1076a94d74d2484024e",
+                "reference": "616eadd3acc058eb56e7a1076a94d74d2484024e",
+                "shasum": ""
             },
             "require-dev": {
                 "phpunit/phpunit": "~4.0.0"
@@ -237,6 +252,7 @@
                     "HTTP2": "src/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "include-path": [
                 "./"
             ],
@@ -245,16 +261,14 @@
             ],
             "authors": [
                 {
-                    "email": "Danack@basereality.com",
                     "name": "Dan Ackroyd",
+                    "email": "Danack@basereality.com",
+                    "homepage": "http://www.basereality.com",
                     "role": "Developer"
                 }
             ],
             "description": "A fork of HTTP for PHP5 and autoloading",
-            "support": {
-                "issues": "http://pear.php.net/bugs/search.php?cmd=display&package_name[]=HTTP2",
-                "source": "https://github.com/Danack/HTTP2"
-            }
+            "time": "2014-07-13 21:04:06"
         },
         {
             "name": "daverandom/libdns",
@@ -287,20 +301,20 @@
         },
         {
             "name": "rdlowrey/nbsock",
-            "version": "v0.4.1",
+            "version": "v0.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rdlowrey/nbsock.git",
-                "reference": "82a2b4c5ba85856bf10ba7ea9db8dbd4eeaff213"
+                "reference": "dea161cb4b0d952a49d775def3b5e7eead99bb2f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rdlowrey/nbsock/zipball/82a2b4c5ba85856bf10ba7ea9db8dbd4eeaff213",
-                "reference": "82a2b4c5ba85856bf10ba7ea9db8dbd4eeaff213",
+                "url": "https://api.github.com/repos/rdlowrey/nbsock/zipball/dea161cb4b0d952a49d775def3b5e7eead99bb2f",
+                "reference": "dea161cb4b0d952a49d775def3b5e7eead99bb2f",
                 "shasum": ""
             },
             "require": {
-                "amphp/amp": "~0.11",
+                "amphp/amp": "~0.12",
                 "amphp/dns": "~0.3",
                 "php": ">=5.4.0"
             },
@@ -335,7 +349,7 @@
                 "tcp",
                 "tls"
             ],
-            "time": "2014-10-21 15:39:25"
+            "time": "2014-10-28 02:59:26"
         }
     ],
     "packages-dev": [
@@ -395,7 +409,7 @@
         },
         {
             "name": "doctrine/instantiator",
-            "version": "1.0.4",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/instantiator.git",
@@ -449,12 +463,17 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "2.0.11",
+            "version": "2.0.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
+                "reference": "62f8cd539ab2e2c25077aeb5f5ed3209acee3612"
+            },
             "dist": {
                 "type": "zip",
-                "url": "http://satis.basereality.com/packages/sebastianbergmann/php-code-coverage/sebastianbergmann_php-code-coverage_2.0.11.zip",
-                "reference": null,
-                "shasum": "130eaaa8e1ca9e19592a2f312c95703c6df82bb6"
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/62f8cd539ab2e2c25077aeb5f5ed3209acee3612",
+                "reference": "62f8cd539ab2e2c25077aeb5f5ed3209acee3612",
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3",
@@ -484,6 +503,7 @@
                     "src/"
                 ]
             },
+            "notification-url": "https://packagist.org/downloads/",
             "include-path": [
                 ""
             ],
@@ -504,10 +524,7 @@
                 "testing",
                 "xunit"
             ],
-            "support": {
-                "issues": "https://github.com/sebastianbergmann/php-code-coverage/issues",
-                "irc": "irc://irc.freenode.net/phpunit"
-            }
+            "time": "2014-09-01 22:04:15"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -635,12 +652,17 @@
         },
         {
             "name": "phpunit/php-token-stream",
-            "version": "1.3.0",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/php-token-stream.git",
+                "reference": "f8d5d08c56de5cfd592b3340424a81733259a876"
+            },
             "dist": {
                 "type": "zip",
-                "url": "http://satis.basereality.com/packages/sebastianbergmann/php-token-stream/sebastianbergmann_php-token-stream_1.3.0.zip",
-                "reference": null,
-                "shasum": "71ba35dd8b30b9440c23152781727d182e780fa5"
+                "url": "https://api.github.com/repos/sebastianbergmann/php-token-stream/zipball/f8d5d08c56de5cfd592b3340424a81733259a876",
+                "reference": "f8d5d08c56de5cfd592b3340424a81733259a876",
+                "shasum": ""
             },
             "require": {
                 "ext-tokenizer": "*",
@@ -660,6 +682,7 @@
                     "src/"
                 ]
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -674,9 +697,7 @@
             "keywords": [
                 "tokenizer"
             ],
-            "support": {
-                "issues": "https://github.com/sebastianbergmann/php-token-stream/issues"
-            }
+            "time": "2014-08-31 06:12:13"
         },
         {
             "name": "phpunit/phpunit",
@@ -751,20 +772,25 @@
         },
         {
             "name": "phpunit/phpunit-mock-objects",
-            "version": "2.3.0",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/phpunit-mock-objects.git",
+                "reference": "96c5b81f9842f38fe6c73ad0020306cc4862a9e3"
+            },
             "dist": {
                 "type": "zip",
-                "url": "http://satis.basereality.com/packages/sebastianbergmann/phpunit-mock-objects/sebastianbergmann_phpunit-mock-objects_2.3.0.zip",
-                "reference": null,
-                "shasum": "8b6554505e52ec45ff9961c41cbc7e7de8290c20"
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/96c5b81f9842f38fe6c73ad0020306cc4862a9e3",
+                "reference": "96c5b81f9842f38fe6c73ad0020306cc4862a9e3",
+                "shasum": ""
             },
             "require": {
-                "doctrine/instantiator": "~1.0,>=1.0.1",
+                "doctrine/instantiator": "~1.0,>=1.0.2",
                 "php": ">=5.3.3",
                 "phpunit/php-text-template": "~1.2"
             },
             "require-dev": {
-                "phpunit/phpunit": "~4.3"
+                "phpunit/phpunit": "4.4.*@dev"
             },
             "suggest": {
                 "ext-soap": "*"
@@ -772,7 +798,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.3.x-dev"
+                    "dev-master": "2.4.x-dev"
                 }
             },
             "autoload": {
@@ -780,11 +806,7 @@
                     "src/"
                 ]
             },
-            "autoload-dev": {
-                "classmap": [
-                    "tests/_fixture/"
-                ]
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -801,19 +823,21 @@
                 "mock",
                 "xunit"
             ],
-            "support": {
-                "issues": "https://github.com/sebastianbergmann/phpunit-mock-objects/issues",
-                "irc": "irc://irc.freenode.net/phpunit"
-            }
+            "time": "2014-10-04 10:04:20"
         },
         {
             "name": "sebastian/comparator",
-            "version": "1.0.1",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/comparator.git",
+                "reference": "6f67d2ae044ba17ba30573941f4ac96c4777be97"
+            },
             "dist": {
                 "type": "zip",
-                "url": "http://satis.basereality.com/packages/sebastianbergmann/comparator/sebastianbergmann_comparator_1.0.1.zip",
-                "reference": null,
-                "shasum": "646d384738150586989a5df1487f9ff1fe1f5a8a"
+                "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/6f67d2ae044ba17ba30573941f4ac96c4777be97",
+                "reference": "6f67d2ae044ba17ba30573941f4ac96c4777be97",
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3",
@@ -826,7 +850,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0.x-dev"
+                    "dev-master": "1.1.x-dev"
                 }
             },
             "autoload": {
@@ -834,14 +858,11 @@
                     "src/"
                 ]
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
             "authors": [
-                {
-                    "name": "Sebastian Bergmann",
-                    "email": "sebastian@phpunit.de"
-                },
                 {
                     "name": "Jeff Welch",
                     "email": "whatthejeff@gmail.com"
@@ -853,6 +874,10 @@
                 {
                     "name": "Bernhard Schussek",
                     "email": "bschussek@2bepublished.at"
+                },
+                {
+                    "name": "Sebastian Bergmann",
+                    "email": "sebastian@phpunit.de"
                 }
             ],
             "description": "Provides the functionality to compare PHP values for equality",
@@ -861,16 +886,22 @@
                 "comparator",
                 "compare",
                 "equality"
-            ]
+            ],
+            "time": "2014-10-21 10:04:18"
         },
         {
             "name": "sebastian/diff",
-            "version": "1.2.0",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/diff.git",
+                "reference": "92d423df43b160006907ea4297b916fdf00415d8"
+            },
             "dist": {
                 "type": "zip",
-                "url": "http://satis.basereality.com/packages/sebastianbergmann/diff/sebastianbergmann_diff_1.2.0.zip",
-                "reference": null,
-                "shasum": "b78b4baf1abfcba0ee0a91eef3d2ecbec52c3bc7"
+                "url": "https://api.github.com/repos/sebastianbergmann/diff/zipball/92d423df43b160006907ea4297b916fdf00415d8",
+                "reference": "92d423df43b160006907ea4297b916fdf00415d8",
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
@@ -889,33 +920,40 @@
                     "src/"
                 ]
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
             "authors": [
                 {
-                    "name": "Sebastian Bergmann",
-                    "email": "sebastian@phpunit.de"
-                },
-                {
                     "name": "Kore Nordmann",
                     "email": "mail@kore-nordmann.de"
+                },
+                {
+                    "name": "Sebastian Bergmann",
+                    "email": "sebastian@phpunit.de"
                 }
             ],
             "description": "Diff implementation",
             "homepage": "http://www.github.com/sebastianbergmann/diff",
             "keywords": [
                 "diff"
-            ]
+            ],
+            "time": "2014-10-19 13:19:30"
         },
         {
             "name": "sebastian/environment",
-            "version": "1.1.0",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/environment.git",
+                "reference": "6e6c71d918088c251b181ba8b3088af4ac336dd7"
+            },
             "dist": {
                 "type": "zip",
-                "url": "http://satis.basereality.com/packages/sebastianbergmann/environment/sebastianbergmann_environment_1.1.0.zip",
-                "reference": null,
-                "shasum": "1d6b8b86844800c254ed6012c8e44714b872efdd"
+                "url": "https://api.github.com/repos/sebastianbergmann/environment/zipball/6e6c71d918088c251b181ba8b3088af4ac336dd7",
+                "reference": "6e6c71d918088c251b181ba8b3088af4ac336dd7",
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
@@ -926,7 +964,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.1.x-dev"
+                    "dev-master": "1.2.x-dev"
                 }
             },
             "autoload": {
@@ -934,6 +972,7 @@
                     "src/"
                 ]
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -946,19 +985,25 @@
             "description": "Provides functionality to handle HHVM/PHP environments",
             "homepage": "http://www.github.com/sebastianbergmann/environment",
             "keywords": [
+                "Xdebug",
                 "environment",
-                "hhvm",
-                "xdebug"
-            ]
+                "hhvm"
+            ],
+            "time": "2014-10-25 08:00:45"
         },
         {
             "name": "sebastian/exporter",
-            "version": "1.0.2",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/exporter.git",
+                "reference": "c7d59948d6e82818e1bdff7cadb6c34710eb7dc0"
+            },
             "dist": {
                 "type": "zip",
-                "url": "http://satis.basereality.com/packages/sebastianbergmann/exporter/sebastianbergmann_exporter_1.0.2.zip",
-                "reference": null,
-                "shasum": "5aef492106835f6c62067d55ef3e8ca22db8b3e4"
+                "url": "https://api.github.com/repos/sebastianbergmann/exporter/zipball/c7d59948d6e82818e1bdff7cadb6c34710eb7dc0",
+                "reference": "c7d59948d6e82818e1bdff7cadb6c34710eb7dc0",
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
@@ -977,14 +1022,11 @@
                     "src/"
                 ]
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
             "authors": [
-                {
-                    "name": "Sebastian Bergmann",
-                    "email": "sebastian@phpunit.de"
-                },
                 {
                     "name": "Jeff Welch",
                     "email": "whatthejeff@gmail.com"
@@ -994,12 +1036,16 @@
                     "email": "github@wallbash.com"
                 },
                 {
-                    "name": "Adam Harvey",
-                    "email": "aharvey@php.net"
-                },
-                {
                     "name": "Bernhard Schussek",
                     "email": "bschussek@2bepublished.at"
+                },
+                {
+                    "name": "Sebastian Bergmann",
+                    "email": "sebastian@phpunit.de"
+                },
+                {
+                    "name": "Adam Harvey",
+                    "email": "aharvey@php.net"
                 }
             ],
             "description": "Provides the functionality to export PHP variables for visualization",
@@ -1007,7 +1053,8 @@
             "keywords": [
                 "export",
                 "exporter"
-            ]
+            ],
+            "time": "2014-09-10 00:51:36"
         },
         {
             "name": "sebastian/version",
@@ -1042,13 +1089,18 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "2.5.5",
+            "version": "dev-master",
             "target-dir": "Symfony/Component/Yaml",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/Yaml.git",
+                "reference": "4c0baf9a5b5c9e50ddd7a46f3c75cb85baf5d6c5"
+            },
             "dist": {
                 "type": "zip",
-                "url": "http://satis.basereality.com/packages/symfony/yaml/symfony_yaml_v2.5.5.zip",
-                "reference": null,
-                "shasum": "6b83be37e2974e3b4c04a8c3f93eb91df81c7d83"
+                "url": "https://api.github.com/repos/symfony/Yaml/zipball/4c0baf9a5b5c9e50ddd7a46f3c75cb85baf5d6c5",
+                "reference": "4c0baf9a5b5c9e50ddd7a46f3c75cb85baf5d6c5",
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
@@ -1056,7 +1108,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.5-dev"
+                    "dev-master": "2.6-dev"
                 }
             },
             "autoload": {
@@ -1064,29 +1116,36 @@
                     "Symfony\\Component\\Yaml\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
             "authors": [
                 {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                },
-                {
                     "name": "Symfony Community",
                     "homepage": "http://symfony.com/contributors"
+                },
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
                 }
             ],
             "description": "Symfony Yaml Component",
-            "homepage": "http://symfony.com"
+            "homepage": "http://symfony.com",
+            "time": "2014-10-26 07:46:28"
         }
     ],
     "aliases": [
-
+        {
+            "alias": "0.3.0",
+            "alias_normalized": "0.3.0.0",
+            "version": "9999999-dev",
+            "package": "danack/artaxservicebuilder"
+        }
     ],
-    "minimum-stability": "RC",
+    "minimum-stability": "dev",
     "stability-flags": {
-        "amphp/artax": 5
+        "danack/artaxservicebuilder": 20
     },
     "prefer-stable": false,
     "platform": [

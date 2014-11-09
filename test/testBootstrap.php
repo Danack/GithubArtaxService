@@ -6,9 +6,9 @@ error_reporting(E_ALL);
 
 $autoloader = require __DIR__.'/../vendor/autoload.php';
 $classDir = realpath(__DIR__)."/fixtures/";
-$outputDirectory = realpath(__DIR__).'/../var/src';
+//$outputDirectory = realpath(__DIR__).'/../var/src';
 
-$autoloader->add('AABTest', [$classDir, $outputDirectory]);
+//$autoloader->add('AABTest', [$classDir, $outputDirectory]);
 $autoloader->add('ArtaxServiceBuilder', [realpath(__DIR__)."/"]);
 
 $included = include_once "../../flickrKey.php";
@@ -26,7 +26,7 @@ if (defined('FLICKR_SECRET') == false) {
 
 
 function prepareArtaxClient(Amp\Artax\Client $client, Auryn\AurynInjector $provider) {
-    $client->setOption(\Amp\Artax\Client::OP_MS_CONNECT_TIMEOUT, 25);
+    $client->setOption(\Amp\Artax\Client::OP_MS_CONNECT_TIMEOUT, 2000);
 }
 
 /**

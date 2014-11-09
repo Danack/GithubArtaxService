@@ -44,7 +44,7 @@ class accessToken implements \ArtaxServiceBuilder\Operation {
 
     public function __construct(\GithubService\GithubArtaxService\GithubArtaxService $api, $userAgent, $client_id, $client_secret, $code, $redirect_uri) {
         $defaultParams = [
-            'Accept' => 'application/json',
+            'Accept' => 'application/vnd.github.v3+json',
         ];
         $this->setParams($defaultParams);
         $this->api = $api;
@@ -61,47 +61,100 @@ class accessToken implements \ArtaxServiceBuilder\Operation {
 
     public function setParams(array $params) {
         if (array_key_exists('Accept', $params)) {
-             $this->parameters['Accept'] = $params['Accept'];
+            $this->parameters['Accept'] = $params['Accept'];
         }
         if (array_key_exists('userAgent', $params)) {
-             $this->parameters['userAgent'] = $params['userAgent'];
+            $this->parameters['userAgent'] = $params['userAgent'];
         }
         if (array_key_exists('client_id', $params)) {
-             $this->parameters['client_id'] = $params['client_id'];
+            $this->parameters['client_id'] = $params['client_id'];
         }
         if (array_key_exists('client_secret', $params)) {
-             $this->parameters['client_secret'] = $params['client_secret'];
+            $this->parameters['client_secret'] = $params['client_secret'];
         }
         if (array_key_exists('code', $params)) {
-             $this->parameters['code'] = $params['code'];
+            $this->parameters['code'] = $params['code'];
         }
         if (array_key_exists('redirect_uri', $params)) {
-             $this->parameters['redirect_uri'] = $params['redirect_uri'];
+            $this->parameters['redirect_uri'] = $params['redirect_uri'];
         }
     }
 
+    /**
+     * Set Accept
+     *
+     * @return $this
+     */
     public function setAccept($Accept) {
         $this->parameters['Accept'] = $Accept;
+
+        return $this;
     }
 
+    /**
+     * Set userAgent
+     *
+     * The user-agent which allows Github to recognise your application.
+     *
+     * @return $this
+     */
     public function setUserAgent($userAgent) {
         $this->parameters['userAgent'] = $userAgent;
+
+        return $this;
     }
 
+    /**
+     * Set client_id
+     *
+     * string Required. The client ID you received from GitHub when you registered.
+     *
+     * @return $this
+     */
     public function setClient_id($client_id) {
         $this->parameters['client_id'] = $client_id;
+
+        return $this;
     }
 
+    /**
+     * Set client_secret
+     *
+     * string Required. The client secret you received from GitHub when you registered.
+     *
+     * @return $this
+     */
     public function setClient_secret($client_secret) {
         $this->parameters['client_secret'] = $client_secret;
+
+        return $this;
     }
 
+    /**
+     * Set code
+     *
+     * string Required. The code you received as a response to Step 1.
+     *
+     * @return $this
+     */
     public function setCode($code) {
         $this->parameters['code'] = $code;
+
+        return $this;
     }
 
+    /**
+     * Set redirect_uri
+     *
+     * string The URL in your app where users will be sent after authorization. See
+     * details below about redirect urls.
+     *
+     * @return $this
+     */
     public function setRedirect_uri($redirect_uri) {
         $this->parameters['redirect_uri'] = $redirect_uri;
+
+        return $this;
     }
 
     public function getParameters() {
@@ -139,7 +192,7 @@ class accessToken implements \ArtaxServiceBuilder\Operation {
 
         if (array_key_exists('Accept', $this->parameters) == true) {
         $value = $this->getFilteredParameter('Accept');
-           $request->setHeader('Accept', $value);
+            $request->setHeader('Accept', $value);
         }
         $value = $this->getFilteredParameter('userAgent');
         $request->setHeader('User-Agent', $value);
@@ -209,7 +262,7 @@ class accessToken implements \ArtaxServiceBuilder\Operation {
      * Execute the operation asynchronously, passing the parsed response to the
      * callback
      *
-     * @return \GithubService\Model\AccessResponse
+     * @return \Amp\Promise
      */
     public function executeAsync(callable $callable) {
         $request = $this->createRequest();

@@ -60,82 +60,193 @@ class listRepoCommits implements \ArtaxServiceBuilder\Operation {
 
     public function setParams(array $params) {
         if (array_key_exists('Accept', $params)) {
-             $this->parameters['Accept'] = $params['Accept'];
+            $this->parameters['Accept'] = $params['Accept'];
         }
         if (array_key_exists('Authorization', $params)) {
-             $this->parameters['Authorization'] = $params['Authorization'];
+            $this->parameters['Authorization'] = $params['Authorization'];
         }
         if (array_key_exists('userAgent', $params)) {
-             $this->parameters['userAgent'] = $params['userAgent'];
+            $this->parameters['userAgent'] = $params['userAgent'];
         }
         if (array_key_exists('perPage', $params)) {
-             $this->parameters['perPage'] = $params['perPage'];
+            $this->parameters['perPage'] = $params['perPage'];
+        }
+        if (array_key_exists('otp', $params)) {
+            $this->parameters['otp'] = $params['otp'];
         }
         if (array_key_exists('owner', $params)) {
-             $this->parameters['owner'] = $params['owner'];
+            $this->parameters['owner'] = $params['owner'];
         }
         if (array_key_exists('repo', $params)) {
-             $this->parameters['repo'] = $params['repo'];
+            $this->parameters['repo'] = $params['repo'];
         }
         if (array_key_exists('sha', $params)) {
-             $this->parameters['sha'] = $params['sha'];
+            $this->parameters['sha'] = $params['sha'];
         }
         if (array_key_exists('path', $params)) {
-             $this->parameters['path'] = $params['path'];
+            $this->parameters['path'] = $params['path'];
         }
         if (array_key_exists('author', $params)) {
-             $this->parameters['author'] = $params['author'];
+            $this->parameters['author'] = $params['author'];
         }
         if (array_key_exists('since', $params)) {
-             $this->parameters['since'] = $params['since'];
+            $this->parameters['since'] = $params['since'];
         }
         if (array_key_exists('until', $params)) {
-             $this->parameters['until'] = $params['until'];
+            $this->parameters['until'] = $params['until'];
         }
     }
 
+    /**
+     * Set Accept
+     *
+     * @return $this
+     */
     public function setAccept($Accept) {
         $this->parameters['Accept'] = $Accept;
+
+        return $this;
     }
 
+    /**
+     * Set Authorization
+     *
+     * The token to use for the request.
+     *
+     * @return $this
+     */
     public function setAuthorization($Authorization) {
         $this->parameters['Authorization'] = $Authorization;
+
+        return $this;
     }
 
+    /**
+     * Set userAgent
+     *
+     * The user-agent which allows Github to recognise your application.
+     *
+     * @return $this
+     */
     public function setUserAgent($userAgent) {
         $this->parameters['userAgent'] = $userAgent;
+
+        return $this;
     }
 
+    /**
+     * Set perPage
+     *
+     * The number of items to get per page.
+     *
+     * @return $this
+     */
     public function setPerPage($perPage) {
         $this->parameters['perPage'] = $perPage;
+
+        return $this;
     }
 
+    /**
+     * Set otp
+     *
+     * The one time password.
+     *
+     * @return $this
+     */
+    public function setOtp($otp) {
+        $this->parameters['otp'] = $otp;
+
+        return $this;
+    }
+
+    /**
+     * Set owner
+     *
+     * @return $this
+     */
     public function setOwner($owner) {
         $this->parameters['owner'] = $owner;
+
+        return $this;
     }
 
+    /**
+     * Set repo
+     *
+     * @return $this
+     */
     public function setRepo($repo) {
         $this->parameters['repo'] = $repo;
+
+        return $this;
     }
 
+    /**
+     * Set sha
+     *
+     * SHA or branch to start listing commits from.
+     *
+     * @return $this
+     */
     public function setSha($sha) {
         $this->parameters['sha'] = $sha;
+
+        return $this;
     }
 
+    /**
+     * Set path
+     *
+     * Only commits containing this file path will be returned.
+     *
+     * @return $this
+     */
     public function setPath($path) {
         $this->parameters['path'] = $path;
+
+        return $this;
     }
 
+    /**
+     * Set author
+     *
+     * GitHub login or email address by which to filter by commit author.
+     *
+     * @return $this
+     */
     public function setAuthor($author) {
         $this->parameters['author'] = $author;
+
+        return $this;
     }
 
+    /**
+     * Set since
+     *
+     * Only commits after this date will be returned. This is a timestamp in ISO 8601
+     * format: YYYY-MM-DDTHH:MM:SSZ.
+     *
+     * @return $this
+     */
     public function setSince($since) {
         $this->parameters['since'] = $since;
+
+        return $this;
     }
 
+    /**
+     * Set until
+     *
+     * Only commits before this date will be returned. This is a timestamp in ISO 8601
+     * format: YYYY-MM-DDTHH:MM:SSZ.
+     *
+     * @return $this
+     */
     public function setUntil($until) {
         $this->parameters['until'] = $until;
+
+        return $this;
     }
 
     public function getParameters() {
@@ -160,7 +271,7 @@ class listRepoCommits implements \ArtaxServiceBuilder\Operation {
             case ('Authorization'): {
                 $args = [];
                 $args[] = $value;
-                $value = call_user_func_array('GithubService\Github::formatBasicAuthToken', $args);
+                $value = call_user_func_array('GithubService\Github::castString', $args);
                 break;
             }
 
@@ -186,7 +297,7 @@ class listRepoCommits implements \ArtaxServiceBuilder\Operation {
 
         if (array_key_exists('Accept', $this->parameters) == true) {
         $value = $this->getFilteredParameter('Accept');
-           $request->setHeader('Accept', $value);
+            $request->setHeader('Accept', $value);
         }
         $value = $this->getFilteredParameter('Authorization');
         if ($value != null) {
@@ -196,7 +307,11 @@ class listRepoCommits implements \ArtaxServiceBuilder\Operation {
         $request->setHeader('User-Agent', $value);
         if (array_key_exists('perPage', $this->parameters) == true) {
         $value = $this->getFilteredParameter('perPage');
-           $queryParameters['per_page'] = $value;
+            $queryParameters['per_page'] = $value;
+        }
+        if (array_key_exists('otp', $this->parameters) == true) {
+        $value = $this->getFilteredParameter('otp');
+            $request->setHeader('X-GitHub-OTP', $value);
         }
         $value = $this->getFilteredParameter('owner');
         $queryParameters['owner'] = $value;
@@ -204,23 +319,23 @@ class listRepoCommits implements \ArtaxServiceBuilder\Operation {
         $queryParameters['repo'] = $value;
         if (array_key_exists('sha', $this->parameters) == true) {
         $value = $this->getFilteredParameter('sha');
-           $queryParameters['sha'] = $value;
+            $queryParameters['sha'] = $value;
         }
         if (array_key_exists('path', $this->parameters) == true) {
         $value = $this->getFilteredParameter('path');
-           $queryParameters['path'] = $value;
+            $queryParameters['path'] = $value;
         }
         if (array_key_exists('author', $this->parameters) == true) {
         $value = $this->getFilteredParameter('author');
-           $queryParameters['author'] = $value;
+            $queryParameters['author'] = $value;
         }
         if (array_key_exists('since', $this->parameters) == true) {
         $value = $this->getFilteredParameter('since');
-           $queryParameters['since'] = $value;
+            $queryParameters['since'] = $value;
         }
         if (array_key_exists('until', $this->parameters) == true) {
         $value = $this->getFilteredParameter('until');
-           $queryParameters['until'] = $value;
+            $queryParameters['until'] = $value;
         }
 
         //Parameters are parsed and set, lets prepare the request
@@ -282,7 +397,7 @@ class listRepoCommits implements \ArtaxServiceBuilder\Operation {
      * Execute the operation asynchronously, passing the parsed response to the
      * callback
      *
-     * @return \GithubService\Model\Commits
+     * @return \Amp\Promise
      */
     public function executeAsync(callable $callable) {
         $request = $this->createRequest();

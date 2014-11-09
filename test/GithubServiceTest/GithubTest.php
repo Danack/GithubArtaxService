@@ -2,8 +2,8 @@
 
 use GithubService\GithubArtaxService\GithubArtaxService;
 use ArtaxServiceBuilder\ResponseCache\NullResponseCache;
-use Artax\Client as ArtaxClient;
-use Alert\NativeReactor;
+use Amp\Artax\Client as ArtaxClient;
+use Amp\NativeReactor;
 use ArtaxServiceBuilder\BadResponseException;
 
 include_once dirname(__DIR__)."/../../githubArtaxServiceConfig.php";
@@ -62,10 +62,8 @@ class GithubTest extends \PHPUnit_Framework_TestCase {
             $response = $bre->getResponse();
             if ($response->hasHeader('X-GitHub-OTP')) {
                 $otp = $response->getHeader('X-GitHub-OTP');
-                
-                echo "Need to:";
+                echo "Need to do OneTimePassword:";
                 var_dump($otp);
-                exit(0);
             }
             
             echo "Bad response, status: ".$bre->getResponse()->getStatus().PHP_EOL;

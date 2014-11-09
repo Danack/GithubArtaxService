@@ -127,7 +127,8 @@ class GithubService extends GithubArtaxService {
     public function translateResponseToException(Response $response) {
         $status = $response->getStatus();
         
-        if ($status == 406) {
+        if ($status == 401 || $status == 406) {
+            //@TODO - find a list of what the status codes are meant to be.
             if ($response->hasHeader('X-GitHub-OTP')) {
                 $otpArray = $response->getHeader('X-GitHub-OTP');
                 foreach ($otpArray as $otp) {

@@ -7,14 +7,6 @@
 //Get all users
 
 
-
-
-
-
-
-
-
-
 return array(
 
     //Get a single user

@@ -60,54 +60,115 @@ class listUserRepos implements \ArtaxServiceBuilder\Operation {
 
     public function setParams(array $params) {
         if (array_key_exists('Accept', $params)) {
-             $this->parameters['Accept'] = $params['Accept'];
+            $this->parameters['Accept'] = $params['Accept'];
         }
         if (array_key_exists('Authorization', $params)) {
-             $this->parameters['Authorization'] = $params['Authorization'];
+            $this->parameters['Authorization'] = $params['Authorization'];
         }
         if (array_key_exists('userAgent', $params)) {
-             $this->parameters['userAgent'] = $params['userAgent'];
+            $this->parameters['userAgent'] = $params['userAgent'];
         }
         if (array_key_exists('perPage', $params)) {
-             $this->parameters['perPage'] = $params['perPage'];
+            $this->parameters['perPage'] = $params['perPage'];
         }
         if (array_key_exists('type', $params)) {
-             $this->parameters['type'] = $params['type'];
+            $this->parameters['type'] = $params['type'];
         }
         if (array_key_exists('sort', $params)) {
-             $this->parameters['sort'] = $params['sort'];
+            $this->parameters['sort'] = $params['sort'];
         }
         if (array_key_exists('direction', $params)) {
-             $this->parameters['direction'] = $params['direction'];
+            $this->parameters['direction'] = $params['direction'];
         }
     }
 
+    /**
+     * Set Accept
+     *
+     * @return $this
+     */
     public function setAccept($Accept) {
         $this->parameters['Accept'] = $Accept;
+
+        return $this;
     }
 
+    /**
+     * Set Authorization
+     *
+     * The token to use for the request.
+     *
+     * @return $this
+     */
     public function setAuthorization($Authorization) {
         $this->parameters['Authorization'] = $Authorization;
+
+        return $this;
     }
 
+    /**
+     * Set userAgent
+     *
+     * The user-agent which allows Github to recognise your application.
+     *
+     * @return $this
+     */
     public function setUserAgent($userAgent) {
         $this->parameters['userAgent'] = $userAgent;
+
+        return $this;
     }
 
+    /**
+     * Set perPage
+     *
+     * The number of items to get per page.
+     *
+     * @return $this
+     */
     public function setPerPage($perPage) {
         $this->parameters['perPage'] = $perPage;
+
+        return $this;
     }
 
+    /**
+     * Set type
+     *
+     * Can be one of all, owner, public, private, member. Default: all
+     *
+     * @return $this
+     */
     public function setType($type) {
         $this->parameters['type'] = $type;
+
+        return $this;
     }
 
+    /**
+     * Set sort
+     *
+     * Can be one of created, updated, pushed, full_name. Default: full_name
+     *
+     * @return $this
+     */
     public function setSort($sort) {
         $this->parameters['sort'] = $sort;
+
+        return $this;
     }
 
+    /**
+     * Set direction
+     *
+     * Can be one of asc or desc. Default: when using full_name: asc; otherwise desc
+     *
+     * @return $this
+     */
     public function setDirection($direction) {
         $this->parameters['direction'] = $direction;
+
+        return $this;
     }
 
     public function getParameters() {
@@ -132,7 +193,7 @@ class listUserRepos implements \ArtaxServiceBuilder\Operation {
             case ('Authorization'): {
                 $args = [];
                 $args[] = $value;
-                $value = call_user_func_array('GithubService\Github::formatBasicAuthToken', $args);
+                $value = call_user_func_array('GithubService\Github::castString', $args);
                 break;
             }
 
@@ -159,7 +220,7 @@ class listUserRepos implements \ArtaxServiceBuilder\Operation {
         $jsonParams = [];
         if (array_key_exists('Accept', $this->parameters) == true) {
         $value = $this->getFilteredParameter('Accept');
-           $request->setHeader('Accept', $value);
+            $request->setHeader('Accept', $value);
         }
         $value = $this->getFilteredParameter('Authorization');
         if ($value != null) {
@@ -169,19 +230,19 @@ class listUserRepos implements \ArtaxServiceBuilder\Operation {
         $request->setHeader('User-Agent', $value);
         if (array_key_exists('perPage', $this->parameters) == true) {
         $value = $this->getFilteredParameter('perPage');
-           $queryParameters['per_page'] = $value;
+            $queryParameters['per_page'] = $value;
         }
         if (array_key_exists('type', $this->parameters) == true) {
         $value = $this->getFilteredParameter('type');
-           $jsonParams['type'] = $value;
+            $jsonParams['type'] = $value;
         }
         if (array_key_exists('sort', $this->parameters) == true) {
         $value = $this->getFilteredParameter('sort');
-           $jsonParams['sort'] = $value;
+            $jsonParams['sort'] = $value;
         }
         if (array_key_exists('direction', $this->parameters) == true) {
         $value = $this->getFilteredParameter('direction');
-           $jsonParams['direction'] = $value;
+            $jsonParams['direction'] = $value;
         }
 
         //Parameters are parsed and set, lets prepare the request

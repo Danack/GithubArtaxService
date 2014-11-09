@@ -61,47 +61,93 @@ class basicAuthToOauth implements \ArtaxServiceBuilder\Operation {
 
     public function setParams(array $params) {
         if (array_key_exists('Accept', $params)) {
-             $this->parameters['Accept'] = $params['Accept'];
+            $this->parameters['Accept'] = $params['Accept'];
         }
         if (array_key_exists('userAgent', $params)) {
-             $this->parameters['userAgent'] = $params['userAgent'];
+            $this->parameters['userAgent'] = $params['userAgent'];
         }
         if (array_key_exists('Authorization', $params)) {
-             $this->parameters['Authorization'] = $params['Authorization'];
+            $this->parameters['Authorization'] = $params['Authorization'];
         }
         if (array_key_exists('scopes', $params)) {
-             $this->parameters['scopes'] = $params['scopes'];
+            $this->parameters['scopes'] = $params['scopes'];
         }
         if (array_key_exists('note', $params)) {
-             $this->parameters['note'] = $params['note'];
+            $this->parameters['note'] = $params['note'];
         }
         if (array_key_exists('note_url', $params)) {
-             $this->parameters['note_url'] = $params['note_url'];
+            $this->parameters['note_url'] = $params['note_url'];
         }
     }
 
+    /**
+     * Set Accept
+     *
+     * @return $this
+     */
     public function setAccept($Accept) {
         $this->parameters['Accept'] = $Accept;
+
+        return $this;
     }
 
+    /**
+     * Set userAgent
+     *
+     * The user-agent which allows Github to recognise your application.
+     *
+     * @return $this
+     */
     public function setUserAgent($userAgent) {
         $this->parameters['userAgent'] = $userAgent;
+
+        return $this;
     }
 
+    /**
+     * Set Authorization
+     *
+     * The basic auth.
+     *
+     * @return $this
+     */
     public function setAuthorization($Authorization) {
         $this->parameters['Authorization'] = $Authorization;
+
+        return $this;
     }
 
+    /**
+     * Set scopes
+     *
+     * @return $this
+     */
     public function setScopes($scopes) {
         $this->parameters['scopes'] = $scopes;
+
+        return $this;
     }
 
+    /**
+     * Set note
+     *
+     * @return $this
+     */
     public function setNote($note) {
         $this->parameters['note'] = $note;
+
+        return $this;
     }
 
+    /**
+     * Set note_url
+     *
+     * @return $this
+     */
     public function setNote_url($note_url) {
         $this->parameters['note_url'] = $note_url;
+
+        return $this;
     }
 
     public function getParameters() {
@@ -111,7 +157,7 @@ class basicAuthToOauth implements \ArtaxServiceBuilder\Operation {
     /**
      * Apply any filters necessary to the parameter
      *
-     * @return mixed
+     * @return \GithubService\Model\Authorization
      * @param string $name The name of the parameter to get.
      */
     public function getFilteredParameter($name) {
@@ -152,7 +198,7 @@ class basicAuthToOauth implements \ArtaxServiceBuilder\Operation {
         $jsonParams = [];
         if (array_key_exists('Accept', $this->parameters) == true) {
         $value = $this->getFilteredParameter('Accept');
-           $request->setHeader('Accept', $value);
+            $request->setHeader('Accept', $value);
         }
         $value = $this->getFilteredParameter('userAgent');
         $request->setHeader('User-Agent', $value);
@@ -195,7 +241,7 @@ class basicAuthToOauth implements \ArtaxServiceBuilder\Operation {
     /**
      * Create and execute the operation, then return the processed  response.
      *
-     * @return mixed|\
+     * @return mixed|\GithubService\Model\Authorization
      */
     public function call() {
         $request = $this->createRequest();
@@ -203,7 +249,9 @@ class basicAuthToOauth implements \ArtaxServiceBuilder\Operation {
         $this->response = $response;
 
         if ($this->shouldResponseBeProcessed($response)) {
-            return $response->getBody();
+            $instance = \GithubService\Model\Authorization::createFromResponse($response, $this);
+
+            return $instance;
         }
         return $response;
     }
@@ -211,7 +259,7 @@ class basicAuthToOauth implements \ArtaxServiceBuilder\Operation {
     /**
      * Execute the operation, returning the parsed response
      *
-     * @return mixed
+     * @return \GithubService\Model\Authorization
      */
     public function execute() {
         $request = $this->createRequest();
@@ -222,7 +270,7 @@ class basicAuthToOauth implements \ArtaxServiceBuilder\Operation {
      * Execute the operation asynchronously, passing the parsed response to the
      * callback
      *
-     * @return mixed
+     * @return \GithubService\Model\Authorization
      */
     public function executeAsync(callable $callable) {
         $request = $this->createRequest();
@@ -233,20 +281,22 @@ class basicAuthToOauth implements \ArtaxServiceBuilder\Operation {
      * Dispatch the request for this operation and process the response. Allows you to
      * modify the request before it is sent.
      *
-     * @return mixed
+     * @return \GithubService\Model\Authorization
      * @param \Amp\Artax\Request $request The request to be processed
      */
     public function dispatch(\Amp\Artax\Request $request) {
         $response = $this->api->execute($request, $this);
         $this->response = $response;
-        return $response->getBody();
+        $instance = \GithubService\Model\Authorization::createFromResponse($response, $this);
+
+        return $instance;
     }
 
     /**
      * Dispatch the request for this operation and process the response asynchronously.
      * Allows you to modify the request before it is sent.
      *
-     * @return mixed
+     * @return \GithubService\Model\Authorization
      * @param \Amp\Artax\Request $request The request to be processed
      * @param callable $callable The callable that processes the response
      */
@@ -258,18 +308,20 @@ class basicAuthToOauth implements \ArtaxServiceBuilder\Operation {
      * Dispatch the request for this operation and process the response. Allows you to
      * modify the request before it is sent.
      *
-     * @return mixed
+     * @return \GithubService\Model\Authorization
      * @param \Amp\Artax\Response $response The HTTP response.
      */
     public function processResponse(\Amp\Artax\Response $response) {
-        return $response->getBody();
+        $instance = \GithubService\Model\Authorization::createFromResponse($response, $this);
+
+        return $instance;
     }
 
     /**
      * Determine whether the response should be processed. Override this method to have
      * a per-operation decision, otherwise the function is the API class will be used.
      *
-     * @return mixed
+     * @return \GithubService\Model\Authorization
      */
     public function shouldResponseBeProcessed(\Amp\Artax\Response $response) {
         return $this->api->shouldResponseBeProcessed($response);
@@ -290,7 +342,7 @@ class basicAuthToOauth implements \ArtaxServiceBuilder\Operation {
      * Override this method to have a per-operation decision, otherwise the
      * functionfrom the API class will be used.
      *
-     * @return mixed
+     * @return \GithubService\Model\Authorization
      */
     public function shouldUseCachedResponse(\Amp\Artax\Response $response) {
         return $this->api->shouldUseCachedResponse($response);
@@ -300,7 +352,7 @@ class basicAuthToOauth implements \ArtaxServiceBuilder\Operation {
      * Determine whether the response should be cached. Override this method to have a
      * per-operation decision, otherwise the function from the API class will be used.
      *
-     * @return mixed
+     * @return \GithubService\Model\Authorization
      */
     public function shouldResponseBeCached(\Amp\Artax\Response $response) {
         return $this->api->shouldResponseBeCached($response);

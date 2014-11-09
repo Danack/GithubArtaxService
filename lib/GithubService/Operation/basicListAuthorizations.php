@@ -58,33 +58,67 @@ class basicListAuthorizations implements \ArtaxServiceBuilder\Operation {
 
     public function setParams(array $params) {
         if (array_key_exists('Accept', $params)) {
-             $this->parameters['Accept'] = $params['Accept'];
+            $this->parameters['Accept'] = $params['Accept'];
         }
         if (array_key_exists('userAgent', $params)) {
-             $this->parameters['userAgent'] = $params['userAgent'];
+            $this->parameters['userAgent'] = $params['userAgent'];
         }
         if (array_key_exists('Authorization', $params)) {
-             $this->parameters['Authorization'] = $params['Authorization'];
+            $this->parameters['Authorization'] = $params['Authorization'];
         }
         if (array_key_exists('otp', $params)) {
-             $this->parameters['otp'] = $params['otp'];
+            $this->parameters['otp'] = $params['otp'];
         }
     }
 
+    /**
+     * Set Accept
+     *
+     * @return $this
+     */
     public function setAccept($Accept) {
         $this->parameters['Accept'] = $Accept;
+
+        return $this;
     }
 
+    /**
+     * Set userAgent
+     *
+     * The user-agent which allows Github to recognise your application.
+     *
+     * @return $this
+     */
     public function setUserAgent($userAgent) {
         $this->parameters['userAgent'] = $userAgent;
+
+        return $this;
     }
 
+    /**
+     * Set Authorization
+     *
+     * The basic auth.
+     *
+     * @return $this
+     */
     public function setAuthorization($Authorization) {
         $this->parameters['Authorization'] = $Authorization;
+
+        return $this;
     }
 
+    /**
+     * Set otp
+     *
+     * The one time password.
+     *
+     * @return $this
+     */
     public function setOtp($otp) {
         $this->parameters['otp'] = $otp;
+
+        return $this;
     }
 
     public function getParameters() {
@@ -134,7 +168,7 @@ class basicListAuthorizations implements \ArtaxServiceBuilder\Operation {
 
         if (array_key_exists('Accept', $this->parameters) == true) {
         $value = $this->getFilteredParameter('Accept');
-           $request->setHeader('Accept', $value);
+            $request->setHeader('Accept', $value);
         }
         $value = $this->getFilteredParameter('userAgent');
         $request->setHeader('User-Agent', $value);
@@ -142,7 +176,7 @@ class basicListAuthorizations implements \ArtaxServiceBuilder\Operation {
         $request->setHeader('Authorization', $value);
         if (array_key_exists('otp', $this->parameters) == true) {
         $value = $this->getFilteredParameter('otp');
-           $request->setHeader('X-GitHub-OTP', $value);
+            $request->setHeader('X-GitHub-OTP', $value);
         }
 
         //Parameters are parsed and set, lets prepare the request
@@ -199,7 +233,7 @@ class basicListAuthorizations implements \ArtaxServiceBuilder\Operation {
      * Execute the operation asynchronously, passing the parsed response to the
      * callback
      *
-     * @return \GithubService\Model\Authorizations
+     * @return \Amp\Promise
      */
     public function executeAsync(callable $callable) {
         $request = $this->createRequest();

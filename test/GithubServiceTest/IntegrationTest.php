@@ -2,23 +2,30 @@
 
 use GithubService\GithubArtaxService\GithubArtaxService;
 
+use Amp\Artax\Client as ArtaxClient;
 
+use Amp\Artax\Response;
+
+
+/**
+ * Class IntegrationTest
+ * @group integration
+ */
 class IntegrationTest extends \PHPUnit_Framework_TestCase {
 
     function testGoogle() {
-        $client = new \Artax\Client();
+        $client = new ArtaxClient();
         $future = $client->request("http://www.google.com");
-        /** @var $result After\Future */
         $response = $future->wait();
+        /** @var $response Response */
         $this->assertEquals(200, $response->getStatus());
     }
 
     function testError() {
-        $this->setExpectedException('Acesync\DnsException');
-        $client = new \Artax\Client();
-        $client->setOption(\Artax\Client::OP_HOST_CONNECTION_LIMIT, 3);
+        $this->setExpectedException('Amp\Dns\ResolutionException');
+        $client = new ArtaxClient();
+        $client->setOption(ArtaxClient::OP_HOST_CONNECTION_LIMIT, 3);
         $future = $client->request("http://doesntexist.test");
-        /** @var $result After\Future */
         $future->wait();
     }
 
@@ -46,7 +53,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase {
         /** @var  $repoTagsExternal \GithubService\Model\RepoTags */
         $repoTagsExternal = null;
         
-        $callback = function($error, GithubService\Model\RepoTags $repoTags) use (&$errorExternal, &$repoTagsExternal) {
+        $callback = function(\Exception $error = null, GithubService\Model\RepoTags $repoTags = null) use (&$errorExternal, &$repoTagsExternal) {
             $errorExternal = $error;
             $repoTagsExternal = $repoTags;
         };

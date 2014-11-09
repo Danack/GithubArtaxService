@@ -59,40 +59,99 @@ class revokeAllAuthority implements \ArtaxServiceBuilder\Operation {
 
     public function setParams(array $params) {
         if (array_key_exists('Accept', $params)) {
-             $this->parameters['Accept'] = $params['Accept'];
+            $this->parameters['Accept'] = $params['Accept'];
         }
         if (array_key_exists('Authorization', $params)) {
-             $this->parameters['Authorization'] = $params['Authorization'];
+            $this->parameters['Authorization'] = $params['Authorization'];
         }
         if (array_key_exists('userAgent', $params)) {
-             $this->parameters['userAgent'] = $params['userAgent'];
+            $this->parameters['userAgent'] = $params['userAgent'];
         }
         if (array_key_exists('perPage', $params)) {
-             $this->parameters['perPage'] = $params['perPage'];
+            $this->parameters['perPage'] = $params['perPage'];
+        }
+        if (array_key_exists('otp', $params)) {
+            $this->parameters['otp'] = $params['otp'];
         }
         if (array_key_exists('client_id', $params)) {
-             $this->parameters['client_id'] = $params['client_id'];
+            $this->parameters['client_id'] = $params['client_id'];
         }
     }
 
+    /**
+     * Set Accept
+     *
+     * @return $this
+     */
     public function setAccept($Accept) {
         $this->parameters['Accept'] = $Accept;
+
+        return $this;
     }
 
+    /**
+     * Set Authorization
+     *
+     * The token to use for the request.
+     *
+     * @return $this
+     */
     public function setAuthorization($Authorization) {
         $this->parameters['Authorization'] = $Authorization;
+
+        return $this;
     }
 
+    /**
+     * Set userAgent
+     *
+     * The user-agent which allows Github to recognise your application.
+     *
+     * @return $this
+     */
     public function setUserAgent($userAgent) {
         $this->parameters['userAgent'] = $userAgent;
+
+        return $this;
     }
 
+    /**
+     * Set perPage
+     *
+     * The number of items to get per page.
+     *
+     * @return $this
+     */
     public function setPerPage($perPage) {
         $this->parameters['perPage'] = $perPage;
+
+        return $this;
     }
 
+    /**
+     * Set otp
+     *
+     * The one time password.
+     *
+     * @return $this
+     */
+    public function setOtp($otp) {
+        $this->parameters['otp'] = $otp;
+
+        return $this;
+    }
+
+    /**
+     * Set client_id
+     *
+     * The id of the client.
+     *
+     * @return $this
+     */
     public function setClient_id($client_id) {
         $this->parameters['client_id'] = $client_id;
+
+        return $this;
     }
 
     public function getParameters() {
@@ -117,7 +176,7 @@ class revokeAllAuthority implements \ArtaxServiceBuilder\Operation {
             case ('Authorization'): {
                 $args = [];
                 $args[] = $value;
-                $value = call_user_func_array('GithubService\Github::formatBasicAuthToken', $args);
+                $value = call_user_func_array('GithubService\Github::castString', $args);
                 break;
             }
 
@@ -143,7 +202,7 @@ class revokeAllAuthority implements \ArtaxServiceBuilder\Operation {
 
         if (array_key_exists('Accept', $this->parameters) == true) {
         $value = $this->getFilteredParameter('Accept');
-           $request->setHeader('Accept', $value);
+            $request->setHeader('Accept', $value);
         }
         $value = $this->getFilteredParameter('Authorization');
         if ($value != null) {
@@ -153,7 +212,11 @@ class revokeAllAuthority implements \ArtaxServiceBuilder\Operation {
         $request->setHeader('User-Agent', $value);
         if (array_key_exists('perPage', $this->parameters) == true) {
         $value = $this->getFilteredParameter('perPage');
-           $queryParameters['per_page'] = $value;
+            $queryParameters['per_page'] = $value;
+        }
+        if (array_key_exists('otp', $this->parameters) == true) {
+        $value = $this->getFilteredParameter('otp');
+            $request->setHeader('X-GitHub-OTP', $value);
         }
         $value = $this->getFilteredParameter('client_id');
         $queryParameters['client_id'] = $value;
@@ -215,7 +278,7 @@ class revokeAllAuthority implements \ArtaxServiceBuilder\Operation {
      * Execute the operation asynchronously, passing the parsed response to the
      * callback
      *
-     * @return mixed
+     * @return \Amp\Promise
      */
     public function executeAsync(callable $callable) {
         $request = $this->createRequest();

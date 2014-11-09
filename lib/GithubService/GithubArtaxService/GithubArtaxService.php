@@ -8,16 +8,15 @@ namespace GithubService\GithubArtaxService;
 
 use Amp\Artax\Request;
 use Amp\Artax\Response;
-use GithubService\Operation\basicAuthToOauth;
+use GithubService\Operation\oauthAuthorize;
 use ArtaxServiceBuilder\BadResponseException;
-use GithubService\Operation\basicListAuthorizations;
-use GithubService\Operation\getAuthorizations;
-use GithubService\Operation\accessToken;
-use GithubService\Operation\revokeAllAuthority;
-use GithubService\Operation\listUserRepos;
+use ArtaxServiceBuilder\ProcessResponseException;
 use GithubService\Operation\listRepoCommitsPaginate;
-use GithubService\Operation\listRepoCommits;
-use GithubService\Operation\getSingleCommit;
+use GithubService\Operation\getAuthorizations;
+use GithubService\Operation\listAuthorizations;
+use GithubService\Operation\basicListAuthorizations;
+use GithubService\Operation\createAuthToken;
+use GithubService\Operation\revokeAllAuthority;
 use GithubService\Operation\listRepositories;
 use GithubService\Operation\listUserRepositories;
 use GithubService\Operation\listOrganizationRepositories;
@@ -31,6 +30,8 @@ use GithubService\Operation\listRepoTags;
 use GithubService\Operation\listRepoBranches;
 use GithubService\Operation\getRepoBranch;
 use GithubService\Operation\deleteRepo;
+use GithubService\Operation\listRepoCommits;
+use GithubService\Operation\getSingleCommit;
 use GithubService\Operation\getUserInfo;
 use GithubService\Operation\getUserEmails;
 use GithubService\Operation\addUserEmails;
@@ -55,16 +56,56 @@ class GithubArtaxService implements \GithubService\GithubService {
     }
 
     /**
-     * basicAuthToOauth
+     * oauthAuthorize
      *
-     * @param mixed $Authorization The basic auth.
-     * @param mixed $scopes 
-     * @param mixed $note 
-     * @param mixed $note_url 
-     * @return \GithubService\Operation\basicAuthToOauth The new operation
+     * Start the web application flow for getting an Outh2 token. 
+     *
+     * @param mixed $client_id string Required. The client ID you received from GitHub
+     * when you registered.
+     * @param mixed $client_secret string Required. The client secret you received from
+     * GitHub when you registered.
+     * @param mixed $code string Required. The code you received as a response to Step
+     * 1.
+     * @param mixed $redirect_uri string The URL in your app where users will be sent
+     * after authorization. See details below about redirect urls.
+     * @return \GithubService\Operation\oauthAuthorize The new operation
      */
-    public function basicAuthToOauth($Authorization, $scopes, $note, $note_url) {
-        $instance = new basicAuthToOauth($this, $this->getUserAgent(), $Authorization, $scopes, $note, $note_url);
+    public function oauthAuthorize($client_id, $client_secret, $code, $redirect_uri) {
+        $instance = new oauthAuthorize($this, $this->getUserAgent(), $client_id, $client_secret, $code, $redirect_uri);
+        return $instance;
+    }
+
+    /**
+     * listRepoCommitsPaginate
+     *
+     * @param string $Authorization The token to use for the request.
+     * @param mixed $pageURL 
+     * @return \GithubService\Operation\listRepoCommitsPaginate The new operation
+     */
+    public function listRepoCommitsPaginate($Authorization, $pageURL) {
+        $instance = new listRepoCommitsPaginate($this, $Authorization, $this->getUserAgent(), $pageURL);
+        return $instance;
+    }
+
+    /**
+     * getAuthorizations
+     *
+     * @param string $Authorization The token to use for the request.
+     * @return \GithubService\Operation\getAuthorizations The new operation
+     */
+    public function getAuthorizations($Authorization) {
+        $instance = new getAuthorizations($this, $Authorization, $this->getUserAgent());
+        return $instance;
+    }
+
+    /**
+     * listAuthorizations
+     *
+     * @param string $Authorization The token to use for the request.
+     * @return \GithubService\Operation\listAuthorizations The new operation
+     */
+    public function listAuthorizations($Authorization) {
+        $instance = new listAuthorizations($this, $Authorization, $this->getUserAgent());
         return $instance;
     }
 
@@ -80,38 +121,23 @@ class GithubArtaxService implements \GithubService\GithubService {
     }
 
     /**
-     * getAuthorizations
+     * createAuthToken
      *
-     * @param string $Authorization The stupid oauth2 bearer token
-     * @return \GithubService\Operation\getAuthorizations The new operation
+     * @param string $Authorization The token to use for the request.
+     * @param mixed $scopes 
+     * @param mixed $note 
+     * @param mixed $note_url 
+     * @return \GithubService\Operation\createAuthToken The new operation
      */
-    public function getAuthorizations($Authorization) {
-        $instance = new getAuthorizations($this, $Authorization, $this->getUserAgent());
-        return $instance;
-    }
-
-    /**
-     * accessToken
-     *
-     * @param mixed $client_id string Required. The client ID you received from GitHub
-     * when you registered.
-     * @param mixed $client_secret string Required. The client secret you received from
-     * GitHub when you registered.
-     * @param mixed $code string Required. The code you received as a response to Step
-     * 1.
-     * @param mixed $redirect_uri string The URL in your app where users will be sent
-     * after authorization. See details below about redirect urls.
-     * @return \GithubService\Operation\accessToken The new operation
-     */
-    public function accessToken($client_id, $client_secret, $code, $redirect_uri) {
-        $instance = new accessToken($this, $this->getUserAgent(), $client_id, $client_secret, $code, $redirect_uri);
+    public function createAuthToken($Authorization, $scopes, $note, $note_url) {
+        $instance = new createAuthToken($this, $Authorization, $this->getUserAgent(), $scopes, $note, $note_url);
         return $instance;
     }
 
     /**
      * revokeAllAuthority
      *
-     * @param string $Authorization The stupid oauth2 bearer token
+     * @param string $Authorization The token to use for the request.
      * @param mixed $client_id The id of the client.
      * @return \GithubService\Operation\revokeAllAuthority The new operation
      */
@@ -121,63 +147,9 @@ class GithubArtaxService implements \GithubService\GithubService {
     }
 
     /**
-     * listUserRepos
-     *
-     * List repositories for the authenticated user. Note that this does not include
-     * repositories owned by organizations which the user can access. You can list user
-     * organizations and list organization repositories separately.
-     *
-     * @param string $Authorization The stupid oauth2 bearer token
-     * @return \GithubService\Operation\listUserRepos The new operation
-     */
-    public function listUserRepos($Authorization) {
-        $instance = new listUserRepos($this, $Authorization, $this->getUserAgent());
-        return $instance;
-    }
-
-    /**
-     * listRepoCommitsPaginate
-     *
-     * @param string $Authorization The stupid oauth2 bearer token
-     * @param mixed $pageURL 
-     * @return \GithubService\Operation\listRepoCommitsPaginate The new operation
-     */
-    public function listRepoCommitsPaginate($Authorization, $pageURL) {
-        $instance = new listRepoCommitsPaginate($this, $Authorization, $this->getUserAgent(), $pageURL);
-        return $instance;
-    }
-
-    /**
-     * listRepoCommits
-     *
-     * @param string $Authorization The stupid oauth2 bearer token
-     * @param mixed $owner 
-     * @param mixed $repo 
-     * @return \GithubService\Operation\listRepoCommits The new operation
-     */
-    public function listRepoCommits($Authorization, $owner, $repo) {
-        $instance = new listRepoCommits($this, $Authorization, $this->getUserAgent(), $owner, $repo);
-        return $instance;
-    }
-
-    /**
-     * getSingleCommit
-     *
-     * @param string $Authorization The stupid oauth2 bearer token
-     * @param mixed $owner 
-     * @param mixed $repo 
-     * @param string $sha SHA of the commit to get
-     * @return \GithubService\Operation\getSingleCommit The new operation
-     */
-    public function getSingleCommit($Authorization, $owner, $repo, $sha) {
-        $instance = new getSingleCommit($this, $Authorization, $this->getUserAgent(), $owner, $repo, $sha);
-        return $instance;
-    }
-
-    /**
      * listRepositories
      *
-     * @param string $Authorization The stupid oauth2 bearer token
+     * @param string $Authorization The token to use for the request.
      * @param string $type Can be one of all, owner, public, private, member. Default:
      * all
      * @param string $sort Can be one of created, updated, pushed, full_name. Default:
@@ -194,7 +166,7 @@ class GithubArtaxService implements \GithubService\GithubService {
     /**
      * listUserRepositories
      *
-     * @param string $Authorization The stupid oauth2 bearer token
+     * @param string $Authorization The token to use for the request.
      * @param string $username The user to fetch the repos for.
      * @param string $type Can be one of all, owner, member. Default: owner
      * @param string $sort Can be one of created, updated, pushed, full_name. Default:
@@ -211,7 +183,7 @@ class GithubArtaxService implements \GithubService\GithubService {
     /**
      * listOrganizationRepositories
      *
-     * @param string $Authorization The stupid oauth2 bearer token
+     * @param string $Authorization The token to use for the request.
      * @param string $organisation The organisation to fetch the repos for.
      * @param string $type Can be one of all, owner, member. Default: owner
      * @return \GithubService\Operation\listOrganizationRepositories The new operation
@@ -224,7 +196,7 @@ class GithubArtaxService implements \GithubService\GithubService {
     /**
      * listAllPublicRepositories
      *
-     * @param string $Authorization The stupid oauth2 bearer token
+     * @param string $Authorization The token to use for the request.
      * @param string $since The integer ID of the last Repository that you’ve seen.
      * @return \GithubService\Operation\listAllPublicRepositories The new operation
      */
@@ -236,7 +208,7 @@ class GithubArtaxService implements \GithubService\GithubService {
     /**
      * getRepo
      *
-     * @param string $Authorization The stupid oauth2 bearer token
+     * @param string $Authorization The token to use for the request.
      * @param string $username The user to fetch the repos for.
      * @param string $type Can be one of all, owner, member. Default: owner
      * @param string $sort Can be one of created, updated, pushed, full_name. Default:
@@ -253,7 +225,7 @@ class GithubArtaxService implements \GithubService\GithubService {
     /**
      * getUserInfoByName
      *
-     * @param string $Authorization The stupid oauth2 bearer token
+     * @param string $Authorization The token to use for the request.
      * @param mixed $username The username of the client.
      * @return \GithubService\Operation\getUserInfoByName The new operation
      */
@@ -265,7 +237,7 @@ class GithubArtaxService implements \GithubService\GithubService {
     /**
      * listRepoLanguages
      *
-     * @param string $Authorization The stupid oauth2 bearer token
+     * @param string $Authorization The token to use for the request.
      * @param string $owner The owner of the repo to fetch contributors for.
      * @param string $repo The repo to fetch contributors for.
      * @return \GithubService\Operation\listRepoLanguages The new operation
@@ -278,7 +250,7 @@ class GithubArtaxService implements \GithubService\GithubService {
     /**
      * listRepoTeams
      *
-     * @param string $Authorization The stupid oauth2 bearer token
+     * @param string $Authorization The token to use for the request.
      * @param string $owner The owner of the repo to fetch contributors for.
      * @param string $repo The repo to fetch contributors for.
      * @return \GithubService\Operation\listRepoTeams The new operation
@@ -291,7 +263,7 @@ class GithubArtaxService implements \GithubService\GithubService {
     /**
      * listRepoTagsPaginate
      *
-     * @param string $Authorization The stupid oauth2 bearer token
+     * @param string $Authorization The token to use for the request.
      * @param mixed $pageURL 
      * @return \GithubService\Operation\listRepoTagsPaginate The new operation
      */
@@ -307,7 +279,7 @@ class GithubArtaxService implements \GithubService\GithubService {
      * authed request (for private repos and higher rate limiting), or as unsigned,
      * (public only, lower limit).
      *
-     * @param string $Authorization The stupid oauth2 bearer token
+     * @param string $Authorization The token to use for the request.
      * @param mixed $owner 
      * @param mixed $repo 
      * @return \GithubService\Operation\listRepoTags The new operation
@@ -320,7 +292,7 @@ class GithubArtaxService implements \GithubService\GithubService {
     /**
      * listRepoBranches
      *
-     * @param string $Authorization The stupid oauth2 bearer token
+     * @param string $Authorization The token to use for the request.
      * @param mixed $owner 
      * @param mixed $repo 
      * @return \GithubService\Operation\listRepoBranches The new operation
@@ -333,7 +305,7 @@ class GithubArtaxService implements \GithubService\GithubService {
     /**
      * getRepoBranch
      *
-     * @param string $Authorization The stupid oauth2 bearer token
+     * @param string $Authorization The token to use for the request.
      * @param mixed $owner 
      * @param mixed $repo 
      * @param mixed $branch 
@@ -347,7 +319,7 @@ class GithubArtaxService implements \GithubService\GithubService {
     /**
      * deleteRepo
      *
-     * @param string $Authorization The stupid oauth2 bearer token
+     * @param string $Authorization The token to use for the request.
      * @param mixed $owner 
      * @param mixed $repo 
      * @return \GithubService\Operation\deleteRepo The new operation
@@ -358,9 +330,36 @@ class GithubArtaxService implements \GithubService\GithubService {
     }
 
     /**
+     * listRepoCommits
+     *
+     * @param string $Authorization The token to use for the request.
+     * @param mixed $owner 
+     * @param mixed $repo 
+     * @return \GithubService\Operation\listRepoCommits The new operation
+     */
+    public function listRepoCommits($Authorization, $owner, $repo) {
+        $instance = new listRepoCommits($this, $Authorization, $this->getUserAgent(), $owner, $repo);
+        return $instance;
+    }
+
+    /**
+     * getSingleCommit
+     *
+     * @param string $Authorization The token to use for the request.
+     * @param mixed $owner 
+     * @param mixed $repo 
+     * @param string $sha SHA of the commit to get
+     * @return \GithubService\Operation\getSingleCommit The new operation
+     */
+    public function getSingleCommit($Authorization, $owner, $repo, $sha) {
+        $instance = new getSingleCommit($this, $Authorization, $this->getUserAgent(), $owner, $repo, $sha);
+        return $instance;
+    }
+
+    /**
      * getUserInfo
      *
-     * @param string $Authorization The stupid oauth2 bearer token
+     * @param string $Authorization The token to use for the request.
      * @return \GithubService\Operation\getUserInfo The new operation
      */
     public function getUserInfo($Authorization) {
@@ -373,7 +372,7 @@ class GithubArtaxService implements \GithubService\GithubService {
      *
      * Get users email addresses
      *
-     * @param string $Authorization The stupid oauth2 bearer token
+     * @param string $Authorization The token to use for the request.
      * @return \GithubService\Operation\getUserEmails The new operation
      */
     public function getUserEmails($Authorization) {
@@ -386,7 +385,7 @@ class GithubArtaxService implements \GithubService\GithubService {
      *
      * Get users email addresses
      *
-     * @param string $Authorization The stupid oauth2 bearer token
+     * @param string $Authorization The token to use for the request.
      * @param mixed $emails Array of the emails to add
      * @return \GithubService\Operation\addUserEmails The new operation
      */
@@ -498,7 +497,7 @@ class GithubArtaxService implements \GithubService\GithubService {
                     $callback(null, $parsedResponse, $response);
                 }
                 catch(\Exception $e) {
-                    $exception = new \Exception("Exception parsing response: ".$e->getMessage(), 0, $e);
+                    $exception = new ProcessResponseException("Exception parsing response: ".$e->getMessage(), 0, $e);
                     $callback($exception, null, $response);
                 }
             }

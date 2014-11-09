@@ -7,18 +7,23 @@ use GithubService\Model\Commits;
 use GithubService\GithubArtaxService\GithubArtaxServiceException;
 use ArtaxServiceBuilder\Service\StoredLink;
 
-use Alert\NativeReactor;
+
 use Auryn\Provider;
-use Artax\Request;
-use Alert\ReactorFactory;
-use Addr\ResolverFactory;
+use Amp\Artax\Request;
+use Amp\Artax\Response;
+use Amp\Artax\Client as ArtaxClient;
+//use Alert\NativeReactor;
+//use Alert\ReactorFactory;
+//use Addr\ResolverFactory;
+
+use ArtaxServiceBuilder\Oauth2Token;
 
 
 /**
  * @param Request $request
  * @return string
  */
-function toCurl(Artax\Request $request) {
+function toCurl(Request $request) {
     $output = '';
     $output .= 'curl -X '.$request->getMethod()." \\\n";
 
@@ -207,7 +212,7 @@ function processAddEmail(GithubService $api, $accessResponse) {
     $newEmail = getVariable('email');
 
     $emailCommand = $api->addUserEmails(
-        $accessResponse->accessToken,
+        new Oauth2Token($accessResponse->accessToken),
         [$newEmail]
     );
 
@@ -247,7 +252,9 @@ END;
  */
 function showGithubEmails(GithubService $api, AccessResponse $accessResponse) {
     //$api = new GithubAPI(GITHUB_USER_AGENT);
-    $emailCommand = $api->getUserEmails($accessResponse->accessToken);
+    $emailCommand = $api->getUserEmails(
+        new Oauth2Token($accessResponse->accessToken)
+    );
     $emailList = $emailCommand->execute();
 
     foreach ($emailList->emails as $email) {
@@ -266,7 +273,7 @@ function showAuthorizations(GithubService $api, AccessResponse $accessResponse) 
         echo "<p>This function is likely to fail. It appears that Github do not support it through the api with bearer tokens.</p>";
 
         //$api = new GithubAPI(GITHUB_USER_AGENT);
-        $authCommand = $api->getAuthorizations($accessResponse->accessToken);
+        $authCommand = $api->getAuthorizations(new Oauth2Token($accessResponse->accessToken));
         $authorisations = $authCommand->execute();
 
         foreach ($authorisations->getIterator() as $authorisation) {
@@ -302,7 +309,7 @@ function renderUserInfo(\GithubService\Model\User $user) {
  */
 function showUser(GithubService $api, AccessResponse $accessResponse, $username) {
     //$api = new GithubAPI(GITHUB_USER_AGENT);
-    $authCommand = $api->getUserInfo($accessResponse->accessToken);
+    $authCommand = $api->getUserInfo(new Oauth2Token($accessResponse->accessToken));
     $user = $authCommand->execute();
     renderUserInfo($user);
 }
@@ -342,7 +349,7 @@ function displayCommits(Commits $commits) {
 
 
 /**
- * @param \Artax\Response $response
+ * @param Response $response
  */
 function displayAndSaveLinks(\ArtaxServiceBuilder\Service\GithubPaginator $pager) {
 
@@ -365,7 +372,7 @@ function displayAndSaveLinks(\ArtaxServiceBuilder\Service\GithubPaginator $pager
  * @param $repo
  */
 function listRepoCommits(GithubService $api, AccessResponse $accessResponse, $username, $repo) {
-    $command = $api->listRepoCommits($accessResponse->accessToken, $username, $repo);
+    $command = $api->listRepoCommits(new Oauth2Token($accessResponse->accessToken), $username, $repo);
     $command->setAuthor('Danack');
     $commits = $command->execute();
 
@@ -392,7 +399,7 @@ function listRepoCommitsIterator(
     $username,
     $repo) 
 {
-    $command = $api->listRepoCommits($accessResponse->accessToken, $username, $repo);
+    $command = $api->listRepoCommits(new Oauth2Token($accessResponse->accessToken), $username, $repo);
     $command->setAuthor('Danack');
     $commitsIterator = new \GithubService\Iterator\ListRepoCommitsIterator($api, $accessResponse, $command);
     $page = 1;
@@ -418,7 +425,7 @@ function listRepoCommitsPages(
     $username, 
     $repo,
     $pages = 5) {
-    $command = $api->listRepoCommits($accessResponse->accessToken, $username, $repo);
+    $command = $api->listRepoCommits(new Oauth2Token($accessResponse->accessToken), $username, $repo);
     $command->setAuthor('Danack');
     $commits = $command->execute();
 
@@ -432,7 +439,7 @@ function listRepoCommitsPages(
         if ($commits->pager) {
             if ($commits->pager->nextLink) {
                 $command = $api->listRepoCommitsPaginate(
-                    $accessResponse->accessToken,
+                    new Oauth2Token($accessResponse->accessToken),
                     $commits->pager->nextLink->url
                 );
 
@@ -466,7 +473,7 @@ function showMoreResults(GithubService $api, AccessResponse $accessResponse) {
     }
 
     $command = $api->listRepoCommitsPaginate(
-        $accessResponse->accessToken,
+        new Oauth2Token($accessResponse->accessToken),
         $storedLink->link->url
     );
 
@@ -498,7 +505,7 @@ function revokeAuthority(GithubService $api, AccessResponse $accessResponse) {
  * @param $repo
  */
 function showRepoTags(GithubService $api, AccessResponse $accessResponse, $username, $repo) {
-    $command = $api->listRepoTags($accessResponse->accessToken, $username, $repo);
+    $command = $api->listRepoTags(new Oauth2Token($accessResponse->accessToken), $username, $repo);
     $command->setPerPage(100);
     $repoTags = $command->execute();
     foreach ($repoTags->getIterator() as $repoTag) {
@@ -522,12 +529,17 @@ function showAllTagsForRepo(
 
     $results = [];
 
+
+    echo "Sorry, this needs updating. <br/>";
+    return;
+    
+
     // What to do if an individual request in the batch fails
     $onError = function($requestKey, Exception $error) {
         echo 'Error: (', $requestKey, ') ', get_class($error).": ", $error->getMessage(), "\n";
     };
 
-    $command = $api->listRepoTags($accessResponse->accessToken, $username, $reponame);
+    $command = $api->listRepoTags(new Oauth2Token($accessResponse->accessToken), $username, $reponame);
 
     $repoTags = $command->execute();
     $results[] = $repoTags;
@@ -561,9 +573,12 @@ function showAllTagsForRepo(
         foreach ($pages as $uri => $alreadyFetched) {
             if ($alreadyFetched == false) {
                 $pages[$uri] = true;
-                $command = $api->listRepoTagsPaginate($accessResponse->accessToken, $uri);
+                $command = $api->listRepoTagsPaginate(
+                    new Oauth2Token(new Oauth2Token($accessResponse->accessToken)),
+                    $uri
+                );
 
-                $onResponse = function ($requestKey, Artax\Response $response) use (
+                $onResponse = function ($requestKey, Response $response) use (
                     $command,
                     &$pages,
                     &$results
@@ -586,12 +601,17 @@ function showAllTagsForRepo(
                     $onResponse,
                     $onError
                 ];
+
             }
         }
 
         if (count($requestsAndCallbacks)) {
-            $client = new \Artax\Client();
-            $client->requestMultiVerse($requestsAndCallbacks);
+            $client = new ArtaxClient();
+            //$client->requestMultiVerse($requestsAndCallbacks);
+            //$client->requestMulti($requestsAndCallbacks);
+
+            
+            
         }
         else {
             $finished = true;
@@ -721,7 +741,7 @@ class DebugGithub extends \GithubService\GithubArtaxService\GithubArtaxService {
 
     public static $count = 0;
 
-    function callAPI(\Artax\Request $request, array $successStatuses = array()) {
+    function callAPI(Request $request, array $successStatuses = array()) {
 
         self::$count++;
 
@@ -737,8 +757,8 @@ class DebugGithub extends \GithubService\GithubArtaxService\GithubArtaxService {
 }
 
 
-function prepareArtaxClient(Artax\Client $client, Auryn\AurynInjector $provider) {
-    $client->setOption(\Artax\Client::OP_MS_CONNECT_TIMEOUT, 25);
+function prepareArtaxClient(ArtaxClient $client, Auryn\AurynInjector $provider) {
+    $client->setOption(ArtaxClient::OP_MS_CONNECT_TIMEOUT, 25);
 }
 
 

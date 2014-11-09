@@ -9,15 +9,46 @@ namespace GithubService;
 interface GithubService {
 
     /**
-     * basicAuthToOauth
+     * oauthAuthorize
      *
-     * @param mixed $Authorization The basic auth.
-     * @param mixed $scopes 
-     * @param mixed $note 
-     * @param mixed $note_url 
-     * @return \GithubService\Operation\basicAuthToOauth The new operation
+     * Start the web application flow for getting an Outh2 token. 
+     *
+     * @param mixed $client_id string Required. The client ID you received from GitHub
+     * when you registered.
+     * @param mixed $client_secret string Required. The client secret you received from
+     * GitHub when you registered.
+     * @param mixed $code string Required. The code you received as a response to Step
+     * 1.
+     * @param mixed $redirect_uri string The URL in your app where users will be sent
+     * after authorization. See details below about redirect urls.
+     * @return \GithubService\Operation\oauthAuthorize The new operation
      */
-    public function basicAuthToOauth($Authorization, $scopes, $note, $note_url);
+    public function oauthAuthorize($client_id, $client_secret, $code, $redirect_uri);
+
+    /**
+     * listRepoCommitsPaginate
+     *
+     * @param string $Authorization The token to use for the request.
+     * @param mixed $pageURL 
+     * @return \GithubService\Operation\listRepoCommitsPaginate The new operation
+     */
+    public function listRepoCommitsPaginate($Authorization, $pageURL);
+
+    /**
+     * getAuthorizations
+     *
+     * @param string $Authorization The token to use for the request.
+     * @return \GithubService\Operation\getAuthorizations The new operation
+     */
+    public function getAuthorizations($Authorization);
+
+    /**
+     * listAuthorizations
+     *
+     * @param string $Authorization The token to use for the request.
+     * @return \GithubService\Operation\listAuthorizations The new operation
+     */
+    public function listAuthorizations($Authorization);
 
     /**
      * basicListAuthorizations
@@ -28,83 +59,29 @@ interface GithubService {
     public function basicListAuthorizations($Authorization);
 
     /**
-     * getAuthorizations
+     * createAuthToken
      *
-     * @param string $Authorization The stupid oauth2 bearer token
-     * @return \GithubService\Operation\getAuthorizations The new operation
+     * @param string $Authorization The token to use for the request.
+     * @param mixed $scopes 
+     * @param mixed $note 
+     * @param mixed $note_url 
+     * @return \GithubService\Operation\createAuthToken The new operation
      */
-    public function getAuthorizations($Authorization);
-
-    /**
-     * accessToken
-     *
-     * @param mixed $client_id string Required. The client ID you received from GitHub
-     * when you registered.
-     * @param mixed $client_secret string Required. The client secret you received from
-     * GitHub when you registered.
-     * @param mixed $code string Required. The code you received as a response to Step
-     * 1.
-     * @param mixed $redirect_uri string The URL in your app where users will be sent
-     * after authorization. See details below about redirect urls.
-     * @return \GithubService\Operation\accessToken The new operation
-     */
-    public function accessToken($client_id, $client_secret, $code, $redirect_uri);
+    public function createAuthToken($Authorization, $scopes, $note, $note_url);
 
     /**
      * revokeAllAuthority
      *
-     * @param string $Authorization The stupid oauth2 bearer token
+     * @param string $Authorization The token to use for the request.
      * @param mixed $client_id The id of the client.
      * @return \GithubService\Operation\revokeAllAuthority The new operation
      */
     public function revokeAllAuthority($Authorization, $client_id);
 
     /**
-     * listUserRepos
-     *
-     * List repositories for the authenticated user. Note that this does not include
-     * repositories owned by organizations which the user can access. You can list user
-     * organizations and list organization repositories separately.
-     *
-     * @param string $Authorization The stupid oauth2 bearer token
-     * @return \GithubService\Operation\listUserRepos The new operation
-     */
-    public function listUserRepos($Authorization);
-
-    /**
-     * listRepoCommitsPaginate
-     *
-     * @param string $Authorization The stupid oauth2 bearer token
-     * @param mixed $pageURL 
-     * @return \GithubService\Operation\listRepoCommitsPaginate The new operation
-     */
-    public function listRepoCommitsPaginate($Authorization, $pageURL);
-
-    /**
-     * listRepoCommits
-     *
-     * @param string $Authorization The stupid oauth2 bearer token
-     * @param mixed $owner 
-     * @param mixed $repo 
-     * @return \GithubService\Operation\listRepoCommits The new operation
-     */
-    public function listRepoCommits($Authorization, $owner, $repo);
-
-    /**
-     * getSingleCommit
-     *
-     * @param string $Authorization The stupid oauth2 bearer token
-     * @param mixed $owner 
-     * @param mixed $repo 
-     * @param string $sha SHA of the commit to get
-     * @return \GithubService\Operation\getSingleCommit The new operation
-     */
-    public function getSingleCommit($Authorization, $owner, $repo, $sha);
-
-    /**
      * listRepositories
      *
-     * @param string $Authorization The stupid oauth2 bearer token
+     * @param string $Authorization The token to use for the request.
      * @param string $type Can be one of all, owner, public, private, member. Default:
      * all
      * @param string $sort Can be one of created, updated, pushed, full_name. Default:
@@ -118,7 +95,7 @@ interface GithubService {
     /**
      * listUserRepositories
      *
-     * @param string $Authorization The stupid oauth2 bearer token
+     * @param string $Authorization The token to use for the request.
      * @param string $username The user to fetch the repos for.
      * @param string $type Can be one of all, owner, member. Default: owner
      * @param string $sort Can be one of created, updated, pushed, full_name. Default:
@@ -132,7 +109,7 @@ interface GithubService {
     /**
      * listOrganizationRepositories
      *
-     * @param string $Authorization The stupid oauth2 bearer token
+     * @param string $Authorization The token to use for the request.
      * @param string $organisation The organisation to fetch the repos for.
      * @param string $type Can be one of all, owner, member. Default: owner
      * @return \GithubService\Operation\listOrganizationRepositories The new operation
@@ -142,7 +119,7 @@ interface GithubService {
     /**
      * listAllPublicRepositories
      *
-     * @param string $Authorization The stupid oauth2 bearer token
+     * @param string $Authorization The token to use for the request.
      * @param string $since The integer ID of the last Repository that you’ve seen.
      * @return \GithubService\Operation\listAllPublicRepositories The new operation
      */
@@ -151,7 +128,7 @@ interface GithubService {
     /**
      * getRepo
      *
-     * @param string $Authorization The stupid oauth2 bearer token
+     * @param string $Authorization The token to use for the request.
      * @param string $username The user to fetch the repos for.
      * @param string $type Can be one of all, owner, member. Default: owner
      * @param string $sort Can be one of created, updated, pushed, full_name. Default:
@@ -165,7 +142,7 @@ interface GithubService {
     /**
      * getUserInfoByName
      *
-     * @param string $Authorization The stupid oauth2 bearer token
+     * @param string $Authorization The token to use for the request.
      * @param mixed $username The username of the client.
      * @return \GithubService\Operation\getUserInfoByName The new operation
      */
@@ -174,7 +151,7 @@ interface GithubService {
     /**
      * listRepoLanguages
      *
-     * @param string $Authorization The stupid oauth2 bearer token
+     * @param string $Authorization The token to use for the request.
      * @param string $owner The owner of the repo to fetch contributors for.
      * @param string $repo The repo to fetch contributors for.
      * @return \GithubService\Operation\listRepoLanguages The new operation
@@ -184,7 +161,7 @@ interface GithubService {
     /**
      * listRepoTeams
      *
-     * @param string $Authorization The stupid oauth2 bearer token
+     * @param string $Authorization The token to use for the request.
      * @param string $owner The owner of the repo to fetch contributors for.
      * @param string $repo The repo to fetch contributors for.
      * @return \GithubService\Operation\listRepoTeams The new operation
@@ -194,7 +171,7 @@ interface GithubService {
     /**
      * listRepoTagsPaginate
      *
-     * @param string $Authorization The stupid oauth2 bearer token
+     * @param string $Authorization The token to use for the request.
      * @param mixed $pageURL 
      * @return \GithubService\Operation\listRepoTagsPaginate The new operation
      */
@@ -207,7 +184,7 @@ interface GithubService {
      * authed request (for private repos and higher rate limiting), or as unsigned,
      * (public only, lower limit).
      *
-     * @param string $Authorization The stupid oauth2 bearer token
+     * @param string $Authorization The token to use for the request.
      * @param mixed $owner 
      * @param mixed $repo 
      * @return \GithubService\Operation\listRepoTags The new operation
@@ -217,7 +194,7 @@ interface GithubService {
     /**
      * listRepoBranches
      *
-     * @param string $Authorization The stupid oauth2 bearer token
+     * @param string $Authorization The token to use for the request.
      * @param mixed $owner 
      * @param mixed $repo 
      * @return \GithubService\Operation\listRepoBranches The new operation
@@ -227,7 +204,7 @@ interface GithubService {
     /**
      * getRepoBranch
      *
-     * @param string $Authorization The stupid oauth2 bearer token
+     * @param string $Authorization The token to use for the request.
      * @param mixed $owner 
      * @param mixed $repo 
      * @param mixed $branch 
@@ -238,7 +215,7 @@ interface GithubService {
     /**
      * deleteRepo
      *
-     * @param string $Authorization The stupid oauth2 bearer token
+     * @param string $Authorization The token to use for the request.
      * @param mixed $owner 
      * @param mixed $repo 
      * @return \GithubService\Operation\deleteRepo The new operation
@@ -246,9 +223,30 @@ interface GithubService {
     public function deleteRepo($Authorization, $owner, $repo);
 
     /**
+     * listRepoCommits
+     *
+     * @param string $Authorization The token to use for the request.
+     * @param mixed $owner 
+     * @param mixed $repo 
+     * @return \GithubService\Operation\listRepoCommits The new operation
+     */
+    public function listRepoCommits($Authorization, $owner, $repo);
+
+    /**
+     * getSingleCommit
+     *
+     * @param string $Authorization The token to use for the request.
+     * @param mixed $owner 
+     * @param mixed $repo 
+     * @param string $sha SHA of the commit to get
+     * @return \GithubService\Operation\getSingleCommit The new operation
+     */
+    public function getSingleCommit($Authorization, $owner, $repo, $sha);
+
+    /**
      * getUserInfo
      *
-     * @param string $Authorization The stupid oauth2 bearer token
+     * @param string $Authorization The token to use for the request.
      * @return \GithubService\Operation\getUserInfo The new operation
      */
     public function getUserInfo($Authorization);
@@ -258,7 +256,7 @@ interface GithubService {
      *
      * Get users email addresses
      *
-     * @param string $Authorization The stupid oauth2 bearer token
+     * @param string $Authorization The token to use for the request.
      * @return \GithubService\Operation\getUserEmails The new operation
      */
     public function getUserEmails($Authorization);
@@ -268,7 +266,7 @@ interface GithubService {
      *
      * Get users email addresses
      *
-     * @param string $Authorization The stupid oauth2 bearer token
+     * @param string $Authorization The token to use for the request.
      * @param mixed $emails Array of the emails to add
      * @return \GithubService\Operation\addUserEmails The new operation
      */

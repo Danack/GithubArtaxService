@@ -280,12 +280,11 @@ return array (
     //List Tags
     'listRepoTags' => array(
         'uri' => '/repos/{owner}/{repo}/tags',
-        //'extends' => 'defaultGetOauthOperation',
         'extends' => 'defaultGetOauthOperation',
-        
         
         'summary' => 'List tags for a repository. Response can be paged. This can be used either as a authed request (for private repos and higher rate limiting), or as unsigned, (public only, lower limit).',
         "responseClass" => 'GithubService\Model\RepoTags',
+        //'exampleResponse' => $listRepoTagResponse,
 
         'parameters' => array(
             'owner' => array(

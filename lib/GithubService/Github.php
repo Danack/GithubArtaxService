@@ -201,5 +201,10 @@ class Github {
 
         return "Basic ".base64_encode($usernameColonpassword);
     }
+    
+    public static function castString($value) {
+        return (string)$value;
+    }
+    
 }
 
