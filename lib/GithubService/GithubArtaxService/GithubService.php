@@ -178,19 +178,26 @@ class GithubService extends GithubArtaxService {
     }
 
     /**
-     * @param $username
-     * @param $password
-     * @param $enterPasswordCallback
-     * @param $scopes
-     * @param $applicationName
-     * @param $noteURL
-     * @param int $maxAttempts
+     * Creates an Oauth token for a named application, or retrieves the current Oauth 
+     * token if one already exists for the named application.
+     * 
+     * @param $username string The username to create the oauth token for
+     * @param $password string The password of the user
+     * @param $enterPasswordCallback callable A callback to get the one-time password
+     * if the user has two factor auth enabled on their account.
+     * @param $scopes array The scopes/permissions that the token should have.
+     * @param $applicationName string The name of the application
+     * @param $noteURL string The URL of application i.e. where a user should go to
+     * find help for the application.
+     * @param $maxAttempts int The maximum number of attempts. This only allows retries
+     * for the two-factor auth failing, not the password
+     *  
      * @return \GithubService\Model\Authorization
      */
     function createOrRetrieveAuth(
         $username,
         $password,
-        $enterPasswordCallback,
+        callable $enterPasswordCallback,
         $scopes,
         $applicationName,
         $noteURL,
