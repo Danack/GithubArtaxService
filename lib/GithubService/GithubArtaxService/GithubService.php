@@ -10,6 +10,7 @@ use ArtaxServiceBuilder\BadResponseException;
 use GithubService\OneTimePasswordAppException;
 use GithubService\OneTimePasswordSMSException;
 use GithubService\RateLimitException;
+use ArtaxServiceBuilder\BasicAuthToken;
 
 
 /**
@@ -175,6 +176,77 @@ class GithubService extends GithubArtaxService {
 
         return null;
     }
+
+    /**
+     * @param $username
+     * @param $password
+     * @param $enterPasswordCallback
+     * @param $scopes
+     * @param $applicationName
+     * @param $noteURL
+     * @param int $maxAttempts
+     * @return \GithubService\Model\Authorization
+     */
+    function createOrRetrieveAuth(
+        $username,
+        $password,
+        $enterPasswordCallback,
+        $scopes,
+        $applicationName,
+        $noteURL,
+        $maxAttempts = 3
+    ) {
+        $basicToken = new BasicAuthToken($username, $password);
+
+        $otp = false;
+
+        for ($i = 0; $i < $maxAttempts; $i++) {
+            try {
+                $currentAuthCommand = $this->listAuthorizations($basicToken);
+
+                if ($otp) {
+                    $currentAuthCommand->setOtp($otp);
+                }
+
+                $currentAuths = $currentAuthCommand->execute();
+                $currentAuth = $currentAuths->findNoteAuthorization($applicationName);
+
+                if ($currentAuth) {
+                    //echo "Already have current auth: ".$currentAuth->token;
+                    return $currentAuth;
+                }
+
+                $createAuthToken = $this->createAuthToken(
+                    $basicToken,
+                    $scopes,
+                    $applicationName,
+                    $noteURL
+                );
+                
+                if ($otp) {
+                    $createAuthToken->setOtp($otp);
+                }
+
+                $authResult = $createAuthToken->execute();
+
+                return $authResult;
+            }
+            catch (OneTimePasswordAppException $otpae) {
+                $otp = $enterPasswordCallback(
+                    "Please enter the code from your 2nd factor auth app:"
+                );
+            }
+            catch (OneTimePasswordSMSException $otse) {
+                $otp = $enterPasswordCallback(
+                    "Please enter the code from the SMS Github should have sent you:"
+                );
+            }
+        }
+
+        throw new GithubArtaxServiceException("Failed to create or retrieve oauth token.");
+    }
+    
+    
 }
 
  

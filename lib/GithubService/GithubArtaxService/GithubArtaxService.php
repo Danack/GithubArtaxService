@@ -8,7 +8,7 @@ namespace GithubService\GithubArtaxService;
 
 use Amp\Artax\Request;
 use Amp\Artax\Response;
-use GithubService\Operation\oauthAuthorize;
+use GithubService\Operation\getOauthAuthorization;
 use ArtaxServiceBuilder\BadResponseException;
 use ArtaxServiceBuilder\ProcessResponseException;
 use GithubService\Operation\listRepoCommitsPaginate;
@@ -56,9 +56,11 @@ class GithubArtaxService implements \GithubService\GithubService {
     }
 
     /**
-     * oauthAuthorize
+     * getOauthAuthorization
      *
-     * Start the web application flow for getting an Outh2 token. 
+     * Retrieve the Outh2 token for an application. You should have directed the user
+     * to https://github.com/login/oauth/authorize with client_id etc set before
+     * calling this.
      *
      * @param mixed $client_id string Required. The client ID you received from GitHub
      * when you registered.
@@ -68,17 +70,22 @@ class GithubArtaxService implements \GithubService\GithubService {
      * 1.
      * @param mixed $redirect_uri string The URL in your app where users will be sent
      * after authorization. See details below about redirect urls.
-     * @return \GithubService\Operation\oauthAuthorize The new operation
+     * @return \GithubService\Operation\getOauthAuthorization The new operation
      */
-    public function oauthAuthorize($client_id, $client_secret, $code, $redirect_uri) {
-        $instance = new oauthAuthorize($this, $this->getUserAgent(), $client_id, $client_secret, $code, $redirect_uri);
+    public function getOauthAuthorization($client_id, $client_secret, $code, $redirect_uri) {
+        $instance = new getOauthAuthorization($this, $this->getUserAgent(), $client_id, $client_secret, $code, $redirect_uri);
         return $instance;
     }
 
     /**
      * listRepoCommitsPaginate
      *
-     * @param string $Authorization The token to use for the request.
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
      * @param mixed $pageURL 
      * @return \GithubService\Operation\listRepoCommitsPaginate The new operation
      */
@@ -90,7 +97,12 @@ class GithubArtaxService implements \GithubService\GithubService {
     /**
      * getAuthorizations
      *
-     * @param string $Authorization The token to use for the request.
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
      * @return \GithubService\Operation\getAuthorizations The new operation
      */
     public function getAuthorizations($Authorization) {
@@ -101,7 +113,12 @@ class GithubArtaxService implements \GithubService\GithubService {
     /**
      * listAuthorizations
      *
-     * @param string $Authorization The token to use for the request.
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
      * @return \GithubService\Operation\listAuthorizations The new operation
      */
     public function listAuthorizations($Authorization) {
@@ -123,7 +140,12 @@ class GithubArtaxService implements \GithubService\GithubService {
     /**
      * createAuthToken
      *
-     * @param string $Authorization The token to use for the request.
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
      * @param mixed $scopes 
      * @param mixed $note 
      * @param mixed $note_url 
@@ -137,7 +159,12 @@ class GithubArtaxService implements \GithubService\GithubService {
     /**
      * revokeAllAuthority
      *
-     * @param string $Authorization The token to use for the request.
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
      * @param mixed $client_id The id of the client.
      * @return \GithubService\Operation\revokeAllAuthority The new operation
      */
@@ -149,7 +176,12 @@ class GithubArtaxService implements \GithubService\GithubService {
     /**
      * listRepositories
      *
-     * @param string $Authorization The token to use for the request.
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
      * @param string $type Can be one of all, owner, public, private, member. Default:
      * all
      * @param string $sort Can be one of created, updated, pushed, full_name. Default:
@@ -166,7 +198,12 @@ class GithubArtaxService implements \GithubService\GithubService {
     /**
      * listUserRepositories
      *
-     * @param string $Authorization The token to use for the request.
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
      * @param string $username The user to fetch the repos for.
      * @param string $type Can be one of all, owner, member. Default: owner
      * @param string $sort Can be one of created, updated, pushed, full_name. Default:
@@ -183,7 +220,12 @@ class GithubArtaxService implements \GithubService\GithubService {
     /**
      * listOrganizationRepositories
      *
-     * @param string $Authorization The token to use for the request.
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
      * @param string $organisation The organisation to fetch the repos for.
      * @param string $type Can be one of all, owner, member. Default: owner
      * @return \GithubService\Operation\listOrganizationRepositories The new operation
@@ -196,7 +238,12 @@ class GithubArtaxService implements \GithubService\GithubService {
     /**
      * listAllPublicRepositories
      *
-     * @param string $Authorization The token to use for the request.
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
      * @param string $since The integer ID of the last Repository that you’ve seen.
      * @return \GithubService\Operation\listAllPublicRepositories The new operation
      */
@@ -208,7 +255,12 @@ class GithubArtaxService implements \GithubService\GithubService {
     /**
      * getRepo
      *
-     * @param string $Authorization The token to use for the request.
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
      * @param string $username The user to fetch the repos for.
      * @param string $type Can be one of all, owner, member. Default: owner
      * @param string $sort Can be one of created, updated, pushed, full_name. Default:
@@ -225,7 +277,12 @@ class GithubArtaxService implements \GithubService\GithubService {
     /**
      * getUserInfoByName
      *
-     * @param string $Authorization The token to use for the request.
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
      * @param mixed $username The username of the client.
      * @return \GithubService\Operation\getUserInfoByName The new operation
      */
@@ -237,7 +294,12 @@ class GithubArtaxService implements \GithubService\GithubService {
     /**
      * listRepoLanguages
      *
-     * @param string $Authorization The token to use for the request.
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
      * @param string $owner The owner of the repo to fetch contributors for.
      * @param string $repo The repo to fetch contributors for.
      * @return \GithubService\Operation\listRepoLanguages The new operation
@@ -250,7 +312,12 @@ class GithubArtaxService implements \GithubService\GithubService {
     /**
      * listRepoTeams
      *
-     * @param string $Authorization The token to use for the request.
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
      * @param string $owner The owner of the repo to fetch contributors for.
      * @param string $repo The repo to fetch contributors for.
      * @return \GithubService\Operation\listRepoTeams The new operation
@@ -263,7 +330,12 @@ class GithubArtaxService implements \GithubService\GithubService {
     /**
      * listRepoTagsPaginate
      *
-     * @param string $Authorization The token to use for the request.
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
      * @param mixed $pageURL 
      * @return \GithubService\Operation\listRepoTagsPaginate The new operation
      */
@@ -279,7 +351,12 @@ class GithubArtaxService implements \GithubService\GithubService {
      * authed request (for private repos and higher rate limiting), or as unsigned,
      * (public only, lower limit).
      *
-     * @param string $Authorization The token to use for the request.
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
      * @param mixed $owner 
      * @param mixed $repo 
      * @return \GithubService\Operation\listRepoTags The new operation
@@ -292,7 +369,12 @@ class GithubArtaxService implements \GithubService\GithubService {
     /**
      * listRepoBranches
      *
-     * @param string $Authorization The token to use for the request.
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
      * @param mixed $owner 
      * @param mixed $repo 
      * @return \GithubService\Operation\listRepoBranches The new operation
@@ -305,7 +387,12 @@ class GithubArtaxService implements \GithubService\GithubService {
     /**
      * getRepoBranch
      *
-     * @param string $Authorization The token to use for the request.
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
      * @param mixed $owner 
      * @param mixed $repo 
      * @param mixed $branch 
@@ -319,7 +406,12 @@ class GithubArtaxService implements \GithubService\GithubService {
     /**
      * deleteRepo
      *
-     * @param string $Authorization The token to use for the request.
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
      * @param mixed $owner 
      * @param mixed $repo 
      * @return \GithubService\Operation\deleteRepo The new operation
@@ -332,7 +424,12 @@ class GithubArtaxService implements \GithubService\GithubService {
     /**
      * listRepoCommits
      *
-     * @param string $Authorization The token to use for the request.
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
      * @param mixed $owner 
      * @param mixed $repo 
      * @return \GithubService\Operation\listRepoCommits The new operation
@@ -345,7 +442,12 @@ class GithubArtaxService implements \GithubService\GithubService {
     /**
      * getSingleCommit
      *
-     * @param string $Authorization The token to use for the request.
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
      * @param mixed $owner 
      * @param mixed $repo 
      * @param string $sha SHA of the commit to get
@@ -359,7 +461,12 @@ class GithubArtaxService implements \GithubService\GithubService {
     /**
      * getUserInfo
      *
-     * @param string $Authorization The token to use for the request.
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
      * @return \GithubService\Operation\getUserInfo The new operation
      */
     public function getUserInfo($Authorization) {
@@ -372,7 +479,12 @@ class GithubArtaxService implements \GithubService\GithubService {
      *
      * Get users email addresses
      *
-     * @param string $Authorization The token to use for the request.
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
      * @return \GithubService\Operation\getUserEmails The new operation
      */
     public function getUserEmails($Authorization) {
@@ -385,7 +497,12 @@ class GithubArtaxService implements \GithubService\GithubService {
      *
      * Get users email addresses
      *
-     * @param string $Authorization The token to use for the request.
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
      * @param mixed $emails Array of the emails to add
      * @return \GithubService\Operation\addUserEmails The new operation
      */

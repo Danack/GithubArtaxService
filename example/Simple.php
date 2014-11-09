@@ -15,12 +15,9 @@ function displayTags(RepoTags $repoTags) {
 }
 
 
-$artaxClient = new ArtaxClient(); //
-$cache = new NullResponseCache(); //This is just a test, we don't cache anything
-
 $github = new GithubService(
-    $artaxClient, 
-    $cache, 
+    new ArtaxClient(),
+    new NullResponseCache(), //This is just an example, we don't cache anything
     'Danack/GithubArtaxService' //Change this to your github name/project
 );
 

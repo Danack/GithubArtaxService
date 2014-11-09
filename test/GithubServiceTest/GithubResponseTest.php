@@ -8,6 +8,8 @@ class GithubResponseTest extends \PHPUnit_Framework_TestCase {
     //TODO Add checks on the data.
     public function additionProvider() {
         return array(
+            ['createOauthToken.txt', 'GithubService\Model\Authorizations'],
+            
             ['getSingleCommit.txt', 'GithubService\Model\Commit'],
             ['getSingleUser.txt', 'GithubService\Model\User'],
             ['listCommitsOnARepository.txt', 'GithubService\Model\Commits'],
@@ -39,10 +41,6 @@ class GithubResponseTest extends \PHPUnit_Framework_TestCase {
             $expectedClassname,
             $instance
         );
-
-//        if ($expectedClassname == 'GithubService\Model\Languages') {
-//            var_dump($instance);
-//        }
     }
 }
 

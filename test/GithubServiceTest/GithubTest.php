@@ -37,6 +37,7 @@ class GithubTest extends \PHPUnit_Framework_TestCase {
 
     /**
      * @group oauth
+     * @group integration
      */
     function testBasicOauth() {
 

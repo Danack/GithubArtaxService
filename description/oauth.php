@@ -71,8 +71,8 @@ return array(
     //POST /authorizations
     'createAuthToken' => [
         'extends' => 'defaultGetOauthOperation',
-        'method' => 'POST',
-        "responseClass" => 'GithubService\Model\Authorizations',
+        'httpMethod' => 'POST',
+        "responseClass" => 'GithubService\Model\Authorization',
         'uri' => '/authorizations',
         'parameters' => array(
             'scopes' => [
