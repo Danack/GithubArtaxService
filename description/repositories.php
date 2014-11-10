@@ -266,6 +266,7 @@ return array (
         ),
     ],
 
+    /*
     'listRepoTagsPaginate' => array(
         'extends' => 'defaultGetOauthOperation',
         "responseClass" => 'GithubService\Model\RepoTags',
@@ -274,7 +275,7 @@ return array (
                 "location" => "absoluteURL",
             ),
         ),
-    ),
+    ), */
 
 
     //List Tags

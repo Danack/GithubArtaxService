@@ -20,22 +20,14 @@ $service = array (
     "baseUrl" => "https://api.github.com",
     "description" => "Github API using Artax as a backend",
     "operations" => array(
-        
-        /*'defaultGetOperation' => array(
-            "httpMethod" => "GET",
-            "parameters" => array(
-                'Accept' => $acceptParam,
-                'userAgent' => $userAgentParam
-            )
-        ), */
-        
+
         'defaultGetOauthOperation' => array(
             "httpMethod" => "GET",
             "parameters" => array(
                 'Accept' => $acceptParam,
                 'Authorization' => array(
                     "location" => "header",
-                    "description" => "The token to use for the request. This should either be an a complete token in the format appropriate format e.g. 'token 123567890' for an oauth token, or '\"Basic \".base64_encode(\$username.\":\".\$password)\"' for a Basic token or anything that can be cast to a string in the correct format e.g. an  \ArtaxServiceBuilder\BasicAuthToken object." ,
+                    "description" => "The token to use for the request. This should either be an a complete token in the format appropriate format e.g. 'token 123567890' for an oauth token, or '\"Basic \".base64_encode(\$username.\":\".\$password)\"' for a Basic token or anything that can be cast to a string in the correct format e.g. an  \\ArtaxServiceBuilder\\BasicAuthToken object." ,
                     'sentAs' => 'Authorization',
                     "filters" => array(
                         array(
@@ -98,7 +90,16 @@ $service = array (
             ]
         ],
 
-        'listRepoCommitsPaginate' => array(
+        'genericPaginate' => array(
+            'extends' => 'defaultGetOauthOperation',
+            'parameters' => array(
+                'pageURL' => array(
+                    "location" => "absoluteURL",
+                ),
+            ),
+        ),
+
+        /*'listRepoCommitsPaginate' => array(
             'extends' => 'defaultGetOauthOperation',
             "responseClass" => 'GithubService\Model\Commits',
             'parameters' => array(
@@ -106,7 +107,7 @@ $service = array (
                     "location" => "absoluteURL",
                 ),
             ),
-        ),
+        ), */
     )
 );
 
@@ -132,7 +133,7 @@ $externalFiles = array(
 
 
 foreach ($externalFiles as $externalFile) {
-    $repoOperations = require_once $externalFile;
+    $repoOperations = require $externalFile;
     $service['operations'] = array_merge($service['operations'], $repoOperations);
 }
 

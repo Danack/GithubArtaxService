@@ -50,7 +50,8 @@ class GithubService extends GithubArtaxService {
         }
         
         $response = parent::execute($request, $operation);
-        $newRateLimit = \GithubService\RateLimit::createFromResponse($response);
+        $originalResponse = $operation->getOriginalResponse();
+        $newRateLimit = \GithubService\RateLimit::createFromResponse($originalResponse);
 
         if ($newRateLimit != null) {
             $this->rateLimit = $newRateLimit;
@@ -78,9 +79,12 @@ class GithubService extends GithubArtaxService {
             \Exception $e = null, 
             $processedData,     //This will be of the type returned by the operation
             Response $response = null
-        ) use ($callback) {
-            if ($response) {
-                $this->parseRateLimit($response);
+        ) use ($callback, $operation) {
+
+            $originalResponse = $operation->getOriginalResponse();
+            
+            if ($originalResponse) {
+                $this->parseRateLimit($originalResponse);
             }
             //Call the original callback
             $callback($e, $processedData, $response);

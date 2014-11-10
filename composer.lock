@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "amphp/amp",
-            "version": "v0.12.0",
+            "version": "v0.13.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/amp.git",
-                "reference": "2fd6538e47e173586649b8101a7a49845357a6c3"
+                "reference": "5c46db0c41bcf6a7b5ad74f2150610acb1e286fc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/amp/zipball/2fd6538e47e173586649b8101a7a49845357a6c3",
-                "reference": "2fd6538e47e173586649b8101a7a49845357a6c3",
+                "url": "https://api.github.com/repos/amphp/amp/zipball/5c46db0c41bcf6a7b5ad74f2150610acb1e286fc",
+                "reference": "5c46db0c41bcf6a7b5ad74f2150610acb1e286fc",
                 "shasum": ""
             },
             "require": {
@@ -59,7 +59,7 @@
                 "non-blocking",
                 "promise"
             ],
-            "time": "2014-10-23 02:18:34"
+            "time": "2014-11-05 16:57:59"
         },
         {
             "name": "amphp/artax",
@@ -116,16 +116,16 @@
         },
         {
             "name": "amphp/dns",
-            "version": "v0.3.3",
+            "version": "v0.3.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/dns.git",
-                "reference": "980fd6a434dd58e373a8e3422d3a7350a6f633d9"
+                "reference": "e58d46d3c565db24c17428bf42a75d55fedd7bc6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/dns/zipball/980fd6a434dd58e373a8e3422d3a7350a6f633d9",
-                "reference": "980fd6a434dd58e373a8e3422d3a7350a6f633d9",
+                "url": "https://api.github.com/repos/amphp/dns/zipball/e58d46d3c565db24c17428bf42a75d55fedd7bc6",
+                "reference": "e58d46d3c565db24c17428bf42a75d55fedd7bc6",
                 "shasum": ""
             },
             "require": {
@@ -165,7 +165,7 @@
                 "dns",
                 "resolve"
             ],
-            "time": "2014-10-23 02:32:01"
+            "time": "2014-11-04 04:49:19"
         },
         {
             "name": "danack/artaxservicebuilder",
@@ -173,12 +173,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Danack/ArtaxServiceBuilder.git",
-                "reference": "e78b3766cc0843e5f9ce2235ba2d4b3f7ebb63c5"
+                "reference": "c722862add2a732095fe23fb6fe0a6ba1be8fd38"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Danack/ArtaxServiceBuilder/zipball/e78b3766cc0843e5f9ce2235ba2d4b3f7ebb63c5",
-                "reference": "e78b3766cc0843e5f9ce2235ba2d4b3f7ebb63c5",
+                "url": "https://api.github.com/repos/Danack/ArtaxServiceBuilder/zipball/c722862add2a732095fe23fb6fe0a6ba1be8fd38",
+                "reference": "c722862add2a732095fe23fb6fe0a6ba1be8fd38",
                 "shasum": ""
             },
             "require": {
@@ -200,16 +200,21 @@
                 "source": "https://github.com/Danack/ArtaxServiceBuilder/tree/master",
                 "issues": "https://github.com/Danack/ArtaxServiceBuilder/issues"
             },
-            "time": "2014-10-27 09:55:30"
+            "time": "2014-11-10 13:43:01"
         },
         {
             "name": "danack/danack-code",
-            "version": "2.4.5",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Danack/DanackCode.git",
+                "reference": "a77a3e7a8856511ed4b6c86b00682559c176179e"
+            },
             "dist": {
                 "type": "zip",
-                "url": "http://satis.basereality.com/packages/Danack/DanackCode/Danack_DanackCode_2.4.5.zip",
-                "reference": null,
-                "shasum": "8b55bb4cc95f966989b2a799c468e762d7ae60e9"
+                "url": "https://api.github.com/repos/Danack/DanackCode/zipball/a77a3e7a8856511ed4b6c86b00682559c176179e",
+                "reference": "a77a3e7a8856511ed4b6c86b00682559c176179e",
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.23"
@@ -220,6 +225,7 @@
                     "Danack\\Code\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -227,7 +233,8 @@
             "keywords": [
                 "code",
                 "zf2"
-            ]
+            ],
+            "time": "2014-10-21 16:09:43"
         },
         {
             "name": "danack/danackhttp2",
@@ -301,16 +308,16 @@
         },
         {
             "name": "rdlowrey/nbsock",
-            "version": "v0.4.3",
+            "version": "v0.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rdlowrey/nbsock.git",
-                "reference": "dea161cb4b0d952a49d775def3b5e7eead99bb2f"
+                "reference": "96e46fdf34b5b180bb9387d89cb69cb6910f24e5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rdlowrey/nbsock/zipball/dea161cb4b0d952a49d775def3b5e7eead99bb2f",
-                "reference": "dea161cb4b0d952a49d775def3b5e7eead99bb2f",
+                "url": "https://api.github.com/repos/rdlowrey/nbsock/zipball/96e46fdf34b5b180bb9387d89cb69cb6910f24e5",
+                "reference": "96e46fdf34b5b180bb9387d89cb69cb6910f24e5",
                 "shasum": ""
             },
             "require": {
@@ -349,7 +356,7 @@
                 "tcp",
                 "tls"
             ],
-            "time": "2014-10-28 02:59:26"
+            "time": "2014-11-03 05:09:34"
         }
     ],
     "packages-dev": [
@@ -467,12 +474,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "62f8cd539ab2e2c25077aeb5f5ed3209acee3612"
+                "reference": "c3e185a27ae59680237c836caecef66c8bd839a8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/62f8cd539ab2e2c25077aeb5f5ed3209acee3612",
-                "reference": "62f8cd539ab2e2c25077aeb5f5ed3209acee3612",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/c3e185a27ae59680237c836caecef66c8bd839a8",
+                "reference": "c3e185a27ae59680237c836caecef66c8bd839a8",
                 "shasum": ""
             },
             "require": {
@@ -524,7 +531,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2014-09-01 22:04:15"
+            "time": "2014-10-31 10:06:54"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -895,12 +902,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/diff.git",
-                "reference": "92d423df43b160006907ea4297b916fdf00415d8"
+                "reference": "3e22c89be2e1cddf7db89699cb23a9159df12e0c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/diff/zipball/92d423df43b160006907ea4297b916fdf00415d8",
-                "reference": "92d423df43b160006907ea4297b916fdf00415d8",
+                "url": "https://api.github.com/repos/sebastianbergmann/diff/zipball/3e22c89be2e1cddf7db89699cb23a9159df12e0c",
+                "reference": "3e22c89be2e1cddf7db89699cb23a9159df12e0c",
                 "shasum": ""
             },
             "require": {
@@ -939,7 +946,7 @@
             "keywords": [
                 "diff"
             ],
-            "time": "2014-10-19 13:19:30"
+            "time": "2014-11-05 15:28:21"
         },
         {
             "name": "sebastian/environment",
@@ -1094,12 +1101,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Yaml.git",
-                "reference": "4c0baf9a5b5c9e50ddd7a46f3c75cb85baf5d6c5"
+                "reference": "9da3813f36985a4089f7e83c601a1034d125ff69"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Yaml/zipball/4c0baf9a5b5c9e50ddd7a46f3c75cb85baf5d6c5",
-                "reference": "4c0baf9a5b5c9e50ddd7a46f3c75cb85baf5d6c5",
+                "url": "https://api.github.com/repos/symfony/Yaml/zipball/9da3813f36985a4089f7e83c601a1034d125ff69",
+                "reference": "9da3813f36985a4089f7e83c601a1034d125ff69",
                 "shasum": ""
             },
             "require": {
@@ -1132,7 +1139,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "http://symfony.com",
-            "time": "2014-10-26 07:46:28"
+            "time": "2014-11-03 03:55:50"
         }
     ],
     "aliases": [

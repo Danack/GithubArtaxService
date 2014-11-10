@@ -11,7 +11,7 @@ use Amp\Artax\Response;
 use GithubService\Operation\getOauthAuthorization;
 use ArtaxServiceBuilder\BadResponseException;
 use ArtaxServiceBuilder\ProcessResponseException;
-use GithubService\Operation\listRepoCommitsPaginate;
+use GithubService\Operation\genericPaginate;
 use GithubService\Operation\getAuthorizations;
 use GithubService\Operation\listAuthorizations;
 use GithubService\Operation\basicListAuthorizations;
@@ -25,7 +25,6 @@ use GithubService\Operation\getRepo;
 use GithubService\Operation\getUserInfoByName;
 use GithubService\Operation\listRepoLanguages;
 use GithubService\Operation\listRepoTeams;
-use GithubService\Operation\listRepoTagsPaginate;
 use GithubService\Operation\listRepoTags;
 use GithubService\Operation\listRepoBranches;
 use GithubService\Operation\getRepoBranch;
@@ -35,6 +34,17 @@ use GithubService\Operation\getSingleCommit;
 use GithubService\Operation\getUserInfo;
 use GithubService\Operation\getUserEmails;
 use GithubService\Operation\addUserEmails;
+use GithubService\Operation\getAuthorizationsPaginate;
+use GithubService\Operation\listAuthorizationsPaginate;
+use GithubService\Operation\basicListAuthorizationsPaginate;
+use GithubService\Operation\getUserInfoByNamePaginate;
+use GithubService\Operation\listRepoTagsPaginate;
+use GithubService\Operation\listRepoBranchesPaginate;
+use GithubService\Operation\getRepoBranchPaginate;
+use GithubService\Operation\listRepoCommitsPaginate;
+use GithubService\Operation\getSingleCommitPaginate;
+use GithubService\Operation\getUserInfoPaginate;
+use GithubService\Operation\getUserEmailsPaginate;
 use ArtaxServiceBuilder\ResponseCache;
 
 class GithubArtaxService implements \GithubService\GithubService {
@@ -78,7 +88,7 @@ class GithubArtaxService implements \GithubService\GithubService {
     }
 
     /**
-     * listRepoCommitsPaginate
+     * genericPaginate
      *
      * @param string $Authorization The token to use for the request. This should
      * either be an a complete token in the format appropriate format e.g. 'token
@@ -87,10 +97,10 @@ class GithubArtaxService implements \GithubService\GithubService {
      * can be cast to a string in the correct format e.g. an 
      * \ArtaxServiceBuilder\BasicAuthToken object.
      * @param mixed $pageURL 
-     * @return \GithubService\Operation\listRepoCommitsPaginate The new operation
+     * @return \GithubService\Operation\genericPaginate The new operation
      */
-    public function listRepoCommitsPaginate($Authorization, $pageURL) {
-        $instance = new listRepoCommitsPaginate($this, $Authorization, $this->getUserAgent(), $pageURL);
+    public function genericPaginate($Authorization, $pageURL) {
+        $instance = new genericPaginate($this, $Authorization, $this->getUserAgent(), $pageURL);
         return $instance;
     }
 
@@ -328,23 +338,6 @@ class GithubArtaxService implements \GithubService\GithubService {
     }
 
     /**
-     * listRepoTagsPaginate
-     *
-     * @param string $Authorization The token to use for the request. This should
-     * either be an a complete token in the format appropriate format e.g. 'token
-     * 123567890' for an oauth token, or '"Basic
-     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
-     * can be cast to a string in the correct format e.g. an 
-     * \ArtaxServiceBuilder\BasicAuthToken object.
-     * @param mixed $pageURL 
-     * @return \GithubService\Operation\listRepoTagsPaginate The new operation
-     */
-    public function listRepoTagsPaginate($Authorization, $pageURL) {
-        $instance = new listRepoTagsPaginate($this, $Authorization, $this->getUserAgent(), $pageURL);
-        return $instance;
-    }
-
-    /**
      * listRepoTags
      *
      * List tags for a repository. Response can be paged. This can be used either as a
@@ -512,6 +505,194 @@ class GithubArtaxService implements \GithubService\GithubService {
     }
 
     /**
+     * getAuthorizationsPaginate
+     *
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
+     * @param mixed $pageURL 
+     * @return \GithubService\Operation\getAuthorizationsPaginate The new operation
+     */
+    public function getAuthorizationsPaginate($Authorization, $pageURL) {
+        $instance = new getAuthorizationsPaginate($this, $Authorization, $this->getUserAgent(), $pageURL);
+        return $instance;
+    }
+
+    /**
+     * listAuthorizationsPaginate
+     *
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
+     * @param mixed $pageURL 
+     * @return \GithubService\Operation\listAuthorizationsPaginate The new operation
+     */
+    public function listAuthorizationsPaginate($Authorization, $pageURL) {
+        $instance = new listAuthorizationsPaginate($this, $Authorization, $this->getUserAgent(), $pageURL);
+        return $instance;
+    }
+
+    /**
+     * basicListAuthorizationsPaginate
+     *
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
+     * @param mixed $pageURL 
+     * @return \GithubService\Operation\basicListAuthorizationsPaginate The new
+     * operation
+     */
+    public function basicListAuthorizationsPaginate($Authorization, $pageURL) {
+        $instance = new basicListAuthorizationsPaginate($this, $Authorization, $this->getUserAgent(), $pageURL);
+        return $instance;
+    }
+
+    /**
+     * getUserInfoByNamePaginate
+     *
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
+     * @param mixed $pageURL 
+     * @return \GithubService\Operation\getUserInfoByNamePaginate The new operation
+     */
+    public function getUserInfoByNamePaginate($Authorization, $pageURL) {
+        $instance = new getUserInfoByNamePaginate($this, $Authorization, $this->getUserAgent(), $pageURL);
+        return $instance;
+    }
+
+    /**
+     * listRepoTagsPaginate
+     *
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
+     * @param mixed $pageURL 
+     * @return \GithubService\Operation\listRepoTagsPaginate The new operation
+     */
+    public function listRepoTagsPaginate($Authorization, $pageURL) {
+        $instance = new listRepoTagsPaginate($this, $Authorization, $this->getUserAgent(), $pageURL);
+        return $instance;
+    }
+
+    /**
+     * listRepoBranchesPaginate
+     *
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
+     * @param mixed $pageURL 
+     * @return \GithubService\Operation\listRepoBranchesPaginate The new operation
+     */
+    public function listRepoBranchesPaginate($Authorization, $pageURL) {
+        $instance = new listRepoBranchesPaginate($this, $Authorization, $this->getUserAgent(), $pageURL);
+        return $instance;
+    }
+
+    /**
+     * getRepoBranchPaginate
+     *
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
+     * @param mixed $pageURL 
+     * @return \GithubService\Operation\getRepoBranchPaginate The new operation
+     */
+    public function getRepoBranchPaginate($Authorization, $pageURL) {
+        $instance = new getRepoBranchPaginate($this, $Authorization, $this->getUserAgent(), $pageURL);
+        return $instance;
+    }
+
+    /**
+     * listRepoCommitsPaginate
+     *
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
+     * @param mixed $pageURL 
+     * @return \GithubService\Operation\listRepoCommitsPaginate The new operation
+     */
+    public function listRepoCommitsPaginate($Authorization, $pageURL) {
+        $instance = new listRepoCommitsPaginate($this, $Authorization, $this->getUserAgent(), $pageURL);
+        return $instance;
+    }
+
+    /**
+     * getSingleCommitPaginate
+     *
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
+     * @param mixed $pageURL 
+     * @return \GithubService\Operation\getSingleCommitPaginate The new operation
+     */
+    public function getSingleCommitPaginate($Authorization, $pageURL) {
+        $instance = new getSingleCommitPaginate($this, $Authorization, $this->getUserAgent(), $pageURL);
+        return $instance;
+    }
+
+    /**
+     * getUserInfoPaginate
+     *
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
+     * @param mixed $pageURL 
+     * @return \GithubService\Operation\getUserInfoPaginate The new operation
+     */
+    public function getUserInfoPaginate($Authorization, $pageURL) {
+        $instance = new getUserInfoPaginate($this, $Authorization, $this->getUserAgent(), $pageURL);
+        return $instance;
+    }
+
+    /**
+     * getUserEmailsPaginate
+     *
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
+     * @param mixed $pageURL 
+     * @return \GithubService\Operation\getUserEmailsPaginate The new operation
+     */
+    public function getUserEmailsPaginate($Authorization, $pageURL) {
+        $instance = new getUserEmailsPaginate($this, $Authorization, $this->getUserAgent(), $pageURL);
+        return $instance;
+    }
+
+    /**
      * @return
      */
     public function getUserAgent() {
@@ -541,6 +722,7 @@ class GithubArtaxService implements \GithubService\GithubService {
 
         if ($response) {
             $operation->setResponse($response);
+            $operation->setOriginalResponse($response);
         }
 
         if ($operation->shouldResponseBeCached($response)) {
@@ -550,7 +732,8 @@ class GithubArtaxService implements \GithubService\GithubService {
         if ($operation->shouldUseCachedResponse($response)) {
             $cachedResponse = $this->responseCache->getResponse($originalRequest);
             if ($cachedResponse) {
-                $response = $cachedResponse; 
+                $response = $cachedResponse;
+                $operation->setResponse($response);
             }
             //@TODO This code should only be reached if the cache entry was deleted
             //so throw an exception? Or just leave the 304 to error?
@@ -571,8 +754,15 @@ class GithubArtaxService implements \GithubService\GithubService {
      * Execute an operation asynchronously.
      *
      * @param \ArtaxServiceBuilder\Operation $operation The operation to perform
-     * @param callable $callback The callback to call on completion/response.
-     * Parameters should be blah blah blah
+     * @param callable $callback The callback to call on completion/response. The
+     * signature of the method should be:
+     * function(
+     *     \Exception $error = null, // null if no error 
+     *     $parsedData = null, //The parsed operation data i.e. same type as
+     * responseClass of the operation.
+     *     \Amp\Artax\Response $response = null //The response received or null if the
+     * request completely failed.
+     * )
      * @return \Amp\Promise A promise to resolve the call at some time.
      */
     public function executeAsync(\Amp\Artax\Request $request, \ArtaxServiceBuilder\Operation $operation, callable $callback) {
@@ -584,6 +774,7 @@ class GithubArtaxService implements \GithubService\GithubService {
 
             if ($response) {
                 $operation->setResponse($response);
+                $operation->setOriginalResponse($response);
             }
 
             if($error) {

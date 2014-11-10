@@ -9,19 +9,24 @@ namespace GithubService\Operation;
 class listRepoCommits implements \ArtaxServiceBuilder\Operation {
 
     /**
-     * @var $api \GithubService\GithubArtaxService\GithubArtaxService
+     * @var \GithubService\GithubArtaxService\GithubArtaxService
      */
     public $api = null;
 
     /**
-     * @var $api array
+     * @var array
      */
     public $parameters = null;
 
     /**
-     * @var $api \Amp\Artax\Response
+     * @var \Amp\Artax\Response
      */
     public $response = null;
+
+    /**
+     * @var \Amp\Artax\Response
+     */
+    public $originalResponse = null;
 
     /**
      * Get the last response.
@@ -487,6 +492,24 @@ class listRepoCommits implements \ArtaxServiceBuilder\Operation {
      */
     public function shouldResponseBeCached(\Amp\Artax\Response $response) {
         return $this->api->shouldResponseBeCached($response);
+    }
+
+    /**
+     * Set the original response. This may be different from the cached response if one
+     * is used.
+     */
+    public function setOriginalResponse(\Amp\Artax\Response $response) {
+        $this->originalResponse = $response;
+    }
+
+    /**
+     * Get the original response. This may be different from the cached response if one
+     * is used.
+     *
+     * @return \Amp\Artax\Response
+     */
+    public function getOriginalResponse() {
+        return $this->originalResponse;
     }
 
 
