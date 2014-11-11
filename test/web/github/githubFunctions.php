@@ -668,7 +668,7 @@ function showScopesForm() {
     echo "<form action='/github/index.php' method='get'>";
 
     echo "<table width='750px'>";
-    foreach (\GithubService\Github::$scopeList as $scope => $description) {
+    foreach (\GithubService\GithubArtaxService\GithubService::$scopeDescriptions as $scope => $description) {
 
         echo "<tr>";
 

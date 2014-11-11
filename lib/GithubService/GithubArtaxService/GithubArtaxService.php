@@ -31,6 +31,7 @@ use GithubService\Operation\getRepoBranch;
 use GithubService\Operation\deleteRepo;
 use GithubService\Operation\listRepoCommits;
 use GithubService\Operation\getSingleCommit;
+use GithubService\Operation\updateFile;
 use GithubService\Operation\getUserInfo;
 use GithubService\Operation\getUserEmails;
 use GithubService\Operation\addUserEmails;
@@ -452,6 +453,30 @@ class GithubArtaxService implements \GithubService\GithubService {
     }
 
     /**
+     * updateFile
+     *
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
+     * @param mixed $path The content path.
+     * @param mixed $owner 
+     * @param string $repo 
+     * @param string $content The updated file content, Base64 encoded.
+     * @param string $sha The blob SHA of the file being replaced.
+     * @param string $branch The branch name. Default: the repository’s default
+     * branch (usually master)
+     * @param string $message The commit message.
+     * @return \GithubService\Operation\updateFile The new operation
+     */
+    public function updateFile($Authorization, $path, $owner, $repo, $content, $sha, $branch, $message) {
+        $instance = new updateFile($this, $Authorization, $this->getUserAgent(), $path, $owner, $repo, $content, $sha, $branch, $message);
+        return $instance;
+    }
+
+    /**
      * getUserInfo
      *
      * @param string $Authorization The token to use for the request. This should
@@ -789,7 +814,8 @@ class GithubArtaxService implements \GithubService\GithubService {
             if ($operation->shouldUseCachedResponse($response)) {
                 $cachedResponse = $this->responseCache->getResponse($originalRequest);
                 if ($cachedResponse) {
-                    $response = $cachedResponse; 
+                    $response = $cachedResponse;
+                    $operation->setResponse($response);
                 }
             }
 

@@ -6,22 +6,27 @@
 //
 namespace GithubService\Operation;
 
-class basicAuthToOauth implements \ArtaxServiceBuilder\Operation {
+class getSingleCommitPaginate implements \ArtaxServiceBuilder\Operation {
 
     /**
-     * @var $api \GithubService\GithubArtaxService\GithubArtaxService
+     * @var \GithubService\GithubArtaxService\GithubArtaxService
      */
     public $api = null;
 
     /**
-     * @var $api array
+     * @var array
      */
     public $parameters = null;
 
     /**
-     * @var $api \Amp\Artax\Response
+     * @var \Amp\Artax\Response
      */
     public $response = null;
+
+    /**
+     * @var \Amp\Artax\Response
+     */
+    public $originalResponse = null;
 
     /**
      * Get the last response.
@@ -42,17 +47,15 @@ class basicAuthToOauth implements \ArtaxServiceBuilder\Operation {
         $this->response = $response;
     }
 
-    public function __construct(\GithubService\GithubArtaxService\GithubArtaxService $api, $userAgent, $Authorization, $scopes, $note, $note_url) {
+    public function __construct(\GithubService\GithubArtaxService\GithubArtaxService $api, $Authorization, $userAgent, $pageURL) {
         $defaultParams = [
             'Accept' => 'application/vnd.github.v3+json',
         ];
         $this->setParams($defaultParams);
         $this->api = $api;
-        $this->parameters['userAgent'] = $userAgent;
         $this->parameters['Authorization'] = $Authorization;
-        $this->parameters['scopes'] = $scopes;
-        $this->parameters['note'] = $note;
-        $this->parameters['note_url'] = $note_url;
+        $this->parameters['userAgent'] = $userAgent;
+        $this->parameters['pageURL'] = $pageURL;
     }
 
     public function setAPI(\GithubService\GithubArtaxService\GithubArtaxService $api) {
@@ -63,20 +66,20 @@ class basicAuthToOauth implements \ArtaxServiceBuilder\Operation {
         if (array_key_exists('Accept', $params)) {
             $this->parameters['Accept'] = $params['Accept'];
         }
-        if (array_key_exists('userAgent', $params)) {
-            $this->parameters['userAgent'] = $params['userAgent'];
-        }
         if (array_key_exists('Authorization', $params)) {
             $this->parameters['Authorization'] = $params['Authorization'];
         }
-        if (array_key_exists('scopes', $params)) {
-            $this->parameters['scopes'] = $params['scopes'];
+        if (array_key_exists('userAgent', $params)) {
+            $this->parameters['userAgent'] = $params['userAgent'];
         }
-        if (array_key_exists('note', $params)) {
-            $this->parameters['note'] = $params['note'];
+        if (array_key_exists('perPage', $params)) {
+            $this->parameters['perPage'] = $params['perPage'];
         }
-        if (array_key_exists('note_url', $params)) {
-            $this->parameters['note_url'] = $params['note_url'];
+        if (array_key_exists('otp', $params)) {
+            $this->parameters['otp'] = $params['otp'];
+        }
+        if (array_key_exists('pageURL', $params)) {
+            $this->parameters['pageURL'] = $params['pageURL'];
         }
     }
 
@@ -87,6 +90,23 @@ class basicAuthToOauth implements \ArtaxServiceBuilder\Operation {
      */
     public function setAccept($Accept) {
         $this->parameters['Accept'] = $Accept;
+
+        return $this;
+    }
+
+    /**
+     * Set Authorization
+     *
+     * The token to use for the request. This should either be an a complete token in
+     * the format appropriate format e.g. 'token 123567890' for an oauth token, or
+     * '"Basic ".base64_encode($username.":".$password)"' for a Basic token or anything
+     * that can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
+     *
+     * @return $this
+     */
+    public function setAuthorization($Authorization) {
+        $this->parameters['Authorization'] = $Authorization;
 
         return $this;
     }
@@ -105,47 +125,38 @@ class basicAuthToOauth implements \ArtaxServiceBuilder\Operation {
     }
 
     /**
-     * Set Authorization
+     * Set perPage
      *
-     * The basic auth.
+     * The number of items to get per page.
      *
      * @return $this
      */
-    public function setAuthorization($Authorization) {
-        $this->parameters['Authorization'] = $Authorization;
+    public function setPerPage($perPage) {
+        $this->parameters['perPage'] = $perPage;
 
         return $this;
     }
 
     /**
-     * Set scopes
+     * Set otp
+     *
+     * The one time password.
      *
      * @return $this
      */
-    public function setScopes($scopes) {
-        $this->parameters['scopes'] = $scopes;
+    public function setOtp($otp) {
+        $this->parameters['otp'] = $otp;
 
         return $this;
     }
 
     /**
-     * Set note
+     * Set pageURL
      *
      * @return $this
      */
-    public function setNote($note) {
-        $this->parameters['note'] = $note;
-
-        return $this;
-    }
-
-    /**
-     * Set note_url
-     *
-     * @return $this
-     */
-    public function setNote_url($note_url) {
-        $this->parameters['note_url'] = $note_url;
+    public function setPageURL($pageURL) {
+        $this->parameters['pageURL'] = $pageURL;
 
         return $this;
     }
@@ -157,7 +168,7 @@ class basicAuthToOauth implements \ArtaxServiceBuilder\Operation {
     /**
      * Apply any filters necessary to the parameter
      *
-     * @return \GithubService\Model\Authorization
+     * @return \GithubService\Model\Commit
      * @param string $name The name of the parameter to get.
      */
     public function getFilteredParameter($name) {
@@ -172,7 +183,7 @@ class basicAuthToOauth implements \ArtaxServiceBuilder\Operation {
             case ('Authorization'): {
                 $args = [];
                 $args[] = $value;
-                $value = call_user_func_array('GithubService\Github::formatBasicAuthToken', $args);
+                $value = call_user_func_array('GithubService\Github::castString', $args);
                 break;
             }
 
@@ -192,33 +203,37 @@ class basicAuthToOauth implements \ArtaxServiceBuilder\Operation {
     public function createRequest() {
         $request = new \Amp\Artax\Request();
         $url = null;
-        $request->setMethod('POST');
+        $request->setMethod('GET');
 
+        $queryParameters = [];
 
-        $jsonParams = [];
         if (array_key_exists('Accept', $this->parameters) == true) {
         $value = $this->getFilteredParameter('Accept');
             $request->setHeader('Accept', $value);
         }
+        $value = $this->getFilteredParameter('Authorization');
+        if ($value != null) {
+            $request->setHeader('Authorization', $value);
+        }
         $value = $this->getFilteredParameter('userAgent');
         $request->setHeader('User-Agent', $value);
-        $value = $this->getFilteredParameter('Authorization');
-        $request->setHeader('Authorization', $value);
-        $value = $this->getFilteredParameter('scopes');
-        $jsonParams['scopes'] = $value;
-        $value = $this->getFilteredParameter('note');
-        $jsonParams['note'] = $value;
-        $value = $this->getFilteredParameter('note_url');
-        $jsonParams['note_url'] = $value;
+        if (array_key_exists('perPage', $this->parameters) == true) {
+        $value = $this->getFilteredParameter('perPage');
+            $queryParameters['per_page'] = $value;
+        }
+        if (array_key_exists('otp', $this->parameters) == true) {
+        $value = $this->getFilteredParameter('otp');
+            $request->setHeader('X-GitHub-OTP', $value);
+        }
+        $value = $this->getFilteredParameter('pageURL');
+        $url = $value;
 
         //Parameters are parsed and set, lets prepare the request
-        if (count($jsonParams)) {
-            $jsonBody = json_encode($jsonParams);
-            $request->setHeader("Content-Type", "application/json");
-            $request->setBody($jsonBody);
-        }
         if ($url == null) {
-            $url = "https://api.github.com/authorizations";
+            $url = "https://api.github.com";
+        }
+        if (count($queryParameters)) {
+            $url = $url.'?'.http_build_query($queryParameters, '', '&', PHP_QUERY_RFC3986);
         }
         $request->setUri($url);
 
@@ -241,7 +256,7 @@ class basicAuthToOauth implements \ArtaxServiceBuilder\Operation {
     /**
      * Create and execute the operation, then return the processed  response.
      *
-     * @return mixed|\GithubService\Model\Authorization
+     * @return mixed|\GithubService\Model\Commit
      */
     public function call() {
         $request = $this->createRequest();
@@ -249,7 +264,7 @@ class basicAuthToOauth implements \ArtaxServiceBuilder\Operation {
         $this->response = $response;
 
         if ($this->shouldResponseBeProcessed($response)) {
-            $instance = \GithubService\Model\Authorization::createFromResponse($response, $this);
+            $instance = \GithubService\Model\Commit::createFromResponse($response, $this);
 
             return $instance;
         }
@@ -259,7 +274,7 @@ class basicAuthToOauth implements \ArtaxServiceBuilder\Operation {
     /**
      * Execute the operation, returning the parsed response
      *
-     * @return \GithubService\Model\Authorization
+     * @return \GithubService\Model\Commit
      */
     public function execute() {
         $request = $this->createRequest();
@@ -270,7 +285,7 @@ class basicAuthToOauth implements \ArtaxServiceBuilder\Operation {
      * Execute the operation asynchronously, passing the parsed response to the
      * callback
      *
-     * @return \GithubService\Model\Authorization
+     * @return \Amp\Promise
      */
     public function executeAsync(callable $callable) {
         $request = $this->createRequest();
@@ -281,13 +296,13 @@ class basicAuthToOauth implements \ArtaxServiceBuilder\Operation {
      * Dispatch the request for this operation and process the response. Allows you to
      * modify the request before it is sent.
      *
-     * @return \GithubService\Model\Authorization
+     * @return \GithubService\Model\Commit
      * @param \Amp\Artax\Request $request The request to be processed
      */
     public function dispatch(\Amp\Artax\Request $request) {
         $response = $this->api->execute($request, $this);
         $this->response = $response;
-        $instance = \GithubService\Model\Authorization::createFromResponse($response, $this);
+        $instance = \GithubService\Model\Commit::createFromResponse($response, $this);
 
         return $instance;
     }
@@ -296,7 +311,7 @@ class basicAuthToOauth implements \ArtaxServiceBuilder\Operation {
      * Dispatch the request for this operation and process the response asynchronously.
      * Allows you to modify the request before it is sent.
      *
-     * @return \GithubService\Model\Authorization
+     * @return \GithubService\Model\Commit
      * @param \Amp\Artax\Request $request The request to be processed
      * @param callable $callable The callable that processes the response
      */
@@ -308,11 +323,11 @@ class basicAuthToOauth implements \ArtaxServiceBuilder\Operation {
      * Dispatch the request for this operation and process the response. Allows you to
      * modify the request before it is sent.
      *
-     * @return \GithubService\Model\Authorization
+     * @return \GithubService\Model\Commit
      * @param \Amp\Artax\Response $response The HTTP response.
      */
     public function processResponse(\Amp\Artax\Response $response) {
-        $instance = \GithubService\Model\Authorization::createFromResponse($response, $this);
+        $instance = \GithubService\Model\Commit::createFromResponse($response, $this);
 
         return $instance;
     }
@@ -321,7 +336,7 @@ class basicAuthToOauth implements \ArtaxServiceBuilder\Operation {
      * Determine whether the response should be processed. Override this method to have
      * a per-operation decision, otherwise the function is the API class will be used.
      *
-     * @return \GithubService\Model\Authorization
+     * @return \GithubService\Model\Commit
      */
     public function shouldResponseBeProcessed(\Amp\Artax\Response $response) {
         return $this->api->shouldResponseBeProcessed($response);
@@ -342,7 +357,7 @@ class basicAuthToOauth implements \ArtaxServiceBuilder\Operation {
      * Override this method to have a per-operation decision, otherwise the
      * functionfrom the API class will be used.
      *
-     * @return \GithubService\Model\Authorization
+     * @return \GithubService\Model\Commit
      */
     public function shouldUseCachedResponse(\Amp\Artax\Response $response) {
         return $this->api->shouldUseCachedResponse($response);
@@ -352,10 +367,28 @@ class basicAuthToOauth implements \ArtaxServiceBuilder\Operation {
      * Determine whether the response should be cached. Override this method to have a
      * per-operation decision, otherwise the function from the API class will be used.
      *
-     * @return \GithubService\Model\Authorization
+     * @return \GithubService\Model\Commit
      */
     public function shouldResponseBeCached(\Amp\Artax\Response $response) {
         return $this->api->shouldResponseBeCached($response);
+    }
+
+    /**
+     * Set the original response. This may be different from the cached response if one
+     * is used.
+     */
+    public function setOriginalResponse(\Amp\Artax\Response $response) {
+        $this->originalResponse = $response;
+    }
+
+    /**
+     * Get the original response. This may be different from the cached response if one
+     * is used.
+     *
+     * @return \Amp\Artax\Response
+     */
+    public function getOriginalResponse() {
+        return $this->originalResponse;
     }
 
 

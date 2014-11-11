@@ -124,6 +124,7 @@ $externalFiles = array(
     "pullRequests.php",
     "repositories.php",
     "repositoryCommits.php",
+    "repositoryContents.php",
     "search.php",    
     "users.php",
     "usersEmails.php",

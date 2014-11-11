@@ -257,6 +257,67 @@ class GithubService extends GithubArtaxService {
 
         throw new GithubArtaxServiceException("Failed to create or retrieve oauth token.");
     }
+
+
+    //(no scope) Grants read-only access to public information (includes public user profile info, public repository info, and gists)
+
+    const SCOPE_USER = 'user'; //	Grants read/write access to profile info only. Note that this scope includes user:email and user:follow.
+
+    const SCOPE_USER_EMAIL = 'user:email'; //	Grants read access to a user’s email addresses.
+
+    const SCOPE_USER_FOLLOW = 'user:follow'; //	Grants access to follow or unfollow other users.
+
+    const SCOPE_PUBLIC_REPO = 'public_repo'; //	Grants read/write access to code, commit statuses, and deployment statuses for public repositories and organizations.
+
+    const SCOPE_REPO = 'repo'; //	Grants read/write access to code, commit statuses, and deployment statuses for public and private repositories and organizations.
+
+    const SCOPE_REPO_DEPLOYMENT = 'repo_deployment'; //	Grants access to deployment statuses for public and private repositories. This scope is only necessary to grant other users or services access to deployment statuses, without granting access to the code.
+
+    const SCOPE_REPO_STATUS = 'repo:status'; //	Grants read/write access to public and private repository commit statuses. This scope is only necessary to grant other users or services access to private repository commit statuses without granting access to the code.
+
+    const SCOPE_DELETE_REPO = 'delete_repo'; //	Grants access to delete adminable repositories.
+
+    const SCOPE_NOTIFICATIONS = 'notifications'; //	Grants read access to a user’s notifications. repo also provides this access.
+
+    const SCOPE_GIST = 'gist'; //	Grants write access to gists.
+
+    const SCOPE_REPO_HOOK_READ = 'read:repo_hook'; //	Grants read and ping access to hooks in public or private repositories.
+    const SCOPE_REPO_HOOK_WRITE = 'write:repo_hook'; //	Grants read, write, and ping access to hooks in public or private repositories.
+    const SCOPE_REPO_HOOK_ADMIN = 'admin:repo_hook'; //	Grants read, write, ping, and delete access to hooks in public or private repositories.
+
+    const SCOPE_ORG_READ = 'read:org'; //	Read-only access to organization, teams, and membership.
+    const SCOPE_ORG_WRITE = 'write:org'; //	Publicize and unpublicize organization membership.
+
+    const SCOPE_ORG_ADMIN = 'admin:org'; //	Fully manage organization, teams, and memberships.
+
+    const SCOPE_PUBLIC_KEY_READ = 'read:public_key'; //	List and view details for public keys.
+    const SCOPE_PUBLIC_KEY_WRITE  = 'write:public_key'; //	Create, list, and view details for public keys.
+    const SCOPE_PUBLIC_KEY_ADMIN = 'admin:public_key'; //	Fully manage public keys.
+
+    static public $scopeDescriptions = [
+        self::SCOPE_USER => "Grants read/write access to profile info only. Note that this scope includes user:email and user:follow.",
+        self::SCOPE_USER_EMAIL => 'Grants read access to a user’s email addresses.',
+        self::SCOPE_USER_FOLLOW => "Grants access to follow or unfollow other users.",
+        self::SCOPE_PUBLIC_REPO => "Grants read/write access to code, commit statuses, and deployment statuses for public repositories and organizations.",
+        self::SCOPE_REPO => "Grants read/write access to code, commit statuses, and deployment statuses for public and private repositories and organizations.",
+        self::SCOPE_REPO_DEPLOYMENT => "Grants access to deployment statuses for public and private repositories. This scope is only necessary to grant other users or services access to deployment statuses, without granting access to the code.",
+        self::SCOPE_REPO_STATUS => "Grants read/write access to public and private repository commit statuses. This scope is only necessary to grant other users or services access to private repository commit statuses without granting access to the code.",
+        self::SCOPE_DELETE_REPO => "Grants access to delete adminable repositories.",
+        self::SCOPE_NOTIFICATIONS => "Grants read access to a user’s notifications. repo also provides this access.",
+        self::SCOPE_GIST => "Grants write access to gists.",
+        self::SCOPE_REPO_HOOK_READ => "Grants read and ping access to hooks in public or private repositories.",
+        self::SCOPE_REPO_HOOK_WRITE => "Grants read, write, and ping access to hooks in public or private repositories.",
+        self::SCOPE_REPO_HOOK_ADMIN => "Grants read, write, ping, and delete access to hooks in public or private repositories.",
+        self::SCOPE_ORG_READ => "Read-only access to organization, teams, and membership.",
+        self::SCOPE_ORG_WRITE => "Publicize and unpublicize organization membership.",
+        self::SCOPE_ORG_ADMIN => "Fully manage organization, teams, and memberships.",
+        self::SCOPE_PUBLIC_KEY_READ => "List and view details for public keys.",
+        self::SCOPE_PUBLIC_KEY_WRITE  => "Create, list, and view details for public keys.",
+        self::SCOPE_PUBLIC_KEY_ADMIN => "Fully manage public keys.",
+    ];
+
+
+
 }
 
  

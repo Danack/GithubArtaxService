@@ -21,8 +21,6 @@ $github = new GithubService(
     'Danack/GithubArtaxService' //Change this to your github name/project
 );
 
-
-
 echo "Tags on first page:\n";
 //Get the first page of data
 $command = $github->listRepoTags(

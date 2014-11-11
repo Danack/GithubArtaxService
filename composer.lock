@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "cb07fd42ee3b6d122fdc414a4c22669e",
+    "hash": "249299c14dae1a72b1d62cf464656745",
     "packages": [
         {
             "name": "amphp/amp",
@@ -308,16 +308,16 @@
         },
         {
             "name": "rdlowrey/nbsock",
-            "version": "v0.4.4",
+            "version": "v0.4.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rdlowrey/nbsock.git",
-                "reference": "96e46fdf34b5b180bb9387d89cb69cb6910f24e5"
+                "reference": "ce69675b0d47d15f82b871af208df93380f303d5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rdlowrey/nbsock/zipball/96e46fdf34b5b180bb9387d89cb69cb6910f24e5",
-                "reference": "96e46fdf34b5b180bb9387d89cb69cb6910f24e5",
+                "url": "https://api.github.com/repos/rdlowrey/nbsock/zipball/ce69675b0d47d15f82b871af208df93380f303d5",
+                "reference": "ce69675b0d47d15f82b871af208df93380f303d5",
                 "shasum": ""
             },
             "require": {
@@ -356,7 +356,7 @@
                 "tcp",
                 "tls"
             ],
-            "time": "2014-11-03 05:09:34"
+            "time": "2014-11-10 15:05:32"
         }
     ],
     "packages-dev": [
