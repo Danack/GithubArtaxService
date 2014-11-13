@@ -24,9 +24,9 @@ $apiGenerator->addParameterTranslation([
 $apiGenerator->excludeMethods(['defaultGetOperation', 'defaultGetOauthOperation']);
 $apiGenerator->parseAndAddServiceFromFile(__DIR__.'/../description/githubServiceDescription.php');
 
-$operations = $apiGenerator->parseServiceFile(
-    __DIR__.'/../description/githubServiceDescription.php'
-);
+//$operations = $apiGenerator->parseServiceFile(
+//    __DIR__.'/../description/githubServiceDescription.php'
+//);
 
 $apiGenerator->addPaginationMethods(".*", 'genericPaginate');
 
