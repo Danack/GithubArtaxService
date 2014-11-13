@@ -31,7 +31,7 @@ $service = array (
                     'sentAs' => 'Authorization',
                     "filters" => array(
                         array(
-                            "method" => 'GithubService\Github::castString',
+                            "method" => 'strval',
                             "args" => ["@value"]
                         )
                     ),

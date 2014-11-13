@@ -21,7 +21,12 @@ $apiGenerator->addParameterTranslation([
     'User-Agent' => 'userAgent',
 ]);
 
-$apiGenerator->excludeMethods(['defaultGetOperation', 'defaultGetOauthOperation']);
+$apiGenerator->excludeMethods([
+    'defaultGetOperation',
+    'defaultGetOauthOperation',
+    'genericPaginate'
+]);
+
 $apiGenerator->parseAndAddServiceFromFile(__DIR__.'/../description/githubServiceDescription.php');
 
 //$operations = $apiGenerator->parseServiceFile(

@@ -280,7 +280,7 @@ class listRepoCommits implements \ArtaxServiceBuilder\Operation {
             case ('Authorization'): {
                 $args = [];
                 $args[] = $value;
-                $value = call_user_func_array('GithubService\Github::castString', $args);
+                $value = call_user_func_array('strval', $args);
                 break;
             }
 

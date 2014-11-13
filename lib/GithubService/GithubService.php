@@ -28,20 +28,6 @@ interface GithubService {
     public function getOauthAuthorization($client_id, $client_secret, $code, $redirect_uri);
 
     /**
-     * genericPaginate
-     *
-     * @param string $Authorization The token to use for the request. This should
-     * either be an a complete token in the format appropriate format e.g. 'token
-     * 123567890' for an oauth token, or '"Basic
-     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
-     * can be cast to a string in the correct format e.g. an 
-     * \ArtaxServiceBuilder\BasicAuthToken object.
-     * @param mixed $pageURL 
-     * @return \GithubService\Operation\genericPaginate The new operation
-     */
-    public function genericPaginate($Authorization, $pageURL);
-
-    /**
      * getAuthorizations
      *
      * @param string $Authorization The token to use for the request. This should
