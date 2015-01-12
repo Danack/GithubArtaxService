@@ -1,10 +1,9 @@
 <?php
 
 use GithubService\GithubArtaxService\GithubArtaxService;
-
 use Amp\Artax\Client as ArtaxClient;
-
 use Amp\Artax\Response;
+use Amp\NativeReactor;
 
 
 /**
@@ -13,20 +12,32 @@ use Amp\Artax\Response;
  */
 class IntegrationTest extends \PHPUnit_Framework_TestCase {
 
+    private function  getReactorAndClient() {
+        $reactor = new NativeReactor();
+        $client = new ArtaxClient($reactor);
+        $client->setOption(ArtaxClient::OP_MS_CONNECT_TIMEOUT, 5000);
+        $client->setOption(ArtaxClient::OP_MS_KEEP_ALIVE_TIMEOUT, 1000);
+
+        return [$reactor, $client];
+    }
+    
+    
     function testGoogle() {
-        $client = new ArtaxClient();
-        $future = $client->request("http://www.google.com");
-        $response = $future->wait();
+        list($reactor, $client) = $this->getReactorAndClient();
+        /** @var  $client ArtaxClient */
+        $promise = $client->request("http://www.google.com");
+        $response = \Amp\wait($promise, $reactor);
         /** @var $response Response */
         $this->assertEquals(200, $response->getStatus());
     }
 
     function testError() {
         $this->setExpectedException('Amp\Dns\ResolutionException');
-        $client = new ArtaxClient();
+        list($reactor, $client) = $this->getReactorAndClient();
+        /** @var  $client ArtaxClient */
         $client->setOption(ArtaxClient::OP_HOST_CONNECTION_LIMIT, 3);
-        $future = $client->request("http://doesntexist.test");
-        $future->wait();
+        $promise = $client->request("http://doesntexist.test");
+        \Amp\wait($promise, $reactor);
     }
 
 
@@ -44,10 +55,13 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase {
         $this->assertGreaterThanOrEqual(3, count($result->repoTags));
     }
 
+    
     function testAsynchronousGithub() {
         $provider = createProvider([], []);
         $githubArtaxService = $provider->make('GithubService\GithubArtaxService\GithubArtaxService');
 
+        $reactor = $provider->make('Amp\Reactor');
+        
         $errorExternal = null;
 
         /** @var  $repoTagsExternal \GithubService\Model\RepoTags */
@@ -60,9 +74,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase {
 
         /** @var $githubArtaxService GithubArtaxService */
         $promise = $githubArtaxService->listRepoTags(null, 'Danack', 'GithubArtaxService')->executeAsync($callback);
-
-        $promise->wait();
-
+        \Amp\wait($promise, $reactor);
         $this->assertNull($errorExternal, "Unexpected error ".var_export($errorExternal, true));
         $this->assertInstanceOf('GithubService\Model\RepoTags', $repoTagsExternal);
         $this->assertTrue(is_array($repoTagsExternal->repoTags), "repo tags is meant to be an array");

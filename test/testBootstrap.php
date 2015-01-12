@@ -11,7 +11,7 @@ $classDir = realpath(__DIR__)."/fixtures/";
 //$autoloader->add('AABTest', [$classDir, $outputDirectory]);
 $autoloader->add('ArtaxServiceBuilder', [realpath(__DIR__)."/"]);
 
-$included = include_once "../../flickrKey.php";
+$included = include_once __DIR__."/../../flickrKey.php";
 
 
 if (defined('FLICKR_KEY') == false) {
@@ -24,9 +24,16 @@ if (defined('FLICKR_SECRET') == false) {
     define('FLICKR_SECRET', 54321);
 }
 
+function createClient(Amp\Reactor $reactor) {
+
+    $client = new Amp\Artax\Client($reactor);
+    
+    return $client;
+}
 
 function prepareArtaxClient(Amp\Artax\Client $client, Auryn\AurynInjector $provider) {
-    $client->setOption(\Amp\Artax\Client::OP_MS_CONNECT_TIMEOUT, 2000);
+    $client->setOption(\Amp\Artax\Client::OP_MS_CONNECT_TIMEOUT, 5000);
+    $client->setOption(\Amp\Artax\Client::OP_MS_KEEP_ALIVE_TIMEOUT, 2000);
 }
 
 /**
@@ -47,16 +54,17 @@ function createProvider($implementations = array(), $shareClasses = array()) {
     $standardImplementations = [
         'GithubService\GithubService' => 'DebugGithub',
         'Amp\Artax\AsyncClient'     => 'Amp\Artax\AsyncClient',
-        'Amp\Reactor'         => 'Amp\NativeReactor',
-        //'Amp\Artax\AddrDnsResolver' => 'Amp\Artax\AddrDnsResolver',
+        'Amp\Reactor'               => 'Amp\NativeReactor',
         'ArtaxServiceBuilder\ResponseCache' => 'ArtaxServiceBuilder\ResponseCache\NullResponseCache',
         'PSR\Cache'     => 'PSR\Cache\APCCache',
         'Amp\Addr\Cache'    => 'Amp\Addr\MemoryCache'
     ];
 
     $standardShares = [
-        'Amp\Alert\Reactor' => 'Amp\Alert\Reactor'
+        'Amp\Reactor' => 'Amp\Reactor'
     ];
+    
+    $provider->delegate('Amp\Artax\Client', 'createClient');
 
     foreach ($standardImplementations as $interface => $implementation) {
         if (array_key_exists($interface, $implementations)) {

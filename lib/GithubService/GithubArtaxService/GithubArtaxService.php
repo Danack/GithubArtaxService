@@ -8,6 +8,7 @@ namespace GithubService\GithubArtaxService;
 
 use Amp\Artax\Request;
 use Amp\Artax\Response;
+use Amp\Reactor;
 use GithubService\Operation\getOauthAuthorization;
 use ArtaxServiceBuilder\BadResponseException;
 use ArtaxServiceBuilder\ProcessResponseException;
@@ -50,7 +51,7 @@ use ArtaxServiceBuilder\ResponseCache;
 class GithubArtaxService implements \GithubService\GithubService {
 
     /**
-     * @var  $userAgent
+     * @var \ $userAgent
      */
     public $userAgent = null;
 
@@ -59,8 +60,14 @@ class GithubArtaxService implements \GithubService\GithubService {
      */
     public $responseCache = null;
 
-    public function __construct(\Amp\Artax\Client $client, \ArtaxServiceBuilder\ResponseCache $responseCache, $userAgent) {
+    /**
+     * @var \Reactor $reactor
+     */
+    public $reactor = null;
+
+    public function __construct(\Amp\Artax\Client $client, \Amp\Reactor $reactor, \ArtaxServiceBuilder\ResponseCache $responseCache, $userAgent) {
         $this->client = $client;
+        $this->reactor = $reactor;
         $this->responseCache = $responseCache;
         $this->userAgent = $userAgent;
     }
@@ -725,7 +732,7 @@ class GithubArtaxService implements \GithubService\GithubService {
         $cachingHeaders = $this->responseCache->getCachingHeaders($request);
         $request->setAllHeaders($cachingHeaders);
         $promise = $this->client->request($request);
-        $response = $promise->wait();
+        $response = \Amp\wait($promise, $this->reactor);
 
         if ($response) {
             $operation->setResponse($response);

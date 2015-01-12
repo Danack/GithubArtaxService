@@ -15,8 +15,9 @@ class GithubTest extends \PHPUnit_Framework_TestCase {
         $reactor = new NativeReactor();
         $cache = new NullResponseCache();
         $client = new ArtaxClient($reactor);
-        $client->setOption(ArtaxClient::OP_MS_KEEP_ALIVE_TIMEOUT, 1);
-        $githubAPI = new GithubArtaxService($client, $cache, "Danack/test");
+        $client->setOption(ArtaxClient::OP_MS_CONNECT_TIMEOUT, 5000);
+        $client->setOption(ArtaxClient::OP_MS_KEEP_ALIVE_TIMEOUT, 1000);
+        $githubAPI = new GithubArtaxService($client, $reactor, $cache, "Danack/test");
         
         return [$reactor, $githubAPI];
     }
@@ -36,40 +37,42 @@ class GithubTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
+     * This cannot be a unit test. It requires getting a one time
+     * password from Github and entering it.
      * @group oauth
      * @group integration
      */
     function testBasicOauth() {
 
-        list($reactor, $githubAPI) = $this->getReactorAndAPI();
-        /** @var  $githubAPI GithubArtaxService */
-        
-        try {
-
-            $listCommand = $githubAPI->basicListAuthorizations(
-                GITHUB_USERNAME.':'.GITHUB_PASSWORD
-            );
-
-            $listCommand->setOtp("506351");
-
-            $authorizations = $listCommand->call();
-            /** @var  $authorization \GithubService\Model\Authorization */
-            foreach ($authorizations as $authorization) {
-                echo "Name: ".$authorization->application->name."\n";
-            }
-        }
-        catch (BadResponseException $bre) {
-
-            $response = $bre->getResponse();
-            if ($response->hasHeader('X-GitHub-OTP')) {
-                $otp = $response->getHeader('X-GitHub-OTP');
-                echo "Need to do OneTimePassword:";
-                var_dump($otp);
-            }
-            
-            echo "Bad response, status: ".$bre->getResponse()->getStatus().PHP_EOL;
-            var_dump($bre->getResponse());
-        }
+//        list($reactor, $githubAPI) = $this->getReactorAndAPI();
+//        /** @var  $githubAPI GithubArtaxService */
+//        
+//        try {
+//
+//            $listCommand = $githubAPI->basicListAuthorizations(
+//                GITHUB_USERNAME.':'.GITHUB_PASSWORD
+//            );
+//
+//            $listCommand->setOtp("506351");
+//
+//            $authorizations = $listCommand->call();
+//            /** @var  $authorization \GithubService\Model\Authorization */
+//            foreach ($authorizations as $authorization) {
+//                echo "Name: ".$authorization->application->name."\n";
+//            }
+//        }
+//        catch (BadResponseException $bre) {
+//
+//            $response = $bre->getResponse();
+//            if ($response->hasHeader('X-GitHub-OTP')) {
+//                $otp = $response->getHeader('X-GitHub-OTP');
+//                echo "Need to do OneTimePassword:";
+//                var_dump($otp);
+//            }
+//            
+//            echo "Bad response, status: ".$bre->getResponse()->getStatus().PHP_EOL;
+//            var_dump($bre->getResponse());
+//        }
     }
     
     
@@ -84,7 +87,6 @@ class GithubTest extends \PHPUnit_Framework_TestCase {
         /** @var  $githubAPI GithubArtaxService */
         $command = $githubAPI->listRepoTags(null, "Danack", "GithubArtaxService");
         
-
         $callbackCalled = false;
 
         $callback = function (
@@ -108,6 +110,9 @@ class GithubTest extends \PHPUnit_Framework_TestCase {
     }
 
 
+    function testStarGazers() {
+
+    }
 
 
 }

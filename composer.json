@@ -21,13 +21,15 @@
         "Danack/danack-code": ">=2.4.5",
         "danack/danackhttp2": ">=1.2.0",
         "danack/artaxservicebuilder": "~0.3.1",
-        "amphp/artax": "v1.0.0-rc5"
+        "amphp/artax": "dev-master"
     },
     "autoload": {
         "psr-0": {
             "GithubService": "lib/"
         }
     },
+    
     "minimum-stability": "dev",
+    "prefer-stable": true,
     "bin": ["bin/generateGithubArtaxService.php"]
 }

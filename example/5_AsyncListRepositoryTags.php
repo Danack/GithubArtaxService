@@ -100,7 +100,7 @@ echo "fin: ".(microtime(true) - $time)."\n";
 function getListRepoTagsPagingCallback($page) {
 
     $listRepoTagsPagingCallback = function (Exception $exception = null,
-                                            RepoTags $repoTags,
+                                            RepoTags $repoTags = null,
                                             Response $response = null) use ($page) {
 
         if ($exception) {
