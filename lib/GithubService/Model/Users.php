@@ -4,7 +4,7 @@
 namespace GithubService\Model;
 
 
-class Users {
+class Users implements \IteratorAggregate {
 
     use DataMapper;
 

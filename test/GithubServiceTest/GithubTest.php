@@ -114,7 +114,26 @@ class GithubTest extends \PHPUnit_Framework_TestCase {
 
     }
 
+    /**
+     * Check that I haven't forgotten to add 'implements IteratorAggregate'
+     * to classes that have 'getIterator'
+     */
+    function testModelClassesThatIterate() {
+        $directoryIterator = new DirectoryIterator(__DIR__."/../../lib/GithubService/Model");
+        foreach ($directoryIterator as $fileInfo) {
+            if ($fileInfo->isDir()) {
+                continue;
+            }
 
+            $classname = $fileInfo->getBasename('.php');
+            $classReflection = new ReflectionClass('GithubService\Model\\'.$classname);
+            if ($classReflection->hasMethod('getIterator')) {
+                if ($classReflection->implementsInterface('IteratorAggregate') == false) {
+                    $this->fail("Class '$classname' is missing interface IteratorAggregate.");
+                }
+            }
+        }
+    }
 }
 
  

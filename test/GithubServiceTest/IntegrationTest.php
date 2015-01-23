@@ -75,7 +75,14 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase {
         /** @var $githubArtaxService GithubArtaxService */
         $promise = $githubArtaxService->listRepoTags(null, 'Danack', 'GithubArtaxService')->executeAsync($callback);
         \Amp\wait($promise, $reactor);
-        $this->assertNull($errorExternal, "Unexpected error ".var_export($errorExternal, true));
+
+        $errorMessage = "Placeholder for exception message.";
+        if ($errorExternal) {
+            /** @var $errorExternal \Exception */
+            $errorMessage = "Unexpected error ".$errorExternal->getMessage();
+        }
+        
+        $this->assertNull($errorExternal, $errorMessage);
         $this->assertInstanceOf('GithubService\Model\RepoTags', $repoTagsExternal);
         $this->assertTrue(is_array($repoTagsExternal->repoTags), "repo tags is meant to be an array");
         //This could break if we ever delete tags.

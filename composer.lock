@@ -4,24 +4,28 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "489b99d7455c98fc755f19fdca891ade",
+    "hash": "fd9c112731e21eea6f1b02b1dbbbf216",
     "packages": [
         {
             "name": "amphp/amp",
-            "version": "v0.15.0",
+            "version": "v0.15.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/amp.git",
-                "reference": "c21068fc946f5bfd692297e927773a732f205279"
+                "reference": "5a39ec6730c8af07f24a4dd153a5e0455323e254"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/amp/zipball/c21068fc946f5bfd692297e927773a732f205279",
-                "reference": "c21068fc946f5bfd692297e927773a732f205279",
+                "url": "https://api.github.com/repos/amphp/amp/zipball/5a39ec6730c8af07f24a4dd153a5e0455323e254",
+                "reference": "5a39ec6730c8af07f24a4dd153a5e0455323e254",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.4.0"
+            },
+            "suggest": {
+                "pecl/libevent": "Extension for libevent backends (high performance use cases).",
+                "php-uv": "Extension for libuv backends (high performance use cases)."
             },
             "type": "library",
             "extra": {
@@ -59,7 +63,7 @@
                 "non-blocking",
                 "promise"
             ],
-            "time": "2014-12-08 16:52:09"
+            "time": "2015-01-22 01:16:07"
         },
         {
             "name": "amphp/artax",
@@ -169,23 +173,24 @@
         },
         {
             "name": "danack/artaxservicebuilder",
-            "version": "0.3.1",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Danack/ArtaxServiceBuilder.git",
-                "reference": "829e2d31b639966e60a42834cfd6aa76f708a565"
+                "reference": "2db70251d131e4b947746829759182dd570c328f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Danack/ArtaxServiceBuilder/zipball/829e2d31b639966e60a42834cfd6aa76f708a565",
-                "reference": "829e2d31b639966e60a42834cfd6aa76f708a565",
+                "url": "https://api.github.com/repos/Danack/ArtaxServiceBuilder/zipball/2db70251d131e4b947746829759182dd570c328f",
+                "reference": "2db70251d131e4b947746829759182dd570c328f",
                 "shasum": ""
             },
             "require": {
-                "danack/danack-code": ">=2.4.4"
+                "danack/danack-code": "~2.4.4"
             },
             "require-dev": {
                 "danack/auryn": "~0.9.5",
+                "danack/danackhttp2": "~1.2.0",
                 "fzaninotto/faker": "*",
                 "mockery/mockery": "0.9.1",
                 "phpunit/phpunit": "4.1.3"
@@ -197,10 +202,10 @@
                 }
             },
             "support": {
-                "source": "https://github.com/Danack/ArtaxServiceBuilder/tree/0.3.1",
+                "source": "https://github.com/Danack/ArtaxServiceBuilder/tree/master",
                 "issues": "https://github.com/Danack/ArtaxServiceBuilder/issues"
             },
-            "time": "2014-11-13 11:10:18"
+            "time": "2015-01-22 18:31:19"
         },
         {
             "name": "danack/danack-code",
@@ -648,12 +653,17 @@
         },
         {
             "name": "phpunit/php-token-stream",
-            "version": "1.3.0",
+            "version": "1.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/php-token-stream.git",
+                "reference": "db32c18eba00b121c145575fcbcd4d4d24e6db74"
+            },
             "dist": {
                 "type": "zip",
-                "url": "http://satis.basereality.com/packages/sebastianbergmann/php-token-stream/sebastianbergmann_php-token-stream_1.3.0.zip",
-                "reference": null,
-                "shasum": "71ba35dd8b30b9440c23152781727d182e780fa5"
+                "url": "https://api.github.com/repos/sebastianbergmann/php-token-stream/zipball/db32c18eba00b121c145575fcbcd4d4d24e6db74",
+                "reference": "db32c18eba00b121c145575fcbcd4d4d24e6db74",
+                "shasum": ""
             },
             "require": {
                 "ext-tokenizer": "*",
@@ -665,7 +675,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.3-dev"
+                    "dev-master": "1.4-dev"
                 }
             },
             "autoload": {
@@ -673,6 +683,7 @@
                     "src/"
                 ]
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -687,9 +698,7 @@
             "keywords": [
                 "tokenizer"
             ],
-            "support": {
-                "issues": "https://github.com/sebastianbergmann/php-token-stream/issues"
-            }
+            "time": "2015-01-17 09:51:32"
         },
         {
             "name": "phpunit/phpunit",
@@ -1119,18 +1128,14 @@
             "time": "2015-01-03 15:33:07"
         }
     ],
-    "aliases": [
-
-    ],
+    "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "danack/artaxservicebuilder": 20,
         "amphp/artax": 20
     },
     "prefer-stable": true,
-    "platform": [
-
-    ],
-    "platform-dev": [
-
-    ]
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
 }

@@ -4,7 +4,7 @@
 namespace GithubService\Model;
 
 
-class Commits {
+class Commits implements \IteratorAggregate{
 
     use DataMapper;
 
