@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c0e0e7367bbcb6d8f15d96ffed22b7e2",
+    "hash": "60c0d198489e47a6f71eaccc23aa41f9",
     "packages": [
         {
             "name": "amphp/amp",
@@ -207,11 +207,16 @@
         {
             "name": "danack/danack-code",
             "version": "2.4.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Danack/DanackCode.git",
+                "reference": "d14f469e7042a6397214037c20ee92246b1c109a"
+            },
             "dist": {
                 "type": "zip",
-                "url": "http://satis.basereality.com/packages/Danack/DanackCode/Danack_DanackCode_2.4.5.zip",
-                "reference": null,
-                "shasum": "8b55bb4cc95f966989b2a799c468e762d7ae60e9"
+                "url": "https://api.github.com/repos/Danack/DanackCode/zipball/d14f469e7042a6397214037c20ee92246b1c109a",
+                "reference": "d14f469e7042a6397214037c20ee92246b1c109a",
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.23"
@@ -222,6 +227,7 @@
                     "Danack\\Code\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -229,16 +235,22 @@
             "keywords": [
                 "code",
                 "zf2"
-            ]
+            ],
+            "time": "2014-09-15 22:26:39"
         },
         {
             "name": "danack/danackhttp2",
             "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Danack/HTTP2.git",
+                "reference": "616eadd3acc058eb56e7a1076a94d74d2484024e"
+            },
             "dist": {
                 "type": "zip",
-                "url": "http://satis.basereality.com/packages/Danack/HTTP2/Danack_HTTP2_1.2.0.zip",
-                "reference": null,
-                "shasum": "7991e94c5d6689ffec29b8350239a8fb2ef41f68"
+                "url": "https://api.github.com/repos/Danack/HTTP2/zipball/616eadd3acc058eb56e7a1076a94d74d2484024e",
+                "reference": "616eadd3acc058eb56e7a1076a94d74d2484024e",
+                "shasum": ""
             },
             "require-dev": {
                 "phpunit/phpunit": "~4.0.0"
@@ -249,6 +261,7 @@
                     "HTTP2": "src/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "include-path": [
                 "./"
             ],
@@ -257,25 +270,28 @@
             ],
             "authors": [
                 {
-                    "email": "Danack@basereality.com",
                     "name": "Dan Ackroyd",
+                    "email": "Danack@basereality.com",
+                    "homepage": "http://www.basereality.com",
                     "role": "Developer"
                 }
             ],
             "description": "A fork of HTTP for PHP5 and autoloading",
-            "support": {
-                "issues": "http://pear.php.net/bugs/search.php?cmd=display&package_name[]=HTTP2",
-                "source": "https://github.com/Danack/HTTP2"
-            }
+            "time": "2014-07-13 21:04:06"
         },
         {
             "name": "daverandom/libdns",
             "version": "v0.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/DaveRandom/LibDNS.git",
+                "reference": "f94f92f3fa8b2776ff2593c87d93d87480efeb73"
+            },
             "dist": {
                 "type": "zip",
-                "url": "http://satis.basereality.com/packages/DaveRandom/LibDNS/DaveRandom_LibDNS_v0.2.1.zip",
-                "reference": "DaveRandom_LibDNS_v0.2.1.zip",
-                "shasum": "2f654b7cbc18c4da4c2d95247c50411803d9f42b"
+                "url": "https://api.github.com/repos/DaveRandom/LibDNS/zipball/f94f92f3fa8b2776ff2593c87d93d87480efeb73",
+                "reference": "f94f92f3fa8b2776ff2593c87d93d87480efeb73",
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.4.0"
@@ -286,6 +302,7 @@
                     "LibDNS": "src"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -293,9 +310,7 @@
             "keywords": [
                 "dns"
             ],
-            "support": {
-                "issues": "https://github.com/DaveRandom/LibDNS/issues"
-            }
+            "time": "2013-11-28 15:57:15"
         },
         {
             "name": "rdlowrey/nbsock",
@@ -351,60 +366,6 @@
         }
     ],
     "packages-dev": [
-        {
-            "name": "danack/auryn",
-            "version": "0.14.2",
-            "dist": {
-                "type": "zip",
-                "url": "http://satis.basereality.com/packages/Danack/Auryn/Danack_Auryn_0.14.2.zip",
-                "reference": null,
-                "shasum": "7a5d0b179b7e40d0cda3f87bcb9fa6a2100d7ceb"
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "replace": {
-                "rdlowrey/auryn": "self.version"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "4.0.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Auryn\\": "lib/"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Daniel Lowrey",
-                    "email": "rdlowrey@gmail.com",
-                    "role": "Creator / Main Developer"
-                },
-                {
-                    "name": "Levi Morrison",
-                    "email": "levim@php.net",
-                    "homepage": "http://morrisonlevi.github.com/",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Dan Ackroyd",
-                    "email": "Danack@basereality.com",
-                    "homepage": "http://www.basereality.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Auryn is a dependency injector for bootstrapping object-oriented PHP applications.",
-            "homepage": "https://github.com/rdlowrey/Auryn",
-            "keywords": [
-                "dependency injection",
-                "dic",
-                "ioc"
-            ]
-        },
         {
             "name": "doctrine/instantiator",
             "version": "1.0.4",
@@ -524,11 +485,16 @@
         {
             "name": "phpunit/php-file-iterator",
             "version": "1.3.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/php-file-iterator.git",
+                "reference": "acd690379117b042d1c8af1fafd61bde001bf6bb"
+            },
             "dist": {
                 "type": "zip",
-                "url": "http://satis.basereality.com/packages/sebastianbergmann/php-file-iterator/sebastianbergmann_php-file-iterator_1.3.4.zip",
-                "reference": "sebastianbergmann_php-file-iterator_1.3.4.zip",
-                "shasum": "a70cb551610f74adae2411b5a5e924312d9ba93b"
+                "url": "https://api.github.com/repos/sebastianbergmann/php-file-iterator/zipball/acd690379117b042d1c8af1fafd61bde001bf6bb",
+                "reference": "acd690379117b042d1c8af1fafd61bde001bf6bb",
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
@@ -539,6 +505,7 @@
                     "File/"
                 ]
             },
+            "notification-url": "https://packagist.org/downloads/",
             "include-path": [
                 ""
             ],
@@ -558,19 +525,21 @@
                 "filesystem",
                 "iterator"
             ],
-            "support": {
-                "issues": "https://github.com/sebastianbergmann/php-file-iterator/issues",
-                "irc": "irc://irc.freenode.net/phpunit"
-            }
+            "time": "2013-10-10 15:34:57"
         },
         {
             "name": "phpunit/php-text-template",
             "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/php-text-template.git",
+                "reference": "206dfefc0ffe9cebf65c413e3d0e809c82fbf00a"
+            },
             "dist": {
                 "type": "zip",
-                "url": "http://satis.basereality.com/packages/sebastianbergmann/php-text-template/sebastianbergmann_php-text-template_1.2.0.zip",
-                "reference": "sebastianbergmann_php-text-template_1.2.0.zip",
-                "shasum": "d4ef634706b56020680d52e6f41b4d92912fe064"
+                "url": "https://api.github.com/repos/sebastianbergmann/php-text-template/zipball/206dfefc0ffe9cebf65c413e3d0e809c82fbf00a",
+                "reference": "206dfefc0ffe9cebf65c413e3d0e809c82fbf00a",
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
@@ -581,6 +550,7 @@
                     "Text/"
                 ]
             },
+            "notification-url": "https://packagist.org/downloads/",
             "include-path": [
                 ""
             ],
@@ -599,19 +569,21 @@
             "keywords": [
                 "template"
             ],
-            "support": {
-                "issues": "https://github.com/sebastianbergmann/php-text-template/issues",
-                "irc": "irc://irc.freenode.net/phpunit"
-            }
+            "time": "2014-01-30 17:20:04"
         },
         {
             "name": "phpunit/php-timer",
             "version": "1.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/php-timer.git",
+                "reference": "19689d4354b295ee3d8c54b4f42c3efb69cbc17c"
+            },
             "dist": {
                 "type": "zip",
-                "url": "http://satis.basereality.com/packages/sebastianbergmann/php-timer/sebastianbergmann_php-timer_1.0.5.zip",
-                "reference": "sebastianbergmann_php-timer_1.0.5.zip",
-                "shasum": "cd2712d9fca8430cc7764dd73fe9e5a687ae1d03"
+                "url": "https://api.github.com/repos/sebastianbergmann/php-timer/zipball/19689d4354b295ee3d8c54b4f42c3efb69cbc17c",
+                "reference": "19689d4354b295ee3d8c54b4f42c3efb69cbc17c",
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
@@ -622,6 +594,7 @@
                     "PHP/"
                 ]
             },
+            "notification-url": "https://packagist.org/downloads/",
             "include-path": [
                 ""
             ],
@@ -640,10 +613,7 @@
             "keywords": [
                 "timer"
             ],
-            "support": {
-                "issues": "https://github.com/sebastianbergmann/php-timer/issues",
-                "irc": "irc://irc.freenode.net/phpunit"
-            }
+            "time": "2013-08-02 07:42:54"
         },
         {
             "name": "phpunit/php-token-stream",
@@ -697,11 +667,16 @@
         {
             "name": "phpunit/phpunit",
             "version": "4.1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/phpunit.git",
+                "reference": "939cb801b3b2aa253aedd0b279f40bb8f35cec91"
+            },
             "dist": {
                 "type": "zip",
-                "url": "http://satis.basereality.com/packages/sebastianbergmann/phpunit/sebastianbergmann_phpunit_4.1.3.zip",
-                "reference": "sebastianbergmann_phpunit_4.1.3.zip",
-                "shasum": "cf3f2e800e39a4ff927fab29707d233b812b2bda"
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/939cb801b3b2aa253aedd0b279f40bb8f35cec91",
+                "reference": "939cb801b3b2aa253aedd0b279f40bb8f35cec91",
+                "shasum": ""
             },
             "require": {
                 "ext-dom": "*",
@@ -739,6 +714,7 @@
                     "src/"
                 ]
             },
+            "notification-url": "https://packagist.org/downloads/",
             "include-path": [
                 "",
                 "../../symfony/yaml/"
@@ -760,19 +736,21 @@
                 "testing",
                 "xunit"
             ],
-            "support": {
-                "issues": "https://github.com/sebastianbergmann/phpunit/issues",
-                "irc": "irc://irc.freenode.net/phpunit"
-            }
+            "time": "2014-06-11 14:15:47"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
             "version": "2.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/phpunit-mock-objects.git",
+                "reference": "c63d2367247365f688544f0d500af90a11a44c65"
+            },
             "dist": {
                 "type": "zip",
-                "url": "http://satis.basereality.com/packages/sebastianbergmann/phpunit-mock-objects/sebastianbergmann_phpunit-mock-objects_2.3.0.zip",
-                "reference": null,
-                "shasum": "8b6554505e52ec45ff9961c41cbc7e7de8290c20"
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/c63d2367247365f688544f0d500af90a11a44c65",
+                "reference": "c63d2367247365f688544f0d500af90a11a44c65",
+                "shasum": ""
             },
             "require": {
                 "doctrine/instantiator": "~1.0,>=1.0.1",
@@ -796,11 +774,7 @@
                     "src/"
                 ]
             },
-            "autoload-dev": {
-                "classmap": [
-                    "tests/_fixture/"
-                ]
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -817,10 +791,65 @@
                 "mock",
                 "xunit"
             ],
-            "support": {
-                "issues": "https://github.com/sebastianbergmann/phpunit-mock-objects/issues",
-                "irc": "irc://irc.freenode.net/phpunit"
-            }
+            "time": "2014-10-03 05:12:11"
+        },
+        {
+            "name": "rdlowrey/auryn",
+            "version": "v0.14.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rdlowrey/Auryn.git",
+                "reference": "bfee56a9e0d2e71b04f04236cb8eff2f8cb1c4fa"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rdlowrey/Auryn/zipball/bfee56a9e0d2e71b04f04236cb8eff2f8cb1c4fa",
+                "reference": "bfee56a9e0d2e71b04f04236cb8eff2f8cb1c4fa",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.0.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Auryn\\": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dan Ackroyd",
+                    "email": "Danack@basereality.com",
+                    "homepage": "http://www.basereality.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Daniel Lowrey",
+                    "email": "rdlowrey@gmail.com",
+                    "role": "Creator / Main Developer"
+                },
+                {
+                    "name": "Levi Morrison",
+                    "email": "levim@php.net",
+                    "homepage": "http://morrisonlevi.github.com/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Auryn is a dependency injector for bootstrapping object-oriented PHP applications.",
+            "homepage": "https://github.com/rdlowrey/Auryn",
+            "keywords": [
+                "dependency injection",
+                "dic",
+                "ioc"
+            ],
+            "time": "2014-10-27 15:01:04"
         },
         {
             "name": "sebastian/comparator",
@@ -889,11 +918,16 @@
         {
             "name": "sebastian/diff",
             "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/diff.git",
+                "reference": "5843509fed39dee4b356a306401e9dd1a931fec7"
+            },
             "dist": {
                 "type": "zip",
-                "url": "http://satis.basereality.com/packages/sebastianbergmann/diff/sebastianbergmann_diff_1.2.0.zip",
-                "reference": null,
-                "shasum": "b78b4baf1abfcba0ee0a91eef3d2ecbec52c3bc7"
+                "url": "https://api.github.com/repos/sebastianbergmann/diff/zipball/5843509fed39dee4b356a306401e9dd1a931fec7",
+                "reference": "5843509fed39dee4b356a306401e9dd1a931fec7",
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
@@ -912,24 +946,26 @@
                     "src/"
                 ]
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
             "authors": [
                 {
-                    "name": "Sebastian Bergmann",
-                    "email": "sebastian@phpunit.de"
-                },
-                {
                     "name": "Kore Nordmann",
                     "email": "mail@kore-nordmann.de"
+                },
+                {
+                    "name": "Sebastian Bergmann",
+                    "email": "sebastian@phpunit.de"
                 }
             ],
             "description": "Diff implementation",
             "homepage": "http://www.github.com/sebastianbergmann/diff",
             "keywords": [
                 "diff"
-            ]
+            ],
+            "time": "2014-08-15 10:29:00"
         },
         {
             "name": "sebastian/environment",

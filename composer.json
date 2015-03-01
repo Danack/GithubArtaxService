@@ -2,7 +2,7 @@
     "name": "danack/githubartaxservice",
     "require-dev": {
         "phpunit/phpunit": "4.1.3",
-        "danack/auryn": "~0.14.0"
+        "rdlowrey/auryn": "^0.14.2"
     },
     "require":{
         "Danack/danack-code": ">=2.4.5",
