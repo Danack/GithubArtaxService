@@ -33,7 +33,7 @@ $result = $foo->execute();
 
 file_put_contents("./foo.tar.gz", $result);
 
-
+echo "all okay.";
 
 
 

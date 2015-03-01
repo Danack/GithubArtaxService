@@ -7,26 +7,14 @@ error_reporting(E_ALL);
 $autoloader = require __DIR__.'/../vendor/autoload.php';
 $classDir = realpath(__DIR__)."/fixtures/";
 $autoloader->add('ArtaxServiceBuilder', [realpath(__DIR__)."/"]);
-$included = include_once __DIR__."/../../flickrKey.php";
-
-if (defined('FLICKR_KEY') == false) {
-    echo "To run the Flickr tests you must define a Flickr API key to use.";
-    define('FLICKR_KEY', 12345);
-}
-
-if (defined('FLICKR_SECRET') == false) {
-    echo "To run the Flickr oauth tests you must define a Flickr API key to use.";
-    define('FLICKR_SECRET', 54321);
-}
 
 function createClient(Amp\Reactor $reactor) {
-
     $client = new Amp\Artax\Client($reactor);
-    
+
     return $client;
 }
 
-function prepareArtaxClient(Amp\Artax\Client $client, Auryn\AurynInjector $provider) {
+function prepareArtaxClient(Amp\Artax\Client $client) {
     $client->setOption(\Amp\Artax\Client::OP_MS_CONNECT_TIMEOUT, 5000);
     $client->setOption(\Amp\Artax\Client::OP_MS_KEEP_ALIVE_TIMEOUT, 2000);
 }
