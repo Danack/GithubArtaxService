@@ -25,8 +25,8 @@ $githubAPI = new GithubArtaxService($client, $reactor, $cache, "Danack/test");
 $foo = $githubAPI->getArchiveLink(
     null,//$oauthToken,
     'Danack',
-    'Configurator',
-    'd5b1adecbf7d2d38bac05630d58bd85dfec1d7a3'
+    'GithubArtaxService',
+    'ab0caeb2ac8124e3b8aa60cfbb633ebe2fa3b0ef'
 );
 
 $result = $foo->execute();
