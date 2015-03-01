@@ -6,13 +6,8 @@ error_reporting(E_ALL);
 
 $autoloader = require __DIR__.'/../vendor/autoload.php';
 $classDir = realpath(__DIR__)."/fixtures/";
-//$outputDirectory = realpath(__DIR__).'/../var/src';
-
-//$autoloader->add('AABTest', [$classDir, $outputDirectory]);
 $autoloader->add('ArtaxServiceBuilder', [realpath(__DIR__)."/"]);
-
 $included = include_once __DIR__."/../../flickrKey.php";
-
 
 if (defined('FLICKR_KEY') == false) {
     echo "To run the Flickr tests you must define a Flickr API key to use.";

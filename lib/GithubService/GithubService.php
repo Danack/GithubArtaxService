@@ -318,6 +318,27 @@ interface GithubService {
     public function getSingleCommit($Authorization, $owner, $repo, $sha);
 
     /**
+     * getArchiveLink
+     *
+     * This method will return a 302 to a URL to download a tarball or zipball archive
+     * for a repository. Please make sure your HTTP framework is configured to follow
+     * redirects or you will need to use the Location header to make a second GET
+     * request.
+     *
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
+     * @param mixed $owner 
+     * @param mixed $repo 
+     * @param mixed $ref 
+     * @return \GithubService\Operation\getArchiveLink The new operation
+     */
+    public function getArchiveLink($Authorization, $owner, $repo, $ref);
+
+    /**
      * updateFile
      *
      * @param string $Authorization The token to use for the request. This should

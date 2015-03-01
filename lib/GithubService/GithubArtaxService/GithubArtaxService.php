@@ -31,6 +31,7 @@ use GithubService\Operation\getRepoBranch;
 use GithubService\Operation\deleteRepo;
 use GithubService\Operation\listRepoCommits;
 use GithubService\Operation\getSingleCommit;
+use GithubService\Operation\getArchiveLink;
 use GithubService\Operation\updateFile;
 use GithubService\Operation\getUserInfo;
 use GithubService\Operation\getUserEmails;
@@ -61,7 +62,7 @@ class GithubArtaxService implements \GithubService\GithubService {
     public $responseCache = null;
 
     /**
-     * @var \Reactor $reactor
+     * @var \Amp\Reactor $reactor
      */
     public $reactor = null;
 
@@ -438,6 +439,30 @@ class GithubArtaxService implements \GithubService\GithubService {
      */
     public function getSingleCommit($Authorization, $owner, $repo, $sha) {
         $instance = new getSingleCommit($this, $Authorization, $this->getUserAgent(), $owner, $repo, $sha);
+        return $instance;
+    }
+
+    /**
+     * getArchiveLink
+     *
+     * This method will return a 302 to a URL to download a tarball or zipball archive
+     * for a repository. Please make sure your HTTP framework is configured to follow
+     * redirects or you will need to use the Location header to make a second GET
+     * request.
+     *
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
+     * @param mixed $owner 
+     * @param mixed $repo 
+     * @param mixed $ref 
+     * @return \GithubService\Operation\getArchiveLink The new operation
+     */
+    public function getArchiveLink($Authorization, $owner, $repo, $ref) {
+        $instance = new getArchiveLink($this, $Authorization, $this->getUserAgent(), $owner, $repo, $ref);
         return $instance;
     }
 

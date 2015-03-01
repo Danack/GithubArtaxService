@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "fd9c112731e21eea6f1b02b1dbbbf216",
+    "hash": "4f6f900007f53305c4cdbac241591544",
     "packages": [
         {
             "name": "amphp/amp",
@@ -173,7 +173,7 @@
         },
         {
             "name": "danack/artaxservicebuilder",
-            "version": "dev-master",
+            "version": "0.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Danack/ArtaxServiceBuilder.git",
@@ -201,10 +201,7 @@
                     "ArtaxServiceBuilder": "src/"
                 }
             },
-            "support": {
-                "source": "https://github.com/Danack/ArtaxServiceBuilder/tree/master",
-                "issues": "https://github.com/Danack/ArtaxServiceBuilder/issues"
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "time": "2015-01-22 18:31:19"
         },
         {
@@ -1131,7 +1128,6 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "danack/artaxservicebuilder": 20,
         "amphp/artax": 20
     },
     "prefer-stable": true,

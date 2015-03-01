@@ -12,7 +12,7 @@ class GithubTest extends \PHPUnit_Framework_TestCase {
 
     private function  getReactorAndAPI() {
 
-        $reactor = new NativeReactor();
+        $reactor = \Amp\getReactor();
         $cache = new NullResponseCache();
         $client = new ArtaxClient($reactor);
         $client->setOption(ArtaxClient::OP_MS_CONNECT_TIMEOUT, 5000);
