@@ -45,19 +45,26 @@ class RateLimit {
         $remaining = null;
         $resetTime = null;
 
-        $limitHeaders = $response->getHeader('X-RateLimit-Limit');
-        foreach ($limitHeaders as $value) {
-            $limit = $value;
+        if ($response->hasHeader('X-RateLimit-Limit') == true) {
+            $limitHeaders = $response->getHeader('X-RateLimit-Limit');
+            foreach ($limitHeaders as $value) {
+                $limit = $value;
+            }
         }
-        
-        $remainingHeaders = $response->getHeader('X-RateLimit-Remaining');
-        foreach ($remainingHeaders as $value) {
-            $remaining = $value;
+
+        if ($response->hasHeader('X-RateLimit-Remaining') == true) {
+            $remainingHeaders = $response->getHeader('X-RateLimit-Remaining');
+            foreach ($remainingHeaders as $value) {
+                $remaining = $value;
+            }
         }
+
         
-        $resetTimeHeaders = $response->getHeader('X-RateLimit-Reset');
-        foreach ($resetTimeHeaders as $value) {
-            $resetTime = $value;
+        if ($response->hasHeader('X-RateLimit-Reset') == true) {
+            $resetTimeHeaders = $response->getHeader('X-RateLimit-Reset');
+            foreach ($resetTimeHeaders as $value) {
+                $resetTime = $value;
+            }
         }
         
         if ($limit !== null && $remaining !== null && $resetTime !== null) {
