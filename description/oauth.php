@@ -39,12 +39,12 @@ return array(
             'Authorization' => array(
                 "location" => "header",
                 "description" => "The basic auth.",
-                "filters" => array(
-                    array(
-                        "method" => 'GithubService\Github::formatBasicAuthToken',
-                        "args" => ["@value"]
-                    )
-                ),
+//                "filters" => array(
+//                    array(
+//                        "method" => 'GithubService\Github::formatBasicAuthToken',
+//                        "args" => ["@value"]
+//                    )
+//                ),
             ),
             'otp' => array(
                 "location" => "header",

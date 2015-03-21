@@ -12,6 +12,12 @@ $autoloader = require __DIR__.'/../vendor/autoload.php';
 require_once "testBootstrap.php";
 
 
+/**
+ * This test cannot be run automatically. It requires the user to read
+ * the one-time-password sent to their phone.
+ */
+
+
 /** @var  $injector Provider */
 $injector = createProvider();
 
@@ -35,7 +41,6 @@ $applicationName = 'BastionInteractiveTest';
 for ($i=0; $i<5 && ($token == false) ; $i++) {
 
     try {
-
         $currentAuthCommand = $githubService->listAuthorizations($basicToken);
 
         if ($otp) {
@@ -46,7 +51,7 @@ for ($i=0; $i<5 && ($token == false) ; $i++) {
         $currentAuth = $currentAuths->findNoteAuthorization($applicationName);
         
         if ($currentAuth) {
-            echo "Already have current auth: ".$currentAuth->token;
+            echo "Already have current auth: ".$currentAuth->token.PHP_EOL;
             break;
         }
 
@@ -64,10 +69,9 @@ for ($i=0; $i<5 && ($token == false) ; $i++) {
         $authResult = $createAuthToken->execute();
         
         var_dump($authResult);
-        
 
-//        echo "Token is ".$authResult->token;
-//        $token = $authResult->token;
+        echo "Token is ".$authResult->token;
+        $token = $authResult->token;
     }
     catch (OneTimePasswordAppException $otpae) {
         echo "Please enter the code from your 2nd factor auth app:\n";
@@ -81,7 +85,7 @@ for ($i=0; $i<5 && ($token == false) ; $i++) {
 }
 
 
-echo "Complete.";
+echo "Complete.".PHP_EOL;
 
 
 

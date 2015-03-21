@@ -143,19 +143,6 @@ class basicListAuthorizations implements \ArtaxServiceBuilder\Operation {
 
         $value = $this->parameters[$name];
 
-        switch ($name) {
-
-            case ('Authorization'): {
-                $args = [];
-                $args[] = $value;
-                $value = call_user_func_array('GithubService\Github::formatBasicAuthToken', $args);
-                break;
-            }
-
-
-            default:{}
-
-        }
 
         return $value;
     }
