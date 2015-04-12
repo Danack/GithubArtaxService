@@ -16,21 +16,26 @@ use ArtaxServiceBuilder\Service\GithubPaginator;
  * how their data should be mapped.
  *
  * static protected $dataMap = array(
- *     [
- *			'propertyName', 				Index 0 - the property name in the object
- *			['result', 'property_name'],	Index 1 - the property path in the data returned by the API. For multi-level
- * 											path, use an array for each segment of the path.
- *			'optional' => true				Index 'optional' - Optional flag of whether the property is optional.
- * 											Default is false and an Exception will be thrown if the value is not
- * 											available in the data.
- * 			'mutliple' => true 				Index 'multiple' - optional flag of whether the property should be created as
- * 											an array. Default is false.
- * 			'class'	=> 'Intahwebz\FlickrGuzzle\PropertyName'   Index 'class' - optional flag of whether to create the
- * 																property as an object. Value must be fully namespaced.
- * 			'unindex' => '_content'				Index 'unindex' - Optional flag of whether to 'unindex' the value from an
- * 											array to a plain value, if the value is an array. e.g.
- * 											$tag = $tag['_content']. Has no effect if the value is not an array or if that 											key is not set.
- *     ]
+[
+    'propertyName',                 Index 0 - the property name in the object
+    ['result', 'property_name'],    Index 1 - the property path in the data returned by the API. For multi-level
+                                    path, use an array for each segment of the path.
+    'optional' => true              Index 'optional' - Optional flag of whether the property is optional.
+                                    Default is false and an Exception will be thrown if the value is not
+                                    available in the data.
+    'mutliple' => true              Index 'multiple' - optional flag of whether the property should be created as
+                                    an array. Default is false.
+    'class'	=> 'Intahwebz\FlickrGuzzle\PropertyName'   Index 'class' - optional flag of whether to create the
+                                                        property as an object. Value must be fully namespaced.
+  
+    'unindex' => '_content'         Index 'unindex' - Optional flag of whether to 'unindex' the value from an
+                                    array to a plain value, if the value is an array. e.g.
+                                    $tag = $tag['_content']. Has no effect if the value is not an array or if that 
+                                    key is not set.
+ 
+   
+  'preserveKeys' => 'true'          Whether the keys should be preserved, default is false
+]
  * );
  *
  * Using the $dataMap above would convert the data in:
@@ -62,9 +67,15 @@ trait DataMapper {
         $instance = new static();
         $data = json_decode($json, true);
         $instance->mapPropertiesFromData($data);
+        $instance->finishMapping();
+
         return $instance;
     }
 
+    private function finishMapping() {
+        // Nothing to do by default.
+    }
+    
     /**
      * @param $data
      * @return static
@@ -187,7 +198,7 @@ trait DataMapper {
                 }
 
                 $dataPath = implode('->', $dataVariableNameArray);
-                throw new DataMapperException("DataMapper cannot find value from $dataPath in source JSON to map to actual value in class ".__CLASS__);
+                throw new DataMapperException("DataMapper cannot find value from `$dataPath` in source JSON to map to actual value in class ".__CLASS__, 0, null, $dataMapElement);
             }
 
             $value = $value[$dataVariableName];

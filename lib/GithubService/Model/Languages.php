@@ -19,7 +19,7 @@ class Languages implements \IteratorAggregate {
      * @return string[]
      */
     public function getIterator() {
-        return new \ArrayIterator($this->$languageBytes);
+        return new \ArrayIterator($this->languageBytes);
     }
 }
 
