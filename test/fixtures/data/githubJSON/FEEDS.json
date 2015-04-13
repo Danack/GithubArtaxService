@@ -1,0 +1,43 @@
+{
+  "timeline_url": "https://github.com/timeline",
+  "current_user_organization_urls": [
+    "https://github.com/organizations/github/defunkt.private.atom?token=abc123"
+  ],
+  "user_url": "https://github.com/{user}",
+  "_links": {
+    "current_user": {
+      "type": "application/atom+xml",
+      "href": "https://github.com/defunkt.private?token=abc123"
+    },
+    "current_user_actor": {
+      "type": "application/atom+xml",
+      "href": "https://github.com/defunkt.private.actor?token=abc123"
+    },
+    "current_user_organization": {
+      "type": "",
+      "href": ""
+    },
+    "user": {
+      "type": "application/atom+xml",
+      "href": "https://github.com/{user}"
+    },
+    "timeline": {
+      "type": "application/atom+xml",
+      "href": "https://github.com/timeline"
+    },
+    "current_user_organizations": [
+      {
+        "type": "application/atom+xml",
+        "href": "https://github.com/organizations/github/defunkt.private.atom?token=abc123"
+      }
+    ],
+    "current_user_public": {
+      "type": "application/atom+xml",
+      "href": "https://github.com/defunkt"
+    }
+  },
+  "current_user_public_url": "https://github.com/defunkt",
+  "current_user_url": "https://github.com/defunkt.private?token=abc123",
+  "current_user_actor_url": "https://github.com/defunkt.private.actor?token=abc123",
+  "current_user_organization_url": ""
+}

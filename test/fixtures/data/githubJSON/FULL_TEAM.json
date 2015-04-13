@@ -1,0 +1,19 @@
+{
+  "repos_count": 10,
+  "organization": {
+    "avatar_url": "https://github.com/images/error/octocat_happy.gif",
+    "url": "https://api.github.com/orgs/github",
+    "login": "github",
+    "description": "A great organization",
+    "id": 1
+  },
+  "slug": "justice-league",
+  "repositories_url": "https://api.github.com/teams/1/repos",
+  "members_url": "https://api.github.com/teams/1/members{/member}",
+  "url": "https://api.github.com/teams/1",
+  "members_count": 3,
+  "id": 1,
+  "description": "A great team.",
+  "permission": "admin",
+  "name": "Justice League"
+}

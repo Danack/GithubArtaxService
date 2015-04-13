@@ -1,0 +1,103 @@
+{
+  "user": null,
+  "comments_url": "https://api.github.com/gists/aa5a315d61ae9438b18d/comments/",
+  "commits_url": "https://api.github.com/gists/aa5a315d61ae9438b18d/commits",
+  "git_pull_url": "https://gist.github.com/aa5a315d61ae9438b18d.git",
+  "owner": {
+    "followers_url": "https://api.github.com/users/octocat/followers",
+    "subscriptions_url": "https://api.github.com/users/octocat/subscriptions",
+    "following_url": "https://api.github.com/users/octocat/following{/other_user}",
+    "received_events_url": "https://api.github.com/users/octocat/received_events",
+    "organizations_url": "https://api.github.com/users/octocat/orgs",
+    "gravatar_id": "",
+    "avatar_url": "https://github.com/images/error/octocat_happy.gif",
+    "type": "User",
+    "events_url": "https://api.github.com/users/octocat/events{/privacy}",
+    "url": "https://api.github.com/users/octocat",
+    "login": "octocat",
+    "site_admin": false,
+    "html_url": "https://github.com/octocat",
+    "id": 1,
+    "starred_url": "https://api.github.com/users/octocat/starred{/owner}{/repo}",
+    "repos_url": "https://api.github.com/users/octocat/repos",
+    "gists_url": "https://api.github.com/users/octocat/gists{/gist_id}"
+  },
+  "files": {
+    "ring.erl": {
+      "content": "contents of gist",
+      "size": 932,
+      "language": "Erlang",
+      "truncated": false,
+      "type": "text/plain",
+      "raw_url": "https://gist.githubusercontent.com/raw/365370/8c4d2d43d178df44f4c03a7f2ac0ff512853564e/ring.erl"
+    }
+  },
+  "history": [
+    {
+      "user": {
+        "followers_url": "https://api.github.com/users/octocat/followers",
+        "subscriptions_url": "https://api.github.com/users/octocat/subscriptions",
+        "following_url": "https://api.github.com/users/octocat/following{/other_user}",
+        "received_events_url": "https://api.github.com/users/octocat/received_events",
+        "organizations_url": "https://api.github.com/users/octocat/orgs",
+        "gravatar_id": "",
+        "avatar_url": "https://github.com/images/error/octocat_happy.gif",
+        "type": "User",
+        "events_url": "https://api.github.com/users/octocat/events{/privacy}",
+        "url": "https://api.github.com/users/octocat",
+        "login": "octocat",
+        "site_admin": false,
+        "html_url": "https://github.com/octocat",
+        "id": 1,
+        "starred_url": "https://api.github.com/users/octocat/starred{/owner}{/repo}",
+        "repos_url": "https://api.github.com/users/octocat/repos",
+        "gists_url": "https://api.github.com/users/octocat/gists{/gist_id}"
+      },
+      "committed_at": "2010-04-14T02:15:15Z",
+      "url": "https://api.github.com/gists/aa5a315d61ae9438b18d/57a7f021a713b1c5a6a199b54cc514735d2d462f",
+      "change_status": {
+        "additions": 180,
+        "deletions": 0,
+        "total": 180
+      },
+      "version": "57a7f021a713b1c5a6a199b54cc514735d2d462f"
+    }
+  ],
+  "updated_at": "2011-06-20T11:34:15Z",
+  "url": "https://api.github.com/gists/aa5a315d61ae9438b18d",
+  "forks_url": "https://api.github.com/gists/aa5a315d61ae9438b18d/forks",
+  "created_at": "2010-04-14T02:15:15Z",
+  "id": "aa5a315d61ae9438b18d",
+  "description": "description of gist",
+  "html_url": "https://gist.github.com/aa5a315d61ae9438b18d",
+  "forks": [
+    {
+      "user": {
+        "followers_url": "https://api.github.com/users/octocat/followers",
+        "subscriptions_url": "https://api.github.com/users/octocat/subscriptions",
+        "following_url": "https://api.github.com/users/octocat/following{/other_user}",
+        "received_events_url": "https://api.github.com/users/octocat/received_events",
+        "organizations_url": "https://api.github.com/users/octocat/orgs",
+        "gravatar_id": "",
+        "avatar_url": "https://github.com/images/error/octocat_happy.gif",
+        "type": "User",
+        "events_url": "https://api.github.com/users/octocat/events{/privacy}",
+        "url": "https://api.github.com/users/octocat",
+        "login": "octocat",
+        "site_admin": false,
+        "html_url": "https://github.com/octocat",
+        "id": 1,
+        "starred_url": "https://api.github.com/users/octocat/starred{/owner}{/repo}",
+        "repos_url": "https://api.github.com/users/octocat/repos",
+        "gists_url": "https://api.github.com/users/octocat/gists{/gist_id}"
+      },
+      "updated_at": "2011-04-14T16:00:49Z",
+      "created_at": "2011-04-14T16:00:49Z",
+      "url": "https://api.github.com/gists/dee9c42e4998ce2ea439",
+      "id": "dee9c42e4998ce2ea439"
+    }
+  ],
+  "git_push_url": "https://gist.github.com/aa5a315d61ae9438b18d.git",
+  "public": true,
+  "comments": 0
+}

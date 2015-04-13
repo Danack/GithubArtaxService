@@ -1,0 +1,34 @@
+[
+  {
+    "path": "lib/octokit.rb",
+    "size": 625,
+    "download_url": "https://raw.githubusercontent.com/octokit/octokit.rb/master/lib/octokit.rb",
+    "url": "https://api.github.com/repos/octokit/octokit.rb/contents/lib/octokit.rb",
+    "sha": "fff6fe3a23bf1c8ea0692b4a883af99bee26fd3b",
+    "type": "file",
+    "html_url": "https://github.com/octokit/octokit.rb/blob/master/lib/octokit.rb",
+    "_links": {
+      "html": "https://github.com/octokit/octokit.rb/blob/master/lib/octokit.rb",
+      "self": "https://api.github.com/repos/octokit/octokit.rb/contents/lib/octokit.rb",
+      "git": "https://api.github.com/repos/octokit/octokit.rb/git/blobs/fff6fe3a23bf1c8ea0692b4a883af99bee26fd3b"
+    },
+    "git_url": "https://api.github.com/repos/octokit/octokit.rb/git/blobs/fff6fe3a23bf1c8ea0692b4a883af99bee26fd3b",
+    "name": "octokit.rb"
+  },
+  {
+    "path": "lib/octokit",
+    "size": 0,
+    "download_url": null,
+    "url": "https://api.github.com/repos/octokit/octokit.rb/contents/lib/octokit",
+    "sha": "a84d88e7554fc1fa21bcbc4efae3c782a70d2b9d",
+    "type": "dir",
+    "html_url": "https://github.com/octokit/octokit.rb/tree/master/lib/octokit",
+    "_links": {
+      "html": "https://github.com/octokit/octokit.rb/tree/master/lib/octokit",
+      "self": "https://api.github.com/repos/octokit/octokit.rb/contents/lib/octokit",
+      "git": "https://api.github.com/repos/octokit/octokit.rb/git/trees/a84d88e7554fc1fa21bcbc4efae3c782a70d2b9d"
+    },
+    "git_url": "https://api.github.com/repos/octokit/octokit.rb/git/trees/a84d88e7554fc1fa21bcbc4efae3c782a70d2b9d",
+    "name": "octokit"
+  }
+]

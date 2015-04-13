@@ -1,0 +1,29 @@
+[
+  {
+    "object": {
+      "url": "https://api.github.com/repos/octocat/Hello-World/git/commits/aa218f56b14c9653891f9e74264a383fa43fefbd",
+      "sha": "aa218f56b14c9653891f9e74264a383fa43fefbd",
+      "type": "commit"
+    },
+    "url": "https://api.github.com/repos/octocat/Hello-World/git/refs/heads/master",
+    "ref": "refs/heads/master"
+  },
+  {
+    "object": {
+      "url": "https://api.github.com/repos/octocat/Hello-World/git/commits/612077ae6dffb4d2fbd8ce0cccaa58893b07b5ac",
+      "sha": "612077ae6dffb4d2fbd8ce0cccaa58893b07b5ac",
+      "type": "commit"
+    },
+    "url": "https://api.github.com/repos/octocat/Hello-World/git/refs/heads/gh-pages",
+    "ref": "refs/heads/gh-pages"
+  },
+  {
+    "object": {
+      "url": "https://api.github.com/repos/octocat/Hello-World/git/tags/940bd336248efae0f9ee5bc7b2d5c985887b16ac",
+      "sha": "940bd336248efae0f9ee5bc7b2d5c985887b16ac",
+      "type": "tag"
+    },
+    "url": "https://api.github.com/repos/octocat/Hello-World/git/refs/tags/v0.0.1",
+    "ref": "refs/tags/v0.0.1"
+  }
+]

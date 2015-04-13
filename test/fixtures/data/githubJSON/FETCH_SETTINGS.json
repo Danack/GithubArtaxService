@@ -1,0 +1,118 @@
+{
+  "enterprise": {
+    "collectd": {
+      "password": "bar",
+      "encryption": "",
+      "port": "",
+      "enabled": false,
+      "server": "",
+      "username": "foo"
+    },
+    "dns": {
+      "secondary_nameserver": "8.8.4.4",
+      "primary_nameserver": "8.8.8.8"
+    },
+    "avatar": {
+      "enabled": false,
+      "uri": ""
+    },
+    "pages": {
+      "enabled": true
+    },
+    "configuration_id": 1401777404,
+    "private_mode": false,
+    "assets": {
+      "access_key": null,
+      "key_id": null,
+      "bucket": null,
+      "storage": "file",
+      "host_name": null
+    },
+    "device": {
+      "path": "/dev/xyz"
+    },
+    "ldap": {
+      "method": "Plain",
+      "password": "",
+      "admin_group": "",
+      "port": "",
+      "uid": "",
+      "user_groups": [
+
+      ],
+      "bind_dn": "",
+      "host": "",
+      "base": [
+
+      ]
+    },
+    "storage_mode": "rootfs",
+    "auth_mode": "default",
+    "configuration_run_count": 4,
+    "github_hostname": "ghe.local",
+    "github_ssl": {
+      "enabled": false,
+      "key": null,
+      "cert": null
+    },
+    "license": {
+      "unlimited_seating": true,
+      "evaluation": false,
+      "ssh_allowed": true,
+      "seats": 0,
+      "support_key": "ssh-rsa AAAAB3N....",
+      "expire_at": "2015-04-27T00:00:00-07:00",
+      "perpetual": false
+    },
+    "package_version": "11.10.332",
+    "admin_password": null,
+    "snmp": {
+      "community": "",
+      "enabled": false
+    },
+    "smtp": {
+      "password": "bar",
+      "port": "1234",
+      "support_address": "enterprise@github.com",
+      "enable_starttls_auto": true,
+      "user_name": "mr_foo",
+      "enabled": true,
+      "username": "foo",
+      "domain": "blah",
+      "authentication": "plain",
+      "address": "smtp.example.com",
+      "noreply_address": "noreply@github.com"
+    },
+    "cas": {
+      "url": ""
+    },
+    "timezone": {
+      "identifier": "UTC"
+    },
+    "ntp": {
+      "primary_server": "0.ubuntu.pool.ntp.org",
+      "secondary_server": "1.ubuntu.pool.ntp.org"
+    },
+    "github_oauth": {
+      "client_secret": "kj123131132",
+      "organization_team": "homestarrunners/characters",
+      "client_id": "12313412",
+      "organization_name": "Homestar Runners"
+    },
+    "rsyslog": {
+      "enabled": false,
+      "server": "",
+      "protocol_name": "TCP"
+    },
+    "customer": {
+      "email": "stannis@themannis.biz",
+      "secret_key_data": "-----BEGIN PGP PRIVATE KEY BLOCK-----\nVersion: GnuPG v1.4.10 (GNU/Linux)\n\nlQcYBE5TCgsBEACk4yHpUcapplebaumBMXYMiLF+nCQ0lxpx...\n-----END PGP PRIVATE KEY BLOCK-----\n",
+      "public_key_data": "-----BEGIN PGP PUBLIC KEY BLOCK-----\nVersion: GnuPG v1.4.10 (GNU/Linux)\n\nmI0ETqzZYgEEALSe6snowdenXyqvLfSQ34HWD6C7....\n-----END PGP PUBLIC KEY BLOCK-----\n",
+      "uuid": "af6cac80-e4e1-012e-d822-1231380e52e9",
+      "name": "GitHub"
+    }
+  },
+  "run_list": [
+    "role[configure]"
+  ]
+}

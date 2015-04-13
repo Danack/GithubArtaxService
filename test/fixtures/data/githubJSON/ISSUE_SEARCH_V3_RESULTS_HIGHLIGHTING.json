@@ -1,0 +1,41 @@
+{
+  "text_matches": [
+    {
+      "matches": [
+        {
+          "indices": [
+            14,
+            21
+          ],
+          "text": "windows"
+        },
+        {
+          "indices": [
+            78,
+            85
+          ],
+          "text": "windows"
+        }
+      ],
+      "fragment": "comprehensive windows font I know of).\n\nIf we can find a commonly distributed windows font that supports them then no problem (we can use html font tags) but otherwise the '(21)' style is probably better.\n",
+      "property": "body",
+      "object_url": "https://api.github.com/repositories/215335/issues/132",
+      "object_type": "Issue"
+    },
+    {
+      "matches": [
+        {
+          "indices": [
+            163,
+            170
+          ],
+          "text": "Windows"
+        }
+      ],
+      "fragment": " right after that are a bit broken IMHO :). I suppose we could have some hack that maxes out at whatever the font does...\n\nI'll check what the state of play is on Windows.\n",
+      "property": "body",
+      "object_url": "https://api.github.com/repositories/215335/issues/comments/25688",
+      "object_type": "IssueComment"
+    }
+  ]
+}

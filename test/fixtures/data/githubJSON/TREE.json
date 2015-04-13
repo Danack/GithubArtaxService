@@ -1,0 +1,30 @@
+{
+  "truncated": false,
+  "url": "https://api.github.com/repos/octocat/Hello-World/trees/9fb037999f264ba9a7fc6274d15fa3ae2ab98312",
+  "sha": "9fb037999f264ba9a7fc6274d15fa3ae2ab98312",
+  "tree": [
+    {
+      "path": "file.rb",
+      "size": 30,
+      "url": "https://api.github.com/repos/octocat/Hello-World/git/blobs/44b4fc6d56897b048c772eb4087f854f46256132",
+      "sha": "44b4fc6d56897b048c772eb4087f854f46256132",
+      "type": "blob",
+      "mode": "100644"
+    },
+    {
+      "path": "subdir",
+      "url": "https://api.github.com/repos/octocat/Hello-World/git/blobs/f484d249c660418515fb01c2b9662073663c242e",
+      "sha": "f484d249c660418515fb01c2b9662073663c242e",
+      "type": "tree",
+      "mode": "040000"
+    },
+    {
+      "path": "exec_file",
+      "size": 75,
+      "url": "https://api.github.com/repos/octocat/Hello-World/git/blobs/45b983be36b73c0788dc9cbcb76cbb80fc7bb057",
+      "sha": "45b983be36b73c0788dc9cbcb76cbb80fc7bb057",
+      "type": "blob",
+      "mode": "100755"
+    }
+  ]
+}

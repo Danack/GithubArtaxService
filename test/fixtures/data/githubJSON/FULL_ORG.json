@@ -1,0 +1,19 @@
+{
+  "email": "octocat@github.com",
+  "location": "San Francisco",
+  "following": 0,
+  "followers": 20,
+  "public_gists": 1,
+  "avatar_url": "https://github.com/images/error/octocat_happy.gif",
+  "blog": "https://github.com/blog",
+  "created_at": "2008-01-14T04:33:35Z",
+  "type": "Organization",
+  "login": "github",
+  "url": "https://api.github.com/orgs/github",
+  "public_repos": 2,
+  "html_url": "https://github.com/octocat",
+  "id": 1,
+  "description": "A great organization",
+  "company": "GitHub",
+  "name": "github"
+}

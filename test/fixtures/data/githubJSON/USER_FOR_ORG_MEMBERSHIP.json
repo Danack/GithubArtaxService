@@ -1,0 +1,19 @@
+{
+  "followers_url": "https://api.github.com/users/defunkt/followers",
+  "subscriptions_url": "https://api.github.com/users/defunkt/subscriptions",
+  "following_url": "https://api.github.com/users/defunkt/following{/other_user}",
+  "received_events_url": "https://api.github.com/users/defunkt/received_events",
+  "organizations_url": "https://api.github.com/users/defunkt/orgs",
+  "gravatar_id": "",
+  "avatar_url": "https://github.com/images/error/octocat_happy.gif",
+  "type": "User",
+  "events_url": "https://api.github.com/users/defunkt/events{/privacy}",
+  "url": "https://api.github.com/users/defunkt",
+  "login": "defunkt",
+  "site_admin": false,
+  "html_url": "https://github.com/defunkt",
+  "id": 3,
+  "starred_url": "https://api.github.com/users/defunkt/starred{/owner}{/repo}",
+  "repos_url": "https://api.github.com/users/defunkt/repos",
+  "gists_url": "https://api.github.com/users/defunkt/gists{/gist_id}"
+}

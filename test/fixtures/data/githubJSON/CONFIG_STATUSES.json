@@ -1,0 +1,25 @@
+{
+  "progress": [
+    {
+      "key": "Appliance core components",
+      "status": "DONE"
+    },
+    {
+      "key": "GitHub utilities",
+      "status": "DONE"
+    },
+    {
+      "key": "GitHub applications",
+      "status": "DONE"
+    },
+    {
+      "key": "GitHub services",
+      "status": "CONFIGURING"
+    },
+    {
+      "key": "Reloading appliance services",
+      "status": "PENDING"
+    }
+  ],
+  "status": "running"
+}

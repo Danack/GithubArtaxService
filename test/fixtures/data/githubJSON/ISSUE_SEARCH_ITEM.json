@@ -1,0 +1,19 @@
+{
+  "user": "ckarbass",
+  "body": "Issue body goes here",
+  "number": 10,
+  "labels": [
+    "api",
+    "feature request",
+    "investigation"
+  ],
+  "updated_at": "2010-06-04T23:20:33Z",
+  "title": "This is is the issue title",
+  "votes": 2,
+  "gravatar_id": "",
+  "state": "open",
+  "created_at": "2010-06-04T23:20:33Z",
+  "html_url": "https://github.com/pengwynn/linkedin/issues/10",
+  "comments": 5,
+  "position": 10
+}

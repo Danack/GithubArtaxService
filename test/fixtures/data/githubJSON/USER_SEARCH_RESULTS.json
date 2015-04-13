@@ -1,0 +1,22 @@
+{
+  "users": [
+    {
+      "score": 4.2559967,
+      "location": "Tsukuba, Ibaraki, Japan",
+      "language": "Python",
+      "followers": 10,
+      "repos": 8,
+      "fullname": "Hirotaka Kawata",
+      "gravatar_id": "",
+      "login": "techno",
+      "type": "user",
+      "created_at": "2009-10-05T01:32:06Z",
+      "created": "2009-10-05T01:32:06Z",
+      "id": "user-135050",
+      "username": "techno",
+      "followers_count": 10,
+      "public_repo_count": 8,
+      "name": "Hirotaka Kawata"
+    }
+  ]
+}

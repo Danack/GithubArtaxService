@@ -1,0 +1,30 @@
+{
+  "plan": {
+    "space": 400,
+    "private_repos": 20,
+    "name": "Medium"
+  },
+  "email": "octocat@github.com",
+  "following": 0,
+  "location": "San Francisco",
+  "followers": 20,
+  "avatar_url": "https://github.com/images/error/octocat_happy.gif",
+  "public_gists": 1,
+  "url": "https://api.github.com/orgs/github",
+  "login": "github",
+  "type": "Organization",
+  "created_at": "2008-01-14T04:33:35Z",
+  "blog": "https://github.com/blog",
+  "description": "A great organization",
+  "id": 1,
+  "html_url": "https://github.com/octocat",
+  "public_repos": 2,
+  "private_gists": 81,
+  "company": "GitHub",
+  "collaborators": 8,
+  "total_private_repos": 100,
+  "owned_private_repos": 100,
+  "disk_usage": 10000,
+  "billing_email": "support@github.com",
+  "name": "github"
+}

@@ -1,0 +1,6 @@
+{
+  "cname": "developer.github.com",
+  "url": "https://api.github.com/repos/github/developer.github.com/pages",
+  "custom_404": false,
+  "status": "built"
+}

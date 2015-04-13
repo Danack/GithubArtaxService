@@ -1,0 +1,56 @@
+{
+  "milestones": {
+    "open_milestones": 6,
+    "total_milestones": 7,
+    "closed_milestones": 1
+  },
+  "pages": {
+    "total_pages": 36
+  },
+  "users": {
+    "total_users": 254,
+    "suspended_users": 21,
+    "admin_users": 45
+  },
+  "hooks": {
+    "active_hooks": 23,
+    "inactive_hooks": 4,
+    "total_hooks": 27
+  },
+  "gists": {
+    "public_gists": 25,
+    "total_gists": 178,
+    "private_gists": 151
+  },
+  "repos": {
+    "root_repos": 194,
+    "org_repos": 51,
+    "total_wikis": 15,
+    "total_pushes": 3082,
+    "total_repos": 212,
+    "fork_repos": 18
+  },
+  "orgs": {
+    "total_teams": 60,
+    "total_team_members": 314,
+    "disabled_orgs": 0,
+    "total_orgs": 33
+  },
+  "comments": {
+    "total_pull_request_comments": 30,
+    "total_issue_comments": 366,
+    "total_gist_comments": 28,
+    "total_commit_comments": 6
+  },
+  "issues": {
+    "open_issues": 83,
+    "total_issues": 179,
+    "closed_issues": 96
+  },
+  "pulls": {
+    "unmergeable_pulls": 3,
+    "merged_pulls": 60,
+    "total_pulls": 86,
+    "mergeable_pulls": 21
+  }
+}

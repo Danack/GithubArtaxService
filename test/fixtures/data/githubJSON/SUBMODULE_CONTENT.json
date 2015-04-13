@@ -1,0 +1,17 @@
+{
+  "path": "test/qunit",
+  "size": 0,
+  "submodule_git_url": "git://github.com/jquery/qunit.git",
+  "download_url": null,
+  "url": "https://api.github.com/repos/jquery/jquery/contents/test/qunit?ref=master",
+  "sha": "6ca3721222109997540bd6d9ccd396902e0ad2f9",
+  "type": "submodule",
+  "html_url": "https://github.com/jquery/qunit/tree/6ca3721222109997540bd6d9ccd396902e0ad2f9",
+  "_links": {
+    "html": "https://github.com/jquery/qunit/tree/6ca3721222109997540bd6d9ccd396902e0ad2f9",
+    "self": "https://api.github.com/repos/jquery/jquery/contents/test/qunit?ref=master",
+    "git": "https://api.github.com/repos/jquery/qunit/git/trees/6ca3721222109997540bd6d9ccd396902e0ad2f9"
+  },
+  "git_url": "https://api.github.com/repos/jquery/qunit/git/trees/6ca3721222109997540bd6d9ccd396902e0ad2f9",
+  "name": "qunit"
+}

@@ -1,0 +1,34 @@
+{
+  "text_matches": [
+    {
+      "matches": [
+        {
+          "indices": [
+            23,
+            31
+          ],
+          "text": "addClass"
+        }
+      ],
+      "fragment": ";\n\njQuery.fn.extend({\n\taddClass: function( value ) {\n\t\tvar classes, elem, cur, clazz, j, finalValue",
+      "property": "content",
+      "object_url": "https://api.github.com/repositories/167174/contents/src/attributes/classes.js?ref=825ac3773694e0cd23ee74895fd5aeb535b27da4",
+      "object_type": "FileContent"
+    },
+    {
+      "matches": [
+        {
+          "indices": [
+            80,
+            88
+          ],
+          "text": "addClass"
+        }
+      ],
+      "fragment": ".isFunction( value ) ) {\n\t\t\treturn this.each(function( j ) {\n\t\t\t\tjQuery( this ).addClass( value.call( this",
+      "property": "content",
+      "object_url": "https://api.github.com/repositories/167174/contents/src/attributes/classes.js?ref=825ac3773694e0cd23ee74895fd5aeb535b27da4",
+      "object_type": "FileContent"
+    }
+  ]
+}

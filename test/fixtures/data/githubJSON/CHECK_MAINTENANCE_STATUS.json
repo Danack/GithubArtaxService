@@ -1,0 +1,18 @@
+{
+  "connection_services": [
+    {
+      "number": 0,
+      "name": "git operations"
+    },
+    {
+      "number": 233,
+      "name": "mysql queries"
+    },
+    {
+      "number": 54,
+      "name": "resque jobs"
+    }
+  ],
+  "scheduled_time": "Tuesday, January 22 at 15 => 34 -0800",
+  "status": "scheduled"
+}

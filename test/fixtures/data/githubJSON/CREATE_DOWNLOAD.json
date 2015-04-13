@@ -1,0 +1,21 @@
+{
+  "policy": "ewogICAg...",
+  "signature": "mwnFDC...",
+  "path": "downloads/octocat/Hello-World/new_file.jpg",
+  "expirationdate": "2011-04-14T16:00:49Z",
+  "accesskeyid": "1ABCDEFG...",
+  "prefix": "downloads/octocat/Hello-World/",
+  "size": 1024,
+  "redirect": false,
+  "download_count": 40,
+  "bucket": "github",
+  "url": "https://api.github.com/repos/octocat/Hello-World/downloads/1",
+  "mime_type": "image/jpeg",
+  "html_url": "https://github.com/repos/octocat/Hello-World/downloads/new_file.jpg",
+  "id": 1,
+  "description": "Description of your download",
+  "content_type": ".jpg",
+  "s3_url": "https://github.s3.amazonaws.com/",
+  "acl": "public-read",
+  "name": "new_file.jpg"
+}

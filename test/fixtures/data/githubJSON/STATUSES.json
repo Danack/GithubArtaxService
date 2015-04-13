@@ -1,0 +1,19 @@
+{
+  "500": "500 Server Error",
+  "401": "401 Unauthorized",
+  "302": "302 Found",
+  "204": "204 No Content",
+  "502": "502 Bad Gateway",
+  "403": "403 Forbidden",
+  "304": "304 Not Modified",
+  "205": "205 Reset Content",
+  "409": "409 Conflict",
+  "200": "200 OK",
+  "404": "404 Not Found",
+  "201": "201 Created",
+  "405": "405 Method not allowed",
+  "422": "422 Unprocessable Entity",
+  "301": "301 Moved Permanently",
+  "202": "202 Accepted",
+  "307": "307 Temporary Redirect"
+}

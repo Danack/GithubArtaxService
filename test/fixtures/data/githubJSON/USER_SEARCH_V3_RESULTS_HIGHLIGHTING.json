@@ -1,0 +1,34 @@
+{
+  "text_matches": [
+    {
+      "matches": [
+        {
+          "indices": [
+            0,
+            3
+          ],
+          "text": "tom"
+        }
+      ],
+      "fragment": "tom@github.com",
+      "property": "email",
+      "object_url": "https://api.github.com/users/mojombo",
+      "object_type": "User"
+    },
+    {
+      "matches": [
+        {
+          "indices": [
+            0,
+            3
+          ],
+          "text": "Tom"
+        }
+      ],
+      "fragment": "Tom Preston-Werner",
+      "property": "name",
+      "object_url": "https://api.github.com/users/mojombo",
+      "object_type": "User"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "size": 1024,
+  "download_count": 40,
+  "url": "https://api.github.com/repos/octocat/Hello-World/downloads/1",
+  "content_type": ".jpg",
+  "description": "Description of your download",
+  "id": 1,
+  "html_url": "https://github.com/repos/octocat/Hello-World/downloads/new_file.jpg",
+  "name": "new_file.jpg"
+}
