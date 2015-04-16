@@ -4,9 +4,8 @@
 namespace GithubService\Model;
 
 
-class Commit {
+class Commit extends DataMapper {
     
-    use DataMapper;
 
     public $url;
     public $sha;
@@ -34,15 +33,19 @@ class Commit {
      */
     public $parents;
 
-    static protected $dataMap = array(
-        ['url', 'url'],
-        ['sha', 'sha'],
-        ['htmlURL', 'html_url', 'optional' => true],
-        ['commitInfo', 'commit', 'class' => 'GithubService\Model\CommitInfo'],
-        ['author', 'author', 'class' => 'GithubService\Model\Person'],
-        ['committer', 'committer', 'class' => 'GithubService\Model\Person'],
-        ['parents', 'parents', 'class' => 'GithubService\Model\CommitParent', 'multiple' => 'true'],
-    );
+    protected function getDataMap() {
+        $dataMap = array(
+            ['url', 'url'],
+            ['sha', 'sha'],
+            ['htmlURL', 'html_url', 'optional' => true],
+            ['commitInfo', 'commit', 'class' => 'GithubService\Model\CommitInfo'],
+            ['author', 'author', 'class' => 'GithubService\Model\Person'],
+            ['committer', 'committer', 'class' => 'GithubService\Model\Person'],
+            ['parents', 'parents', 'class' => 'GithubService\Model\CommitParent', 'multiple' => 'true'],
+        );
+
+        return $dataMap;
+    }
 }
 
  

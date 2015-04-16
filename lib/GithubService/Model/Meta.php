@@ -1,21 +1,37 @@
-<?php
+<?php 
 
 namespace GithubService\Model;
 
+class Meta extends \GithubService\Model\DataMapper {
 
-class Meta {
-
-    use DataMapper;
-
-    public $hookCIDRs = [];
-    public $gitCIDRs = [];
-    public $verifiablePasswordAuthentication;
-    public $githubServicesSHA;
-    
-    static protected $dataMap = array(
-        ['hookCIDRs', 'hooks', 'multiple' => true, ],
-        ['gitCIDRs', 'git', 'multiple' => true, ],
-        ['verifiablePasswordAuthentication', 'verifiable_password_authentication', ],
-        ['githubServicesSHA', 'github_services_sha', ],
+    /**
+     * @var \GithubService\Model\Indices $git
+     */
+    public $git = array(
+        
     );
+
+    public $githubServicesSha = null;
+
+    /**
+     * @var \GithubService\Model\Indices $hooks
+     */
+    public $hooks = array(
+        
+    );
+
+    public $verifiablePasswordAuthentication = null;
+
+    protected function getDataMap() {
+        $dataMap = [
+            ['git', 'git', 'multiple' => true, 'class' => 'GithubService\\Model\\Indices'],
+            ['githubServicesSha', 'github_services_sha'],
+            ['hooks', 'hooks', 'multiple' => true, 'class' => 'GithubService\\Model\\Indices'],
+            ['verifiablePasswordAuthentication', 'verifiable_password_authentication'],
+        ];
+
+        return $dataMap;
+    }
+
+
 }

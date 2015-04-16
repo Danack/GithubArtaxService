@@ -1,110 +1,65 @@
-<?php
-
+<?php 
 
 namespace GithubService\Model;
 
+class User extends \GithubService\Model\DataMapper {
 
-class User {
-    
-    public $login;
-    public $id;
-    public $avatarURL;
-    public $gravatarID;
-    public $url;
-    public $htmlUrl;
-    public $followersUrl;
-    public $followingUrl;
-    public $gistsUrl;
-    public $starredUrl;
-    public $subscriptionsUrl;
-    public $organizationsUrl;
-    public $reposUrl;
-    public $eventsUrl;
-    public $receivedEventsUrl;
-    public $type;
-    public $siteAdmin;
-    public $name;
-    public $company;
-    public $blog;
-    public $location;
-    public $email;
-    public $hireable;
-    public $bio;
-    public $publicRepos;
-    public $publicGists;
-    public $followers;
-    public $following;
-    public $createdAt;
-    public $updatedAt;
-    
-    public $plan;
+    public $avatarUrl = null;
 
-    //public $oauthScopes = [];
-    
-    
-    use DataMapper;
+    public $eventsUrl = null;
 
-    static protected $dataMap = array(
-        ['login', 'login'],
-        ['id', 'id'],
-        ['avatarURL', 'avatar_url'],
-        ['gravatarID', 'gravatar_id'],
-        ['url', 'url'],
-        ['htmlUrl', 'html_url'],
-        ['followersUrl', 'followers_url'],
-        ['followingUrl', 'following_url'],
-        ['gistsUrl', 'gists_url'],
-        ['starredUrl', 'starred_url'],
-        ['subscriptionsUrl', 'subscriptions_url'],
-        ['organizationsUrl', 'organizations_url'],
-        ['reposUrl', 'repos_url'],
-        ['eventsUrl', 'events_url'],
-        ['receivedEventsUrl', 'received_events_url'],
-        ['type', 'type'],
-        ['siteAdmin', 'site_admin'],
-        ['name', 'name'],
-        ['company', 'company'],
-        ['blog', 'blog'],
-        ['location', 'location'],
-        ['email', 'email'],
-        ['hireable', 'hireable'],
-        ['bio', 'bio'],
-        ['publicRepos', 'public_repos'],
-        ['publicGists', 'public_gists'],
-        ['followers', 'followers'],
-        ['following', 'following'],
-        ['createdAt', 'created_at'],
-        ['updatedAt', 'updated_at'],
-        //['oauthScopes', 'oauthScopes', 'optional' => true],
+    public $followersUrl = null;
 
-        //I don't know if this is actually optional, but I doubt it's vital
-        //information
-        ['plan', 'plan', 'class' => 'GithubService\Model\Plan', 'optional' => true],
-    );
+    public $followingUrl = null;
+
+    public $gistsUrl = null;
+
+    public $gravatarId = null;
+
+    public $htmlUrl = null;
+
+    public $id = null;
+
+    public $login = null;
+
+    public $organizationsUrl = null;
+
+    public $receivedEventsUrl = null;
+
+    public $reposUrl = null;
+
+    public $starredUrl = null;
+
+    public $subscriptionsUrl = null;
+
+    public $type = null;
+
+    public $url = null;
+
+    protected function getDataMap() {
+        $dataMap = [
+            ['avatarUrl', 'avatar_url'],
+            ['eventsUrl', 'events_url'],
+            ['followersUrl', 'followers_url'],
+            ['followingUrl', 'following_url'],
+            ['gistsUrl', 'gists_url'],
+            ['gravatarId', 'gravatar_id'],
+            ['htmlUrl', 'html_url'],
+            ['id', 'id'],
+            ['login', 'login'],
+            ['organizationsUrl', 'organizations_url'],
+            ['receivedEventsUrl', 'received_events_url'],
+            ['reposUrl', 'repos_url'],
+            ['starredUrl', 'starred_url'],
+            ['subscriptionsUrl', 'subscriptions_url'],
+            ['type', 'type'],
+            ['url', 'url'],
+        ];
+        
+        
+
+        return $dataMap;
+    }
 
 
-//    /**
-//     * @param Response $response
-//     * @param Operation $operation
-//     * @return \GithubService\Model\Emails
-//     * @throws DataMapperException
-//     */
-//    static function createFromResponse(Response $response, Operation $operation) {
-//        $data = $response->getBody();
-//        $jsonData = json_decode($data, true);
-//
-//        $oauthHeaderValues = $response->getHeader('X-OAuth-Scopes');
-//
-//        $oauthScopes = [];
-//        
-//        foreach ($oauthHeaderValues as $oauthHeaderValue) {
-//            $oauthScopes = explode(', ', $oauthHeaderValue);
-//        }
-//
-//        $jsonData['oauthScopes'] = $oauthScopes;
-//
-//        return self::createFromData($jsonData);
-//    }
 }
-
- 

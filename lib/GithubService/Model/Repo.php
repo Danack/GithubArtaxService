@@ -1,48 +1,111 @@
-<?php
-
+<?php 
 
 namespace GithubService\Model;
 
+class Repo extends \GithubService\Model\DataMapper {
 
-class Repo {
+    public $cloneUrl = null;
 
-    use DataMapper;
-//    id
-//name
-//full_name
-//owner
-//$private
-//html_url
-//description
-//fork
-//url
-//forks_url
-//keys_url
-//issue_events_url
-//events_url
-//assignees_url
-//tags_url
-//blobs_url
-//git_tags_url
-//git_refs_url
-//trees_url
-//statuses_url
-//languages_url
-//stargazers_url
-//contributors_url
-//subscribers_url
-//commits_url
-//git_commits_url
-//comments_url
-//compare_url
-//merges_url
-//archive_url
-//downloads_url
-//issues_url
-//pulls_url
-//milestones_url
-//notifications_url
-//labels_url
-//releases_url
+    public $createdAt = null;
+
+    public $defaultBranch = null;
+
+    public $description = null;
+
+    public $fork = null;
+
+    public $forksCount = null;
+
+    public $fullName = null;
+
+    public $gitUrl = null;
+
+    public $hasDownloads = null;
+
+    public $hasIssues = null;
+
+    public $hasPages = null;
+
+    public $hasWiki = null;
+
+    public $homepage = null;
+
+    public $htmlUrl = null;
+
+    public $id = null;
+
+    public $language = null;
+
+    public $mirrorUrl = null;
+
+    public $name = null;
+
+    public $openIssuesCount = null;
+
+    /**
+     * @var \GithubService\Model\User $owner
+     */
+    public $owner = null;
+
+    /**
+     * @var \GithubService\Model\ $permissions
+     */
+    public $permissions = null;
+
+    public $private = null;
+
+    public $pushedAt = null;
+
+    public $size = null;
+
+    public $sshUrl = null;
+
+    public $stargazersCount = null;
+
+    public $svnUrl = null;
+
+    public $updatedAt = null;
+
+    public $url = null;
+
+    public $watchersCount = null;
+
+    protected function getDataMap() {
+        $dataMap = [
+            ['cloneUrl', 'clone_url'],
+            ['createdAt', 'created_at'],
+            ['defaultBranch', 'default_branch'],
+            ['description', 'description'],
+            ['fork', 'fork'],
+            ['forksCount', 'forks_count'],
+            ['fullName', 'full_name'],
+            ['gitUrl', 'git_url'],
+            ['hasDownloads', 'has_downloads'],
+            ['hasIssues', 'has_issues'],
+            ['hasPages', 'has_pages'],
+            ['hasWiki', 'has_wiki'],
+            ['homepage', 'homepage'],
+            ['htmlUrl', 'html_url'],
+            ['id', 'id'],
+            ['language', 'language'],
+            ['mirrorUrl', 'mirror_url'],
+            ['name', 'name'],
+            ['openIssuesCount', 'open_issues_count'],
+            ['owner', 'owner', 'class' => 'GithubService\\Model\\User'],
+            ['permissions', 'permissions', 'class' => 'GithubService\\Model\\Permissions'],
+            ['private', 'private'],
+            ['pushedAt', 'pushed_at'],
+            ['size', 'size'],
+            ['sshUrl', 'ssh_url'],
+            ['stargazersCount', 'stargazers_count'],
+            ['svnUrl', 'svn_url'],
+            ['updatedAt', 'updated_at'],
+            ['url', 'url'],
+            ['watchersCount', 'watchers_count'],
+        ];
+
+        return $dataMap;
+    }
+
+
 }
-

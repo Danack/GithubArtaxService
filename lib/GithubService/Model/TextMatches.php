@@ -1,32 +1,23 @@
-<?php
-
+<?php 
 
 namespace GithubService\Model;
 
-
-class TextMatches implements \IteratorAggregate {
-
-    use DataMapper;
-
-    public $objectURL;
-    public $objectType;
-    public $property;
-    public $fragment;
-    public $matches;
-
-    static protected $dataMap = array(
-        [ 'objectURL', "object_url"],
-        [ 'objectType', "object_type"],
-        [ 'property', "property"],
-        [ 'fragment', "fragment"],
-        [ 'matches', "matches"],
-    );
+class TextMatches extends \GithubService\Model\DataMapper {
 
     /**
-     * @return string[]
+     * @var \GithubService\Model\ $textMatchesChild
      */
-    public function getIterator() {
-        return new \ArrayIterator($this->matches);
-    }
-}
+    public $textMatchesChild = array(
+        
+    );
 
+    protected function getDataMap() {
+        $dataMap = [
+            ['textMatchesChild', '', 'multiple' => true, 'class' => 'GithubService\\Model\\TextMatchesChild'],
+        ];
+
+        return $dataMap;
+    }
+
+
+}

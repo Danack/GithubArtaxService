@@ -4,14 +4,19 @@
 namespace GithubService\Model;
 
 
-class CommitParent {
+class CommitParent extends DataMapper {
 
-    use DataMapper;
+    public $url;
+    public $sha;
 
-    static protected $dataMap = array(
-        ['url', 'url'],
-        ['sha', 'sha'],
-    );
+    protected function getDataMap() {
+        $dataMap = array(
+            ['url', 'url'],
+            ['sha', 'sha'],
+        );
+
+        return $dataMap;
+    }
 }
 
  

@@ -1,22 +1,23 @@
-<?php
-
+<?php 
 
 namespace GithubService\Model;
 
+class Matches extends \GithubService\Model\DataMapper {
 
-class Matches {
-
-
-    use DataMapper;
-
-    public $text;
-    public $indices;
-
-    static protected $dataMap = array(
-        ['text', 'text'],
-        ['indices', 'indices'],
+    /**
+     * @var \GithubService\Model\ $matchesChild
+     */
+    public $matchesChild = array(
+        
     );
 
-    
-}
+    protected function getDataMap() {
+        $dataMap = [
+            ['matchesChild', '', 'multiple' => true, 'class' => 'GithubService\\Model\\MatchesChild'],
+        ];
 
+        return $dataMap;
+    }
+
+
+}

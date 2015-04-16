@@ -8,8 +8,19 @@ use GithubService\GithubArtaxService\GithubArtaxServiceException;
 
 use ArtaxServiceBuilder\Service\GithubPaginator;
 
+function is_indexable($item) {
+    if (is_object($item)) {
+        return true;
+    }
+    if (is_array($item)) {
+        return true;
+    }
+    
+    return false;
+}
+
 /**
- * Trait DataMapper
+ * Class DataMapper
  *
  * Allows objects to be created directly from an array of data, mapping keynames in the array to member
  * variable of an object. Each class that uses this trait _must_ define a static $dataMap variable to define
@@ -46,7 +57,7 @@ use ArtaxServiceBuilder\Service\GithubPaginator;
  * @property array $dataMap The mapping scheme to use from values to properties.
  * @package Intahwebz\FlickrGuzzle
  */
-trait DataMapper {
+abstract class DataMapper {
 
     /**
      * @var  \ArtaxServiceBuilder\Service\GithubPaginator|null
@@ -59,20 +70,11 @@ trait DataMapper {
     public $oauthScopes = null;
 
     /**
-     * @param string $json The raw JSON string to decode. 
-     * @return static An instance of the class that the trait is used in. 'Static' is meant to be the 'late static class' - not many IDEs support this DOC comment yet.
-     * @throws DataMapperException
+     * @return mixed
      */
-    static function createFromJson($json) {
-        $instance = new static();
-        $data = json_decode($json, true);
-        $instance->mapPropertiesFromData($data);
-        $instance->finishMapping();
+    abstract protected function getDataMap();
 
-        return $instance;
-    }
-
-    private function finishMapping() {
+    protected function finishMapping() {
         // Nothing to do by default.
     }
     
@@ -114,7 +116,7 @@ trait DataMapper {
             throw new GithubArtaxServiceException($response, 'Github error: '.$errorDescription);
         }
 
-        $instance = self::createFromData($data);
+        $instance = static::createFromData($data);
 
         //Header based information needs to be added after the array
         
@@ -132,8 +134,6 @@ trait DataMapper {
 
         return $instance;
     }
-
-    
     
     /**
      * Maps the properties that are in the $data param to the internal properties of the class,
@@ -142,16 +142,11 @@ trait DataMapper {
      * @param $data
      * @throws DataMapperException
      */
-    function mapPropertiesFromData($data){
-
-        if (property_exists(__CLASS__, 'dataMap') == FALSE){
-            throw new DataMapperException("Class ".__CLASS__." is using DataMapper but has no DataMap property.");
-        }
-
-        foreach(static::$dataMap as $dataMapElement){
-            if (is_array($dataMapElement) == FALSE) {
-                $string = var_export(static::$dataMap, TRUE);
-                throw new DataMapperException("DataMap is meant to be composed of arrays of entries. You've missed some brackets in class ".__CLASS__." : ".$string);
+    function mapPropertiesFromData($data) {
+        $dataMap = $this->getDataMap();
+        foreach($dataMap as $dataMapElement) {
+            if (is_indexable($dataMapElement) == FALSE) {
+                throw new DataMapperException("DataMap for class ".__CLASS__." is not an array.");
             }
 
             $dataFound = FALSE;
@@ -161,6 +156,8 @@ trait DataMapper {
                 $this->setPropertyFromValue($dataMapElement, $sourceValue);
             }
         }
+        
+        $this->finishMapping();
     }
 
     /**
@@ -183,13 +180,13 @@ trait DataMapper {
             return $data;
         }
 
-        if (is_array($dataVariableNameArray) == FALSE){
+        if (is_indexable($dataVariableNameArray) == FALSE) {
             $dataVariableNameArray = array($dataVariableNameArray);
         }
 
         $value = $data;
 
-        foreach($dataVariableNameArray as $dataVariableName){
+        foreach($dataVariableNameArray as $dataVariableName) {
             if (is_array($value) == FALSE ||
                 array_key_exists($dataVariableName, $value) == FALSE){
                 if (array_key_exists('optional', $dataMapElement) == TRUE &&
@@ -242,7 +239,7 @@ trait DataMapper {
      * @param $dataMapElement
      * @param $sourceValue
      */
-    function setPropertyFromValue($dataMapElement, $sourceValue){
+    function setPropertyFromValue($dataMapElement, $sourceValue) {
         $classVariableName = $dataMapElement[0];
         $className = FALSE;
         $multiple = FALSE;
@@ -271,7 +268,7 @@ trait DataMapper {
                 $this->{$classVariableName} = array();
             }
 
-            foreach($sourceValue as $key => $sourceValueInstance){
+            foreach($sourceValue as $key => $sourceValueInstance) {
                 if($className != FALSE){
                     $object = $className::createFromData($sourceValueInstance);
                     $value = $object;

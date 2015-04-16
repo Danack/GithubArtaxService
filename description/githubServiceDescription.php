@@ -4,7 +4,6 @@ $userAgentParam = array(
     "location" => "header",
     "description" => "The user-agent which allows Github to recognise your application.",
     'sentAs' => 'User-Agent',
-    //'required' => 'true'
 );
 
 $acceptParam = array(
@@ -15,7 +14,6 @@ $acceptParam = array(
 
 
 $service = array (
-
     "name" => "Github",
     "baseUrl" => "https://api.github.com",
     "description" => "Github API using Artax as a backend",
@@ -56,19 +54,12 @@ $service = array (
             )
         ),
 
-        //accessToken
-        //Accept: application/json
         'getOauthAuthorization' => [
             'uri' => 'https://github.com/login/oauth/access_token',
             'httpMethod' => 'POST',
             "responseClass" => 'GithubService\Model\AccessResponse',
             'summary' => 'Retrieve the Outh2 token for an application. You should have directed the user to https://github.com/login/oauth/authorize with client_id etc set before calling this.',
             'parameters' => [
-                /* 'Accept' => array(
-                    "location" => "header",
-                    "description" => "",
-                    'default' =>  'application/json',
-                ), */
                 'Accept' => $acceptParam,
                 'userAgent' => $userAgentParam,
                 'client_id' => [
@@ -98,38 +89,74 @@ $service = array (
                 ),
             ),
         ),
-
-        /*'listRepoCommitsPaginate' => array(
-            'extends' => 'defaultGetOauthOperation',
-            "responseClass" => 'GithubService\Model\Commits',
-            'parameters' => array(
-                'pageURL' => array(
-                    "location" => "absoluteURL",
-                ),
-            ),
-        ), */
     )
 );
 
 
 $externalFiles = array(
-    "activity.php",
-    "enterprise.php",
+
+
+//    "activity/events/types.php",
+//    "activity/events.php",
+//    "activity/feeds.php",
+//    "activity/notifications.php",
+//    "activity/starring.php",
+//    "activity/watching.php",
+    "emojis.php",
+//    "enterprise/admin_stats.php",
+//    "enterprise/ldap.php",
+//    "enterprise/license.php",
+//    "enterprise/management_console.php",
+//    "enterprise/search_indexing.php",
+//    "gists/comments.php",
     "gists.php",
-    "gitData.php",
-    "issues.php",
-    "miscellaneous.php",
-    "oauth.php",
-    "organizations.php",
-    "pullRequests.php",
-    "repositories.php",
-    "repositoryCommits.php",
-    "repositoryContents.php",
-    "search.php",    
-    "users.php",
-    "usersEmails.php",
-    "usersFollowers.php",
-    "usersPublicKeys.php",
+//    "git/blobs.php",
+//    "git/commits.php",
+//    "git/refs.php",
+//    "git/tags.php",
+//    "git/trees.php",
+//    "githubServiceDescription.php",
+//    "gitignore.php",
+//    "issues/assignees.php",
+//    "issues/comments.php",
+//    "issues/events.php",
+//    "issues/labels.php",
+//    "issues/milestones.php",
+//    "issues.php",
+//    "licenses.php",
+//    "markdown.php",
+//    "meta.php",
+//    "oauth_authorizations.php",
+//    "orgs/hooks.php",
+//    "orgs/members.php",
+//    "orgs/teams.php",
+//    "orgs.php",
+//    "pulls/comments.php",
+//    "pulls.php",
+//    "repos/collaborators.php",
+//    "repos/comments.php",
+//    "repos/commits.php",
+//    "repos/contents.php",
+//    "repos/deployments.php",
+//    "repos/downloads.php",
+//    "repos/forks.php",
+//    "repos/hooks.php",
+//    "repos/keys.php",
+//    "repos/merging.php",
+//    "repos/pages.php",
+//    "repos/releases.php",
+//    "repos/statistics.php",
+//    "repos/statuses.php",
+//    "repos.php",
+//    "search/legacy.php",
+//    "search.php",
+//    "users/administration.php",
+//    "users/emails.php",
+//    "users/followers.php",
+//    "users/keys.php",
+//    "users.php",
+
+
 );
 
 
@@ -138,5 +165,44 @@ foreach ($externalFiles as $externalFile) {
     $service['operations'] = array_merge($service['operations'], $repoOperations);
 }
 
-
 return $service;
+
+
+function expandGithub($command) {
+
+    if (array_key_exists('url', $command) == false) {
+        return $command;
+    }
+
+    $url = $command['url'];
+    $modifiedURL = $url;
+
+    preg_match_all('#:(\w*)#', $url, $matches, PREG_OFFSET_CAPTURE);
+
+    $captures = $matches[0];
+    $params = $matches[1];
+
+    $parameters = [];
+
+    for ($i=0 ; $i<count($captures) ; $i++) {
+        $capture = $captures[$i];
+        $search = $capture[0];
+        $param = $params[$i];
+
+        $name = $param[0];
+        $replace = '{'.$name.'}';
+        $modifiedURL = str_replace($search, $replace, $modifiedURL);
+
+        $parameters[$name] = array(
+            "location" => "uri",
+        );
+    }
+    $newDetails = $command;
+
+
+    $newDetails['parameters'] = $parameters;
+    $newDetails['uri'] = $modifiedURL;
+
+    return $newDetails;
+}
+

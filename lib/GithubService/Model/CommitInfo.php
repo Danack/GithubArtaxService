@@ -4,9 +4,7 @@
 namespace GithubService\Model;
 
 
-class CommitInfo {
-
-    use DataMapper;
+class CommitInfo extends DataMapper{
 
     public $url;
 
@@ -23,19 +21,23 @@ class CommitInfo {
     public $treeSHA;
     public $commentCount;
 
-    static protected $dataMap = array(
-        ['url', 'url'],
-        ['authorName', ['author', 'name']],
-        ['authorEmail', ['author', 'email']],
-        ['authorDate', ['author', 'date']],
-        ['committerName', ['committer', 'name']],
-        ['committerEmail', ['committer', 'email']],
-        ['committerDate', ['committer', 'date']],
-        ['message', 'message'],
-        ['treeURL', ['tree', 'url']],
-        ['treeSHA', ['tree', 'sha']],
-        ['commentCount', 'comment_count', 'optional' => true],
-    );
+    protected function getDataMap() {
+        $dataMap = array(
+            ['url', 'url'],
+            ['authorName', ['author', 'name']],
+            ['authorEmail', ['author', 'email']],
+            ['authorDate', ['author', 'date']],
+            ['committerName', ['committer', 'name']],
+            ['committerEmail', ['committer', 'email']],
+            ['committerDate', ['committer', 'date']],
+            ['message', 'message'],
+            ['treeURL', ['tree', 'url']],
+            ['treeSHA', ['tree', 'sha']],
+            ['commentCount', 'comment_count', 'optional' => true],
+        );
+
+        return $dataMap;
+    }
     
     
 //"url": "https://api.github.com/repos/octocat/Hello-World/git/commits/6dcb09b5b57875f334f61aebed695e2e4193db5e",

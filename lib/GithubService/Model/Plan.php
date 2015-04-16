@@ -1,24 +1,27 @@
-<?php
-
+<?php 
 
 namespace GithubService\Model;
 
+class Plan extends \GithubService\Model\DataMapper {
 
-class Plan {
+    public $collaborators = null;
 
-    use DataMapper;
-    
-    public $name;
-    public $space;
-    public $collaborators;
-    public $privateRepos;
-    
-    static protected $dataMap = array(
-       ['name', 'name'],
-       ['space', 'space'],
-       ['collaborators', 'collaborators'],
-       ['privateRepos', 'private_repos'],
-    );
+    public $name = null;
+
+    public $privateRepos = null;
+
+    public $space = null;
+
+    protected function getDataMap() {
+        $dataMap = [
+            ['collaborators', 'collaborators'],
+            ['name', 'name'],
+            ['privateRepos', 'private_repos'],
+            ['space', 'space'],
+        ];
+
+        return $dataMap;
+    }
+
+
 }
-
- 

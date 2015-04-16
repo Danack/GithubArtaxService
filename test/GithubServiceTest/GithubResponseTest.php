@@ -1,44 +1,118 @@
 <?php
 
-use ArtaxServiceBuilder\Service\OauthConfig;
-
 
 class GithubResponseTest extends \PHPUnit_Framework_TestCase { 
 
     //TODO Add checks on the data.
     public function additionProvider() {
-        return array(
-            ['createOauthToken.txt', 'GithubService\Model\Authorizations'],
-            
-            ['getSingleCommit.txt', 'GithubService\Model\Commit'],
-            ['getSingleUser.txt', 'GithubService\Model\User'],
-            ['listCommitsOnARepository.txt', 'GithubService\Model\Commits'],
-            ['listCommits.txt', 'GithubService\Model\Commits'],
-            ['listEmailAddressesForUser.txt', 'GithubService\Model\Emails'],
-            ['addEmailAddresses.txt', 'GithubService\Model\Emails'],
-            ['listRepoTags.txt', 'GithubService\Model\RepoTags'],
-            ['listAuthorizations.txt', 'GithubService\Model\Authorizations'],
 
-            //Repos
-            ['repo/getBranch.txt', 'GithubService\Model\RepoBranch'],
-            ['repo/listBranches.txt', 'GithubService\Model\RepoBranches'],
-            ['repo/listLanguages.txt', 'GithubService\Model\Languages'],
-            ['repo/listTeams.txt', 'GithubService\Model\Teams'],
-            ['repo/listTags.txt', 'GithubService\Model\RepoTags'],
-            ['repo/listContributors.txt', 'GithubService\Model\Contributors'],
-            
+        return array(
+//            //['ActiveAdminOrgMembership', 'ACTIVE_ADMIN_ORG_MEMBERSHIP'],
+//            //['ActiveOrgMemberships', 'ACTIVE_ORG_MEMBERSHIPS '],
+//            ['ActiveTeamMembership', 'ACTIVE_TEAM_MEMBERSHIP'],
+            ['AdminStats', 'ADMIN_STATS'],
+            ['Blob', 'BLOB'],
+            ['BlobAfterCreate', 'BLOB_AFTER_CREATE'],
+            ['Branch', 'BRANCH'],
+            ['Branches', 'BRANCHES'],
+            ['CheckMaintenanceStatus', 'CHECK_MAINTENANCE_STATUS'],
+            ['CodeSearchV3Results', 'CODE_SEARCH_V3_RESULTS'],
+            ['CodeSearchV3ResultsHighlighting', 'CODE_SEARCH_V3_RESULTS_HIGHLIGHTING'],
+            ['CombinedStatus', 'COMBINED_STATUS'],
+            ['Commit', 'COMMIT'],
+            ['CommitComment', 'COMMIT_COMMENT'],
+//Difficult            ['CommitComparison', 'COMMIT_COMPARISON'],
+            ['ConfigStatuses', 'CONFIG_STATUSES'],
+//Difficult            ['ContentCrud', 'CONTENT_CRUD'],
+            ['Contributor', 'CONTRIBUTOR'],
+            ['CreateDownload', 'CREATE_DOWNLOAD'],
+            ['CreatedRelease', 'CREATED_RELEASE'],
+            ['Deployment', 'DEPLOYMENT'],
+            ['DeploymentStatus', 'DEPLOYMENT_STATUS'],
+// DC            ['DirectoryContent', 'DIRECTORY_CONTENT'],
+            ['Download', 'DOWNLOAD'],
+            ['EmailSearchResults', 'EMAIL_SEARCH_RESULTS'],
+            ['Emojis', 'EMOJIS'],
+            ['Event', 'EVENT'],
+            ['Feeds', 'FEEDS'],
+//DC            ['FetchSettings', 'FETCH_SETTINGS'],
+//            ['FullCommit', 'FULL_COMMIT'],
+            ['FullGist', 'FULL_GIST'],
+            ['FullIssue', 'FULL_ISSUE'],
+            ['FullIssueEvent', 'FULL_ISSUE_EVENT'],
+            ['FullOrg', 'FULL_ORG'],
+            ['FullPull', 'FULL_PULL'],
+            ['FullRepo', 'FULL_REPO'],
+            ['FullTeam', 'FULL_TEAM'],
+            ['FullUser', 'FULL_USER'],
+            ['GetAuthorizedSshKeys', 'GET_AUTHORIZED_SSH_KEYS'],
+            ['Gist', 'GIST'],
+            ['GistComment', 'GIST_COMMENT'],
+            ['GistForks', 'GIST_FORKS'],
+            ['GistHistory', 'GIST_HISTORY'],
+            ['GitCommit', 'GIT_COMMIT'],
+            ['Gittag', 'GITTAG'],
+            ['Hook', 'HOOK'],
+            ['IndexingSuccess', 'INDEXING_SUCCESS'],
+            ['IssueComment', 'ISSUE_COMMENT'],
+            ['IssueEvent', 'ISSUE_EVENT'],
+            ['IssueSearchItem', 'ISSUE_SEARCH_ITEM'],
+//       TODO - only implement v3?     ['IssueSearchResults', 'ISSUE_SEARCH_RESULTS'],
+            ['Licensing', 'LICENSING'],
+            ['Meta', 'META'],
+            ['OauthAccess', 'OAUTH_ACCESS'],
+            ['OauthAccessWithUser', 'OAUTH_ACCESS_WITH_USER'],
+//            ['OrgMemberships', 'ORG_MEMBERSHIPS'],
+            ['Pages', 'PAGES'],
+            ['PagesBuild', 'PAGES_BUILD'],
+//            ['PendingOrgMemberships', 'PENDING_ORG_MEMBERSHIPS'],
+//DC            ['PrivateOrg', 'PRIVATE_ORG'],
+            ['PrivateUser', 'PRIVATE_USER'],
+            ['PublicKey', 'PUBLIC_KEY'],
+            ['Pull', 'PULL'],
+            ['PullComment', 'PULL_COMMENT'],
+            ['ReadmeContent', 'README_CONTENT'],
+            ['Ref', 'REF'],
+            ['Refs', 'REFS'],
+            ['RepoSearchItem', 'REPO_SEARCH_ITEM'],
+            ['RepoSearchResults', 'REPO_SEARCH_RESULTS'],
+            ['RepoStatsCodeFrequency', 'REPO_STATS_CODE_FREQUENCY'],
+            ['RepoStatsCommitActivity', 'REPO_STATS_COMMIT_ACTIVITY'],
+//DC             ['RepoStatsContributors', 'REPO_STATS_CONTRIBUTORS'],
+            ['RepoStatsParticipation', 'REPO_STATS_PARTICIPATION'],
+            ['RepoStatsPunchCard', 'REPO_STATS_PUNCH_CARD'],
+            ['RepoSubscription', 'REPO_SUBSCRIPTION'],
+            ['SimplePublicKey', 'SIMPLE_PUBLIC_KEY'],
+            ['Status', 'STATUS'],
+            ['SubmoduleContent', 'SUBMODULE_CONTENT'],
+            ['Subscription', 'SUBSCRIPTION'],
+            ['SymlinkContent', 'SYMLINK_CONTENT'],
+            ['Tag', 'TAG'],
+            ['Team', 'TEAM'],
+            ['Template', 'TEMPLATE'],
+            ['Thread', 'THREAD'],
+            ['Tree', 'TREE'],
+            ['TreeNew', 'TREE_NEW'],
+            ['UserEmail', 'USER_EMAIL'],
+            ['UserSearchItem', 'USER_SEARCH_ITEM'],
+            ['UserSearchResults', 'USER_SEARCH_RESULTS'],
+
         );
     }
 
     /**
      * @dataProvider additionProvider
      */
-    function testDataParsing($dataFile, $expectedClassname) {
-        $json = file_get_contents(__DIR__.'/../fixtures/data/github/'.$dataFile);
+    function testDataParsing($expectedClassname, $dataFile ) {
+        $json = file_get_contents(__DIR__.'/../fixtures/data/githubJSON/'.$dataFile.'.json');
+
+        $className = 'GithubService\Model\\'.$expectedClassname;
+        $data = json_decode($json, true); //TODO - test against stdobjects as well.
         
-        $instance = $expectedClassname::createFromJson($json);
+        $instance = $className::createFromData($data);
+
         $this->assertInstanceOf(
-            $expectedClassname,
+            $className,
             $instance
         );
     }

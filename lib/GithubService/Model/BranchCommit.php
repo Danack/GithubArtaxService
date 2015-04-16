@@ -12,18 +12,23 @@ namespace GithubService\Model;
  * 
  * @package GithubService\Model
  */
-class BranchCommit {
-    use DataMapper;
+class BranchCommit extends DataMapper {
 
     public $name;
 
     public $url;
     public $sha;
 
-    static protected $dataMap = array(
-        ['name', 'name'],
-        ['url', ['commit', 'url']],
-        ['sha', ['commit', 'sha']],
-    );
+    protected function getDataMap() {
+        $dataMap = array(
+            ['name', 'name'],
+            ['url', ['commit', 'url']],
+            ['sha', ['commit', 'sha']],
+        );
+    
+        return $dataMap;
+    }
+    
+    
 }
 

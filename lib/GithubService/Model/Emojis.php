@@ -2,25 +2,26 @@
 
 namespace GithubService\Model;
 
+//TODO - needs paging?
+class Emojis extends \GithubService\Model\DataMapper {
 
-class Emojis {
+    public $emojiList = [];
 
-    use DataMapper;
+    protected function getDataMap() {
+        $dataMap = [
+            ['emojiList', '', 'class' => '\GithubService\Model\Emoji', 'multiple' => true, 'recycleKey' => 'name'],
+        ];
 
-    /**
-     * @var Emoji[]
-     */
-    public $emojis;
-   
-    static protected $dataMap = array(
-        ['emojis', '', 'multiple' => true, 'preserveKeys' => 'true'],
-    );
-    
-    private function finishMapping() {
-        $emojiObjects = [];
-        foreach ($this->emojis as $key => $value) {
-            $emojiObjects[] = new Emoji($key, $value);
+        return $dataMap;
+    }
+
+
+    static function createFromData($data) {
+        $instance = new static();
+        foreach ($data as $key => $value) {
+            $instance->emojiList[] = new Emoji($key, $value);
         }
-        $this->emojis = $emojiObjects;
+
+        return $instance;
     }
 }

@@ -1,26 +1,23 @@
-<?php
-
+<?php 
 
 namespace GithubService\Model;
 
-
-class Commits implements \IteratorAggregate{
-
-    use DataMapper;
+class Commits extends \GithubService\Model\DataMapper {
 
     /**
-     * @var \GithubService\Model\Commit[]
+     * @var \GithubService\Model\Commit $commitsChild
      */
-    public $commits = [];
-
-    static protected $dataMap = array(
-        ['commits', [], 'class' => 'GithubService\Model\Commit', 'multiple' => true],
+    public $commitsChild = array(
+        
     );
 
-    /**
-     * @return \GithubService\Model\Commit[]
-     */
-    public function getIterator() {
-        return new \ArrayIterator($this->commits);
+    protected function getDataMap() {
+        $dataMap = [
+            ['commitsChild', 'commits_child', 'multiple' => true, 'class' => 'GithubService\\Model\\Commit'],
+        ];
+
+        return $dataMap;
     }
+
+
 }

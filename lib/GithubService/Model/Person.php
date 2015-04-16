@@ -4,9 +4,8 @@
 namespace GithubService\Model;
 
 
-class Person {
+class Person extends DataMapper{
 
-    use DataMapper;
 
     public $login;
     public $id;
@@ -23,24 +22,29 @@ class Person {
     public $receivedEventsURL;
     public $type;
     public $siteAdmin;
-    
-    static protected $dataMap = array(
-        ['login', 'login'],
-        ['id', 'id'],
-        ['avatarURL', 'avatar_url'],
-        ['gravatarID', 'gravatar_id'],
-        ['url', 'url'],
-        ['followersURL', 'followers_url', 'optional' => true],
-        ['followingURL', 'following_url', 'optional' => true],
-        ['gistsURL', 'gists_url', 'optional' => true],
-        ['starredURL', 'starred_url', 'optional' => true],
-        ['organizationsURL', 'organizations_url', 'optional' => true],
-        ['reposURL', 'repos_url', 'optional' => true],
-        ['eventsURL', 'events_url', 'optional' => true],
-        ['receivedEventsURL', 'received_events_url', 'optional' => true],
-        ['type', 'type', 'optional' => true],
-        ['siteAdmin', 'site_admin', 'optional' => true],
-    );
+
+
+    protected function getDataMap() {
+        $dataMap = array(
+            ['login', 'login'],
+            ['id', 'id'],
+            ['avatarURL', 'avatar_url'],
+            ['gravatarID', 'gravatar_id'],
+            ['url', 'url'],
+            ['followersURL', 'followers_url', 'optional' => true],
+            ['followingURL', 'following_url', 'optional' => true],
+            ['gistsURL', 'gists_url', 'optional' => true],
+            ['starredURL', 'starred_url', 'optional' => true],
+            ['organizationsURL', 'organizations_url', 'optional' => true],
+            ['reposURL', 'repos_url', 'optional' => true],
+            ['eventsURL', 'events_url', 'optional' => true],
+            ['receivedEventsURL', 'received_events_url', 'optional' => true],
+            ['type', 'type', 'optional' => true],
+            ['siteAdmin', 'site_admin', 'optional' => true],
+        );
+
+        return $dataMap;
+    }
     
 
 //"author": {
