@@ -1,4 +1,5 @@
 {
+
     "name": "danack/githubartaxservice",
     "require-dev": {
         "phpunit/phpunit": "4.1.3",
@@ -8,14 +9,12 @@
         "Danack/danack-code": ">=2.4.5",
         "danack/danackhttp2": ">=1.2.0",
         "danack/artaxservicebuilder": "0.3.2",
-        "amphp/artax": "1.0.0-rc6"
+        "amphp/artax": "^1.0.0"
     },
     "autoload": {
         "psr-0": {
             "GithubService": "lib/"
         }
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "bin": ["bin/generateGithubArtaxService.php"]
 }

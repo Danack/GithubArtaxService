@@ -180,15 +180,20 @@ return array(
     ),
     'checkGistStarred' => array(
         //### Response if gist is starred
-        //
         //== headers 204 
-        //
         //### Response if gist is not starred
-        //
         //== headers 404
         "description" => "Check if a gist is starred",
         'extends' => 'defaultGetOauthOperation',
         'uri' => '/gists/{id}/star',
+        'responseClass' => 'GithubService\Model\GistStarred',
+        'parameters' => array(
+            'id' => array(
+                "location" => "uri",
+                'type' => 'string',
+                "description" => "The id of the gist to check",
+            ),
+        ),
     ),
     'forkGist' => array(
         //== headers 201, :Location => get_resource(:gist)['url'] 

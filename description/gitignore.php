@@ -2,34 +2,29 @@
 
 
 return array(
-
-        //When you create a new GitHub repository via the API, you can specify a
-        //[.gitignore template][what-is] to apply to the repository upon creation. The
-        //.gitignore Templates API lists and fetches templates from the [GitHub .gitignore repository][templates-repo].
-    'listGitignoreTemplates' => array(
-        //## Listing available templates
-        //
-        //List all templates available to pass as an option when [creating a repository][create-repo].
-        //
-        //    GET /gitignore/templates
-        //
-        //### Response
-        //
-        //== headers 200 
-        //== json(:templates)  
+    'listGitIgnoreTemplates' => array(
+        'extends' => 'defaultGetOauthOperation',
+        'uri' => '/gitignore/templates',
+        'description' => 'List available templates. List all templates available to pass as an option when creating a repository When you create a new GitHub repository via the API, you can specify a .gitignore template to apply to the repository upon creation. The .gitignore Templates API lists and fetches templates from the GitHub .gitignore repository.',
+        'responseClass' => 'GithubService\Model\TemplateList',
     ),
-    'getGitignoreTemplate' => array(
-        //## Get a single template
-        //
-        //The API also allows fetching the source of a single template.
-        //
-        //    GET /gitignore/templates/C
-        //
-        //### Response
-        //
-        //== headers 200 
-        //== json(:template)  
-        //
+
+    'getGitIgnoreTemplate' => array(
+        'extends' => 'defaultGetOauthOperation',
+        'uri' => '/gitignore/templates/{type}',
+        'parameters' => array(
+            'type' => array(
+                "location" => "uri",
+                'type' => 'string',
+                "description" => "Which template to get."
+            ),
+        ),
+        'responseClass' => 'GithubService\Model\Template',
+        'description' => 'Get a single template. The API also allows fetching the source of a single template.',
+    ),        
+    
+    
+
         //Use the raw [media type][media-type] to get the raw contents.
         //
         //== headers 200 
@@ -52,7 +47,7 @@ return array(
         //*.out
         //*.app
         //</pre>
-    ),
+    
     //[what-is]: https://help.github.com/articles/ignoring-files
     //[templates-repo]: https://github.com/github/gitignore
     //[create-repo]: /v3/repos/#create

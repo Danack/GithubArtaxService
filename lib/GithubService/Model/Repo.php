@@ -92,7 +92,7 @@ class Repo extends \GithubService\Model\DataMapper {
             ['name', 'name'],
             ['openIssuesCount', 'open_issues_count'],
             ['owner', 'owner', 'class' => 'GithubService\\Model\\User'],
-            ['permissions', 'permissions', 'class' => 'GithubService\\Model\\Permissions'],
+            ['permissions', 'permissions', 'class' => 'GithubService\\Model\\Permissions', 'optional' => true],
             ['private', 'private'],
             ['pushedAt', 'pushed_at'],
             ['size', 'size'],

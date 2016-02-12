@@ -1,104 +1,112 @@
 <?php
 
 
+$repoParameters = array(
+    'owner' => array(
+        "location" => "uri",
+        'type' => 'string',
+        "description" => "",
+    ),
+    'repo' => array(
+        "location" => "uri",
+        'type' => 'string',
+        "description" => "",
+    ),
+);
+
+
 return array(
- 
     'listSelfRepos' => array(
-        //## List your repositories
-        //
-        //List repositories for the authenticated user.
-        //
-        //Note that this currently does not include repositories owned by organizations
-        //which the user can access. You can
-        //[list your organizations](/v3/orgs/#list-your-organizations) and
-        //[list organization repositories](/v3/repos/#list-organization-repositories)
-        //separately.
-        //
-        //With the new Organization Permissions API (described below), this *will* include
-        //repositories owned by organizations which the user can access. If you provide
-        //the custom media type (described below), you won't need to use other APIs to
-        //list the authenticated user's organization-owned repositories.
-        //
-        //<div class="alert">
-        //  <p>
-        //    We're currently offering a migration period allowing applications to opt in to the Organization Permissions API. This functionality will <a href="/changes/2015-02-24-more-time-to-prepare-for-the-breaking-changes-to-organization-permissions/">soon</a> apply to all API consumers. Please see the <a href="/changes/2015-01-07-prepare-for-organization-permissions-changes/">blog post</a> for full details.
-        //  </p>
-        //
-        //  <p>
-        //    To access the API during the migration period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
-        //    <pre>application/vnd.github.moondragon+json</pre>
-        //  </p>
-        //</div>
-        //
-        //    GET /user/repos
-        //
-        //### Parameters
-        //
-        //Name | Type | Description
-        //-----|------|--------------
-        //`type`|`string` | Can be one of `all`, `owner`, `public`, `private`, `member`. Default: `all`
-        //`sort`|`string` | Can be one of `created`, `updated`, `pushed`, `full_name`. Default: `full_name`
-        //`direction`|`string` | Can be one of `asc` or `desc`. Default: when using `full_name`: `asc`; otherwise `desc`
-        //
+        "description" => "List your repositories. List repositories for the authenticated user.",
+        'extends' => 'defaultGetOauthOperation',
+        'uri' => '/user/repos',
+        'responseClass' => 'GithubService\Model\Repos',
+        'parameters' => array(
+            'type' => array(
+                "location" => "query",
+                'type' => 'string',
+                "description" => "Can be one of `all`, `owner`, `member`. Default: `owner`",
+                'required' => 'false'
+            ),
+            'sort' => array(
+                "location" => "query",
+                'type' => 'string',
+                "description" => "Can be one of `created`, `updated`, `pushed`, `full_name`. Default: `full_name`",
+                'required' => 'false'
+            ),
+            'direction' => array(
+                "location" => "query",
+                'type' => 'string',
+                "description" => " Can be one of `asc` or `desc`. Default: when using `full_name`: `asc`, otherwise `desc`",
+                'required' => 'false'
+            ),
+        ),
     ),
     'listUserRepos' => array(
-        //## List user repositories
-        //
-        //List public repositories for the specified user.
-        //
-        //    GET /users/:username/repos
-        //
-        //### Parameters
-        //
-        //Name | Type | Description
-        //-----|------|-------------
-        //`type`|`string` | Can be one of `all`, `owner`, `member`. Default: `owner`
-        //`sort`|`string` | Can be one of `created`, `updated`, `pushed`, `full_name`. Default: `full_name`
-        //`direction`|`string` | Can be one of `asc` or `desc`. Default: when using `full_name`: `asc`, otherwise `desc`
-        //
+        "description" => "List user repositories. List public repositories for the specified user.",
+        'extends' => 'defaultGetOauthOperation',
+        'uri' => '/users/{username}/repos',
+        'responseClass' => 'GithubService\Model\RepoList',
+        'parameters' => array(
+            'username' => array(
+                "location" => "uri",
+                'type' => 'string',
+                "description" => "The user to get the repos of.",
+            ),
+            'type' => array(
+                "location" => "query",
+                'type' => 'string',
+                "description" => "Can be one of `all`, `owner`, `member`. Default: `owner`",
+                'optional' => 'true'
+            ),
+            'sort' => array(
+                "location" => "query",
+                'type' => 'string',
+                "description" => "Can be one of `created`, `updated`, `pushed`, `full_name`. Default: `full_name`",
+                'optional' => 'true'
+            ),
+            'direction' => array(
+                "location" => "query",
+                'type' => 'string',
+                "description" => " Can be one of `asc` or `desc`. Default: when using `full_name`: `asc`, otherwise `desc`",
+                'optional' => 'true'
+            ),
+        ),
     ),
     'listOrgRepos' => array(
-        //## List organization repositories
-        //
-        //List repositories for the specified org.
-        //
-        //    GET /orgs/:org/repos
-        //
-        //### Parameters
-        //
-        //Name | Type | Description
-        //-----|------|--------------
-        //`type`|`string` | Can be one of `all`, `public`, `private`, `forks`, `sources`, `member`. Default: `all`
-        //
-        //
-        //### Response
-        //
         //== headers 200, :pagination => default_pagination_rels 
-        //== json(:repo) { |h| [h] } 
+        "description" => "List organization repositories. List repositories for the specified org.",
+        'extends' => 'defaultGetOauthOperation',
+        'uri' => '/orgs/{org}/repos',
+        'responseClass' => 'GithubService\Model\Repos',
+        'parameters' => array(
+            'org' => array(
+                "location" => "query",
+                'type' => 'string',
+                "description" => "The organisation to get the repos of.",
+            ),
+            'type' => array(
+                "location" => "query",
+                'type' => 'string',
+                "description" => "Can be one of `all`, `public`, `private`, `forks`, `sources`, `member`. Default: `all`",
+            ),
+        ),
     ),
     
     'listPublicRepos' => array(
-        //## List all public repositories
-        //
-        //This provides a dump of every public repository, in the order that they were created.
-        //
-        //Note: Pagination is powered exclusively by the `since` parameter.
-        //Use the [Link header](/v3/#link-header) to get the URL for the next page of
-        //repositories.
-        //
-        //    GET /repositories
-        //
-        //### Parameters
-        //
-        //Name | Type | Description
-        //-----|------|--------------
-        //`since`|`string`| The integer ID of the last Repository that you've seen.
-        //
-        //
-        //### Response
-        //
         //== headers 200, :pagination => { :next => 'https://api.github.com/repositories?since=364' } 
         //== json(:simple_repo) { |h| [h] } 
+        "description" => "List all public repositories. This provides a dump of every public repository, in the order that they were created.",
+        'extends' => 'defaultGetOauthOperation',
+        'uri' => '/repos/{owner}/{repo}/tags',
+        'responseClass' => 'GithubService\Model\RepoSimpleList',
+        'parameters' => array(
+            'since' => array(
+                "location" => "query",
+                'type' => 'string',
+                "description" => "The integer ID of the last Repository that you've seen.",
+            ),
+        ),
     ),
     
     'createRepo' => array(
@@ -155,18 +163,14 @@ return array(
     ),
     
     'getRepo' => array(
-        //## Get
-        //
-        //    GET /repos/:owner/:repo
-        //
-        //### Response
-        //
-        //The `parent` and `source` objects are present when the repository is a fork.
-        //`parent` is the repository this repository was forked from,
-        //`source` is the ultimate source for the network.
-        //
-        //== headers 200 
-        //== json :full_repo 
+        "description" => "Get repo. The `parent` and `source` objects are present when the repository is a fork.
+        `parent` is the repository this repository was forked from,
+        `source` is the ultimate source for the network.",
+        'extends' => 'defaultGetOauthOperation',
+        'uri' => '/repos/{owner}/{repo}',
+        'responseClass' => 'GithubService\Model\FullRepo',
+        'parameters' => $repoParameters
+        
     ),
     
     'updateRepo' => array(
@@ -221,7 +225,28 @@ return array(
         //### Response
         //
         //== headers 200, :pagination => default_pagination_rels 
-        //== json(:contributor) { |h| [h] } 
+        //== json(:contributor) { |h| [h] }
+        "description" => "List contributors",
+        'extends' => 'defaultGetOauthOperation',
+        'uri' => '/repos/{owner}/{repo}/tags',
+        'responseClass' => 'GithubService\Model\Contributor',
+        'parameters' => array(
+            'owner' => array(
+                "location" => "uri",
+                'type' => 'string',
+                "description" => "",
+            ),
+            'repo' => array(
+                "location" => "uri",
+                'type' => 'string',
+                "description" => "",
+            ),
+            'anon' => array(
+                "location" => "query",
+                'type' => 'string',
+                "description" => "",
+            ),
+        ), 
     ),
     'listRepoLanguages' => array(
         //## List languages
@@ -236,58 +261,70 @@ return array(
         //== json \
         //  "C"      => 78769,
         //  "Python" => 7769
+        "description" => "List languages. List languages for the specified repository. The value on the right of a language is the number of bytes of code written in that language.",
+        'extends' => 'defaultGetOauthOperation',
+        'uri' => '/repos/{owner}/{repo}/languages',
+        'responseClass' => 'GithubService\Model\Languages',
+        'parameters' => $repoParameters
     ),
     
     'listRepoTeams' => array(
-        //## List Teams
-        //
-        //    GET /repos/:owner/:repo/teams
-        //
-        //### Response
-        //
         //== headers 200, :pagination => default_pagination_rels 
         //== json(:team) { |h| [h] } 
+        "description" => "List Repo Teams",
+        'extends' => 'defaultGetOauthOperation',
+        'uri' => '/repos/{owner}/{repo}/teams',
+        'responseClass' => 'GithubService\Model\Teams',
+        'parameters' => $repoParameters
     ),
     'listRepoTags' => array(
-        //## List Tags
-        //
-        //    GET /repos/:owner/:repo/tags
-        //
-        //### Response
-        //
         //== headers 200, :pagination => default_pagination_rels 
-        //== json(:tag) { |h| [h] } 
+        "description" => "List Repo Tags",
+        'extends' => 'defaultGetOauthOperation',
+        'uri' => '/repos/{owner}/{repo}/tags',
+        'responseClass' => 'GithubService\Model\Tags',
+        'parameters' => $repoParameters
     ),
     'listRepoBranches' => array(
-        //## List Branches
-        //
-        //    GET /repos/:owner/:repo/branches
-        //
-        //### Response
-        //
         //== headers 200, :pagination => default_pagination_rels 
-        //== json(:branches) 
+        //== json(:branches)
+        "description" => "List Branches",
+        'extends' => 'defaultGetOauthOperation',
+        'uri' => '/repos/{owner}/{repo}/branches',
+        'responseClass' => 'GithubService\Model\Branches',
+        'parameters' => $repoParameters
     ),
     'getRepoBranch' => array(
-        //## Get Branch
-        //
-        //    GET /repos/:owner/:repo/branches/:branch
-        //
-        //### Response
-        //
-        //== headers 200 
-        //== json(:branch) 
+        "description" => "Get Branch",
+        'extends' => 'defaultGetOauthOperation',
+        'uri' => '/repos/:owner/:repo/branches/:branch',
+        'responseClass' => 'GithubService\Model\Branch',
+        'parameters' => array(
+            'username' => array(
+                "location" => "uri",
+                'type' => 'string',
+                "description" => "",
+            ),
+        ),
     ),
     'deleteRepo' => array(
-        //## Delete a Repository
-        //
-        //Deleting a repository requires admin access.  If OAuth is used, the
-        //`delete_repo` scope is required.
-        //
-        //    DELETE /repos/:owner/:repo
-        //
-        //### Response
-        //
-        //== headers 204 
+        //== headers 204
+        "description" => "Delete a Repository. Deleting a repository requires admin access.  If OAuth is used, the
+        `delete_repo` scope is required.",
+        'extends' => 'defaultGetOauthOperation',
+        'httpMethod' => 'DELETE',
+        'uri' => '/repos/{owner}/{repo}',
+        'parameters' => array(
+            'owner' => array(
+                "location" => "uri",
+                'type' => 'string',
+                "description" => "",
+            ),
+            'repo' => array(
+                "location" => "uri",
+                'type' => 'string',
+                "description" => "",
+            ),
+        ),
     ),
 );

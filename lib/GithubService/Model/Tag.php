@@ -25,6 +25,4 @@ class Tag extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

@@ -47,14 +47,15 @@ class checkGistStarred implements \ArtaxServiceBuilder\Operation {
         $this->response = $response;
     }
 
-    public function __construct(\GithubService\GithubArtaxService\GithubArtaxService $api, $Authorization, $userAgent) {
+    public function __construct(\GithubService\GithubArtaxService\GithubArtaxService $api, $authorization, $userAgent, $id) {
         $defaultParams = [
             'Accept' => 'application/vnd.github.v3+json',
         ];
         $this->setParams($defaultParams);
         $this->api = $api;
-        $this->parameters['Authorization'] = $Authorization;
+        $this->parameters['Authorization'] = $authorization;
         $this->parameters['userAgent'] = $userAgent;
+        $this->parameters['id'] = $id;
     }
 
     public function setAPI(\GithubService\GithubArtaxService\GithubArtaxService $api) {
@@ -76,6 +77,9 @@ class checkGistStarred implements \ArtaxServiceBuilder\Operation {
         }
         if (array_key_exists('otp', $params)) {
             $this->parameters['otp'] = $params['otp'];
+        }
+        if (array_key_exists('id', $params)) {
+            $this->parameters['id'] = $params['id'];
         }
     }
 
@@ -146,6 +150,19 @@ class checkGistStarred implements \ArtaxServiceBuilder\Operation {
         return $this;
     }
 
+    /**
+     * Set id
+     *
+     * The id of the gist to check
+     *
+     * @return $this
+     */
+    public function setId($id) {
+        $this->parameters['id'] = $id;
+
+        return $this;
+    }
+
     public function getParameters() {
         return $this->parameters;
     }
@@ -153,7 +170,7 @@ class checkGistStarred implements \ArtaxServiceBuilder\Operation {
     /**
      * Apply any filters necessary to the parameter
      *
-     * @return mixed
+     * @return \GithubService\Model\GistStarred
      * @param string $name The name of the parameter to get.
      */
     public function getFilteredParameter($name) {
@@ -210,11 +227,15 @@ class checkGistStarred implements \ArtaxServiceBuilder\Operation {
         $value = $this->getFilteredParameter('otp');
             $request->setHeader('X-GitHub-OTP', $value);
         }
+        $value = $this->getFilteredParameter('id');
+        $queryParameters['id'] = $value;
 
         //Parameters are parsed and set, lets prepare the request
         if ($url == null) {
             $url = "https://api.github.com/gists/{id}/star";
         }
+        $uriTemplate = new \ArtaxServiceBuilder\Service\UriTemplate\UriTemplate();
+        $url = $uriTemplate->expand($url, $this->parameters);
         if (count($queryParameters)) {
             $url = $url.'?'.http_build_query($queryParameters, '', '&', PHP_QUERY_RFC3986);
         }
@@ -239,7 +260,7 @@ class checkGistStarred implements \ArtaxServiceBuilder\Operation {
     /**
      * Create and execute the operation, then return the processed  response.
      *
-     * @return mixed|\
+     * @return mixed|\GithubService\Model\GistStarred
      */
     public function call() {
         $request = $this->createRequest();
@@ -247,7 +268,9 @@ class checkGistStarred implements \ArtaxServiceBuilder\Operation {
         $this->response = $response;
 
         if ($this->shouldResponseBeProcessed($response)) {
-            return $response->getBody();
+            $instance = \GithubService\Model\GistStarred::createFromResponse($response, $this);
+
+            return $instance;
         }
         return $response;
     }
@@ -255,7 +278,7 @@ class checkGistStarred implements \ArtaxServiceBuilder\Operation {
     /**
      * Execute the operation, returning the parsed response
      *
-     * @return mixed
+     * @return \GithubService\Model\GistStarred
      */
     public function execute() {
         $request = $this->createRequest();
@@ -277,20 +300,22 @@ class checkGistStarred implements \ArtaxServiceBuilder\Operation {
      * Dispatch the request for this operation and process the response. Allows you to
      * modify the request before it is sent.
      *
-     * @return mixed
+     * @return \GithubService\Model\GistStarred
      * @param \Amp\Artax\Request $request The request to be processed
      */
     public function dispatch(\Amp\Artax\Request $request) {
         $response = $this->api->execute($request, $this);
         $this->response = $response;
-        return $response->getBody();
+        $instance = \GithubService\Model\GistStarred::createFromResponse($response, $this);
+
+        return $instance;
     }
 
     /**
      * Dispatch the request for this operation and process the response asynchronously.
      * Allows you to modify the request before it is sent.
      *
-     * @return mixed
+     * @return \GithubService\Model\GistStarred
      * @param \Amp\Artax\Request $request The request to be processed
      * @param callable $callable The callable that processes the response
      */
@@ -302,18 +327,20 @@ class checkGistStarred implements \ArtaxServiceBuilder\Operation {
      * Dispatch the request for this operation and process the response. Allows you to
      * modify the request before it is sent.
      *
-     * @return mixed
+     * @return \GithubService\Model\GistStarred
      * @param \Amp\Artax\Response $response The HTTP response.
      */
     public function processResponse(\Amp\Artax\Response $response) {
-        return $response->getBody();
+        $instance = \GithubService\Model\GistStarred::createFromResponse($response, $this);
+
+        return $instance;
     }
 
     /**
      * Determine whether the response should be processed. Override this method to have
      * a per-operation decision, otherwise the function is the API class will be used.
      *
-     * @return mixed
+     * @return \GithubService\Model\GistStarred
      */
     public function shouldResponseBeProcessed(\Amp\Artax\Response $response) {
         return $this->api->shouldResponseBeProcessed($response);
@@ -334,7 +361,7 @@ class checkGistStarred implements \ArtaxServiceBuilder\Operation {
      * Override this method to have a per-operation decision, otherwise the
      * functionfrom the API class will be used.
      *
-     * @return mixed
+     * @return \GithubService\Model\GistStarred
      */
     public function shouldUseCachedResponse(\Amp\Artax\Response $response) {
         return $this->api->shouldUseCachedResponse($response);
@@ -344,7 +371,7 @@ class checkGistStarred implements \ArtaxServiceBuilder\Operation {
      * Determine whether the response should be cached. Override this method to have a
      * per-operation decision, otherwise the function from the API class will be used.
      *
-     * @return mixed
+     * @return \GithubService\Model\GistStarred
      */
     public function shouldResponseBeCached(\Amp\Artax\Response $response) {
         return $this->api->shouldResponseBeCached($response);

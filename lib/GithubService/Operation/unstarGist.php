@@ -47,13 +47,13 @@ class unstarGist implements \ArtaxServiceBuilder\Operation {
         $this->response = $response;
     }
 
-    public function __construct(\GithubService\GithubArtaxService\GithubArtaxService $api, $Authorization, $userAgent) {
+    public function __construct(\GithubService\GithubArtaxService\GithubArtaxService $api, $authorization, $userAgent) {
         $defaultParams = [
             'Accept' => 'application/vnd.github.v3+json',
         ];
         $this->setParams($defaultParams);
         $this->api = $api;
-        $this->parameters['Authorization'] = $Authorization;
+        $this->parameters['Authorization'] = $authorization;
         $this->parameters['userAgent'] = $userAgent;
     }
 

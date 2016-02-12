@@ -1,3 +1,8 @@
+<?php
+
+return array();
+
+/*
 ---
 title: Releases | GitHub API
 ---
@@ -235,3 +240,6 @@ Name | Type | Description
 == headers 204 
 
 [repo tags api]: /v3/repos/#list-tags
+
+
+*/

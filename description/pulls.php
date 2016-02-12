@@ -118,7 +118,7 @@ return array(
         //== headers 201, :Location => get_resource(:pull)['url'] 
         //== json :pull 
     ),
-    'updatePR' => arrray(
+    'updatePR' => array(
         //## Update a pull request
         //
         //    PATCH /repos/:owner/:repo/pulls/:number

@@ -1,5 +1,6 @@
 <?php
 
+return array();
 
 //### Downloads API is Deprecated
 //

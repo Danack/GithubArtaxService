@@ -195,7 +195,11 @@ abstract class DataMapper {
                 }
 
                 $dataPath = implode('->', $dataVariableNameArray);
-                throw new DataMapperException("DataMapper cannot find value from `$dataPath` in source JSON to map to actual value in class ".__CLASS__, 0, null, $dataMapElement);
+                throw DataMapperException::createBadMapping(
+                    "DataMapper cannot find value from `$dataPath` in source JSON to map to actual value in class ".__CLASS__, 
+                    $data,
+                    $dataMapElement
+                );
             }
 
             $value = $value[$dataVariableName];

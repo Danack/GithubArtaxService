@@ -38,7 +38,7 @@ interface GithubService {
      * \ArtaxServiceBuilder\BasicAuthToken object.
      * @return \GithubService\Operation\listEmojis The new operation
      */
-    public function listEmojis($Authorization);
+    public function listEmojis($authorization);
 
     /**
      * listUsersGists
@@ -52,7 +52,7 @@ interface GithubService {
      * @param string $username 
      * @return \GithubService\Operation\listUsersGists The new operation
      */
-    public function listUsersGists($Authorization, $username);
+    public function listUsersGists($authorization, $username);
 
     /**
      * listSelfGists
@@ -65,7 +65,7 @@ interface GithubService {
      * \ArtaxServiceBuilder\BasicAuthToken object.
      * @return \GithubService\Operation\listSelfGists The new operation
      */
-    public function listSelfGists($Authorization);
+    public function listSelfGists($authorization);
 
     /**
      * listPublicGists
@@ -78,7 +78,7 @@ interface GithubService {
      * \ArtaxServiceBuilder\BasicAuthToken object.
      * @return \GithubService\Operation\listPublicGists The new operation
      */
-    public function listPublicGists($Authorization);
+    public function listPublicGists($authorization);
 
     /**
      * listSelfStarredGists
@@ -91,7 +91,7 @@ interface GithubService {
      * \ArtaxServiceBuilder\BasicAuthToken object.
      * @return \GithubService\Operation\listSelfStarredGists The new operation
      */
-    public function listSelfStarredGists($Authorization);
+    public function listSelfStarredGists($authorization);
 
     /**
      * getGist
@@ -104,7 +104,7 @@ interface GithubService {
      * \ArtaxServiceBuilder\BasicAuthToken object.
      * @return \GithubService\Operation\getGist The new operation
      */
-    public function getGist($Authorization);
+    public function getGist($authorization);
 
     /**
      * getGistByRevision
@@ -117,7 +117,7 @@ interface GithubService {
      * \ArtaxServiceBuilder\BasicAuthToken object.
      * @return \GithubService\Operation\getGistByRevision The new operation
      */
-    public function getGistByRevision($Authorization);
+    public function getGistByRevision($authorization);
 
     /**
      * createGist
@@ -144,7 +144,7 @@ interface GithubService {
      * \ArtaxServiceBuilder\BasicAuthToken object.
      * @return \GithubService\Operation\listGistCommits The new operation
      */
-    public function listGistCommits($Authorization);
+    public function listGistCommits($authorization);
 
     /**
      * starGist
@@ -157,7 +157,7 @@ interface GithubService {
      * \ArtaxServiceBuilder\BasicAuthToken object.
      * @return \GithubService\Operation\starGist The new operation
      */
-    public function starGist($Authorization);
+    public function starGist($authorization);
 
     /**
      * unstarGist
@@ -170,7 +170,7 @@ interface GithubService {
      * \ArtaxServiceBuilder\BasicAuthToken object.
      * @return \GithubService\Operation\unstarGist The new operation
      */
-    public function unstarGist($Authorization);
+    public function unstarGist($authorization);
 
     /**
      * checkGistStarred
@@ -181,9 +181,10 @@ interface GithubService {
      * ".base64_encode($username.":".$password)"' for a Basic token or anything that
      * can be cast to a string in the correct format e.g. an 
      * \ArtaxServiceBuilder\BasicAuthToken object.
+     * @param string $id The id of the gist to check
      * @return \GithubService\Operation\checkGistStarred The new operation
      */
-    public function checkGistStarred($Authorization);
+    public function checkGistStarred($authorization, $id);
 
     /**
      * forkGist
@@ -196,7 +197,7 @@ interface GithubService {
      * \ArtaxServiceBuilder\BasicAuthToken object.
      * @return \GithubService\Operation\forkGist The new operation
      */
-    public function forkGist($Authorization);
+    public function forkGist($authorization);
 
     /**
      * listGistForks
@@ -209,7 +210,7 @@ interface GithubService {
      * \ArtaxServiceBuilder\BasicAuthToken object.
      * @return \GithubService\Operation\listGistForks The new operation
      */
-    public function listGistForks($Authorization);
+    public function listGistForks($authorization);
 
     /**
      * deleteGist
@@ -222,7 +223,942 @@ interface GithubService {
      * \ArtaxServiceBuilder\BasicAuthToken object.
      * @return \GithubService\Operation\deleteGist The new operation
      */
-    public function deleteGist($Authorization);
+    public function deleteGist($authorization);
+
+    /**
+     * listGitIgnoreTemplates
+     *
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
+     * @return \GithubService\Operation\listGitIgnoreTemplates The new operation
+     */
+    public function listGitIgnoreTemplates($authorization);
+
+    /**
+     * getGitIgnoreTemplate
+     *
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
+     * @param string $type Which template to get.
+     * @return \GithubService\Operation\getGitIgnoreTemplate The new operation
+     */
+    public function getGitIgnoreTemplate($authorization, $type);
+
+    /**
+     * listIssues
+     *
+     * @return \GithubService\Operation\listIssues The new operation
+     */
+    public function listIssues();
+
+    /**
+     * listRepoIssues
+     *
+     * @return \GithubService\Operation\listRepoIssues The new operation
+     */
+    public function listRepoIssues();
+
+    /**
+     * getIssue
+     *
+     * @return \GithubService\Operation\getIssue The new operation
+     */
+    public function getIssue();
+
+    /**
+     * createIssue
+     *
+     * @return \GithubService\Operation\createIssue The new operation
+     */
+    public function createIssue();
+
+    /**
+     * updateIssue
+     *
+     * @return \GithubService\Operation\updateIssue The new operation
+     */
+    public function updateIssue();
+
+    /**
+     * listLicenses
+     *
+     * @return \GithubService\Operation\listLicenses The new operation
+     */
+    public function listLicenses();
+
+    /**
+     * getLicense
+     *
+     * @return \GithubService\Operation\getLicense The new operation
+     */
+    public function getLicense();
+
+    /**
+     * getRepoLicense
+     *
+     * @return \GithubService\Operation\getRepoLicense The new operation
+     */
+    public function getRepoLicense();
+
+    /**
+     * renderMarkdown
+     *
+     * @return \GithubService\Operation\renderMarkdown The new operation
+     */
+    public function renderMarkdown();
+
+    /**
+     * renderMarkdownRaw
+     *
+     * @return \GithubService\Operation\renderMarkdownRaw The new operation
+     */
+    public function renderMarkdownRaw();
+
+    /**
+     * getMeta
+     *
+     * @return \GithubService\Operation\getMeta The new operation
+     */
+    public function getMeta();
+
+    /**
+     * stubBasicAuth
+     *
+     * @param mixed $Authorization The basic authentication token
+     * @return \GithubService\Operation\stubBasicAuth The new operation
+     */
+    public function stubBasicAuth($authorization);
+
+    /**
+     * getAuthorizations
+     *
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
+     * @return \GithubService\Operation\getAuthorizations The new operation
+     */
+    public function getAuthorizations($authorization);
+
+    /**
+     * getAuthorization
+     *
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
+     * @param mixed $id Which authorization to get
+     * @return \GithubService\Operation\getAuthorization The new operation
+     */
+    public function getAuthorization($authorization, $id);
+
+    /**
+     * createAuthorization
+     *
+     * @param mixed $Authorization The basic authentication token
+     * @param mixed $scopes 
+     * @param mixed $note 
+     * @return \GithubService\Operation\createAuthorization The new operation
+     */
+    public function createAuthorization($authorization, $scopes, $note);
+
+    /**
+     * getOrCreateAuthorization
+     *
+     * @param mixed $Authorization The basic authentication token
+     * @param mixed $scopes A list of scopes that this authorization is in.
+     * @param mixed $note A note to remind you what the OAuth token is for.
+     * @param mixed $note_url A URL to remind you what app the OAuth token is for.
+     * @param mixed $client_id The 20 character OAuth app client key for which to
+     * create the token.
+     * @param mixed $client_secret The 40 character OAuth app client secret for which
+     * to create the token.
+     * @return \GithubService\Operation\getOrCreateAuthorization The new operation
+     */
+    public function getOrCreateAuthorization($authorization, $scopes, $note, $note_url, $client_id, $client_secret);
+
+    /**
+     * getOrCreateAuthorizationForAppFingerprint
+     *
+     * @param mixed $client_secret The 40 character OAuth app client secret associated
+     * with the client ID specified in the URL.
+     * @param mixed $scopes A list of scopes that this authorization is in.
+     * @param mixed $note A note to remind you what the OAuth token is for.
+     * @param mixed $note_url A URL to remind you what app the OAuth token is for.
+     * @param mixed $fingerprint This attribute is only available when using the
+     * [mirage-preview](#deprecation-notice) media type.** A unique string to
+     * distinguish an authorization from others created for the same client ID and
+     * user.
+     * @return \GithubService\Operation\getOrCreateAuthorizationForAppFingerprint The
+     * new operation
+     */
+    public function getOrCreateAuthorizationForAppFingerprint($client_secret, $scopes, $note, $note_url, $fingerprint);
+
+    /**
+     * updateAuthorization
+     *
+     * @param mixed $scopes Replaces the authorization scopes with these.
+     * @param mixed $add_scopes A list of scopes to add to this authorization.
+     * @param mixed $remove_scopes A list of scopes to remove from this authorization.
+     * @param mixed $note A note to remind you what the OAuth token is for.
+     * @param mixed $note_url A URL to remind you what app the OAuth token is for.
+     * @param mixed $fingerprint **This attribute is only available when using the
+     * [mirage-preview](#deprecation-notice) media type.** A unique string to
+     * distinguish an authorization from others created for the same client ID and
+     * user.
+     * @return \GithubService\Operation\updateAuthorization The new operation
+     */
+    public function updateAuthorization($scopes, $add_scopes, $remove_scopes, $note, $note_url, $fingerprint);
+
+    /**
+     * deleteAuthorization
+     *
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
+     * @return \GithubService\Operation\deleteAuthorization The new operation
+     */
+    public function deleteAuthorization($authorization);
+
+    /**
+     * checkAuthorization
+     *
+     * @param mixed $Authorization The basic authentication token
+     * @param mixed $client_id 
+     * @param mixed $access_token 
+     * @return \GithubService\Operation\checkAuthorization The new operation
+     */
+    public function checkAuthorization($authorization, $client_id, $access_token);
+
+    /**
+     * resetAuthorization
+     *
+     * @param mixed $Authorization The basic authentication token
+     * @param mixed $client_id 
+     * @param mixed $access_token 
+     * @return \GithubService\Operation\resetAuthorization The new operation
+     */
+    public function resetAuthorization($authorization, $client_id, $access_token);
+
+    /**
+     * revokeAllAuthority
+     *
+     * @param mixed $Authorization The basic authentication token
+     * @param mixed $client_id The id of the client.
+     * @return \GithubService\Operation\revokeAllAuthority The new operation
+     */
+    public function revokeAllAuthority($authorization, $client_id);
+
+    /**
+     * revokeAuthorityForApplication
+     *
+     * @param mixed $Authorization The basic authentication token
+     * @param mixed $client_id The id of the client.
+     * @param mixed $access_token The access token to delete.
+     * @return \GithubService\Operation\revokeAuthorityForApplication The new operation
+     */
+    public function revokeAuthorityForApplication($authorization, $client_id, $access_token);
+
+    /**
+     * listPRComments
+     *
+     * @return \GithubService\Operation\listPRComments The new operation
+     */
+    public function listPRComments();
+
+    /**
+     * listRepoComments
+     *
+     * @return \GithubService\Operation\listRepoComments The new operation
+     */
+    public function listRepoComments();
+
+    /**
+     * getPRComment
+     *
+     * @return \GithubService\Operation\getPRComment The new operation
+     */
+    public function getPRComment();
+
+    /**
+     * createPRComment
+     *
+     * @return \GithubService\Operation\createPRComment The new operation
+     */
+    public function createPRComment();
+
+    /**
+     * updatePRComment
+     *
+     * @return \GithubService\Operation\updatePRComment The new operation
+     */
+    public function updatePRComment();
+
+    /**
+     * deletePRComment
+     *
+     * @return \GithubService\Operation\deletePRComment The new operation
+     */
+    public function deletePRComment();
+
+    /**
+     * linkPRRelations
+     *
+     * @return \GithubService\Operation\linkPRRelations The new operation
+     */
+    public function linkPRRelations();
+
+    /**
+     * getPR
+     *
+     * @return \GithubService\Operation\getPR The new operation
+     */
+    public function getPR();
+
+    /**
+     * getPRMergeability
+     *
+     * @return \GithubService\Operation\getPRMergeability The new operation
+     */
+    public function getPRMergeability();
+
+    /**
+     * createPR
+     *
+     * @return \GithubService\Operation\createPR The new operation
+     */
+    public function createPR();
+
+    /**
+     * updatePR
+     *
+     * @return \GithubService\Operation\updatePR The new operation
+     */
+    public function updatePR();
+
+    /**
+     * listCommitsOnPR
+     *
+     * @return \GithubService\Operation\listCommitsOnPR The new operation
+     */
+    public function listCommitsOnPR();
+
+    /**
+     * checkPRMerged
+     *
+     * @return \GithubService\Operation\checkPRMerged The new operation
+     */
+    public function checkPRMerged();
+
+    /**
+     * mergePR
+     *
+     * @return \GithubService\Operation\mergePR The new operation
+     */
+    public function mergePR();
+
+    /**
+     * listCollaborators
+     *
+     * @return \GithubService\Operation\listCollaborators The new operation
+     */
+    public function listCollaborators();
+
+    /**
+     * isUserCollaborator
+     *
+     * @return \GithubService\Operation\isUserCollaborator The new operation
+     */
+    public function isUserCollaborator();
+
+    /**
+     * addUserAsCollaborator
+     *
+     * @return \GithubService\Operation\addUserAsCollaborator The new operation
+     */
+    public function addUserAsCollaborator();
+
+    /**
+     * removeUserAsCollaborator
+     *
+     * @return \GithubService\Operation\removeUserAsCollaborator The new operation
+     */
+    public function removeUserAsCollaborator();
+
+    /**
+     * listCommitCommentsRepo
+     *
+     * @return \GithubService\Operation\listCommitCommentsRepo The new operation
+     */
+    public function listCommitCommentsRepo();
+
+    /**
+     * listCommitComments
+     *
+     * @return \GithubService\Operation\listCommitComments The new operation
+     */
+    public function listCommitComments();
+
+    /**
+     * createCommitComment
+     *
+     * @return \GithubService\Operation\createCommitComment The new operation
+     */
+    public function createCommitComment();
+
+    /**
+     * getCommitComment
+     *
+     * @return \GithubService\Operation\getCommitComment The new operation
+     */
+    public function getCommitComment();
+
+    /**
+     * updateCommitComment
+     *
+     * @return \GithubService\Operation\updateCommitComment The new operation
+     */
+    public function updateCommitComment();
+
+    /**
+     * deleteCommitComment
+     *
+     * @return \GithubService\Operation\deleteCommitComment The new operation
+     */
+    public function deleteCommitComment();
+
+    /**
+     * listRepoCommits
+     *
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
+     * @param string $sha SHA or branch to start listing commits from. Default: the
+     * repository’s default branch (usually `master`).
+     * @param string $path Only commits containing this file path will be returned.
+     * @param string $author GitHub login or email address by which to filter by commit
+     * author.
+     * @param string $since Only commits before this date will be returned. This is a
+     * timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
+     * @param string $until Only commits after this date will be returned. This is a
+     * timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
+     * @param string $owner 
+     * @param string $repo 
+     * @return \GithubService\Operation\listRepoCommits The new operation
+     */
+    public function listRepoCommits($authorization, $sha, $path, $author, $since, $until, $owner, $repo);
+
+    /**
+     * getCommit
+     *
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
+     * @return \GithubService\Operation\getCommit The new operation
+     */
+    public function getCommit($authorization);
+
+    /**
+     * compareTwoCommits
+     *
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
+     * @return \GithubService\Operation\compareTwoCommits The new operation
+     */
+    public function compareTwoCommits($authorization);
+
+    /**
+     * compareTwoCommitsForks
+     *
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
+     * @return \GithubService\Operation\compareTwoCommitsForks The new operation
+     */
+    public function compareTwoCommitsForks($authorization);
+
+    /**
+     * getRepoReadme
+     *
+     * @return \GithubService\Operation\getRepoReadme The new operation
+     */
+    public function getRepoReadme();
+
+    /**
+     * getFileContents
+     *
+     * @return \GithubService\Operation\getFileContents The new operation
+     */
+    public function getFileContents();
+
+    /**
+     * createRepoFile
+     *
+     * @return \GithubService\Operation\createRepoFile The new operation
+     */
+    public function createRepoFile();
+
+    /**
+     * updateRepoFile
+     *
+     * @return \GithubService\Operation\updateRepoFile The new operation
+     */
+    public function updateRepoFile();
+
+    /**
+     * deleteRepoFile
+     *
+     * @return \GithubService\Operation\deleteRepoFile The new operation
+     */
+    public function deleteRepoFile();
+
+    /**
+     * getRepoArchiveLink
+     *
+     * @return \GithubService\Operation\getRepoArchiveLink The new operation
+     */
+    public function getRepoArchiveLink();
+
+    /**
+     * listDeployments
+     *
+     * @return \GithubService\Operation\listDeployments The new operation
+     */
+    public function listDeployments();
+
+    /**
+     * createDeployment
+     *
+     * @return \GithubService\Operation\createDeployment The new operation
+     */
+    public function createDeployment();
+
+    /**
+     * updateDeployment
+     *
+     * @return \GithubService\Operation\updateDeployment The new operation
+     */
+    public function updateDeployment();
+
+    /**
+     * createDeploymentStatus
+     *
+     * @return \GithubService\Operation\createDeploymentStatus The new operation
+     */
+    public function createDeploymentStatus();
+
+    /**
+     * listForks
+     *
+     * @return \GithubService\Operation\listForks The new operation
+     */
+    public function listForks();
+
+    /**
+     * createFork
+     *
+     * @return \GithubService\Operation\createFork The new operation
+     */
+    public function createFork();
+
+    /**
+     * listHooks
+     *
+     * @return \GithubService\Operation\listHooks The new operation
+     */
+    public function listHooks();
+
+    /**
+     * createHook
+     *
+     * @return \GithubService\Operation\createHook The new operation
+     */
+    public function createHook();
+
+    /**
+     * updateHook
+     *
+     * @return \GithubService\Operation\updateHook The new operation
+     */
+    public function updateHook();
+
+    /**
+     * testHook
+     *
+     * @return \GithubService\Operation\testHook The new operation
+     */
+    public function testHook();
+
+    /**
+     * pingHook
+     *
+     * @return \GithubService\Operation\pingHook The new operation
+     */
+    public function pingHook();
+
+    /**
+     * deleteHook
+     *
+     * @return \GithubService\Operation\deleteHook The new operation
+     */
+    public function deleteHook();
+
+    /**
+     * listDeployKeys
+     *
+     * @return \GithubService\Operation\listDeployKeys The new operation
+     */
+    public function listDeployKeys();
+
+    /**
+     * getDeployKey
+     *
+     * @return \GithubService\Operation\getDeployKey The new operation
+     */
+    public function getDeployKey();
+
+    /**
+     * addDeployKey
+     *
+     * @return \GithubService\Operation\addDeployKey The new operation
+     */
+    public function addDeployKey();
+
+    /**
+     * updateDeployKey
+     *
+     * @return \GithubService\Operation\updateDeployKey The new operation
+     */
+    public function updateDeployKey();
+
+    /**
+     * performMerge
+     *
+     * @return \GithubService\Operation\performMerge The new operation
+     */
+    public function performMerge();
+
+    /**
+     * getPagesInfo
+     *
+     * @return \GithubService\Operation\getPagesInfo The new operation
+     */
+    public function getPagesInfo();
+
+    /**
+     * listPagesBuilds
+     *
+     * @return \GithubService\Operation\listPagesBuilds The new operation
+     */
+    public function listPagesBuilds();
+
+    /**
+     * listPagesBuildLatest
+     *
+     * @return \GithubService\Operation\listPagesBuildLatest The new operation
+     */
+    public function listPagesBuildLatest();
+
+    /**
+     * getRepoContributors
+     *
+     * @return \GithubService\Operation\getRepoContributors The new operation
+     */
+    public function getRepoContributors();
+
+    /**
+     * getRepoCodeFrequency
+     *
+     * @return \GithubService\Operation\getRepoCodeFrequency The new operation
+     */
+    public function getRepoCodeFrequency();
+
+    /**
+     * getRepoParticipation
+     *
+     * @return \GithubService\Operation\getRepoParticipation The new operation
+     */
+    public function getRepoParticipation();
+
+    /**
+     * getRepoPunchCard
+     *
+     * @return \GithubService\Operation\getRepoPunchCard The new operation
+     */
+    public function getRepoPunchCard();
+
+    /**
+     * createStatus
+     *
+     * @return \GithubService\Operation\createStatus The new operation
+     */
+    public function createStatus();
+
+    /**
+     * listStatusesForRef
+     *
+     * @return \GithubService\Operation\listStatusesForRef The new operation
+     */
+    public function listStatusesForRef();
+
+    /**
+     * getCombinedStatusForRef
+     *
+     * @return \GithubService\Operation\getCombinedStatusForRef The new operation
+     */
+    public function getCombinedStatusForRef();
+
+    /**
+     * listSelfRepos
+     *
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
+     * @param string $type Can be one of `all`, `owner`, `member`. Default: `owner`
+     * @param string $sort Can be one of `created`, `updated`, `pushed`, `full_name`.
+     * Default: `full_name`
+     * @param string $direction  Can be one of `asc` or `desc`. Default: when using
+     * `full_name`: `asc`, otherwise `desc`
+     * @return \GithubService\Operation\listSelfRepos The new operation
+     */
+    public function listSelfRepos($authorization, $type, $sort, $direction);
+
+    /**
+     * listUserRepos
+     *
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
+     * @param string $username The user to get the repos of.
+     * @return \GithubService\Operation\listUserRepos The new operation
+     */
+    public function listUserRepos($authorization, $username);
+
+    /**
+     * listOrgRepos
+     *
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
+     * @param string $org The organisation to get the repos of.
+     * @param string $type Can be one of `all`, `public`, `private`, `forks`,
+     * `sources`, `member`. Default: `all`
+     * @return \GithubService\Operation\listOrgRepos The new operation
+     */
+    public function listOrgRepos($authorization, $org, $type);
+
+    /**
+     * listPublicRepos
+     *
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
+     * @param string $since The integer ID of the last Repository that you've seen.
+     * @return \GithubService\Operation\listPublicRepos The new operation
+     */
+    public function listPublicRepos($authorization, $since);
+
+    /**
+     * createRepo
+     *
+     * @return \GithubService\Operation\createRepo The new operation
+     */
+    public function createRepo();
+
+    /**
+     * getRepo
+     *
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
+     * @param string $owner 
+     * @param string $repo 
+     * @return \GithubService\Operation\getRepo The new operation
+     */
+    public function getRepo($authorization, $owner, $repo);
+
+    /**
+     * updateRepo
+     *
+     * @return \GithubService\Operation\updateRepo The new operation
+     */
+    public function updateRepo();
+
+    /**
+     * listRepoContributors
+     *
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
+     * @param string $owner 
+     * @param string $repo 
+     * @param string $anon 
+     * @return \GithubService\Operation\listRepoContributors The new operation
+     */
+    public function listRepoContributors($authorization, $owner, $repo, $anon);
+
+    /**
+     * listRepoLanguages
+     *
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
+     * @param string $owner 
+     * @param string $repo 
+     * @return \GithubService\Operation\listRepoLanguages The new operation
+     */
+    public function listRepoLanguages($authorization, $owner, $repo);
+
+    /**
+     * listRepoTeams
+     *
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
+     * @param string $owner 
+     * @param string $repo 
+     * @return \GithubService\Operation\listRepoTeams The new operation
+     */
+    public function listRepoTeams($authorization, $owner, $repo);
+
+    /**
+     * listRepoTags
+     *
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
+     * @param string $owner 
+     * @param string $repo 
+     * @return \GithubService\Operation\listRepoTags The new operation
+     */
+    public function listRepoTags($authorization, $owner, $repo);
+
+    /**
+     * listRepoBranches
+     *
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
+     * @param string $owner 
+     * @param string $repo 
+     * @return \GithubService\Operation\listRepoBranches The new operation
+     */
+    public function listRepoBranches($authorization, $owner, $repo);
+
+    /**
+     * getRepoBranch
+     *
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
+     * @param string $username 
+     * @return \GithubService\Operation\getRepoBranch The new operation
+     */
+    public function getRepoBranch($authorization, $username);
+
+    /**
+     * deleteRepo
+     *
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
+     * @param string $owner 
+     * @param string $repo 
+     * @return \GithubService\Operation\deleteRepo The new operation
+     */
+    public function deleteRepo($authorization, $owner, $repo);
+
+    /**
+     * searchRepos
+     *
+     * @return \GithubService\Operation\searchRepos The new operation
+     */
+    public function searchRepos();
+
+    /**
+     * searchCode
+     *
+     * @return \GithubService\Operation\searchCode The new operation
+     */
+    public function searchCode();
+
+    /**
+     * searchIssues
+     *
+     * @return \GithubService\Operation\searchIssues The new operation
+     */
+    public function searchIssues();
+
+    /**
+     * searchUsers
+     *
+     * @return \GithubService\Operation\searchUsers The new operation
+     */
+    public function searchUsers();
 
     /**
      * listEmojisPaginate
@@ -236,7 +1172,7 @@ interface GithubService {
      * @param mixed $pageURL 
      * @return \GithubService\Operation\listEmojisPaginate The new operation
      */
-    public function listEmojisPaginate($Authorization, $pageURL);
+    public function listEmojisPaginate($authorization, $pageURL);
 
     /**
      * listUsersGistsPaginate
@@ -250,7 +1186,7 @@ interface GithubService {
      * @param mixed $pageURL 
      * @return \GithubService\Operation\listUsersGistsPaginate The new operation
      */
-    public function listUsersGistsPaginate($Authorization, $pageURL);
+    public function listUsersGistsPaginate($authorization, $pageURL);
 
     /**
      * listSelfGistsPaginate
@@ -264,7 +1200,7 @@ interface GithubService {
      * @param mixed $pageURL 
      * @return \GithubService\Operation\listSelfGistsPaginate The new operation
      */
-    public function listSelfGistsPaginate($Authorization, $pageURL);
+    public function listSelfGistsPaginate($authorization, $pageURL);
 
     /**
      * listPublicGistsPaginate
@@ -278,7 +1214,7 @@ interface GithubService {
      * @param mixed $pageURL 
      * @return \GithubService\Operation\listPublicGistsPaginate The new operation
      */
-    public function listPublicGistsPaginate($Authorization, $pageURL);
+    public function listPublicGistsPaginate($authorization, $pageURL);
 
     /**
      * listSelfStarredGistsPaginate
@@ -292,7 +1228,7 @@ interface GithubService {
      * @param mixed $pageURL 
      * @return \GithubService\Operation\listSelfStarredGistsPaginate The new operation
      */
-    public function listSelfStarredGistsPaginate($Authorization, $pageURL);
+    public function listSelfStarredGistsPaginate($authorization, $pageURL);
 
     /**
      * getGistPaginate
@@ -306,7 +1242,7 @@ interface GithubService {
      * @param mixed $pageURL 
      * @return \GithubService\Operation\getGistPaginate The new operation
      */
-    public function getGistPaginate($Authorization, $pageURL);
+    public function getGistPaginate($authorization, $pageURL);
 
     /**
      * getGistByRevisionPaginate
@@ -320,7 +1256,7 @@ interface GithubService {
      * @param mixed $pageURL 
      * @return \GithubService\Operation\getGistByRevisionPaginate The new operation
      */
-    public function getGistByRevisionPaginate($Authorization, $pageURL);
+    public function getGistByRevisionPaginate($authorization, $pageURL);
 
     /**
      * listGistCommitsPaginate
@@ -334,7 +1270,21 @@ interface GithubService {
      * @param mixed $pageURL 
      * @return \GithubService\Operation\listGistCommitsPaginate The new operation
      */
-    public function listGistCommitsPaginate($Authorization, $pageURL);
+    public function listGistCommitsPaginate($authorization, $pageURL);
+
+    /**
+     * checkGistStarredPaginate
+     *
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
+     * @param mixed $pageURL 
+     * @return \GithubService\Operation\checkGistStarredPaginate The new operation
+     */
+    public function checkGistStarredPaginate($authorization, $pageURL);
 
     /**
      * listGistForksPaginate
@@ -348,7 +1298,275 @@ interface GithubService {
      * @param mixed $pageURL 
      * @return \GithubService\Operation\listGistForksPaginate The new operation
      */
-    public function listGistForksPaginate($Authorization, $pageURL);
+    public function listGistForksPaginate($authorization, $pageURL);
+
+    /**
+     * listGitIgnoreTemplatesPaginate
+     *
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
+     * @param mixed $pageURL 
+     * @return \GithubService\Operation\listGitIgnoreTemplatesPaginate The new
+     * operation
+     */
+    public function listGitIgnoreTemplatesPaginate($authorization, $pageURL);
+
+    /**
+     * getGitIgnoreTemplatePaginate
+     *
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
+     * @param mixed $pageURL 
+     * @return \GithubService\Operation\getGitIgnoreTemplatePaginate The new operation
+     */
+    public function getGitIgnoreTemplatePaginate($authorization, $pageURL);
+
+    /**
+     * getAuthorizationsPaginate
+     *
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
+     * @param mixed $pageURL 
+     * @return \GithubService\Operation\getAuthorizationsPaginate The new operation
+     */
+    public function getAuthorizationsPaginate($authorization, $pageURL);
+
+    /**
+     * getAuthorizationPaginate
+     *
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
+     * @param mixed $pageURL 
+     * @return \GithubService\Operation\getAuthorizationPaginate The new operation
+     */
+    public function getAuthorizationPaginate($authorization, $pageURL);
+
+    /**
+     * listRepoCommitsPaginate
+     *
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
+     * @param mixed $pageURL 
+     * @return \GithubService\Operation\listRepoCommitsPaginate The new operation
+     */
+    public function listRepoCommitsPaginate($authorization, $pageURL);
+
+    /**
+     * getCommitPaginate
+     *
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
+     * @param mixed $pageURL 
+     * @return \GithubService\Operation\getCommitPaginate The new operation
+     */
+    public function getCommitPaginate($authorization, $pageURL);
+
+    /**
+     * compareTwoCommitsPaginate
+     *
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
+     * @param mixed $pageURL 
+     * @return \GithubService\Operation\compareTwoCommitsPaginate The new operation
+     */
+    public function compareTwoCommitsPaginate($authorization, $pageURL);
+
+    /**
+     * compareTwoCommitsForksPaginate
+     *
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
+     * @param mixed $pageURL 
+     * @return \GithubService\Operation\compareTwoCommitsForksPaginate The new
+     * operation
+     */
+    public function compareTwoCommitsForksPaginate($authorization, $pageURL);
+
+    /**
+     * listSelfReposPaginate
+     *
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
+     * @param mixed $pageURL 
+     * @return \GithubService\Operation\listSelfReposPaginate The new operation
+     */
+    public function listSelfReposPaginate($authorization, $pageURL);
+
+    /**
+     * listUserReposPaginate
+     *
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
+     * @param mixed $pageURL 
+     * @return \GithubService\Operation\listUserReposPaginate The new operation
+     */
+    public function listUserReposPaginate($authorization, $pageURL);
+
+    /**
+     * listOrgReposPaginate
+     *
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
+     * @param mixed $pageURL 
+     * @return \GithubService\Operation\listOrgReposPaginate The new operation
+     */
+    public function listOrgReposPaginate($authorization, $pageURL);
+
+    /**
+     * listPublicReposPaginate
+     *
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
+     * @param mixed $pageURL 
+     * @return \GithubService\Operation\listPublicReposPaginate The new operation
+     */
+    public function listPublicReposPaginate($authorization, $pageURL);
+
+    /**
+     * getRepoPaginate
+     *
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
+     * @param mixed $pageURL 
+     * @return \GithubService\Operation\getRepoPaginate The new operation
+     */
+    public function getRepoPaginate($authorization, $pageURL);
+
+    /**
+     * listRepoContributorsPaginate
+     *
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
+     * @param mixed $pageURL 
+     * @return \GithubService\Operation\listRepoContributorsPaginate The new operation
+     */
+    public function listRepoContributorsPaginate($authorization, $pageURL);
+
+    /**
+     * listRepoLanguagesPaginate
+     *
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
+     * @param mixed $pageURL 
+     * @return \GithubService\Operation\listRepoLanguagesPaginate The new operation
+     */
+    public function listRepoLanguagesPaginate($authorization, $pageURL);
+
+    /**
+     * listRepoTeamsPaginate
+     *
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
+     * @param mixed $pageURL 
+     * @return \GithubService\Operation\listRepoTeamsPaginate The new operation
+     */
+    public function listRepoTeamsPaginate($authorization, $pageURL);
+
+    /**
+     * listRepoTagsPaginate
+     *
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
+     * @param mixed $pageURL 
+     * @return \GithubService\Operation\listRepoTagsPaginate The new operation
+     */
+    public function listRepoTagsPaginate($authorization, $pageURL);
+
+    /**
+     * listRepoBranchesPaginate
+     *
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
+     * @param mixed $pageURL 
+     * @return \GithubService\Operation\listRepoBranchesPaginate The new operation
+     */
+    public function listRepoBranchesPaginate($authorization, $pageURL);
+
+    /**
+     * getRepoBranchPaginate
+     *
+     * @param string $Authorization The token to use for the request. This should
+     * either be an a complete token in the format appropriate format e.g. 'token
+     * 123567890' for an oauth token, or '"Basic
+     * ".base64_encode($username.":".$password)"' for a Basic token or anything that
+     * can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
+     * @param mixed $pageURL 
+     * @return \GithubService\Operation\getRepoBranchPaginate The new operation
+     */
+    public function getRepoBranchPaginate($authorization, $pageURL);
 
     /**
      * executeAsync
