@@ -597,7 +597,7 @@ class GithubArtaxService implements \GithubService\GithubService {
                     $callback(null, $parsedResponse, $response);
                 }
                 catch(\Exception $e) {
-                    $exception = new ProcessResponseException("Exception parsing response: ".$e->getMessage(), 0, $e);
+                    $exception = new ProcessResponseException("Exception parsing response: ".$e->getMessage(), $response, 0, $e);
                     $callback($exception, null, $response);
                 }
             }
@@ -648,21 +648,11 @@ class GithubArtaxService implements \GithubService\GithubService {
 
     /**
      * Inspect the response and return an exception if it is an error response.
-     *      * Exceptions should extend \ArtaxServiceBuilder\BadResponseException
+     * Exceptions should extend \ArtaxServiceBuilder\BadResponseException
      *
      * @return BadResponseException
      */
     public function translateResponseToException(\Amp\Artax\Response $response) {
-        $status = $response->getStatus();
-        if ($status < 200 || $status >= 300) {
-            return new BadResponseException(
-                "Status $status is not treated as OK.",
-                $response
-            );
-        }
-
         return null;
     }
-
-
 }
