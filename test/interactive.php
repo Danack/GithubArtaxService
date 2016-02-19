@@ -15,8 +15,6 @@ require_once dirname(dirname(__DIR__))."/clavis.php";
 $autoloader = require dirname(__DIR__).'/vendor/autoload.php';
 require_once "testBootstrap.php";
 
-
-
 /**
  * This test cannot be run automatically. It requires the user to read
  * the one-time-password sent to their phone.
@@ -32,13 +30,11 @@ $githubService = $injector->make('GithubService\GithubArtaxService\GithubService
 try {
 
     $token = @file_get_contents("../../GithubToken.txt");
-
     if ($token === false) {
         $token = getToken($githubService);
         file_put_contents("../../GithubToken.txt", $token);
         echo "wrote token to file\n";
     }
-
 }
 catch (BadResponseException $bre) {
     echo "Bad response, body is:";
@@ -49,7 +45,7 @@ catch (DataMapperException $dme) {
     echo $dme->displayProblem();
 }
     
-//
+
 //try {
 //    $oauthToken = new Oauth2Token($token);
 //    $q = 'Resource language:php extension:php user:Danack';

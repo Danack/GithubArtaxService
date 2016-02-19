@@ -8,9 +8,7 @@ use ArtaxServiceBuilder\BadResponseException;
 use ArtaxServiceBuilder\Oauth2Token;
 use GithubService\Model\DataMapperException;
 
-
 require_once "testBootstrap.php";
-
 
 $injector = createProvider();
 
@@ -21,13 +19,6 @@ $client->setOption(ArtaxClient::OP_MS_CONNECT_TIMEOUT, 5000);
 $client->setOption(ArtaxClient::OP_MS_KEEP_ALIVE_TIMEOUT, 1000);
 $githubAPI = new GithubArtaxService($client, $reactor, $cache, "Danack/test");
 
-//$foo = $githubAPI->getArchiveLink(
-//    null,
-//    'Danack',
-//    'Imagick-demos',
-//    '8b22bb534407100ee6f2c8b6caa183b5b5aead59'
-//);
-
 $token = @file_get_contents("../../GithubToken.txt");
 $oauthToken = null;
 
@@ -35,11 +26,8 @@ if ($token) {
     $oauthToken = new Oauth2Token($token);
 }
 
-
 try {
-    
-    $tagListRequest = $githubAPI->listRepoTags(null, "J7mbo", "twitter-api-php");
-
+    $tagListRequest = $githubAPI->listRepoTags(null, "Danack", "GithubArtaxService");
     $tagList = $tagListRequest->execute();
 
     foreach ($tagList as $tag) {
@@ -49,25 +37,11 @@ try {
             $tag->commit->sha
         );
     }
-    
-    
-//    $result = $githubAPI->listEmojis(null)->execute();
-//    $result = $githubAPI->listUsersGists(null, 'danack')->execute();
-//    $result = $githubAPI->listUserRepos(null, 'Danack')->execute();
-    //$result = $githubAPI->checkGistStarred($oauthToken, '6bd30de6247bc5148986')->execute();
 
-    //$result = $githubAPI->listGitIgnoreTemplates($oauthToken->__toString())->execute();
-    
-//    foreach ($result as $templateName) {
-//        echo $templateName."\n";
-//    }
-
-    // Accept: application/vnd.github.v3.full+json
-
-//    $templateCommand = $githubAPI->getGitIgnoreTemplate($oauthToken->__toString(), 'Rails');
-//    $templateCommand->setAccept('application/vnd.github.v3.full+json');
-//    $template = $templateCommand->execute();    
-//    var_dump($templateCommand->getResponse()->getBody());    
+    $emojiResult = $githubAPI->listEmojis(null)->execute();
+    foreach ($emojiResult->emojiList as $emoji) {
+        echo $emoji->name." \n";
+    }  
 }
 catch (BadResponseException $bre) {
     echo "Bad response: ". $bre->getResponse()->getBody()."\n";
