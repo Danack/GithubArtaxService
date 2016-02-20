@@ -2,7 +2,7 @@
 
 namespace GithubService\Model;
 
-class Blob extends \GithubService\Model\DataMapper {
+class Blob { //extends \GithubService\Model\DataMapper {
 
     public $content = null;
 
@@ -14,17 +14,17 @@ class Blob extends \GithubService\Model\DataMapper {
 
     public $url = null;
 
-    protected function getDataMap() {
-        $dataMap = [
-            ['content', 'content'],
-            ['encoding', 'encoding'],
-            ['sha', 'sha'],
-            ['size', 'size'],
-            ['url', 'url'],
-        ];
-
-        return $dataMap;
-    }
+//    protected function getDataMap() {
+//        $dataMap = [
+//            ['content', 'content'],
+//            ['encoding', 'encoding'],
+//            ['sha', 'sha'],
+//            ['size', 'size'],
+//            ['url', 'url'],
+//        ];
+//
+//        return $dataMap;
+//    }
 
 
 }

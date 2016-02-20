@@ -4,6 +4,8 @@ namespace GithubService\Model;
 
 class CommitList extends \GithubService\Model\DataMapper {
 
+    use GithubTrait;
+    
     /**
      * @var \GithubService\Model\Commit $commitsChild
      */

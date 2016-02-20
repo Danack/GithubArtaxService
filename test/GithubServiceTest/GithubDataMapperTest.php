@@ -1,10 +1,26 @@
 <?php
 
+namespace GithugServiceTest;
 
-class GithubResponseTest extends \PHPUnit_Framework_TestCase { 
+use GithubService\GithubArtaxService\GithubArtaxService;
+use GithubService\GithubDataMapper;
 
-    //TODO Add checks on the data.
-    public function additionProvider() {
+/**
+ * @group refactoring
+ */
+class GithubDataMapperTest extends \PHPUnit_Framework_TestCase
+{
+    function testEmojis()
+    {
+        $dataMapper = new GithubDataMapper();
+        $contents = file_get_contents(__DIR__."/../fixtures/data/githubJSON/EMOJIS.json");
+        $data = json_decode($contents, true);
+        $emojiList = $dataMapper->instantiate('GithubService\Model\EmojiList', $data);
+        $this->assertInstanceOf('GithubService\Model\EmojiList', $emojiList);
+    }
+
+    public function additionProvider()
+    {
 
         return array(
 //            //['ActiveAdminOrgMembership', 'ACTIVE_ADMIN_ORG_MEMBERSHIP'],
@@ -32,7 +48,7 @@ class GithubResponseTest extends \PHPUnit_Framework_TestCase {
 // DC            ['DirectoryContent', 'DIRECTORY_CONTENT'],
             ['Download', 'DOWNLOAD'],
             ['EmailSearchResults', 'EMAIL_SEARCH_RESULTS'],
-            ['Emojis', 'EMOJIS'],
+            ['EmojiList', 'EMOJIS'],
             ['Event', 'EVENT'],
             ['Feeds', 'FEEDS'],
 //DC            ['FetchSettings', 'FETCH_SETTINGS'],
@@ -96,26 +112,23 @@ class GithubResponseTest extends \PHPUnit_Framework_TestCase {
             ['UserEmail', 'USER_EMAIL'],
             ['UserSearchItem', 'USER_SEARCH_ITEM'],
             ['UserSearchResults', 'USER_SEARCH_RESULTS'],
-
         );
     }
 
     /**
      * @dataProvider additionProvider
      */
-    function testDataParsing($expectedClassname, $dataFile ) {
+    function testDataParsing($expectedClassname, $dataFile )
+    {
         $json = file_get_contents(__DIR__.'/../fixtures/data/githubJSON/'.$dataFile.'.json');
-
         $className = 'GithubService\Model\\'.$expectedClassname;
-        $data = json_decode($json, true); //TODO - test against stdobjects as well.
-        
-        $instance = $className::createFromData($data);
+        $data = json_decode($json, true);
+        $dataMapper = new GithubDataMapper();
 
+        $instance = $dataMapper->instantiate($className, $data);
         $this->assertInstanceOf(
             $className,
             $instance
         );
     }
 }
-
- 

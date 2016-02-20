@@ -6,10 +6,10 @@ use Amp\Artax\Client as ArtaxClient;
 use Amp\NativeReactor;
 use ArtaxServiceBuilder\BadResponseException;
 
-include_once dirname(__DIR__)."/../../githubArtaxServiceConfig.php";
+//include_once dirname(__DIR__)."/../../githubArtaxServiceConfig.php";
 
-class GithubTest extends \PHPUnit_Framework_TestCase {
-
+class GithubTest extends \PHPUnit_Framework_TestCase
+{
     private function  getReactorAndAPI() {
 
         $reactor = \Amp\getReactor();

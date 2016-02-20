@@ -4,8 +4,8 @@
 namespace GithubService\Model;
 
 
-class Emoji {
-
+class Emoji
+{
     public $name;
     public $url;
 
