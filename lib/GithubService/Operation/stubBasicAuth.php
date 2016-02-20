@@ -47,14 +47,14 @@ class stubBasicAuth implements \ArtaxServiceBuilder\Operation {
         $this->response = $response;
     }
 
-    public function __construct(\GithubService\GithubArtaxService\GithubArtaxService $api, $userAgent, $authorization) {
+    public function __construct(\GithubService\GithubArtaxService\GithubArtaxService $api, $userAgent, $Authorization) {
         $defaultParams = [
             'Accept' => 'application/vnd.github.mirage-preview+json',
         ];
         $this->setParams($defaultParams);
         $this->api = $api;
         $this->parameters['userAgent'] = $userAgent;
-        $this->parameters['Authorization'] = $authorization;
+        $this->parameters['Authorization'] = $Authorization;
     }
 
     public function setAPI(\GithubService\GithubArtaxService\GithubArtaxService $api) {

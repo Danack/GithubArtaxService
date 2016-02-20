@@ -47,14 +47,14 @@ class createAuthorization implements \ArtaxServiceBuilder\Operation {
         $this->response = $response;
     }
 
-    public function __construct(\GithubService\GithubArtaxService\GithubArtaxService $api, $userAgent, $authorization, $scopes, $note) {
+    public function __construct(\GithubService\GithubArtaxService\GithubArtaxService $api, $userAgent, $Authorization, $scopes, $note) {
         $defaultParams = [
             'Accept' => 'application/vnd.github.mirage-preview+json',
         ];
         $this->setParams($defaultParams);
         $this->api = $api;
         $this->parameters['userAgent'] = $userAgent;
-        $this->parameters['Authorization'] = $authorization;
+        $this->parameters['Authorization'] = $Authorization;
         $this->parameters['scopes'] = $scopes;
         $this->parameters['note'] = $note;
     }

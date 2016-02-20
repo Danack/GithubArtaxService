@@ -18,6 +18,4 @@ class Users extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

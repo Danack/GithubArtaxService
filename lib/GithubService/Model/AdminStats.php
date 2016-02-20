@@ -71,6 +71,4 @@ class AdminStats extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

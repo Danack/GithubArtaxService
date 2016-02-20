@@ -47,13 +47,13 @@ class listOrgRepos implements \ArtaxServiceBuilder\Operation {
         $this->response = $response;
     }
 
-    public function __construct(\GithubService\GithubArtaxService\GithubArtaxService $api, $authorization, $userAgent, $org, $type) {
+    public function __construct(\GithubService\GithubArtaxService\GithubArtaxService $api, $Authorization, $userAgent, $org, $type) {
         $defaultParams = [
             'Accept' => 'application/vnd.github.v3+json',
         ];
         $this->setParams($defaultParams);
         $this->api = $api;
-        $this->parameters['Authorization'] = $authorization;
+        $this->parameters['Authorization'] = $Authorization;
         $this->parameters['userAgent'] = $userAgent;
         $this->parameters['org'] = $org;
         $this->parameters['type'] = $type;

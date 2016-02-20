@@ -47,14 +47,14 @@ class resetAuthorization implements \ArtaxServiceBuilder\Operation {
         $this->response = $response;
     }
 
-    public function __construct(\GithubService\GithubArtaxService\GithubArtaxService $api, $userAgent, $authorization, $client_id, $access_token) {
+    public function __construct(\GithubService\GithubArtaxService\GithubArtaxService $api, $userAgent, $Authorization, $client_id, $access_token) {
         $defaultParams = [
             'Accept' => 'application/vnd.github.mirage-preview+json',
         ];
         $this->setParams($defaultParams);
         $this->api = $api;
         $this->parameters['userAgent'] = $userAgent;
-        $this->parameters['Authorization'] = $authorization;
+        $this->parameters['Authorization'] = $Authorization;
         $this->parameters['client_id'] = $client_id;
         $this->parameters['access_token'] = $access_token;
     }

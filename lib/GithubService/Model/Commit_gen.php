@@ -46,6 +46,4 @@ class Commit extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

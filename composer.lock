@@ -271,7 +271,6 @@
                 {
                     "name": "Dan Ackroyd",
                     "email": "Danack@basereality.com",
-                    "homepage": "http://www.basereality.com",
                     "role": "Developer"
                 }
             ],
@@ -793,12 +792,12 @@
             "version": "v0.14.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/rdlowrey/Auryn.git",
+                "url": "https://github.com/rdlowrey/auryn.git",
                 "reference": "bfee56a9e0d2e71b04f04236cb8eff2f8cb1c4fa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rdlowrey/Auryn/zipball/bfee56a9e0d2e71b04f04236cb8eff2f8cb1c4fa",
+                "url": "https://api.github.com/repos/rdlowrey/auryn/zipball/bfee56a9e0d2e71b04f04236cb8eff2f8cb1c4fa",
                 "reference": "bfee56a9e0d2e71b04f04236cb8eff2f8cb1c4fa",
                 "shasum": ""
             },

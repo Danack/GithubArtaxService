@@ -92,8 +92,12 @@ return array(
         //
         //If the submodule repository is not hosted on github.com, the Git URLs (`git_url` and `_links["git"]`) and the github.com URLs (`html_url` and `_links["html"]`) will have null values.
         //
-
     ),
+    
+    
+    
+    
+    
     'createRepoFile' => array(
         //## Create a file
         //
@@ -249,52 +253,136 @@ return array(
         //  end
 
     ),
+//
+//    'getRepoArchiveLink' => array(
+//        //## Get archive link
+//        //
+//        //This method will return a `302` to a URL to download a tarball
+//        //or zipball archive for a repository. Please make sure your HTTP framework
+//        //is configured to follow redirects or you will need to use the `Location` header
+//        //to make a second `GET` request.
+//        //
+//        //*Note*: For private repositories, these links are temporary and expire quickly.
+//        //
+//        //    GET /repos/:owner/:repo/:archive_format/:ref
+//        //
+//        //### Parameters
+//        //
+//        //Name | Type | Description
+//        //-----|------|--------------
+//        //`archive_format`|`string` | Can be either `tarball` or `zipball`. Default: `tarball`
+//        //`ref`| `string` | A valid Git reference. Default: the repository’s default branch (usually `master`)
+//        //
+//        //
+//        //### Response
+//        //
+//        //== headers 302, :Location => 'https://codeload.github.com/me/myprivate/legacy.zip/master?login=me&token=thistokenexpires' 
+//        //
+//        //To follow redirects with curl, use the `-L` switch:
+//        //
+//        //<pre class="terminal">
+//        //curl -L https://api.github.com/repos/octokit/octokit.rb/tarball > octokit.tar.gz
+//        //
+//        //  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+//        //                                 Dload  Upload   Total   Spent    Left  Speed
+//        //100  206k  100  206k    0     0   146k      0  0:00:01  0:00:01 --:--:--  790k
+//        //</pre>
+//        //
+//        //## Custom media types
+//        //
+//        //[READMEs](#get-the-readme), [files](#get-contents), and [symlinks](#get-contents) support the following custom media types:
+//        //
+//        //    application/vnd.github.VERSION.raw
+//        //    application/vnd.github.VERSION.html
+//        //
+//        //Use the `.raw` media type to retrieve the contents of the file.
+//        //
+//        //For markup files such as Markdown or AsciiDoc, you can retrieve the rendered HTML using the `.html` media type. Markup languages are rendered to HTML using our open-source [Markup library](https://github.com/github/markup).
+//        //
+//        //You can read more about the use of media types in the API [here](/v3/media/).
+//    ),
+//    
+    
+    // Get archive link
+// https://developer.github.com/v3/repos/contents/#get-archive-link
+// GET /repos/:owner/:repo/:archive_format/:ref
+    'getArchiveLink' => array(
+        'uri' => '/repos/{owner}/{repo}/{archive_format}/{ref}',
+        'extends' => 'defaultGetOauthOperation',
 
-    'getRepoArchiveLink' => array(
-        //## Get archive link
-        //
-        //This method will return a `302` to a URL to download a tarball
-        //or zipball archive for a repository. Please make sure your HTTP framework
-        //is configured to follow redirects or you will need to use the `Location` header
-        //to make a second `GET` request.
-        //
-        //*Note*: For private repositories, these links are temporary and expire quickly.
-        //
-        //    GET /repos/:owner/:repo/:archive_format/:ref
-        //
-        //### Parameters
-        //
-        //Name | Type | Description
-        //-----|------|--------------
-        //`archive_format`|`string` | Can be either `tarball` or `zipball`. Default: `tarball`
-        //`ref`| `string` | A valid Git reference. Default: the repository’s default branch (usually `master`)
-        //
-        //
-        //### Response
-        //
-        //== headers 302, :Location => 'https://codeload.github.com/me/myprivate/legacy.zip/master?login=me&token=thistokenexpires' 
-        //
-        //To follow redirects with curl, use the `-L` switch:
-        //
-        //<pre class="terminal">
-        //curl -L https://api.github.com/repos/octokit/octokit.rb/tarball > octokit.tar.gz
-        //
-        //  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-        //                                 Dload  Upload   Total   Spent    Left  Speed
-        //100  206k  100  206k    0     0   146k      0  0:00:01  0:00:01 --:--:--  790k
-        //</pre>
-        //
-        //## Custom media types
-        //
-        //[READMEs](#get-the-readme), [files](#get-contents), and [symlinks](#get-contents) support the following custom media types:
-        //
-        //    application/vnd.github.VERSION.raw
-        //    application/vnd.github.VERSION.html
-        //
-        //Use the `.raw` media type to retrieve the contents of the file.
-        //
-        //For markup files such as Markdown or AsciiDoc, you can retrieve the rendered HTML using the `.html` media type. Markup languages are rendered to HTML using our open-source [Markup library](https://github.com/github/markup).
-        //
-        //You can read more about the use of media types in the API [here](/v3/media/).
+        'summary' => 'This method will return a 302 to a URL to download a tarball or zipball archive for a repository. Please make sure your HTTP framework is configured to follow redirects or you will need to use the Location header to make a second GET request.',
+
+        'parameters' => array(
+            'owner' => array(
+                "location" => "uri",
+                'required' => 'true'
+            ),
+            'repo' => array(
+                "location" => "uri",
+                'required' => 'true'
+            ),
+            'archive_format' => array(
+                "location" => "uri",
+                'required' => 'true',
+                'default' =>  'tarball',
+                'description' => 'Can be either tarball or zipball. Default: tarball'
+            ),
+            'ref' => array(
+                "location" => "uri",
+                'required' => 'false',
+                //A valid Git reference. Default: the repository’s default branch (usually master)
+            ),
+        ),
+    ),
+    
+    //Update a file
+    //https://developer.github.com/v3/repos/contents/#update-a-file
+    'updateFile' => array(
+        'extends' => 'defaultGetOauthOperation',
+        'httpMethod' => 'PUT',
+        'uri' => '/repos/{owner}/{repo}/contents/{path}',
+        
+        "responseClass" => 'GithubService\Model\Commits',
+        'parameters' => array(
+            'path' => array(
+                'description' => 'The content path.',
+                "location" => "uri",
+            ),
+            'owner' => array(
+                "location" => "uri",
+                'description' => '',
+            ),
+            'repo' => array(
+                'description' => '',
+                'type' => 'string'
+            ),
+            'content' => array(
+                'description' => 'The updated file content, Base64 encoded.',
+                'type' => 'string'
+            ),
+            'sha' => array(
+                'description' => 'The blob SHA of the file being replaced.',
+                'type' => 'string'
+                //TODO - needs to be a function.
+            ),
+            'branch' => array(
+                'description' => 'The branch name. Default: the repository’s default branch (usually master)',
+                'type' => 'string'
+            ),
+            'message' => array(
+                'description' => 'The commit message.',
+                'type' => 'string'
+            ),            
+            'name' => array(
+                'description' => 'The name of the author (or committer) of the commit',
+                'type' => 'string',
+                'optional' => 'true'
+            ),
+            'email' => array(
+                'description' => 'The email of the author (or committer) of the commit',
+                'type' => 'string',
+                'optional' => 'true'
+            ),
+        ),
     ),
 );

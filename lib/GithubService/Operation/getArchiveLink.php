@@ -6,7 +6,7 @@
 //
 namespace GithubService\Operation;
 
-class listPublicReposPaginate implements \ArtaxServiceBuilder\Operation {
+class getArchiveLink implements \ArtaxServiceBuilder\Operation {
 
     /**
      * @var \GithubService\GithubArtaxService\GithubArtaxService
@@ -47,15 +47,18 @@ class listPublicReposPaginate implements \ArtaxServiceBuilder\Operation {
         $this->response = $response;
     }
 
-    public function __construct(\GithubService\GithubArtaxService\GithubArtaxService $api, $Authorization, $userAgent, $pageURL) {
+    public function __construct(\GithubService\GithubArtaxService\GithubArtaxService $api, $Authorization, $userAgent, $owner, $repo, $ref) {
         $defaultParams = [
             'Accept' => 'application/vnd.github.v3+json',
+            'archive_format' => 'tarball',
         ];
         $this->setParams($defaultParams);
         $this->api = $api;
         $this->parameters['Authorization'] = $Authorization;
         $this->parameters['userAgent'] = $userAgent;
-        $this->parameters['pageURL'] = $pageURL;
+        $this->parameters['owner'] = $owner;
+        $this->parameters['repo'] = $repo;
+        $this->parameters['ref'] = $ref;
     }
 
     public function setAPI(\GithubService\GithubArtaxService\GithubArtaxService $api) {
@@ -78,8 +81,17 @@ class listPublicReposPaginate implements \ArtaxServiceBuilder\Operation {
         if (array_key_exists('otp', $params)) {
             $this->parameters['otp'] = $params['otp'];
         }
-        if (array_key_exists('pageURL', $params)) {
-            $this->parameters['pageURL'] = $params['pageURL'];
+        if (array_key_exists('owner', $params)) {
+            $this->parameters['owner'] = $params['owner'];
+        }
+        if (array_key_exists('repo', $params)) {
+            $this->parameters['repo'] = $params['repo'];
+        }
+        if (array_key_exists('archive_format', $params)) {
+            $this->parameters['archive_format'] = $params['archive_format'];
+        }
+        if (array_key_exists('ref', $params)) {
+            $this->parameters['ref'] = $params['ref'];
         }
     }
 
@@ -151,12 +163,47 @@ class listPublicReposPaginate implements \ArtaxServiceBuilder\Operation {
     }
 
     /**
-     * Set pageURL
+     * Set owner
      *
      * @return $this
      */
-    public function setPageURL($pageURL) {
-        $this->parameters['pageURL'] = $pageURL;
+    public function setOwner($owner) {
+        $this->parameters['owner'] = $owner;
+
+        return $this;
+    }
+
+    /**
+     * Set repo
+     *
+     * @return $this
+     */
+    public function setRepo($repo) {
+        $this->parameters['repo'] = $repo;
+
+        return $this;
+    }
+
+    /**
+     * Set archive_format
+     *
+     * Can be either tarball or zipball. Default: tarball
+     *
+     * @return $this
+     */
+    public function setArchive_format($archive_format) {
+        $this->parameters['archive_format'] = $archive_format;
+
+        return $this;
+    }
+
+    /**
+     * Set ref
+     *
+     * @return $this
+     */
+    public function setRef($ref) {
+        $this->parameters['ref'] = $ref;
 
         return $this;
     }
@@ -168,7 +215,7 @@ class listPublicReposPaginate implements \ArtaxServiceBuilder\Operation {
     /**
      * Apply any filters necessary to the parameter
      *
-     * @return \GithubService\Model\RepoSimpleList
+     * @return mixed
      * @param string $name The name of the parameter to get.
      */
     public function getFilteredParameter($name) {
@@ -225,13 +272,23 @@ class listPublicReposPaginate implements \ArtaxServiceBuilder\Operation {
         $value = $this->getFilteredParameter('otp');
             $request->setHeader('X-GitHub-OTP', $value);
         }
-        $value = $this->getFilteredParameter('pageURL');
-        $url = $value;
+        $value = $this->getFilteredParameter('owner');
+        $queryParameters['owner'] = $value;
+        $value = $this->getFilteredParameter('repo');
+        $queryParameters['repo'] = $value;
+        if (array_key_exists('archive_format', $this->parameters) == true) {
+        $value = $this->getFilteredParameter('archive_format');
+            $queryParameters['archive_format'] = $value;
+        }
+        $value = $this->getFilteredParameter('ref');
+        $queryParameters['ref'] = $value;
 
         //Parameters are parsed and set, lets prepare the request
         if ($url == null) {
-            $url = "https://api.github.com";
+            $url = "https://api.github.com/repos/{owner}/{repo}/{archive_format}/{ref}";
         }
+        $uriTemplate = new \ArtaxServiceBuilder\Service\UriTemplate\UriTemplate();
+        $url = $uriTemplate->expand($url, $this->parameters);
         if (count($queryParameters)) {
             $url = $url.'?'.http_build_query($queryParameters, '', '&', PHP_QUERY_RFC3986);
         }
@@ -256,7 +313,7 @@ class listPublicReposPaginate implements \ArtaxServiceBuilder\Operation {
     /**
      * Create and execute the operation, then return the processed  response.
      *
-     * @return mixed|\GithubService\Model\RepoSimpleList
+     * @return mixed|\
      */
     public function call() {
         $request = $this->createRequest();
@@ -264,9 +321,7 @@ class listPublicReposPaginate implements \ArtaxServiceBuilder\Operation {
         $this->response = $response;
 
         if ($this->shouldResponseBeProcessed($response)) {
-            $instance = \GithubService\Model\RepoSimpleList::createFromResponse($response, $this);
-
-            return $instance;
+            return $response->getBody();
         }
         return $response;
     }
@@ -274,7 +329,7 @@ class listPublicReposPaginate implements \ArtaxServiceBuilder\Operation {
     /**
      * Execute the operation, returning the parsed response
      *
-     * @return \GithubService\Model\RepoSimpleList
+     * @return mixed
      */
     public function execute() {
         $request = $this->createRequest();
@@ -296,22 +351,20 @@ class listPublicReposPaginate implements \ArtaxServiceBuilder\Operation {
      * Dispatch the request for this operation and process the response. Allows you to
      * modify the request before it is sent.
      *
-     * @return \GithubService\Model\RepoSimpleList
+     * @return mixed
      * @param \Amp\Artax\Request $request The request to be processed
      */
     public function dispatch(\Amp\Artax\Request $request) {
         $response = $this->api->execute($request, $this);
         $this->response = $response;
-        $instance = \GithubService\Model\RepoSimpleList::createFromResponse($response, $this);
-
-        return $instance;
+        return $response->getBody();
     }
 
     /**
      * Dispatch the request for this operation and process the response asynchronously.
      * Allows you to modify the request before it is sent.
      *
-     * @return \GithubService\Model\RepoSimpleList
+     * @return mixed
      * @param \Amp\Artax\Request $request The request to be processed
      * @param callable $callable The callable that processes the response
      */
@@ -323,20 +376,18 @@ class listPublicReposPaginate implements \ArtaxServiceBuilder\Operation {
      * Dispatch the request for this operation and process the response. Allows you to
      * modify the request before it is sent.
      *
-     * @return \GithubService\Model\RepoSimpleList
+     * @return mixed
      * @param \Amp\Artax\Response $response The HTTP response.
      */
     public function processResponse(\Amp\Artax\Response $response) {
-        $instance = \GithubService\Model\RepoSimpleList::createFromResponse($response, $this);
-
-        return $instance;
+        return $response->getBody();
     }
 
     /**
      * Determine whether the response should be processed. Override this method to have
      * a per-operation decision, otherwise the function is the API class will be used.
      *
-     * @return \GithubService\Model\RepoSimpleList
+     * @return mixed
      */
     public function shouldResponseBeProcessed(\Amp\Artax\Response $response) {
         return $this->api->shouldResponseBeProcessed($response);
@@ -357,7 +408,7 @@ class listPublicReposPaginate implements \ArtaxServiceBuilder\Operation {
      * Override this method to have a per-operation decision, otherwise the
      * functionfrom the API class will be used.
      *
-     * @return \GithubService\Model\RepoSimpleList
+     * @return mixed
      */
     public function shouldUseCachedResponse(\Amp\Artax\Response $response) {
         return $this->api->shouldUseCachedResponse($response);
@@ -367,7 +418,7 @@ class listPublicReposPaginate implements \ArtaxServiceBuilder\Operation {
      * Determine whether the response should be cached. Override this method to have a
      * per-operation decision, otherwise the function from the API class will be used.
      *
-     * @return \GithubService\Model\RepoSimpleList
+     * @return mixed
      */
     public function shouldResponseBeCached(\Amp\Artax\Response $response) {
         return $this->api->shouldResponseBeCached($response);

@@ -23,18 +23,18 @@ class GithubTest extends \PHPUnit_Framework_TestCase {
     }
 
 
-//    /**
-//     * @group internet
-//     */
-//    function testRepoTags() {
-//        /** @var  $githubAPI GithubArtaxService */
-//        list($reactor, $githubAPI) = $this->getReactorAndAPI();
-//        $command = $githubAPI->listRepoTags(null, "Danack", "GithubArtaxService");
-//        $repoTags = $command->call();
-//        $this->assertInstanceOf('GithubService\Model\RepoTags', $repoTags);
-//        $numberOfTags = count($repoTags->repoTags);
-//        $this->assertGreaterThanOrEqual(4, $numberOfTags);
-//    }
+    /**
+     * @group internet
+     */
+    function testRepoTags() {
+        /** @var  $githubAPI GithubArtaxService */
+        list($reactor, $githubAPI) = $this->getReactorAndAPI();
+        $command = $githubAPI->listRepoTags(null, "Danack", "GithubArtaxService");
+        $repoTags = $command->call();
+        $this->assertInstanceOf('GithubService\Model\RepoTags', $repoTags);
+        $numberOfTags = count($repoTags->repoTags);
+        $this->assertGreaterThanOrEqual(4, $numberOfTags);
+    }
 
     /**
      * This cannot be a unit test. It requires getting a one time

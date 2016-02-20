@@ -47,13 +47,13 @@ class getRepo implements \ArtaxServiceBuilder\Operation {
         $this->response = $response;
     }
 
-    public function __construct(\GithubService\GithubArtaxService\GithubArtaxService $api, $authorization, $userAgent, $owner, $repo) {
+    public function __construct(\GithubService\GithubArtaxService\GithubArtaxService $api, $Authorization, $userAgent, $owner, $repo) {
         $defaultParams = [
             'Accept' => 'application/vnd.github.v3+json',
         ];
         $this->setParams($defaultParams);
         $this->api = $api;
-        $this->parameters['Authorization'] = $authorization;
+        $this->parameters['Authorization'] = $Authorization;
         $this->parameters['userAgent'] = $userAgent;
         $this->parameters['owner'] = $owner;
         $this->parameters['repo'] = $repo;
