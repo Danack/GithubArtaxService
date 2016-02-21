@@ -2,7 +2,7 @@
 
 namespace GithubService\Model;
 
-class Licensing extends \GithubService\Model\DataMapper {
+class Licensing { //extends \GithubService\Model\DataMapper {
 
     public $daysUntilExpiration = null;
 

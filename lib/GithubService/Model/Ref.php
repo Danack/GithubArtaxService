@@ -2,7 +2,8 @@
 
 namespace GithubService\Model;
 
-class Ref extends \GithubService\Model\DataMapper {
+class Ref
+{ //extends \GithubService\Model\DataMapper {
 
     /**
      * @var \GithubService\Model\Object $object
@@ -13,15 +14,6 @@ class Ref extends \GithubService\Model\DataMapper {
 
     public $url = null;
 
-    protected function getDataMap() {
-        $dataMap = [
-            ['object', 'object', 'class' => 'GithubService\\Model\\RefObject'],
-            ['ref', 'ref'],
-            ['url', 'url'],
-        ];
-
-        return $dataMap;
-    }
 
 
 }

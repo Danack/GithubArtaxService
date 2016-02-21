@@ -2,7 +2,7 @@
 
 namespace GithubService\Model;
 
-class TreeChild extends \GithubService\Model\DataMapper {
+class TreeChild { //extends \GithubService\Model\DataMapper {
 
     public $mode = null;
 
@@ -16,16 +16,16 @@ class TreeChild extends \GithubService\Model\DataMapper {
 
     public $url = null;
 
-    protected function getDataMap() {
-        $dataMap = [
-            ['mode', 'mode'],
-            ['path', 'path'],
-            ['sha', 'sha'],
-            ['size', 'size', 'optional' => true],
-            ['type', 'type'],
-            ['url', 'url'],
-        ];
-
-        return $dataMap;
-    }
+//    protected function getDataMap() {
+//        $dataMap = [
+//            ['mode', 'mode'],
+//            ['path', 'path'],
+//            ['sha', 'sha'],
+//            ['size', 'size', 'optional' => true],
+//            ['type', 'type'],
+//            ['url', 'url'],
+//        ];
+//
+//        return $dataMap;
+//    }
 }

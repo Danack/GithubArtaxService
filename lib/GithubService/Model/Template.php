@@ -2,7 +2,8 @@
 
 namespace GithubService\Model;
 
-class Template extends \GithubService\Model\DataMapper {
+class Template
+{
 
     public $name = null;
 

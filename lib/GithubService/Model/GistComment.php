@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class GistComment extends \GithubService\Model\DataMapper {
-
+class GistComment
+{
     public $body = null;
 
     public $createdAt = null;
@@ -18,19 +18,4 @@ class GistComment extends \GithubService\Model\DataMapper {
      * @var \GithubService\Model\User $user
      */
     public $user = null;
-
-    protected function getDataMap() {
-        $dataMap = [
-            ['body', 'body'],
-            ['createdAt', 'created_at'],
-            ['id', 'id'],
-            ['updatedAt', 'updated_at'],
-            ['url', 'url'],
-            ['user', 'user', 'class' => 'GithubService\\Model\\User'],
-        ];
-
-        return $dataMap;
-    }
-
-
 }

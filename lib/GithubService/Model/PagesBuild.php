@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class PagesBuild extends \GithubService\Model\DataMapper {
-
+class PagesBuild 
+{
     public $commit = null;
 
     public $createdAt = null;

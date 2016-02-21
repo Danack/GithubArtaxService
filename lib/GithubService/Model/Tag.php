@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class Tag extends \GithubService\Model\DataMapper {
-
+class Tag 
+{
     /**
      * @var \GithubService\Model\BlobAfterCreate $commit
      */
@@ -15,14 +15,14 @@ class Tag extends \GithubService\Model\DataMapper {
 
     public $zipballUrl = null;
 
-    protected function getDataMap() {
-        $dataMap = [
-            ['commit', 'commit', 'class' => 'GithubService\\Model\\BlobAfterCreate'],
-            ['name', 'name'],
-            ['tarballUrl', 'tarball_url'],
-            ['zipballUrl', 'zipball_url'],
-        ];
-
-        return $dataMap;
-    }
+//    protected function getDataMap() {
+//        $dataMap = [
+//            ['commit', 'commit', 'class' => 'GithubService\\Model\\BlobAfterCreate'],
+//            ['name', 'name'],
+//            ['tarballUrl', 'tarball_url'],
+//            ['zipballUrl', 'zipball_url'],
+//        ];
+//
+//        return $dataMap;
+//    }
 }

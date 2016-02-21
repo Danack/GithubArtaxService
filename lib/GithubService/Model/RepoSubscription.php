@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class RepoSubscription extends \GithubService\Model\DataMapper {
-
+class RepoSubscription
+{
     public $createdAt = null;
 
     public $ignored = null;
@@ -16,18 +16,18 @@ class RepoSubscription extends \GithubService\Model\DataMapper {
 
     public $url = null;
 
-    protected function getDataMap() {
-        $dataMap = [
-            ['createdAt', 'created_at'],
-            ['ignored', 'ignored'],
-            ['reason', 'reason'],
-            ['repositoryUrl', 'repository_url'],
-            ['subscribed', 'subscribed'],
-            ['url', 'url'],
-        ];
-
-        return $dataMap;
-    }
+//    protected function getDataMap() {
+//        $dataMap = [
+//            ['createdAt', 'created_at'],
+//            ['ignored', 'ignored'],
+//            ['reason', 'reason'],
+//            ['repositoryUrl', 'repository_url'],
+//            ['subscribed', 'subscribed'],
+//            ['url', 'url'],
+//        ];
+//
+//        return $dataMap;
+//    }
 
 
 }

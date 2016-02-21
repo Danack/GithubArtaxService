@@ -2,7 +2,8 @@
 
 namespace GithubService\Model;
 
-class TagObject extends \GithubService\Model\DataMapper {
+class TagObject
+{// extends \GithubService\Model\DataMapper {
 
     public $url;
     public $sha;

@@ -2,14 +2,13 @@
 
 namespace GithubService\Model;
 
+
 class RepoStatsPunchCard extends \GithubService\Model\DataMapper {
 
     /**
-     * @var \GithubService\Model\Indices $rEPOSTATSPUNCHCARDChild
+     * @var \GithubService\Model\RepoStatsPunchCardInfo[]
      */
-    public $entries = array(
-        
-    );
+    public $entries = [];
 
 //Each array contains the day number, hour number, and number of commits:
 //

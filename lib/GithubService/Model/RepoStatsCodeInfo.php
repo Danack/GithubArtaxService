@@ -33,14 +33,4 @@ class RepoStatsCodeInfo {
         return $instance;
     }
 
-
-//    protected function getDataMap() {
-//        $dataMap = [
-//            ['repoStats', '', 'multiple' => true, 'class' => 'GithubService\\Model\\Indices'],
-//        ];
-//
-//        return $dataMap;
-//    }
-
-
 }

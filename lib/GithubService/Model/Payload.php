@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class Payload extends \GithubService\Model\DataMapper {
-
+class Payload
+{
     public $task = null;
 
     protected function getDataMap() {
@@ -13,6 +13,4 @@ class Payload extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

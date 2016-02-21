@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class EmailSearchResults extends \GithubService\Model\DataMapper {
-
+class EmailSearchResults 
+{
     /**
      * @var \GithubService\Model\UserInSearchResult
      */
@@ -16,6 +16,4 @@ class EmailSearchResults extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

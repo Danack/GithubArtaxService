@@ -30,10 +30,43 @@ class DataMapper
         $this->hydrators[$classname] = $hydrator;
     }
 
+    public function extractValue(array $data, $keyName, $optional = false)
+    {
+        if (array_key_exists($keyName, $data) === true) {
+            return $data[$keyName];
+        }
+        if ($optional === true) {
+            return null;
+        }
+        throw new DataMapperException("Missing key '$keyName' in data ".var_export($data, true));
+    }
+    
+    public function extractValueByPath(array $data, array $keyPath, $optional = false)
+    {
+        $loopData = $data;
+        foreach ($keyPath as $keyName) {
+            if (array_key_exists($keyName, $loopData) === false) {
+                if ($optional === true) {
+                    return null;
+                }
+                else {
+                    throw new DataMapperException(
+                        "Missing key '$keyName' in data ".var_export($data, true)
+                    );
+                }
+            }
+
+            $loopData = $loopData[$keyName];
+        }
+
+        return $loopData;
+    }
+    
+
     public function instantiate($classname, $data)
     {
         if (array_key_exists($classname, $this->hydrators) === false) {
-            throw new DataMapperException("Cannot instantiate - unregistered clss $classname");
+            throw new DataMapperException("Cannot instantiate - unregistered class $classname");
         }
 
         $hydrator = $this->hydrators[$classname];

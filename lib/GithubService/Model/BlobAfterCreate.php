@@ -2,20 +2,21 @@
 
 namespace GithubService\Model;
 
-class BlobAfterCreate extends \GithubService\Model\DataMapper {
+class BlobAfterCreate
+{
 
     public $sha = null;
 
     public $url = null;
 
-    protected function getDataMap() {
-        $dataMap = [
-            ['sha', 'sha'],
-            ['url', 'url'],
-        ];
-
-        return $dataMap;
-    }
+//    protected function getDataMap() {
+//        $dataMap = [
+//            ['sha', 'sha'],
+//            ['url', 'url'],
+//        ];
+//
+//        return $dataMap;
+//    }
 
 
 }

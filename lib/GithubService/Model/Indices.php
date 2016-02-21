@@ -10,6 +10,4 @@ class Indices extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }
