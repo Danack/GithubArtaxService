@@ -46,11 +46,19 @@ class GithubIntegrationTest extends \PHPUnit_Framework_TestCase
         $command = $githubAPI->listEmojis(null);
         $emojiList = $command->call();
         $this->assertInstanceOf('GithubService\Model\EmojiList', $emojiList);
-
-        //$numberOfTags = count($repoTags->repoTags);
-        //$this->assertGreaterThanOrEqual(4, $numberOfTags);
     }
-    
+
+    /**
+     * @group internet
+     * @group refactoring
+     */
+    function testListRepoCommits() {
+        /** @var  $githubAPI GithubService */
+        list($reactor, $githubAPI) = $this->getReactorAndAPI();
+        $command = $githubAPI->listRepoCommits(null, 'Danack', 'GithubArtaxService');
+        $commitList = $command->call();
+        $this->assertInstanceOf('GithubService\Model\CommitList', $commitList);
+    }
     
 
     /**

@@ -1,12 +1,7 @@
 <?php
 
-
 namespace GithubService;
 
-use Amp\Artax\Response;
-use ArtaxServiceBuilder\Operation;
-use ArtaxServiceBuilder\Service\GithubPaginator;
-use GithubService\GithubArtaxService\GithubArtaxServiceException;
 use GithubService\Model\DataMapperException;
 
 function is_indexable($item) {
@@ -75,27 +70,6 @@ class DataMapper
         return $instance;
     }
     
-//    /**
-//     * Maps the properties that are in the $data param to the internal properties of the class,
-//     * using the static::$dataMap 
-//     * 
-//     * @param $data
-//     * @throws DataMapperException
-//     */
-//    function mapPropertiesFromData($instance, $data, DataMapList $dataMapList)
-//    {
-//        foreach($dataMapList as $dataMap) {
-//            $dataFound = FALSE;
-//
-//            $sourceValue = self::extractValueFromData($data, $dataMap, $dataFound);
-//            if ($dataFound == TRUE) {
-//                $this->setPropertyFromValue($instance, $dataMap, $sourceValue);
-//            }
-//        }
-//
-//        //$this->finishMapping();
-//    }
-
     /**
      * Look in the $data for the value to be used for the mapping according to the rules set in $dataMapElement.
      *
@@ -118,10 +92,6 @@ class DataMapper
             $dataFound = TRUE;
             return $data;
         }
-
-//        if (is_indexable($dataVariableNameArray) == FALSE) {
-//            $dataVariableNameArray = array($dataVariableNameArray);
-//        }
 
         $value = $data;
 

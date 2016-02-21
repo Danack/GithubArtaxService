@@ -13,6 +13,7 @@ use GithubService\Hydrator\BlobHydrator;
 use GithubService\Hydrator\BlobAfterCreateHydrator;
 use GithubService\Hydrator\BranchCommitHydrator;
 use GithubService\Hydrator\BranchesHydrator;
+use GithubService\Hydrator\CommitHydrator;
 use GithubService\Hydrator\CommitInfoHydrator;
 use GithubService\Hydrator\CommitParentHydrator;
 use GithubService\Hydrator\ConfigHydrator;
@@ -35,6 +36,7 @@ use GithubService\Hydrator\OauthAccessHydrator;
 use GithubService\Hydrator\PagesHydrator;
 use GithubService\Hydrator\PagesBuildHydrator;
 use GithubService\Hydrator\PayloadHydrator;
+use GithubService\Hydrator\PersonHydrator;
 use GithubService\Hydrator\PublicKeyHydrator;
 use GithubService\Hydrator\PullCommentHydrator;
 use GithubService\Hydrator\ReadmeContentHydrator;
@@ -64,9 +66,7 @@ use GithubService\Hydrator\UserEmailHydrator;
 use GithubService\Hydrator\UserHydrator;
 use GithubService\Hydrator\UserInSearchResultHydrator;
 use GithubService\Hydrator\UserSearchItemHydrator;
-        
-
-
+use GithubService\Hydrator\CommitListHydrator;
 
 class GithubDataMapper extends DataMapper
 {
@@ -77,7 +77,9 @@ class GithubDataMapper extends DataMapper
         $this->registerType('GithubService\Model\BlobAfterCreate', new BlobAfterCreateHydrator());
         $this->registerType('GithubService\Model\BranchCommit', new BranchCommitHydrator());
         $this->registerType('GithubService\Model\Branches', new BranchesHydrator());
+        $this->registerType('GithubService\Model\Commit', new CommitHydrator());
         $this->registerType('GithubService\Model\CommitInfo', new CommitInfoHydrator());
+        $this->registerType('GithubService\Model\CommitList', new CommitListHydrator());
         $this->registerType('GithubService\Model\CommitParent', new CommitParentHydrator());
         $this->registerType('GithubService\Model\Config', new ConfigHydrator());
         $this->registerType('GithubService\Model\Contributor', new ContributorHydrator());
@@ -99,6 +101,7 @@ class GithubDataMapper extends DataMapper
         $this->registerType('GithubService\Model\Pages', new PagesHydrator());
         $this->registerType('GithubService\Model\PagesBuild', new PagesBuildHydrator());
         $this->registerType('GithubService\Model\Payload', new PayloadHydrator());
+        $this->registerType('GithubService\Model\Person', new PersonHydrator());
         $this->registerType('GithubService\Model\PublicKey', new PublicKeyHydrator());        
         $this->registerType('GithubService\Model\PullComment', new PullCommentHydrator());        
         $this->registerType('GithubService\Model\ReadmeContent', new ReadmeContentHydrator());

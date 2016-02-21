@@ -1,7 +1,7 @@
 <?php
 
 
-use GithubService\GithubArtaxService\GithubArtaxService;
+use GithubService\GithubArtaxService\GithubService;
 use ArtaxServiceBuilder\ResponseCache\NullResponseCache;
 use Amp\Artax\Client as ArtaxClient;
 use ArtaxServiceBuilder\BadResponseException;
@@ -17,7 +17,7 @@ $cache = new NullResponseCache();
 $client = new ArtaxClient($reactor);
 $client->setOption(ArtaxClient::OP_MS_CONNECT_TIMEOUT, 5000);
 $client->setOption(ArtaxClient::OP_MS_KEEP_ALIVE_TIMEOUT, 1000);
-$githubAPI = new GithubArtaxService($client, $reactor, $cache, "Danack/test");
+$githubAPI = new GithubService($client, $reactor, $cache, "Danack/test");
 
 $token = @file_get_contents("../../GithubToken.txt");
 $oauthToken = null;
@@ -39,7 +39,8 @@ try {
     }
 
     $emojiResult = $githubAPI->listEmojis(null)->execute();
-    foreach ($emojiResult->emojiList as $emoji) {
+    
+    foreach ($emojiResult->emojis as $emoji) {
         echo $emoji->name." \n";
     }  
 }

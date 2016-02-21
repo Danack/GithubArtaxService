@@ -251,7 +251,6 @@ END;
  * @param AccessResponse $accessResponse
  */
 function showGithubEmails(GithubService $api, AccessResponse $accessResponse) {
-    //$api = new GithubAPI(GITHUB_USER_AGENT);
     $emailCommand = $api->getUserEmails(
         new Oauth2Token($accessResponse->accessToken)
     );
