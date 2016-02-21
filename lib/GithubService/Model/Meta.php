@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class Meta extends \GithubService\Model\DataMapper {
-
+class Meta
+{
     /**
      * @var \GithubService\Model\Indices $git
      */

@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class App extends \GithubService\Model\DataMapper {
-
+class App 
+{
     public $clientId = null;
 
     public $name = null;
@@ -19,6 +19,4 @@ class App extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

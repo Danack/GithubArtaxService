@@ -2,20 +2,10 @@
 
 namespace GithubService\Model;
 
-class RepoSearchResults extends \GithubService\Model\DataMapper {
-
+class RepoSearchResults 
+{
     /**
      * @var \GithubService\Model\ $repositories
      */
     public $repositories = null;
-
-    protected function getDataMap() {
-        $dataMap = [
-            ['repositories', 'repositories', 'class' => 'GithubService\\Model\\Repositories'],
-        ];
-
-        return $dataMap;
-    }
-
-
 }

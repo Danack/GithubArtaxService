@@ -16,7 +16,7 @@ class CreateDownload extends \GithubService\Model\DataMapper {
 
     public $downloadCount = null;
 
-    public $expirationdate = null;
+    public $expirationDate = null;
 
     public $htmlUrl = null;
 
