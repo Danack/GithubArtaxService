@@ -257,7 +257,7 @@ class listPagesBuildLatest implements \ArtaxServiceBuilder\Operation {
      * @return \Amp\Artax\Response
      */
     public function getResultInstantiationInfo() {
-        return null
+        return null;
     }
 
 
