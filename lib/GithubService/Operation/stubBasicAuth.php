@@ -47,14 +47,14 @@ class stubBasicAuth implements \ArtaxServiceBuilder\Operation {
         $this->response = $response;
     }
 
-    public function __construct(\GithubService\GithubArtaxService\GithubArtaxService $api, $userAgent, $Authorization) {
+    public function __construct(\GithubService\GithubArtaxService\GithubArtaxService $api, $userAgent, $authorization) {
         $defaultParams = [
             'Accept' => 'application/vnd.github.mirage-preview+json',
         ];
         $this->setParams($defaultParams);
         $this->api = $api;
         $this->parameters['userAgent'] = $userAgent;
-        $this->parameters['Authorization'] = $Authorization;
+        $this->parameters['Authorization'] = $authorization;
     }
 
     public function setAPI(\GithubService\GithubArtaxService\GithubArtaxService $api) {
@@ -204,7 +204,9 @@ class stubBasicAuth implements \ArtaxServiceBuilder\Operation {
         $this->response = $response;
 
         if ($this->shouldResponseBeProcessed($response)) {
-            return $response->getBody();
+            $instance = $this->api->instantiateResult($response, $this);
+
+            return $instance;
         }
         return $response;
     }
@@ -240,7 +242,9 @@ class stubBasicAuth implements \ArtaxServiceBuilder\Operation {
     public function dispatch(\Amp\Artax\Request $request) {
         $response = $this->api->execute($request, $this);
         $this->response = $response;
-        return $response->getBody();
+        $instance = $this->api->instantiateResult($response, $this);
+
+        return $instance;
     }
 
     /**
@@ -263,7 +267,9 @@ class stubBasicAuth implements \ArtaxServiceBuilder\Operation {
      * @param \Amp\Artax\Response $response The HTTP response.
      */
     public function processResponse(\Amp\Artax\Response $response) {
-        return $response->getBody();
+        $instance = $this->api->instantiateResult($response, $this);
+
+        return $instance;
     }
 
     /**
@@ -323,6 +329,15 @@ class stubBasicAuth implements \ArtaxServiceBuilder\Operation {
      */
     public function getOriginalResponse() {
         return $this->originalResponse;
+    }
+
+    /**
+     * Return how the result of this operation should be instantiated.
+     *
+     * @return \Amp\Artax\Response
+     */
+    public function getResultInstantiationInfo() {
+        return null
     }
 
 

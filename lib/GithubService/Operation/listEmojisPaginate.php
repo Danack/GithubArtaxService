@@ -47,13 +47,13 @@ class listEmojisPaginate implements \ArtaxServiceBuilder\Operation {
         $this->response = $response;
     }
 
-    public function __construct(\GithubService\GithubArtaxService\GithubArtaxService $api, $Authorization, $userAgent, $pageURL) {
+    public function __construct(\GithubService\GithubArtaxService\GithubArtaxService $api, $authorization, $userAgent, $pageURL) {
         $defaultParams = [
             'Accept' => 'application/vnd.github.v3+json',
         ];
         $this->setParams($defaultParams);
         $this->api = $api;
-        $this->parameters['Authorization'] = $Authorization;
+        $this->parameters['Authorization'] = $authorization;
         $this->parameters['userAgent'] = $userAgent;
         $this->parameters['pageURL'] = $pageURL;
     }
@@ -168,7 +168,7 @@ class listEmojisPaginate implements \ArtaxServiceBuilder\Operation {
     /**
      * Apply any filters necessary to the parameter
      *
-     * @return \GithubService\Model\Emojis
+     * @return \GithubService\Model\EmojiList
      * @param string $name The name of the parameter to get.
      */
     public function getFilteredParameter($name) {
@@ -256,7 +256,7 @@ class listEmojisPaginate implements \ArtaxServiceBuilder\Operation {
     /**
      * Create and execute the operation, then return the processed  response.
      *
-     * @return mixed|\GithubService\Model\Emojis
+     * @return mixed|\GithubService\Model\EmojiList
      */
     public function call() {
         $request = $this->createRequest();
@@ -264,7 +264,7 @@ class listEmojisPaginate implements \ArtaxServiceBuilder\Operation {
         $this->response = $response;
 
         if ($this->shouldResponseBeProcessed($response)) {
-            $instance = \GithubService\Model\Emojis::createFromResponse($response, $this);
+            $instance = $this->api->instantiateResult($response, $this);
 
             return $instance;
         }
@@ -274,7 +274,7 @@ class listEmojisPaginate implements \ArtaxServiceBuilder\Operation {
     /**
      * Execute the operation, returning the parsed response
      *
-     * @return \GithubService\Model\Emojis
+     * @return \GithubService\Model\EmojiList
      */
     public function execute() {
         $request = $this->createRequest();
@@ -296,13 +296,13 @@ class listEmojisPaginate implements \ArtaxServiceBuilder\Operation {
      * Dispatch the request for this operation and process the response. Allows you to
      * modify the request before it is sent.
      *
-     * @return \GithubService\Model\Emojis
+     * @return \GithubService\Model\EmojiList
      * @param \Amp\Artax\Request $request The request to be processed
      */
     public function dispatch(\Amp\Artax\Request $request) {
         $response = $this->api->execute($request, $this);
         $this->response = $response;
-        $instance = \GithubService\Model\Emojis::createFromResponse($response, $this);
+        $instance = $this->api->instantiateResult($response, $this);
 
         return $instance;
     }
@@ -311,7 +311,7 @@ class listEmojisPaginate implements \ArtaxServiceBuilder\Operation {
      * Dispatch the request for this operation and process the response asynchronously.
      * Allows you to modify the request before it is sent.
      *
-     * @return \GithubService\Model\Emojis
+     * @return \GithubService\Model\EmojiList
      * @param \Amp\Artax\Request $request The request to be processed
      * @param callable $callable The callable that processes the response
      */
@@ -323,11 +323,11 @@ class listEmojisPaginate implements \ArtaxServiceBuilder\Operation {
      * Dispatch the request for this operation and process the response. Allows you to
      * modify the request before it is sent.
      *
-     * @return \GithubService\Model\Emojis
+     * @return \GithubService\Model\EmojiList
      * @param \Amp\Artax\Response $response The HTTP response.
      */
     public function processResponse(\Amp\Artax\Response $response) {
-        $instance = \GithubService\Model\Emojis::createFromResponse($response, $this);
+        $instance = $this->api->instantiateResult($response, $this);
 
         return $instance;
     }
@@ -336,7 +336,7 @@ class listEmojisPaginate implements \ArtaxServiceBuilder\Operation {
      * Determine whether the response should be processed. Override this method to have
      * a per-operation decision, otherwise the function is the API class will be used.
      *
-     * @return \GithubService\Model\Emojis
+     * @return \GithubService\Model\EmojiList
      */
     public function shouldResponseBeProcessed(\Amp\Artax\Response $response) {
         return $this->api->shouldResponseBeProcessed($response);
@@ -357,7 +357,7 @@ class listEmojisPaginate implements \ArtaxServiceBuilder\Operation {
      * Override this method to have a per-operation decision, otherwise the
      * functionfrom the API class will be used.
      *
-     * @return \GithubService\Model\Emojis
+     * @return \GithubService\Model\EmojiList
      */
     public function shouldUseCachedResponse(\Amp\Artax\Response $response) {
         return $this->api->shouldUseCachedResponse($response);
@@ -367,7 +367,7 @@ class listEmojisPaginate implements \ArtaxServiceBuilder\Operation {
      * Determine whether the response should be cached. Override this method to have a
      * per-operation decision, otherwise the function from the API class will be used.
      *
-     * @return \GithubService\Model\Emojis
+     * @return \GithubService\Model\EmojiList
      */
     public function shouldResponseBeCached(\Amp\Artax\Response $response) {
         return $this->api->shouldResponseBeCached($response);
@@ -389,6 +389,15 @@ class listEmojisPaginate implements \ArtaxServiceBuilder\Operation {
      */
     public function getOriginalResponse() {
         return $this->originalResponse;
+    }
+
+    /**
+     * Return how the result of this operation should be instantiated.
+     *
+     * @return \Amp\Artax\Response
+     */
+    public function getResultInstantiationInfo() {
+        return ['instantiate' => 'GithubService\\Model\\EmojiList'];
     }
 
 

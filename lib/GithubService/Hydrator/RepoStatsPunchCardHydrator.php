@@ -14,7 +14,7 @@ class RepoStatsPunchCardHydrator implements Hydrator
     {
         $repoStatsPunchCard = new RepoStatsPunchCard();
         foreach ($data as $entry) {
-            $newEntry = $dataMapper->instantiate('GithubService\\Model\\RepoStatsPunchCardInfo', $entry);
+            $newEntry = $dataMapper->instantiateClass('GithubService\\Model\\RepoStatsPunchCardInfo', $entry);
             $repoStatsPunchCard->entries[] = $newEntry; 
         }
 

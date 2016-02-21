@@ -19,7 +19,7 @@ class IssueCommentHydrator implements Hydrator
         $issueComment->updatedAt = $dataMapper->extractValue($data, 'updated_at');
         $issueComment->url = $dataMapper->extractValue($data, 'url');
         $user = $dataMapper->extractValue($data, 'user');
-        $issueComment->user = $dataMapper->instantiate('GithubService\Model\User', $user);
+        $issueComment->user = $dataMapper->instantiateClass('GithubService\Model\User', $user);
 
         return $issueComment;
     }

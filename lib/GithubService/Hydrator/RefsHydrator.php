@@ -12,7 +12,7 @@ class RefsHydrator implements Hydrator
     {
         $ref = new Refs();
         foreach ($data as $refData) {
-            $ref->refs[] = $dataMapper->instantiate('GithubService\Model\Ref', $refData);
+            $ref->refs[] = $dataMapper->instantiateClass('GithubService\Model\Ref', $refData);
         }
 
         return $ref;

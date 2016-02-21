@@ -164,7 +164,7 @@ use GithubService\Operation\listRepoBranchesPaginate;
 use GithubService\Operation\getRepoBranchPaginate;
 use ArtaxServiceBuilder\ResponseCache;
 
-class GithubArtaxService implements \GithubService\GithubService {
+abstract class GithubArtaxService implements \GithubService\GithubService {
 
     /**
      * @var \ $userAgent
@@ -221,8 +221,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * \ArtaxServiceBuilder\BasicAuthToken object.
      * @return \GithubService\Operation\listEmojis The new operation
      */
-    public function listEmojis($Authorization) {
-        $instance = new listEmojis($this, $Authorization, $this->getUserAgent());
+    public function listEmojis($authorization) {
+        $instance = new listEmojis($this, $authorization, $this->getUserAgent());
         return $instance;
     }
 
@@ -238,8 +238,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * @param string $username 
      * @return \GithubService\Operation\listUsersGists The new operation
      */
-    public function listUsersGists($Authorization, $username) {
-        $instance = new listUsersGists($this, $Authorization, $this->getUserAgent(), $username);
+    public function listUsersGists($authorization, $username) {
+        $instance = new listUsersGists($this, $authorization, $this->getUserAgent(), $username);
         return $instance;
     }
 
@@ -254,8 +254,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * \ArtaxServiceBuilder\BasicAuthToken object.
      * @return \GithubService\Operation\listSelfGists The new operation
      */
-    public function listSelfGists($Authorization) {
-        $instance = new listSelfGists($this, $Authorization, $this->getUserAgent());
+    public function listSelfGists($authorization) {
+        $instance = new listSelfGists($this, $authorization, $this->getUserAgent());
         return $instance;
     }
 
@@ -270,8 +270,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * \ArtaxServiceBuilder\BasicAuthToken object.
      * @return \GithubService\Operation\listPublicGists The new operation
      */
-    public function listPublicGists($Authorization) {
-        $instance = new listPublicGists($this, $Authorization, $this->getUserAgent());
+    public function listPublicGists($authorization) {
+        $instance = new listPublicGists($this, $authorization, $this->getUserAgent());
         return $instance;
     }
 
@@ -286,8 +286,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * \ArtaxServiceBuilder\BasicAuthToken object.
      * @return \GithubService\Operation\listSelfStarredGists The new operation
      */
-    public function listSelfStarredGists($Authorization) {
-        $instance = new listSelfStarredGists($this, $Authorization, $this->getUserAgent());
+    public function listSelfStarredGists($authorization) {
+        $instance = new listSelfStarredGists($this, $authorization, $this->getUserAgent());
         return $instance;
     }
 
@@ -302,8 +302,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * \ArtaxServiceBuilder\BasicAuthToken object.
      * @return \GithubService\Operation\getGist The new operation
      */
-    public function getGist($Authorization) {
-        $instance = new getGist($this, $Authorization, $this->getUserAgent());
+    public function getGist($authorization) {
+        $instance = new getGist($this, $authorization, $this->getUserAgent());
         return $instance;
     }
 
@@ -318,8 +318,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * \ArtaxServiceBuilder\BasicAuthToken object.
      * @return \GithubService\Operation\getGistByRevision The new operation
      */
-    public function getGistByRevision($Authorization) {
-        $instance = new getGistByRevision($this, $Authorization, $this->getUserAgent());
+    public function getGistByRevision($authorization) {
+        $instance = new getGistByRevision($this, $authorization, $this->getUserAgent());
         return $instance;
     }
 
@@ -354,8 +354,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * \ArtaxServiceBuilder\BasicAuthToken object.
      * @return \GithubService\Operation\listGistCommits The new operation
      */
-    public function listGistCommits($Authorization) {
-        $instance = new listGistCommits($this, $Authorization, $this->getUserAgent());
+    public function listGistCommits($authorization) {
+        $instance = new listGistCommits($this, $authorization, $this->getUserAgent());
         return $instance;
     }
 
@@ -370,8 +370,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * \ArtaxServiceBuilder\BasicAuthToken object.
      * @return \GithubService\Operation\starGist The new operation
      */
-    public function starGist($Authorization) {
-        $instance = new starGist($this, $Authorization, $this->getUserAgent());
+    public function starGist($authorization) {
+        $instance = new starGist($this, $authorization, $this->getUserAgent());
         return $instance;
     }
 
@@ -386,8 +386,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * \ArtaxServiceBuilder\BasicAuthToken object.
      * @return \GithubService\Operation\unstarGist The new operation
      */
-    public function unstarGist($Authorization) {
-        $instance = new unstarGist($this, $Authorization, $this->getUserAgent());
+    public function unstarGist($authorization) {
+        $instance = new unstarGist($this, $authorization, $this->getUserAgent());
         return $instance;
     }
 
@@ -403,8 +403,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * @param string $id The id of the gist to check
      * @return \GithubService\Operation\checkGistStarred The new operation
      */
-    public function checkGistStarred($Authorization, $id) {
-        $instance = new checkGistStarred($this, $Authorization, $this->getUserAgent(), $id);
+    public function checkGistStarred($authorization, $id) {
+        $instance = new checkGistStarred($this, $authorization, $this->getUserAgent(), $id);
         return $instance;
     }
 
@@ -419,8 +419,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * \ArtaxServiceBuilder\BasicAuthToken object.
      * @return \GithubService\Operation\forkGist The new operation
      */
-    public function forkGist($Authorization) {
-        $instance = new forkGist($this, $Authorization, $this->getUserAgent());
+    public function forkGist($authorization) {
+        $instance = new forkGist($this, $authorization, $this->getUserAgent());
         return $instance;
     }
 
@@ -435,8 +435,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * \ArtaxServiceBuilder\BasicAuthToken object.
      * @return \GithubService\Operation\listGistForks The new operation
      */
-    public function listGistForks($Authorization) {
-        $instance = new listGistForks($this, $Authorization, $this->getUserAgent());
+    public function listGistForks($authorization) {
+        $instance = new listGistForks($this, $authorization, $this->getUserAgent());
         return $instance;
     }
 
@@ -451,8 +451,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * \ArtaxServiceBuilder\BasicAuthToken object.
      * @return \GithubService\Operation\deleteGist The new operation
      */
-    public function deleteGist($Authorization) {
-        $instance = new deleteGist($this, $Authorization, $this->getUserAgent());
+    public function deleteGist($authorization) {
+        $instance = new deleteGist($this, $authorization, $this->getUserAgent());
         return $instance;
     }
 
@@ -467,8 +467,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * \ArtaxServiceBuilder\BasicAuthToken object.
      * @return \GithubService\Operation\listGitIgnoreTemplates The new operation
      */
-    public function listGitIgnoreTemplates($Authorization) {
-        $instance = new listGitIgnoreTemplates($this, $Authorization, $this->getUserAgent());
+    public function listGitIgnoreTemplates($authorization) {
+        $instance = new listGitIgnoreTemplates($this, $authorization, $this->getUserAgent());
         return $instance;
     }
 
@@ -484,8 +484,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * @param string $type Which template to get.
      * @return \GithubService\Operation\getGitIgnoreTemplate The new operation
      */
-    public function getGitIgnoreTemplate($Authorization, $type) {
-        $instance = new getGitIgnoreTemplate($this, $Authorization, $this->getUserAgent(), $type);
+    public function getGitIgnoreTemplate($authorization, $type) {
+        $instance = new getGitIgnoreTemplate($this, $authorization, $this->getUserAgent(), $type);
         return $instance;
     }
 
@@ -605,8 +605,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * @param mixed $Authorization The basic authentication token
      * @return \GithubService\Operation\stubBasicAuth The new operation
      */
-    public function stubBasicAuth($Authorization) {
-        $instance = new stubBasicAuth($this, $this->getUserAgent(), $Authorization);
+    public function stubBasicAuth($authorization) {
+        $instance = new stubBasicAuth($this, $this->getUserAgent(), $authorization);
         return $instance;
     }
 
@@ -621,8 +621,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * \ArtaxServiceBuilder\BasicAuthToken object.
      * @return \GithubService\Operation\getAuthorizations The new operation
      */
-    public function getAuthorizations($Authorization) {
-        $instance = new getAuthorizations($this, $Authorization, $this->getUserAgent());
+    public function getAuthorizations($authorization) {
+        $instance = new getAuthorizations($this, $authorization, $this->getUserAgent());
         return $instance;
     }
 
@@ -638,8 +638,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * @param mixed $id Which authorization to get
      * @return \GithubService\Operation\getAuthorization The new operation
      */
-    public function getAuthorization($Authorization, $id) {
-        $instance = new getAuthorization($this, $Authorization, $this->getUserAgent(), $id);
+    public function getAuthorization($authorization, $id) {
+        $instance = new getAuthorization($this, $authorization, $this->getUserAgent(), $id);
         return $instance;
     }
 
@@ -651,8 +651,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * @param mixed $note 
      * @return \GithubService\Operation\createAuthorization The new operation
      */
-    public function createAuthorization($Authorization, $scopes, $note) {
-        $instance = new createAuthorization($this, $this->getUserAgent(), $Authorization, $scopes, $note);
+    public function createAuthorization($authorization, $scopes, $note) {
+        $instance = new createAuthorization($this, $this->getUserAgent(), $authorization, $scopes, $note);
         return $instance;
     }
 
@@ -669,8 +669,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * to create the token.
      * @return \GithubService\Operation\getOrCreateAuthorization The new operation
      */
-    public function getOrCreateAuthorization($Authorization, $scopes, $note, $note_url, $client_id, $client_secret) {
-        $instance = new getOrCreateAuthorization($this, $this->getUserAgent(), $Authorization, $scopes, $note, $note_url, $client_id, $client_secret);
+    public function getOrCreateAuthorization($authorization, $scopes, $note, $note_url, $client_id, $client_secret) {
+        $instance = new getOrCreateAuthorization($this, $this->getUserAgent(), $authorization, $scopes, $note, $note_url, $client_id, $client_secret);
         return $instance;
     }
 
@@ -724,8 +724,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * \ArtaxServiceBuilder\BasicAuthToken object.
      * @return \GithubService\Operation\deleteAuthorization The new operation
      */
-    public function deleteAuthorization($Authorization) {
-        $instance = new deleteAuthorization($this, $Authorization, $this->getUserAgent());
+    public function deleteAuthorization($authorization) {
+        $instance = new deleteAuthorization($this, $authorization, $this->getUserAgent());
         return $instance;
     }
 
@@ -737,8 +737,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * @param mixed $access_token 
      * @return \GithubService\Operation\checkAuthorization The new operation
      */
-    public function checkAuthorization($Authorization, $client_id, $access_token) {
-        $instance = new checkAuthorization($this, $this->getUserAgent(), $Authorization, $client_id, $access_token);
+    public function checkAuthorization($authorization, $client_id, $access_token) {
+        $instance = new checkAuthorization($this, $this->getUserAgent(), $authorization, $client_id, $access_token);
         return $instance;
     }
 
@@ -750,8 +750,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * @param mixed $access_token 
      * @return \GithubService\Operation\resetAuthorization The new operation
      */
-    public function resetAuthorization($Authorization, $client_id, $access_token) {
-        $instance = new resetAuthorization($this, $this->getUserAgent(), $Authorization, $client_id, $access_token);
+    public function resetAuthorization($authorization, $client_id, $access_token) {
+        $instance = new resetAuthorization($this, $this->getUserAgent(), $authorization, $client_id, $access_token);
         return $instance;
     }
 
@@ -762,8 +762,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * @param mixed $client_id The id of the client.
      * @return \GithubService\Operation\revokeAllAuthority The new operation
      */
-    public function revokeAllAuthority($Authorization, $client_id) {
-        $instance = new revokeAllAuthority($this, $this->getUserAgent(), $Authorization, $client_id);
+    public function revokeAllAuthority($authorization, $client_id) {
+        $instance = new revokeAllAuthority($this, $this->getUserAgent(), $authorization, $client_id);
         return $instance;
     }
 
@@ -775,8 +775,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * @param mixed $access_token The access token to delete.
      * @return \GithubService\Operation\revokeAuthorityForApplication The new operation
      */
-    public function revokeAuthorityForApplication($Authorization, $client_id, $access_token) {
-        $instance = new revokeAuthorityForApplication($this, $this->getUserAgent(), $Authorization, $client_id, $access_token);
+    public function revokeAuthorityForApplication($authorization, $client_id, $access_token) {
+        $instance = new revokeAuthorityForApplication($this, $this->getUserAgent(), $authorization, $client_id, $access_token);
         return $instance;
     }
 
@@ -1033,8 +1033,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * @param string $repo The repository to get the commits for
      * @return \GithubService\Operation\listRepoCommits The new operation
      */
-    public function listRepoCommits($Authorization, $owner, $repo) {
-        $instance = new listRepoCommits($this, $Authorization, $this->getUserAgent(), $owner, $repo);
+    public function listRepoCommits($authorization, $owner, $repo) {
+        $instance = new listRepoCommits($this, $authorization, $this->getUserAgent(), $owner, $repo);
         return $instance;
     }
 
@@ -1049,8 +1049,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * \ArtaxServiceBuilder\BasicAuthToken object.
      * @return \GithubService\Operation\getCommit The new operation
      */
-    public function getCommit($Authorization) {
-        $instance = new getCommit($this, $Authorization, $this->getUserAgent());
+    public function getCommit($authorization) {
+        $instance = new getCommit($this, $authorization, $this->getUserAgent());
         return $instance;
     }
 
@@ -1065,8 +1065,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * \ArtaxServiceBuilder\BasicAuthToken object.
      * @return \GithubService\Operation\compareTwoCommits The new operation
      */
-    public function compareTwoCommits($Authorization) {
-        $instance = new compareTwoCommits($this, $Authorization, $this->getUserAgent());
+    public function compareTwoCommits($authorization) {
+        $instance = new compareTwoCommits($this, $authorization, $this->getUserAgent());
         return $instance;
     }
 
@@ -1081,8 +1081,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * \ArtaxServiceBuilder\BasicAuthToken object.
      * @return \GithubService\Operation\compareTwoCommitsForks The new operation
      */
-    public function compareTwoCommitsForks($Authorization) {
-        $instance = new compareTwoCommitsForks($this, $Authorization, $this->getUserAgent());
+    public function compareTwoCommitsForks($authorization) {
+        $instance = new compareTwoCommitsForks($this, $authorization, $this->getUserAgent());
         return $instance;
     }
 
@@ -1155,8 +1155,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * @param mixed $ref 
      * @return \GithubService\Operation\getArchiveLink The new operation
      */
-    public function getArchiveLink($Authorization, $owner, $repo, $ref) {
-        $instance = new getArchiveLink($this, $Authorization, $this->getUserAgent(), $owner, $repo, $ref);
+    public function getArchiveLink($authorization, $owner, $repo, $ref) {
+        $instance = new getArchiveLink($this, $authorization, $this->getUserAgent(), $owner, $repo, $ref);
         return $instance;
     }
 
@@ -1179,8 +1179,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * @param string $message The commit message.
      * @return \GithubService\Operation\updateFile The new operation
      */
-    public function updateFile($Authorization, $path, $owner, $repo, $content, $sha, $branch, $message) {
-        $instance = new updateFile($this, $Authorization, $this->getUserAgent(), $path, $owner, $repo, $content, $sha, $branch, $message);
+    public function updateFile($authorization, $path, $owner, $repo, $content, $sha, $branch, $message) {
+        $instance = new updateFile($this, $authorization, $this->getUserAgent(), $path, $owner, $repo, $content, $sha, $branch, $message);
         return $instance;
     }
 
@@ -1470,8 +1470,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * `full_name`: `asc`, otherwise `desc`
      * @return \GithubService\Operation\listSelfRepos The new operation
      */
-    public function listSelfRepos($Authorization, $type, $sort, $direction) {
-        $instance = new listSelfRepos($this, $Authorization, $this->getUserAgent(), $type, $sort, $direction);
+    public function listSelfRepos($authorization, $type, $sort, $direction) {
+        $instance = new listSelfRepos($this, $authorization, $this->getUserAgent(), $type, $sort, $direction);
         return $instance;
     }
 
@@ -1487,8 +1487,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * @param string $username The user to get the repos of.
      * @return \GithubService\Operation\listUserRepos The new operation
      */
-    public function listUserRepos($Authorization, $username) {
-        $instance = new listUserRepos($this, $Authorization, $this->getUserAgent(), $username);
+    public function listUserRepos($authorization, $username) {
+        $instance = new listUserRepos($this, $authorization, $this->getUserAgent(), $username);
         return $instance;
     }
 
@@ -1506,8 +1506,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * `sources`, `member`. Default: `all`
      * @return \GithubService\Operation\listOrgRepos The new operation
      */
-    public function listOrgRepos($Authorization, $org, $type) {
-        $instance = new listOrgRepos($this, $Authorization, $this->getUserAgent(), $org, $type);
+    public function listOrgRepos($authorization, $org, $type) {
+        $instance = new listOrgRepos($this, $authorization, $this->getUserAgent(), $org, $type);
         return $instance;
     }
 
@@ -1523,8 +1523,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * @param string $since The integer ID of the last Repository that you've seen.
      * @return \GithubService\Operation\listPublicRepos The new operation
      */
-    public function listPublicRepos($Authorization, $since) {
-        $instance = new listPublicRepos($this, $Authorization, $this->getUserAgent(), $since);
+    public function listPublicRepos($authorization, $since) {
+        $instance = new listPublicRepos($this, $authorization, $this->getUserAgent(), $since);
         return $instance;
     }
 
@@ -1551,8 +1551,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * @param string $repo 
      * @return \GithubService\Operation\getRepo The new operation
      */
-    public function getRepo($Authorization, $owner, $repo) {
-        $instance = new getRepo($this, $Authorization, $this->getUserAgent(), $owner, $repo);
+    public function getRepo($authorization, $owner, $repo) {
+        $instance = new getRepo($this, $authorization, $this->getUserAgent(), $owner, $repo);
         return $instance;
     }
 
@@ -1580,8 +1580,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * @param string $anon 
      * @return \GithubService\Operation\listRepoContributors The new operation
      */
-    public function listRepoContributors($Authorization, $owner, $repo, $anon) {
-        $instance = new listRepoContributors($this, $Authorization, $this->getUserAgent(), $owner, $repo, $anon);
+    public function listRepoContributors($authorization, $owner, $repo, $anon) {
+        $instance = new listRepoContributors($this, $authorization, $this->getUserAgent(), $owner, $repo, $anon);
         return $instance;
     }
 
@@ -1598,8 +1598,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * @param string $repo 
      * @return \GithubService\Operation\listRepoLanguages The new operation
      */
-    public function listRepoLanguages($Authorization, $owner, $repo) {
-        $instance = new listRepoLanguages($this, $Authorization, $this->getUserAgent(), $owner, $repo);
+    public function listRepoLanguages($authorization, $owner, $repo) {
+        $instance = new listRepoLanguages($this, $authorization, $this->getUserAgent(), $owner, $repo);
         return $instance;
     }
 
@@ -1616,8 +1616,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * @param string $repo 
      * @return \GithubService\Operation\listRepoTeams The new operation
      */
-    public function listRepoTeams($Authorization, $owner, $repo) {
-        $instance = new listRepoTeams($this, $Authorization, $this->getUserAgent(), $owner, $repo);
+    public function listRepoTeams($authorization, $owner, $repo) {
+        $instance = new listRepoTeams($this, $authorization, $this->getUserAgent(), $owner, $repo);
         return $instance;
     }
 
@@ -1634,8 +1634,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * @param string $repo 
      * @return \GithubService\Operation\listRepoTags The new operation
      */
-    public function listRepoTags($Authorization, $owner, $repo) {
-        $instance = new listRepoTags($this, $Authorization, $this->getUserAgent(), $owner, $repo);
+    public function listRepoTags($authorization, $owner, $repo) {
+        $instance = new listRepoTags($this, $authorization, $this->getUserAgent(), $owner, $repo);
         return $instance;
     }
 
@@ -1652,8 +1652,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * @param string $repo 
      * @return \GithubService\Operation\listRepoBranches The new operation
      */
-    public function listRepoBranches($Authorization, $owner, $repo) {
-        $instance = new listRepoBranches($this, $Authorization, $this->getUserAgent(), $owner, $repo);
+    public function listRepoBranches($authorization, $owner, $repo) {
+        $instance = new listRepoBranches($this, $authorization, $this->getUserAgent(), $owner, $repo);
         return $instance;
     }
 
@@ -1669,8 +1669,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * @param string $username 
      * @return \GithubService\Operation\getRepoBranch The new operation
      */
-    public function getRepoBranch($Authorization, $username) {
-        $instance = new getRepoBranch($this, $Authorization, $this->getUserAgent(), $username);
+    public function getRepoBranch($authorization, $username) {
+        $instance = new getRepoBranch($this, $authorization, $this->getUserAgent(), $username);
         return $instance;
     }
 
@@ -1687,8 +1687,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * @param string $repo 
      * @return \GithubService\Operation\deleteRepo The new operation
      */
-    public function deleteRepo($Authorization, $owner, $repo) {
-        $instance = new deleteRepo($this, $Authorization, $this->getUserAgent(), $owner, $repo);
+    public function deleteRepo($authorization, $owner, $repo) {
+        $instance = new deleteRepo($this, $authorization, $this->getUserAgent(), $owner, $repo);
         return $instance;
     }
 
@@ -1744,8 +1744,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * @param mixed $pageURL 
      * @return \GithubService\Operation\listEmojisPaginate The new operation
      */
-    public function listEmojisPaginate($Authorization, $pageURL) {
-        $instance = new listEmojisPaginate($this, $Authorization, $this->getUserAgent(), $pageURL);
+    public function listEmojisPaginate($authorization, $pageURL) {
+        $instance = new listEmojisPaginate($this, $authorization, $this->getUserAgent(), $pageURL);
         return $instance;
     }
 
@@ -1761,8 +1761,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * @param mixed $pageURL 
      * @return \GithubService\Operation\listUsersGistsPaginate The new operation
      */
-    public function listUsersGistsPaginate($Authorization, $pageURL) {
-        $instance = new listUsersGistsPaginate($this, $Authorization, $this->getUserAgent(), $pageURL);
+    public function listUsersGistsPaginate($authorization, $pageURL) {
+        $instance = new listUsersGistsPaginate($this, $authorization, $this->getUserAgent(), $pageURL);
         return $instance;
     }
 
@@ -1778,8 +1778,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * @param mixed $pageURL 
      * @return \GithubService\Operation\listSelfGistsPaginate The new operation
      */
-    public function listSelfGistsPaginate($Authorization, $pageURL) {
-        $instance = new listSelfGistsPaginate($this, $Authorization, $this->getUserAgent(), $pageURL);
+    public function listSelfGistsPaginate($authorization, $pageURL) {
+        $instance = new listSelfGistsPaginate($this, $authorization, $this->getUserAgent(), $pageURL);
         return $instance;
     }
 
@@ -1795,8 +1795,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * @param mixed $pageURL 
      * @return \GithubService\Operation\listPublicGistsPaginate The new operation
      */
-    public function listPublicGistsPaginate($Authorization, $pageURL) {
-        $instance = new listPublicGistsPaginate($this, $Authorization, $this->getUserAgent(), $pageURL);
+    public function listPublicGistsPaginate($authorization, $pageURL) {
+        $instance = new listPublicGistsPaginate($this, $authorization, $this->getUserAgent(), $pageURL);
         return $instance;
     }
 
@@ -1812,8 +1812,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * @param mixed $pageURL 
      * @return \GithubService\Operation\listSelfStarredGistsPaginate The new operation
      */
-    public function listSelfStarredGistsPaginate($Authorization, $pageURL) {
-        $instance = new listSelfStarredGistsPaginate($this, $Authorization, $this->getUserAgent(), $pageURL);
+    public function listSelfStarredGistsPaginate($authorization, $pageURL) {
+        $instance = new listSelfStarredGistsPaginate($this, $authorization, $this->getUserAgent(), $pageURL);
         return $instance;
     }
 
@@ -1829,8 +1829,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * @param mixed $pageURL 
      * @return \GithubService\Operation\getGistPaginate The new operation
      */
-    public function getGistPaginate($Authorization, $pageURL) {
-        $instance = new getGistPaginate($this, $Authorization, $this->getUserAgent(), $pageURL);
+    public function getGistPaginate($authorization, $pageURL) {
+        $instance = new getGistPaginate($this, $authorization, $this->getUserAgent(), $pageURL);
         return $instance;
     }
 
@@ -1846,8 +1846,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * @param mixed $pageURL 
      * @return \GithubService\Operation\getGistByRevisionPaginate The new operation
      */
-    public function getGistByRevisionPaginate($Authorization, $pageURL) {
-        $instance = new getGistByRevisionPaginate($this, $Authorization, $this->getUserAgent(), $pageURL);
+    public function getGistByRevisionPaginate($authorization, $pageURL) {
+        $instance = new getGistByRevisionPaginate($this, $authorization, $this->getUserAgent(), $pageURL);
         return $instance;
     }
 
@@ -1863,8 +1863,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * @param mixed $pageURL 
      * @return \GithubService\Operation\listGistCommitsPaginate The new operation
      */
-    public function listGistCommitsPaginate($Authorization, $pageURL) {
-        $instance = new listGistCommitsPaginate($this, $Authorization, $this->getUserAgent(), $pageURL);
+    public function listGistCommitsPaginate($authorization, $pageURL) {
+        $instance = new listGistCommitsPaginate($this, $authorization, $this->getUserAgent(), $pageURL);
         return $instance;
     }
 
@@ -1880,8 +1880,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * @param mixed $pageURL 
      * @return \GithubService\Operation\checkGistStarredPaginate The new operation
      */
-    public function checkGistStarredPaginate($Authorization, $pageURL) {
-        $instance = new checkGistStarredPaginate($this, $Authorization, $this->getUserAgent(), $pageURL);
+    public function checkGistStarredPaginate($authorization, $pageURL) {
+        $instance = new checkGistStarredPaginate($this, $authorization, $this->getUserAgent(), $pageURL);
         return $instance;
     }
 
@@ -1897,8 +1897,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * @param mixed $pageURL 
      * @return \GithubService\Operation\listGistForksPaginate The new operation
      */
-    public function listGistForksPaginate($Authorization, $pageURL) {
-        $instance = new listGistForksPaginate($this, $Authorization, $this->getUserAgent(), $pageURL);
+    public function listGistForksPaginate($authorization, $pageURL) {
+        $instance = new listGistForksPaginate($this, $authorization, $this->getUserAgent(), $pageURL);
         return $instance;
     }
 
@@ -1915,8 +1915,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * @return \GithubService\Operation\listGitIgnoreTemplatesPaginate The new
      * operation
      */
-    public function listGitIgnoreTemplatesPaginate($Authorization, $pageURL) {
-        $instance = new listGitIgnoreTemplatesPaginate($this, $Authorization, $this->getUserAgent(), $pageURL);
+    public function listGitIgnoreTemplatesPaginate($authorization, $pageURL) {
+        $instance = new listGitIgnoreTemplatesPaginate($this, $authorization, $this->getUserAgent(), $pageURL);
         return $instance;
     }
 
@@ -1932,8 +1932,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * @param mixed $pageURL 
      * @return \GithubService\Operation\getGitIgnoreTemplatePaginate The new operation
      */
-    public function getGitIgnoreTemplatePaginate($Authorization, $pageURL) {
-        $instance = new getGitIgnoreTemplatePaginate($this, $Authorization, $this->getUserAgent(), $pageURL);
+    public function getGitIgnoreTemplatePaginate($authorization, $pageURL) {
+        $instance = new getGitIgnoreTemplatePaginate($this, $authorization, $this->getUserAgent(), $pageURL);
         return $instance;
     }
 
@@ -1949,8 +1949,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * @param mixed $pageURL 
      * @return \GithubService\Operation\getAuthorizationsPaginate The new operation
      */
-    public function getAuthorizationsPaginate($Authorization, $pageURL) {
-        $instance = new getAuthorizationsPaginate($this, $Authorization, $this->getUserAgent(), $pageURL);
+    public function getAuthorizationsPaginate($authorization, $pageURL) {
+        $instance = new getAuthorizationsPaginate($this, $authorization, $this->getUserAgent(), $pageURL);
         return $instance;
     }
 
@@ -1966,8 +1966,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * @param mixed $pageURL 
      * @return \GithubService\Operation\getAuthorizationPaginate The new operation
      */
-    public function getAuthorizationPaginate($Authorization, $pageURL) {
-        $instance = new getAuthorizationPaginate($this, $Authorization, $this->getUserAgent(), $pageURL);
+    public function getAuthorizationPaginate($authorization, $pageURL) {
+        $instance = new getAuthorizationPaginate($this, $authorization, $this->getUserAgent(), $pageURL);
         return $instance;
     }
 
@@ -1983,8 +1983,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * @param mixed $pageURL 
      * @return \GithubService\Operation\listRepoCommitsPaginate The new operation
      */
-    public function listRepoCommitsPaginate($Authorization, $pageURL) {
-        $instance = new listRepoCommitsPaginate($this, $Authorization, $this->getUserAgent(), $pageURL);
+    public function listRepoCommitsPaginate($authorization, $pageURL) {
+        $instance = new listRepoCommitsPaginate($this, $authorization, $this->getUserAgent(), $pageURL);
         return $instance;
     }
 
@@ -2000,8 +2000,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * @param mixed $pageURL 
      * @return \GithubService\Operation\getCommitPaginate The new operation
      */
-    public function getCommitPaginate($Authorization, $pageURL) {
-        $instance = new getCommitPaginate($this, $Authorization, $this->getUserAgent(), $pageURL);
+    public function getCommitPaginate($authorization, $pageURL) {
+        $instance = new getCommitPaginate($this, $authorization, $this->getUserAgent(), $pageURL);
         return $instance;
     }
 
@@ -2017,8 +2017,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * @param mixed $pageURL 
      * @return \GithubService\Operation\compareTwoCommitsPaginate The new operation
      */
-    public function compareTwoCommitsPaginate($Authorization, $pageURL) {
-        $instance = new compareTwoCommitsPaginate($this, $Authorization, $this->getUserAgent(), $pageURL);
+    public function compareTwoCommitsPaginate($authorization, $pageURL) {
+        $instance = new compareTwoCommitsPaginate($this, $authorization, $this->getUserAgent(), $pageURL);
         return $instance;
     }
 
@@ -2035,8 +2035,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * @return \GithubService\Operation\compareTwoCommitsForksPaginate The new
      * operation
      */
-    public function compareTwoCommitsForksPaginate($Authorization, $pageURL) {
-        $instance = new compareTwoCommitsForksPaginate($this, $Authorization, $this->getUserAgent(), $pageURL);
+    public function compareTwoCommitsForksPaginate($authorization, $pageURL) {
+        $instance = new compareTwoCommitsForksPaginate($this, $authorization, $this->getUserAgent(), $pageURL);
         return $instance;
     }
 
@@ -2052,8 +2052,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * @param mixed $pageURL 
      * @return \GithubService\Operation\listSelfReposPaginate The new operation
      */
-    public function listSelfReposPaginate($Authorization, $pageURL) {
-        $instance = new listSelfReposPaginate($this, $Authorization, $this->getUserAgent(), $pageURL);
+    public function listSelfReposPaginate($authorization, $pageURL) {
+        $instance = new listSelfReposPaginate($this, $authorization, $this->getUserAgent(), $pageURL);
         return $instance;
     }
 
@@ -2069,8 +2069,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * @param mixed $pageURL 
      * @return \GithubService\Operation\listUserReposPaginate The new operation
      */
-    public function listUserReposPaginate($Authorization, $pageURL) {
-        $instance = new listUserReposPaginate($this, $Authorization, $this->getUserAgent(), $pageURL);
+    public function listUserReposPaginate($authorization, $pageURL) {
+        $instance = new listUserReposPaginate($this, $authorization, $this->getUserAgent(), $pageURL);
         return $instance;
     }
 
@@ -2086,8 +2086,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * @param mixed $pageURL 
      * @return \GithubService\Operation\listOrgReposPaginate The new operation
      */
-    public function listOrgReposPaginate($Authorization, $pageURL) {
-        $instance = new listOrgReposPaginate($this, $Authorization, $this->getUserAgent(), $pageURL);
+    public function listOrgReposPaginate($authorization, $pageURL) {
+        $instance = new listOrgReposPaginate($this, $authorization, $this->getUserAgent(), $pageURL);
         return $instance;
     }
 
@@ -2103,8 +2103,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * @param mixed $pageURL 
      * @return \GithubService\Operation\listPublicReposPaginate The new operation
      */
-    public function listPublicReposPaginate($Authorization, $pageURL) {
-        $instance = new listPublicReposPaginate($this, $Authorization, $this->getUserAgent(), $pageURL);
+    public function listPublicReposPaginate($authorization, $pageURL) {
+        $instance = new listPublicReposPaginate($this, $authorization, $this->getUserAgent(), $pageURL);
         return $instance;
     }
 
@@ -2120,8 +2120,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * @param mixed $pageURL 
      * @return \GithubService\Operation\getRepoPaginate The new operation
      */
-    public function getRepoPaginate($Authorization, $pageURL) {
-        $instance = new getRepoPaginate($this, $Authorization, $this->getUserAgent(), $pageURL);
+    public function getRepoPaginate($authorization, $pageURL) {
+        $instance = new getRepoPaginate($this, $authorization, $this->getUserAgent(), $pageURL);
         return $instance;
     }
 
@@ -2137,8 +2137,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * @param mixed $pageURL 
      * @return \GithubService\Operation\listRepoContributorsPaginate The new operation
      */
-    public function listRepoContributorsPaginate($Authorization, $pageURL) {
-        $instance = new listRepoContributorsPaginate($this, $Authorization, $this->getUserAgent(), $pageURL);
+    public function listRepoContributorsPaginate($authorization, $pageURL) {
+        $instance = new listRepoContributorsPaginate($this, $authorization, $this->getUserAgent(), $pageURL);
         return $instance;
     }
 
@@ -2154,8 +2154,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * @param mixed $pageURL 
      * @return \GithubService\Operation\listRepoLanguagesPaginate The new operation
      */
-    public function listRepoLanguagesPaginate($Authorization, $pageURL) {
-        $instance = new listRepoLanguagesPaginate($this, $Authorization, $this->getUserAgent(), $pageURL);
+    public function listRepoLanguagesPaginate($authorization, $pageURL) {
+        $instance = new listRepoLanguagesPaginate($this, $authorization, $this->getUserAgent(), $pageURL);
         return $instance;
     }
 
@@ -2171,8 +2171,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * @param mixed $pageURL 
      * @return \GithubService\Operation\listRepoTeamsPaginate The new operation
      */
-    public function listRepoTeamsPaginate($Authorization, $pageURL) {
-        $instance = new listRepoTeamsPaginate($this, $Authorization, $this->getUserAgent(), $pageURL);
+    public function listRepoTeamsPaginate($authorization, $pageURL) {
+        $instance = new listRepoTeamsPaginate($this, $authorization, $this->getUserAgent(), $pageURL);
         return $instance;
     }
 
@@ -2188,8 +2188,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * @param mixed $pageURL 
      * @return \GithubService\Operation\listRepoTagsPaginate The new operation
      */
-    public function listRepoTagsPaginate($Authorization, $pageURL) {
-        $instance = new listRepoTagsPaginate($this, $Authorization, $this->getUserAgent(), $pageURL);
+    public function listRepoTagsPaginate($authorization, $pageURL) {
+        $instance = new listRepoTagsPaginate($this, $authorization, $this->getUserAgent(), $pageURL);
         return $instance;
     }
 
@@ -2205,8 +2205,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * @param mixed $pageURL 
      * @return \GithubService\Operation\listRepoBranchesPaginate The new operation
      */
-    public function listRepoBranchesPaginate($Authorization, $pageURL) {
-        $instance = new listRepoBranchesPaginate($this, $Authorization, $this->getUserAgent(), $pageURL);
+    public function listRepoBranchesPaginate($authorization, $pageURL) {
+        $instance = new listRepoBranchesPaginate($this, $authorization, $this->getUserAgent(), $pageURL);
         return $instance;
     }
 
@@ -2222,8 +2222,8 @@ class GithubArtaxService implements \GithubService\GithubService {
      * @param mixed $pageURL 
      * @return \GithubService\Operation\getRepoBranchPaginate The new operation
      */
-    public function getRepoBranchPaginate($Authorization, $pageURL) {
-        $instance = new getRepoBranchPaginate($this, $Authorization, $this->getUserAgent(), $pageURL);
+    public function getRepoBranchPaginate($authorization, $pageURL) {
+        $instance = new getRepoBranchPaginate($this, $authorization, $this->getUserAgent(), $pageURL);
         return $instance;
     }
 
@@ -2390,6 +2390,7 @@ class GithubArtaxService implements \GithubService\GithubService {
         return false;
     }
 
+    abstract public function instantiateResult(\Amp\Artax\Response $response, \ArtaxServiceBuilder\Operation $operation);
     /**
      * Inspect the response and return an exception if it is an error response.
      *      * Exceptions should extend \ArtaxServiceBuilder\BadResponseException

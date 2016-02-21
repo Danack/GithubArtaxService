@@ -15,7 +15,7 @@ class RefHydrator implements Hydrator
     {
         $ref = new Ref();
         $refObjectData = $dataMapper->extractValue($data, 'object');
-        $ref->refObject = $dataMapper->instantiate('GithubService\Model\RefObject', $refObjectData);
+        $ref->refObject = $dataMapper->instantiateClass('GithubService\Model\RefObject', $refObjectData);
         $ref->ref = $dataMapper->extractValue($data, 'ref');
         $ref->url = $dataMapper->extractValue($data, 'url');
 

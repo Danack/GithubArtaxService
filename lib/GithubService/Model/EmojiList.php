@@ -13,13 +13,4 @@ class EmojiList implements \IteratorAggregate
     {
         return new \ArrayIterator($this->emojis);
     }
-
-//    static function createFromData($data) {
-//        $instance = new static();
-//        foreach ($data as $key => $value) {
-//            $instance->emojiList[] = new Emoji($key, $value);
-//        }
-//
-//        return $instance;
-//    }
 }

@@ -47,14 +47,14 @@ class revokeAuthorityForApplication implements \ArtaxServiceBuilder\Operation {
         $this->response = $response;
     }
 
-    public function __construct(\GithubService\GithubArtaxService\GithubArtaxService $api, $userAgent, $Authorization, $client_id, $access_token) {
+    public function __construct(\GithubService\GithubArtaxService\GithubArtaxService $api, $userAgent, $authorization, $client_id, $access_token) {
         $defaultParams = [
             'Accept' => 'application/vnd.github.mirage-preview+json',
         ];
         $this->setParams($defaultParams);
         $this->api = $api;
         $this->parameters['userAgent'] = $userAgent;
-        $this->parameters['Authorization'] = $Authorization;
+        $this->parameters['Authorization'] = $authorization;
         $this->parameters['client_id'] = $client_id;
         $this->parameters['access_token'] = $access_token;
     }
@@ -244,7 +244,9 @@ class revokeAuthorityForApplication implements \ArtaxServiceBuilder\Operation {
         $this->response = $response;
 
         if ($this->shouldResponseBeProcessed($response)) {
-            return $response->getBody();
+            $instance = $this->api->instantiateResult($response, $this);
+
+            return $instance;
         }
         return $response;
     }
@@ -280,7 +282,9 @@ class revokeAuthorityForApplication implements \ArtaxServiceBuilder\Operation {
     public function dispatch(\Amp\Artax\Request $request) {
         $response = $this->api->execute($request, $this);
         $this->response = $response;
-        return $response->getBody();
+        $instance = $this->api->instantiateResult($response, $this);
+
+        return $instance;
     }
 
     /**
@@ -303,7 +307,9 @@ class revokeAuthorityForApplication implements \ArtaxServiceBuilder\Operation {
      * @param \Amp\Artax\Response $response The HTTP response.
      */
     public function processResponse(\Amp\Artax\Response $response) {
-        return $response->getBody();
+        $instance = $this->api->instantiateResult($response, $this);
+
+        return $instance;
     }
 
     /**
@@ -363,6 +369,15 @@ class revokeAuthorityForApplication implements \ArtaxServiceBuilder\Operation {
      */
     public function getOriginalResponse() {
         return $this->originalResponse;
+    }
+
+    /**
+     * Return how the result of this operation should be instantiated.
+     *
+     * @return \Amp\Artax\Response
+     */
+    public function getResultInstantiationInfo() {
+        return null
     }
 
 

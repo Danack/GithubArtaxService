@@ -1,6 +1,6 @@
 <?php
 
-use GithubService\GithubArtaxService\GithubArtaxService;
+use GithubService\GithubArtaxService\GithubService;
 use ArtaxServiceBuilder\ResponseCache\NullResponseCache;
 use Amp\Artax\Client as ArtaxClient;
 use Amp\NativeReactor;
@@ -8,7 +8,7 @@ use ArtaxServiceBuilder\BadResponseException;
 
 //include_once dirname(__DIR__)."/../../githubArtaxServiceConfig.php";
 
-class GithubTest extends \PHPUnit_Framework_TestCase
+class GithubIntegrationTest extends \PHPUnit_Framework_TestCase
 {
     private function  getReactorAndAPI() {
 
@@ -17,17 +17,16 @@ class GithubTest extends \PHPUnit_Framework_TestCase
         $client = new ArtaxClient($reactor);
         $client->setOption(ArtaxClient::OP_MS_CONNECT_TIMEOUT, 5000);
         $client->setOption(ArtaxClient::OP_MS_KEEP_ALIVE_TIMEOUT, 1000);
-        $githubAPI = new GithubArtaxService($client, $reactor, $cache, "Danack/test");
+        $githubAPI = new GithubService($client, $reactor, $cache, "Danack/test");
         
         return [$reactor, $githubAPI];
     }
-
 
     /**
      * @group internet
      */
     function testRepoTags() {
-        /** @var  $githubAPI GithubArtaxService */
+        /** @var  $githubAPI GithubService */
         list($reactor, $githubAPI) = $this->getReactorAndAPI();
         $command = $githubAPI->listRepoTags(null, "Danack", "GithubArtaxService");
         $repoTags = $command->call();
@@ -35,6 +34,24 @@ class GithubTest extends \PHPUnit_Framework_TestCase
         $numberOfTags = count($repoTags->repoTags);
         $this->assertGreaterThanOrEqual(4, $numberOfTags);
     }
+    
+    
+    /**
+     * @group internet
+     * @group refactoring
+     */
+    function testListEmojis() {
+        /** @var  $githubAPI GithubService */
+        list($reactor, $githubAPI) = $this->getReactorAndAPI();
+        $command = $githubAPI->listEmojis(null);
+        $emojiList = $command->call();
+        $this->assertInstanceOf('GithubService\Model\EmojiList', $emojiList);
+
+        //$numberOfTags = count($repoTags->repoTags);
+        //$this->assertGreaterThanOrEqual(4, $numberOfTags);
+    }
+    
+    
 
     /**
      * This cannot be a unit test. It requires getting a one time

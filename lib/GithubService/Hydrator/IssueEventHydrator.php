@@ -18,7 +18,7 @@ class IssueEventHydrator implements Hydrator
         $issueEvent->id = $dataMapper->extractValue($data, 'id');
         $issueEvent->url = $dataMapper->extractValue($data, 'url');
         $user = $dataMapper->extractValue($data, 'actor');
-        $issueEvent->actor = $dataMapper->instantiate('GithubService\Model\User', $user);
+        $issueEvent->actor = $dataMapper->instantiateClass('GithubService\Model\User', $user);
 
         return $issueEvent;
     }

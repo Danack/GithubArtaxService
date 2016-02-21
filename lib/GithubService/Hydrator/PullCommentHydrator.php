@@ -27,7 +27,7 @@ class PullCommentHydrator implements Hydrator
         $pullComment->updatedAt = $dataMapper->extractValue($data, 'updated_at');
         $pullComment->url = $dataMapper->extractValue($data, 'url');
         $user = $dataMapper->extractValue($data, 'user');
-        $pullComment->user = $dataMapper->instantiate('GithubService\Model\User', $user);
+        $pullComment->user = $dataMapper->instantiateClass('GithubService\Model\User', $user);
 
         //TODO restore links
             //['links', '_links', 'class' => 'GithubService\\Model\\Links'],

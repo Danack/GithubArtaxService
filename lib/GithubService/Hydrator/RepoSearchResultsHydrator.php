@@ -15,7 +15,7 @@ class RepoSearchResultsHydrator implements Hydrator
     {
         $branches = new RepoSearchResults();
         $repositories = $dataMapper->extractValue($data, 'repositories');
-        $object = $dataMapper->instantiate('GithubService\Model\Repositories', $repositories);
+        $object = $dataMapper->instantiateClass('GithubService\Model\Repositories', $repositories);
         $branches->repositories = $object;
 
         return $branches;

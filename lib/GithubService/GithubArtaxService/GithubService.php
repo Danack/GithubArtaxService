@@ -3,15 +3,19 @@
 
 namespace GithubService\GithubArtaxService;
 
+use Amp\Artax\Client;
 use Amp\Artax\Response;
 use Amp\Artax\Request;
 use Amp\Promise;
+use Amp\Reactor;
 use ArtaxServiceBuilder\BadResponseException;
+use ArtaxServiceBuilder\ResponseCache;
 use GithubService\OneTimePasswordAppException;
 use GithubService\OneTimePasswordSMSException;
 use GithubService\RateLimitException;
 use ArtaxServiceBuilder\BasicAuthToken;
-
+use ArtaxServiceBuilder\Operation;
+use GithubService\GithubDataMapper;
 
 /**
  * Class GithubService 
@@ -19,13 +23,20 @@ use ArtaxServiceBuilder\BasicAuthToken;
  * the service description.
  * @package GithubService\GithubArtaxService
  */
-class GithubService extends GithubArtaxService {
-
-
+class GithubService extends GithubArtaxService
+{
+    protected $githubDataMapper;
+    
     /**
      * @var \GithubService\RateLimit
      */
     private $rateLimit;
+
+    public function __construct(Client $client, Reactor $reactor, ResponseCache $responseCache, $userAgent)
+    {
+        parent::__construct($client, $reactor, $responseCache, $userAgent);
+        $this->githubDataMapper = new GithubDataMapper();
+    }
 
     /**
      * @return \GithubService\RateLimit
@@ -33,8 +44,6 @@ class GithubService extends GithubArtaxService {
     public function getRateLimit() {
         return $this->rateLimit;
     }
-
-
     
     /**
      * @param Request $request
@@ -60,6 +69,19 @@ class GithubService extends GithubArtaxService {
         return $response; 
     }
 
+    public function instantiateResult(Response $response, Operation $operation)
+    {
+        $instantiationInfo = $operation->getResultInstantiationInfo();
+        if ($instantiationInfo !== null) {
+            if (array_key_exists('instantiate', $instantiationInfo) == true) {
+                $classname = $instantiationInfo['instantiate'];
+                return $this->githubDataMapper->createFromResponse($response, $operation, $classname);
+            }
+        }
+
+        return $response->getBody();
+    }
+
     /**
      * @param Request $request
      * @param \ArtaxServiceBuilder\Operation $operation
@@ -73,7 +95,7 @@ class GithubService extends GithubArtaxService {
         if ($rateLimitException) {
             $callback($rateLimitException, null, null);
         }
-        
+
         //We need to wrap the original callback to be able to get the rate limit info
         $extractRateLimitCallable = function (
             \Exception $e = null, 

@@ -24,7 +24,7 @@ class GistForkHydrator implements Hydrator
         $ref->url = $dataMapper->extractValue($data, 'url');
         
         $user = $dataMapper->extractValue($data, 'user');
-        $ref->refObject = $dataMapper->instantiate('GithubService\Model\User', $user);
+        $ref->refObject = $dataMapper->instantiateClass('GithubService\Model\User', $user);
 
         return $ref;
     }

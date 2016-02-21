@@ -15,7 +15,7 @@ class EmailSearchResultsHydrator implements Hydrator
         $emailSearchResults = new EmailSearchResults();
         foreach ($data as $key => $value) {
             $user = $dataMapper->extractValue($data, 'user');
-            $emailSearchResults->user = $dataMapper->instantiate(
+            $emailSearchResults->user = $dataMapper->instantiateClass(
                 'GithubService\\Model\\UserInSearchResult',
                 $user
             );

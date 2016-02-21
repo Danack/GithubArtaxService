@@ -15,7 +15,7 @@ class GithubDataMapperTest extends \PHPUnit_Framework_TestCase
         $dataMapper = new GithubDataMapper();
         $contents = file_get_contents(__DIR__."/../fixtures/data/githubJSON/EMOJIS.json");
         $data = json_decode($contents, true);
-        $emojiList = $dataMapper->instantiate('GithubService\Model\EmojiList', $data);
+        $emojiList = $dataMapper->instantiateClass('GithubService\Model\EmojiList', $data);
         $this->assertInstanceOf('GithubService\Model\EmojiList', $emojiList);
     }
 
@@ -125,7 +125,7 @@ class GithubDataMapperTest extends \PHPUnit_Framework_TestCase
         $data = json_decode($json, true);
         $dataMapper = new GithubDataMapper();
 
-        $instance = $dataMapper->instantiate($className, $data);
+        $instance = $dataMapper->instantiateClass($className, $data);
         $this->assertInstanceOf(
             $className,
             $instance

@@ -22,7 +22,7 @@ class OauthAccessHydrator implements Hydrator
         $oauthAccess->updatedAt = $dataMapper->extractValue($data, 'updated_at');
         $oauthAccess->url = $dataMapper->extractValue($data, 'url');
         $app = $dataMapper->extractValue($data, 'app');
-        $oauthAccess->app = $dataMapper->instantiate('GithubService\Model\App', $app);
+        $oauthAccess->app = $dataMapper->instantiateClass('GithubService\Model\App', $app);
         //TODO - check is array of values
         $oauthAccess->scopes = $dataMapper->extractValue($data, 'scopes');
 

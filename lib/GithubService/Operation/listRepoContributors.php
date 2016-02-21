@@ -47,13 +47,13 @@ class listRepoContributors implements \ArtaxServiceBuilder\Operation {
         $this->response = $response;
     }
 
-    public function __construct(\GithubService\GithubArtaxService\GithubArtaxService $api, $Authorization, $userAgent, $owner, $repo, $anon) {
+    public function __construct(\GithubService\GithubArtaxService\GithubArtaxService $api, $authorization, $userAgent, $owner, $repo, $anon) {
         $defaultParams = [
             'Accept' => 'application/vnd.github.v3+json',
         ];
         $this->setParams($defaultParams);
         $this->api = $api;
-        $this->parameters['Authorization'] = $Authorization;
+        $this->parameters['Authorization'] = $authorization;
         $this->parameters['userAgent'] = $userAgent;
         $this->parameters['owner'] = $owner;
         $this->parameters['repo'] = $repo;
@@ -300,7 +300,7 @@ class listRepoContributors implements \ArtaxServiceBuilder\Operation {
         $this->response = $response;
 
         if ($this->shouldResponseBeProcessed($response)) {
-            $instance = \GithubService\Model\Contributor::createFromResponse($response, $this);
+            $instance = $this->api->instantiateResult($response, $this);
 
             return $instance;
         }
@@ -338,7 +338,7 @@ class listRepoContributors implements \ArtaxServiceBuilder\Operation {
     public function dispatch(\Amp\Artax\Request $request) {
         $response = $this->api->execute($request, $this);
         $this->response = $response;
-        $instance = \GithubService\Model\Contributor::createFromResponse($response, $this);
+        $instance = $this->api->instantiateResult($response, $this);
 
         return $instance;
     }
@@ -363,7 +363,7 @@ class listRepoContributors implements \ArtaxServiceBuilder\Operation {
      * @param \Amp\Artax\Response $response The HTTP response.
      */
     public function processResponse(\Amp\Artax\Response $response) {
-        $instance = \GithubService\Model\Contributor::createFromResponse($response, $this);
+        $instance = $this->api->instantiateResult($response, $this);
 
         return $instance;
     }
@@ -425,6 +425,15 @@ class listRepoContributors implements \ArtaxServiceBuilder\Operation {
      */
     public function getOriginalResponse() {
         return $this->originalResponse;
+    }
+
+    /**
+     * Return how the result of this operation should be instantiated.
+     *
+     * @return \Amp\Artax\Response
+     */
+    public function getResultInstantiationInfo() {
+        return ['instantiate' => 'GithubService\\Model\\Contributor'];
     }
 
 

@@ -38,7 +38,7 @@ interface GithubService {
      * \ArtaxServiceBuilder\BasicAuthToken object.
      * @return \GithubService\Operation\listEmojis The new operation
      */
-    public function listEmojis($Authorization);
+    public function listEmojis($authorization);
 
     /**
      * listUsersGists
@@ -52,7 +52,7 @@ interface GithubService {
      * @param string $username 
      * @return \GithubService\Operation\listUsersGists The new operation
      */
-    public function listUsersGists($Authorization, $username);
+    public function listUsersGists($authorization, $username);
 
     /**
      * listSelfGists
@@ -65,7 +65,7 @@ interface GithubService {
      * \ArtaxServiceBuilder\BasicAuthToken object.
      * @return \GithubService\Operation\listSelfGists The new operation
      */
-    public function listSelfGists($Authorization);
+    public function listSelfGists($authorization);
 
     /**
      * listPublicGists
@@ -78,7 +78,7 @@ interface GithubService {
      * \ArtaxServiceBuilder\BasicAuthToken object.
      * @return \GithubService\Operation\listPublicGists The new operation
      */
-    public function listPublicGists($Authorization);
+    public function listPublicGists($authorization);
 
     /**
      * listSelfStarredGists
@@ -91,7 +91,7 @@ interface GithubService {
      * \ArtaxServiceBuilder\BasicAuthToken object.
      * @return \GithubService\Operation\listSelfStarredGists The new operation
      */
-    public function listSelfStarredGists($Authorization);
+    public function listSelfStarredGists($authorization);
 
     /**
      * getGist
@@ -104,7 +104,7 @@ interface GithubService {
      * \ArtaxServiceBuilder\BasicAuthToken object.
      * @return \GithubService\Operation\getGist The new operation
      */
-    public function getGist($Authorization);
+    public function getGist($authorization);
 
     /**
      * getGistByRevision
@@ -117,7 +117,7 @@ interface GithubService {
      * \ArtaxServiceBuilder\BasicAuthToken object.
      * @return \GithubService\Operation\getGistByRevision The new operation
      */
-    public function getGistByRevision($Authorization);
+    public function getGistByRevision($authorization);
 
     /**
      * createGist
@@ -144,7 +144,7 @@ interface GithubService {
      * \ArtaxServiceBuilder\BasicAuthToken object.
      * @return \GithubService\Operation\listGistCommits The new operation
      */
-    public function listGistCommits($Authorization);
+    public function listGistCommits($authorization);
 
     /**
      * starGist
@@ -157,7 +157,7 @@ interface GithubService {
      * \ArtaxServiceBuilder\BasicAuthToken object.
      * @return \GithubService\Operation\starGist The new operation
      */
-    public function starGist($Authorization);
+    public function starGist($authorization);
 
     /**
      * unstarGist
@@ -170,7 +170,7 @@ interface GithubService {
      * \ArtaxServiceBuilder\BasicAuthToken object.
      * @return \GithubService\Operation\unstarGist The new operation
      */
-    public function unstarGist($Authorization);
+    public function unstarGist($authorization);
 
     /**
      * checkGistStarred
@@ -184,7 +184,7 @@ interface GithubService {
      * @param string $id The id of the gist to check
      * @return \GithubService\Operation\checkGistStarred The new operation
      */
-    public function checkGistStarred($Authorization, $id);
+    public function checkGistStarred($authorization, $id);
 
     /**
      * forkGist
@@ -197,7 +197,7 @@ interface GithubService {
      * \ArtaxServiceBuilder\BasicAuthToken object.
      * @return \GithubService\Operation\forkGist The new operation
      */
-    public function forkGist($Authorization);
+    public function forkGist($authorization);
 
     /**
      * listGistForks
@@ -210,7 +210,7 @@ interface GithubService {
      * \ArtaxServiceBuilder\BasicAuthToken object.
      * @return \GithubService\Operation\listGistForks The new operation
      */
-    public function listGistForks($Authorization);
+    public function listGistForks($authorization);
 
     /**
      * deleteGist
@@ -223,7 +223,7 @@ interface GithubService {
      * \ArtaxServiceBuilder\BasicAuthToken object.
      * @return \GithubService\Operation\deleteGist The new operation
      */
-    public function deleteGist($Authorization);
+    public function deleteGist($authorization);
 
     /**
      * listGitIgnoreTemplates
@@ -236,7 +236,7 @@ interface GithubService {
      * \ArtaxServiceBuilder\BasicAuthToken object.
      * @return \GithubService\Operation\listGitIgnoreTemplates The new operation
      */
-    public function listGitIgnoreTemplates($Authorization);
+    public function listGitIgnoreTemplates($authorization);
 
     /**
      * getGitIgnoreTemplate
@@ -250,7 +250,7 @@ interface GithubService {
      * @param string $type Which template to get.
      * @return \GithubService\Operation\getGitIgnoreTemplate The new operation
      */
-    public function getGitIgnoreTemplate($Authorization, $type);
+    public function getGitIgnoreTemplate($authorization, $type);
 
     /**
      * listIssues
@@ -335,7 +335,7 @@ interface GithubService {
      * @param mixed $Authorization The basic authentication token
      * @return \GithubService\Operation\stubBasicAuth The new operation
      */
-    public function stubBasicAuth($Authorization);
+    public function stubBasicAuth($authorization);
 
     /**
      * getAuthorizations
@@ -348,7 +348,7 @@ interface GithubService {
      * \ArtaxServiceBuilder\BasicAuthToken object.
      * @return \GithubService\Operation\getAuthorizations The new operation
      */
-    public function getAuthorizations($Authorization);
+    public function getAuthorizations($authorization);
 
     /**
      * getAuthorization
@@ -362,7 +362,7 @@ interface GithubService {
      * @param mixed $id Which authorization to get
      * @return \GithubService\Operation\getAuthorization The new operation
      */
-    public function getAuthorization($Authorization, $id);
+    public function getAuthorization($authorization, $id);
 
     /**
      * createAuthorization
@@ -372,7 +372,7 @@ interface GithubService {
      * @param mixed $note 
      * @return \GithubService\Operation\createAuthorization The new operation
      */
-    public function createAuthorization($Authorization, $scopes, $note);
+    public function createAuthorization($authorization, $scopes, $note);
 
     /**
      * getOrCreateAuthorization
@@ -387,7 +387,7 @@ interface GithubService {
      * to create the token.
      * @return \GithubService\Operation\getOrCreateAuthorization The new operation
      */
-    public function getOrCreateAuthorization($Authorization, $scopes, $note, $note_url, $client_id, $client_secret);
+    public function getOrCreateAuthorization($authorization, $scopes, $note, $note_url, $client_id, $client_secret);
 
     /**
      * getOrCreateAuthorizationForAppFingerprint
@@ -433,7 +433,7 @@ interface GithubService {
      * \ArtaxServiceBuilder\BasicAuthToken object.
      * @return \GithubService\Operation\deleteAuthorization The new operation
      */
-    public function deleteAuthorization($Authorization);
+    public function deleteAuthorization($authorization);
 
     /**
      * checkAuthorization
@@ -443,7 +443,7 @@ interface GithubService {
      * @param mixed $access_token 
      * @return \GithubService\Operation\checkAuthorization The new operation
      */
-    public function checkAuthorization($Authorization, $client_id, $access_token);
+    public function checkAuthorization($authorization, $client_id, $access_token);
 
     /**
      * resetAuthorization
@@ -453,7 +453,7 @@ interface GithubService {
      * @param mixed $access_token 
      * @return \GithubService\Operation\resetAuthorization The new operation
      */
-    public function resetAuthorization($Authorization, $client_id, $access_token);
+    public function resetAuthorization($authorization, $client_id, $access_token);
 
     /**
      * revokeAllAuthority
@@ -462,7 +462,7 @@ interface GithubService {
      * @param mixed $client_id The id of the client.
      * @return \GithubService\Operation\revokeAllAuthority The new operation
      */
-    public function revokeAllAuthority($Authorization, $client_id);
+    public function revokeAllAuthority($authorization, $client_id);
 
     /**
      * revokeAuthorityForApplication
@@ -472,7 +472,7 @@ interface GithubService {
      * @param mixed $access_token The access token to delete.
      * @return \GithubService\Operation\revokeAuthorityForApplication The new operation
      */
-    public function revokeAuthorityForApplication($Authorization, $client_id, $access_token);
+    public function revokeAuthorityForApplication($authorization, $client_id, $access_token);
 
     /**
      * listPRComments
@@ -655,7 +655,7 @@ interface GithubService {
      * @param string $repo The repository to get the commits for
      * @return \GithubService\Operation\listRepoCommits The new operation
      */
-    public function listRepoCommits($Authorization, $owner, $repo);
+    public function listRepoCommits($authorization, $owner, $repo);
 
     /**
      * getCommit
@@ -668,7 +668,7 @@ interface GithubService {
      * \ArtaxServiceBuilder\BasicAuthToken object.
      * @return \GithubService\Operation\getCommit The new operation
      */
-    public function getCommit($Authorization);
+    public function getCommit($authorization);
 
     /**
      * compareTwoCommits
@@ -681,7 +681,7 @@ interface GithubService {
      * \ArtaxServiceBuilder\BasicAuthToken object.
      * @return \GithubService\Operation\compareTwoCommits The new operation
      */
-    public function compareTwoCommits($Authorization);
+    public function compareTwoCommits($authorization);
 
     /**
      * compareTwoCommitsForks
@@ -694,7 +694,7 @@ interface GithubService {
      * \ArtaxServiceBuilder\BasicAuthToken object.
      * @return \GithubService\Operation\compareTwoCommitsForks The new operation
      */
-    public function compareTwoCommitsForks($Authorization);
+    public function compareTwoCommitsForks($authorization);
 
     /**
      * getRepoReadme
@@ -750,7 +750,7 @@ interface GithubService {
      * @param mixed $ref 
      * @return \GithubService\Operation\getArchiveLink The new operation
      */
-    public function getArchiveLink($Authorization, $owner, $repo, $ref);
+    public function getArchiveLink($authorization, $owner, $repo, $ref);
 
     /**
      * updateFile
@@ -771,7 +771,7 @@ interface GithubService {
      * @param string $message The commit message.
      * @return \GithubService\Operation\updateFile The new operation
      */
-    public function updateFile($Authorization, $path, $owner, $repo, $content, $sha, $branch, $message);
+    public function updateFile($authorization, $path, $owner, $repo, $content, $sha, $branch, $message);
 
     /**
      * listDeployments
@@ -978,7 +978,7 @@ interface GithubService {
      * `full_name`: `asc`, otherwise `desc`
      * @return \GithubService\Operation\listSelfRepos The new operation
      */
-    public function listSelfRepos($Authorization, $type, $sort, $direction);
+    public function listSelfRepos($authorization, $type, $sort, $direction);
 
     /**
      * listUserRepos
@@ -992,7 +992,7 @@ interface GithubService {
      * @param string $username The user to get the repos of.
      * @return \GithubService\Operation\listUserRepos The new operation
      */
-    public function listUserRepos($Authorization, $username);
+    public function listUserRepos($authorization, $username);
 
     /**
      * listOrgRepos
@@ -1008,7 +1008,7 @@ interface GithubService {
      * `sources`, `member`. Default: `all`
      * @return \GithubService\Operation\listOrgRepos The new operation
      */
-    public function listOrgRepos($Authorization, $org, $type);
+    public function listOrgRepos($authorization, $org, $type);
 
     /**
      * listPublicRepos
@@ -1022,7 +1022,7 @@ interface GithubService {
      * @param string $since The integer ID of the last Repository that you've seen.
      * @return \GithubService\Operation\listPublicRepos The new operation
      */
-    public function listPublicRepos($Authorization, $since);
+    public function listPublicRepos($authorization, $since);
 
     /**
      * createRepo
@@ -1044,7 +1044,7 @@ interface GithubService {
      * @param string $repo 
      * @return \GithubService\Operation\getRepo The new operation
      */
-    public function getRepo($Authorization, $owner, $repo);
+    public function getRepo($authorization, $owner, $repo);
 
     /**
      * updateRepo
@@ -1067,7 +1067,7 @@ interface GithubService {
      * @param string $anon 
      * @return \GithubService\Operation\listRepoContributors The new operation
      */
-    public function listRepoContributors($Authorization, $owner, $repo, $anon);
+    public function listRepoContributors($authorization, $owner, $repo, $anon);
 
     /**
      * listRepoLanguages
@@ -1082,7 +1082,7 @@ interface GithubService {
      * @param string $repo 
      * @return \GithubService\Operation\listRepoLanguages The new operation
      */
-    public function listRepoLanguages($Authorization, $owner, $repo);
+    public function listRepoLanguages($authorization, $owner, $repo);
 
     /**
      * listRepoTeams
@@ -1097,7 +1097,7 @@ interface GithubService {
      * @param string $repo 
      * @return \GithubService\Operation\listRepoTeams The new operation
      */
-    public function listRepoTeams($Authorization, $owner, $repo);
+    public function listRepoTeams($authorization, $owner, $repo);
 
     /**
      * listRepoTags
@@ -1112,7 +1112,7 @@ interface GithubService {
      * @param string $repo 
      * @return \GithubService\Operation\listRepoTags The new operation
      */
-    public function listRepoTags($Authorization, $owner, $repo);
+    public function listRepoTags($authorization, $owner, $repo);
 
     /**
      * listRepoBranches
@@ -1127,7 +1127,7 @@ interface GithubService {
      * @param string $repo 
      * @return \GithubService\Operation\listRepoBranches The new operation
      */
-    public function listRepoBranches($Authorization, $owner, $repo);
+    public function listRepoBranches($authorization, $owner, $repo);
 
     /**
      * getRepoBranch
@@ -1141,7 +1141,7 @@ interface GithubService {
      * @param string $username 
      * @return \GithubService\Operation\getRepoBranch The new operation
      */
-    public function getRepoBranch($Authorization, $username);
+    public function getRepoBranch($authorization, $username);
 
     /**
      * deleteRepo
@@ -1156,7 +1156,7 @@ interface GithubService {
      * @param string $repo 
      * @return \GithubService\Operation\deleteRepo The new operation
      */
-    public function deleteRepo($Authorization, $owner, $repo);
+    public function deleteRepo($authorization, $owner, $repo);
 
     /**
      * searchRepos
@@ -1198,7 +1198,7 @@ interface GithubService {
      * @param mixed $pageURL 
      * @return \GithubService\Operation\listEmojisPaginate The new operation
      */
-    public function listEmojisPaginate($Authorization, $pageURL);
+    public function listEmojisPaginate($authorization, $pageURL);
 
     /**
      * listUsersGistsPaginate
@@ -1212,7 +1212,7 @@ interface GithubService {
      * @param mixed $pageURL 
      * @return \GithubService\Operation\listUsersGistsPaginate The new operation
      */
-    public function listUsersGistsPaginate($Authorization, $pageURL);
+    public function listUsersGistsPaginate($authorization, $pageURL);
 
     /**
      * listSelfGistsPaginate
@@ -1226,7 +1226,7 @@ interface GithubService {
      * @param mixed $pageURL 
      * @return \GithubService\Operation\listSelfGistsPaginate The new operation
      */
-    public function listSelfGistsPaginate($Authorization, $pageURL);
+    public function listSelfGistsPaginate($authorization, $pageURL);
 
     /**
      * listPublicGistsPaginate
@@ -1240,7 +1240,7 @@ interface GithubService {
      * @param mixed $pageURL 
      * @return \GithubService\Operation\listPublicGistsPaginate The new operation
      */
-    public function listPublicGistsPaginate($Authorization, $pageURL);
+    public function listPublicGistsPaginate($authorization, $pageURL);
 
     /**
      * listSelfStarredGistsPaginate
@@ -1254,7 +1254,7 @@ interface GithubService {
      * @param mixed $pageURL 
      * @return \GithubService\Operation\listSelfStarredGistsPaginate The new operation
      */
-    public function listSelfStarredGistsPaginate($Authorization, $pageURL);
+    public function listSelfStarredGistsPaginate($authorization, $pageURL);
 
     /**
      * getGistPaginate
@@ -1268,7 +1268,7 @@ interface GithubService {
      * @param mixed $pageURL 
      * @return \GithubService\Operation\getGistPaginate The new operation
      */
-    public function getGistPaginate($Authorization, $pageURL);
+    public function getGistPaginate($authorization, $pageURL);
 
     /**
      * getGistByRevisionPaginate
@@ -1282,7 +1282,7 @@ interface GithubService {
      * @param mixed $pageURL 
      * @return \GithubService\Operation\getGistByRevisionPaginate The new operation
      */
-    public function getGistByRevisionPaginate($Authorization, $pageURL);
+    public function getGistByRevisionPaginate($authorization, $pageURL);
 
     /**
      * listGistCommitsPaginate
@@ -1296,7 +1296,7 @@ interface GithubService {
      * @param mixed $pageURL 
      * @return \GithubService\Operation\listGistCommitsPaginate The new operation
      */
-    public function listGistCommitsPaginate($Authorization, $pageURL);
+    public function listGistCommitsPaginate($authorization, $pageURL);
 
     /**
      * checkGistStarredPaginate
@@ -1310,7 +1310,7 @@ interface GithubService {
      * @param mixed $pageURL 
      * @return \GithubService\Operation\checkGistStarredPaginate The new operation
      */
-    public function checkGistStarredPaginate($Authorization, $pageURL);
+    public function checkGistStarredPaginate($authorization, $pageURL);
 
     /**
      * listGistForksPaginate
@@ -1324,7 +1324,7 @@ interface GithubService {
      * @param mixed $pageURL 
      * @return \GithubService\Operation\listGistForksPaginate The new operation
      */
-    public function listGistForksPaginate($Authorization, $pageURL);
+    public function listGistForksPaginate($authorization, $pageURL);
 
     /**
      * listGitIgnoreTemplatesPaginate
@@ -1339,7 +1339,7 @@ interface GithubService {
      * @return \GithubService\Operation\listGitIgnoreTemplatesPaginate The new
      * operation
      */
-    public function listGitIgnoreTemplatesPaginate($Authorization, $pageURL);
+    public function listGitIgnoreTemplatesPaginate($authorization, $pageURL);
 
     /**
      * getGitIgnoreTemplatePaginate
@@ -1353,7 +1353,7 @@ interface GithubService {
      * @param mixed $pageURL 
      * @return \GithubService\Operation\getGitIgnoreTemplatePaginate The new operation
      */
-    public function getGitIgnoreTemplatePaginate($Authorization, $pageURL);
+    public function getGitIgnoreTemplatePaginate($authorization, $pageURL);
 
     /**
      * getAuthorizationsPaginate
@@ -1367,7 +1367,7 @@ interface GithubService {
      * @param mixed $pageURL 
      * @return \GithubService\Operation\getAuthorizationsPaginate The new operation
      */
-    public function getAuthorizationsPaginate($Authorization, $pageURL);
+    public function getAuthorizationsPaginate($authorization, $pageURL);
 
     /**
      * getAuthorizationPaginate
@@ -1381,7 +1381,7 @@ interface GithubService {
      * @param mixed $pageURL 
      * @return \GithubService\Operation\getAuthorizationPaginate The new operation
      */
-    public function getAuthorizationPaginate($Authorization, $pageURL);
+    public function getAuthorizationPaginate($authorization, $pageURL);
 
     /**
      * listRepoCommitsPaginate
@@ -1395,7 +1395,7 @@ interface GithubService {
      * @param mixed $pageURL 
      * @return \GithubService\Operation\listRepoCommitsPaginate The new operation
      */
-    public function listRepoCommitsPaginate($Authorization, $pageURL);
+    public function listRepoCommitsPaginate($authorization, $pageURL);
 
     /**
      * getCommitPaginate
@@ -1409,7 +1409,7 @@ interface GithubService {
      * @param mixed $pageURL 
      * @return \GithubService\Operation\getCommitPaginate The new operation
      */
-    public function getCommitPaginate($Authorization, $pageURL);
+    public function getCommitPaginate($authorization, $pageURL);
 
     /**
      * compareTwoCommitsPaginate
@@ -1423,7 +1423,7 @@ interface GithubService {
      * @param mixed $pageURL 
      * @return \GithubService\Operation\compareTwoCommitsPaginate The new operation
      */
-    public function compareTwoCommitsPaginate($Authorization, $pageURL);
+    public function compareTwoCommitsPaginate($authorization, $pageURL);
 
     /**
      * compareTwoCommitsForksPaginate
@@ -1438,7 +1438,7 @@ interface GithubService {
      * @return \GithubService\Operation\compareTwoCommitsForksPaginate The new
      * operation
      */
-    public function compareTwoCommitsForksPaginate($Authorization, $pageURL);
+    public function compareTwoCommitsForksPaginate($authorization, $pageURL);
 
     /**
      * listSelfReposPaginate
@@ -1452,7 +1452,7 @@ interface GithubService {
      * @param mixed $pageURL 
      * @return \GithubService\Operation\listSelfReposPaginate The new operation
      */
-    public function listSelfReposPaginate($Authorization, $pageURL);
+    public function listSelfReposPaginate($authorization, $pageURL);
 
     /**
      * listUserReposPaginate
@@ -1466,7 +1466,7 @@ interface GithubService {
      * @param mixed $pageURL 
      * @return \GithubService\Operation\listUserReposPaginate The new operation
      */
-    public function listUserReposPaginate($Authorization, $pageURL);
+    public function listUserReposPaginate($authorization, $pageURL);
 
     /**
      * listOrgReposPaginate
@@ -1480,7 +1480,7 @@ interface GithubService {
      * @param mixed $pageURL 
      * @return \GithubService\Operation\listOrgReposPaginate The new operation
      */
-    public function listOrgReposPaginate($Authorization, $pageURL);
+    public function listOrgReposPaginate($authorization, $pageURL);
 
     /**
      * listPublicReposPaginate
@@ -1494,7 +1494,7 @@ interface GithubService {
      * @param mixed $pageURL 
      * @return \GithubService\Operation\listPublicReposPaginate The new operation
      */
-    public function listPublicReposPaginate($Authorization, $pageURL);
+    public function listPublicReposPaginate($authorization, $pageURL);
 
     /**
      * getRepoPaginate
@@ -1508,7 +1508,7 @@ interface GithubService {
      * @param mixed $pageURL 
      * @return \GithubService\Operation\getRepoPaginate The new operation
      */
-    public function getRepoPaginate($Authorization, $pageURL);
+    public function getRepoPaginate($authorization, $pageURL);
 
     /**
      * listRepoContributorsPaginate
@@ -1522,7 +1522,7 @@ interface GithubService {
      * @param mixed $pageURL 
      * @return \GithubService\Operation\listRepoContributorsPaginate The new operation
      */
-    public function listRepoContributorsPaginate($Authorization, $pageURL);
+    public function listRepoContributorsPaginate($authorization, $pageURL);
 
     /**
      * listRepoLanguagesPaginate
@@ -1536,7 +1536,7 @@ interface GithubService {
      * @param mixed $pageURL 
      * @return \GithubService\Operation\listRepoLanguagesPaginate The new operation
      */
-    public function listRepoLanguagesPaginate($Authorization, $pageURL);
+    public function listRepoLanguagesPaginate($authorization, $pageURL);
 
     /**
      * listRepoTeamsPaginate
@@ -1550,7 +1550,7 @@ interface GithubService {
      * @param mixed $pageURL 
      * @return \GithubService\Operation\listRepoTeamsPaginate The new operation
      */
-    public function listRepoTeamsPaginate($Authorization, $pageURL);
+    public function listRepoTeamsPaginate($authorization, $pageURL);
 
     /**
      * listRepoTagsPaginate
@@ -1564,7 +1564,7 @@ interface GithubService {
      * @param mixed $pageURL 
      * @return \GithubService\Operation\listRepoTagsPaginate The new operation
      */
-    public function listRepoTagsPaginate($Authorization, $pageURL);
+    public function listRepoTagsPaginate($authorization, $pageURL);
 
     /**
      * listRepoBranchesPaginate
@@ -1578,7 +1578,7 @@ interface GithubService {
      * @param mixed $pageURL 
      * @return \GithubService\Operation\listRepoBranchesPaginate The new operation
      */
-    public function listRepoBranchesPaginate($Authorization, $pageURL);
+    public function listRepoBranchesPaginate($authorization, $pageURL);
 
     /**
      * getRepoBranchPaginate
@@ -1592,7 +1592,7 @@ interface GithubService {
      * @param mixed $pageURL 
      * @return \GithubService\Operation\getRepoBranchPaginate The new operation
      */
-    public function getRepoBranchPaginate($Authorization, $pageURL);
+    public function getRepoBranchPaginate($authorization, $pageURL);
 
     /**
      * executeAsync

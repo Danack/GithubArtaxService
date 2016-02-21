@@ -22,7 +22,7 @@ class StatusHydrator implements Hydrator
 
         $creator = $dataMapper->extractValue($data, 'creator', true);
         if ($creator !== null) {
-            $status->creator = $dataMapper->instantiate('GithubService\\Model\\User', $creator);
+            $status->creator = $dataMapper->instantiateClass('GithubService\\Model\\User', $creator);
         }
         
         return $status;

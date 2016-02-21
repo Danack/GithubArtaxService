@@ -20,27 +20,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase {
 //
 //        return [$reactor, $client];
 //    }
-//    
-//    
-//    function testGoogle() {
-//        list($reactor, $client) = $this->getReactorAndClient();
-//        /** @var  $client ArtaxClient */
-//        $promise = $client->request("http://www.google.com");
-//        $response = \Amp\wait($promise, $reactor);
-//        /** @var $response Response */
-//        $this->assertEquals(200, $response->getStatus());
-//    }
-//
-//    function testError() {
-//        $this->setExpectedException('Amp\Dns\ResolutionException');
-//        list($reactor, $client) = $this->getReactorAndClient();
-//        /** @var  $client ArtaxClient */
-//        $client->setOption(ArtaxClient::OP_HOST_CONNECTION_LIMIT, 3);
-//        $promise = $client->request("http://doesntexist.test");
-//        \Amp\wait($promise, $reactor);
-//    }
-//
-//
+
 //    /**
 //     * Test that calling listRepoTags
 //     */

@@ -16,7 +16,7 @@ class GistForksHydrator implements Hydrator
     {
         $gistForks = new GistForks();
         foreach ($data as $entry) {
-            $gistForks->gistForklist[] = $dataMapper->instantiate('GithubService\Model\GistFork', $entry);  
+            $gistForks->gistForklist[] = $dataMapper->instantiateClass('GithubService\Model\GistFork', $entry);  
         }
  
         return $gistForks;

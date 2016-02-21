@@ -24,7 +24,7 @@ class GistCommentHydrator implements Hydrator
   
         
         $user = $dataMapper->extractValue($data, 'user');
-        $gistComment->refObject = $dataMapper->instantiate('GithubService\Model\User', $user);
+        $gistComment->refObject = $dataMapper->instantiateClass('GithubService\Model\User', $user);
 
         return $gistComment;
     }

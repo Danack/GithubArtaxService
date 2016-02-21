@@ -13,7 +13,7 @@ class RepoStatsCodeFrequencyHydrator implements Hydrator
         $repoStatsCodeInfo = new RepoStatsCodeFrequency();
 
         foreach ($data as $entry) {
-            $codeInfo = $dataMapper->instantiate('GithubService\Model\RepoStatsCodeInfo', $entry);
+            $codeInfo = $dataMapper->instantiateClass('GithubService\Model\RepoStatsCodeInfo', $entry);
             $repoStatsCodeInfo->repoStats[] = $codeInfo; 
         }
 

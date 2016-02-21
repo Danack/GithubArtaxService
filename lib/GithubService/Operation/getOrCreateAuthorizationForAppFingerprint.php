@@ -229,7 +229,7 @@ class getOrCreateAuthorizationForAppFingerprint implements \ArtaxServiceBuilder\
         $this->response = $response;
 
         if ($this->shouldResponseBeProcessed($response)) {
-            $instance = \GithubService\Model\OauthAccess::createFromResponse($response, $this);
+            $instance = $this->api->instantiateResult($response, $this);
 
             return $instance;
         }
@@ -267,7 +267,7 @@ class getOrCreateAuthorizationForAppFingerprint implements \ArtaxServiceBuilder\
     public function dispatch(\Amp\Artax\Request $request) {
         $response = $this->api->execute($request, $this);
         $this->response = $response;
-        $instance = \GithubService\Model\OauthAccess::createFromResponse($response, $this);
+        $instance = $this->api->instantiateResult($response, $this);
 
         return $instance;
     }
@@ -292,7 +292,7 @@ class getOrCreateAuthorizationForAppFingerprint implements \ArtaxServiceBuilder\
      * @param \Amp\Artax\Response $response The HTTP response.
      */
     public function processResponse(\Amp\Artax\Response $response) {
-        $instance = \GithubService\Model\OauthAccess::createFromResponse($response, $this);
+        $instance = $this->api->instantiateResult($response, $this);
 
         return $instance;
     }
@@ -354,6 +354,15 @@ class getOrCreateAuthorizationForAppFingerprint implements \ArtaxServiceBuilder\
      */
     public function getOriginalResponse() {
         return $this->originalResponse;
+    }
+
+    /**
+     * Return how the result of this operation should be instantiated.
+     *
+     * @return \Amp\Artax\Response
+     */
+    public function getResultInstantiationInfo() {
+        return ['instantiate' => 'GithubService\\Model\\OauthAccess'];
     }
 
 

@@ -13,7 +13,7 @@ class BranchesHydrator implements Hydrator
         $branches = new Branches();
 
         foreach ($data as $entry) {
-            $object = $dataMapper->instantiate('GithubService\Model\BranchCommit', $entry);
+            $object = $dataMapper->instantiateClass('GithubService\Model\BranchCommit', $entry);
             $branches->branchList[] = $object;
         }
 

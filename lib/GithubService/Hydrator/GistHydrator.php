@@ -27,10 +27,10 @@ class GistHydrator implements Hydrator
         $gist->user = $dataMapper->extractValue($data, 'user');
         
         $files = $dataMapper->extractValue($data, 'files');
-        $gist->files = $dataMapper->instantiate('GithubService\Model\FileList', $files);
+        $gist->files = $dataMapper->instantiateClass('GithubService\Model\FileList', $files);
         
         $owner = $dataMapper->extractValue($data, 'owner');
-        $gist->owner = $dataMapper->instantiate('GithubService\Model\User', $owner);
+        $gist->owner = $dataMapper->instantiateClass('GithubService\Model\User', $owner);
 
         return $gist;
     }

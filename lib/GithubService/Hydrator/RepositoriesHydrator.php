@@ -16,7 +16,7 @@ class RepositoriesHydrator implements Hydrator
         $repositories = new Repositories();
         
         foreach ($data as $entry) {
-            $object = $dataMapper->instantiate('GithubService\Model\RepoSearchItem', $entry);
+            $object = $dataMapper->instantiateClass('GithubService\Model\RepoSearchItem', $entry);
             $repositories->repositoriesChild[] = $object;
         }
 

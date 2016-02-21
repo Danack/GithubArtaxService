@@ -124,7 +124,9 @@ class createPR implements \ArtaxServiceBuilder\Operation {
         $this->response = $response;
 
         if ($this->shouldResponseBeProcessed($response)) {
-            return $response->getBody();
+            $instance = $this->api->instantiateResult($response, $this);
+
+            return $instance;
         }
         return $response;
     }
@@ -160,7 +162,9 @@ class createPR implements \ArtaxServiceBuilder\Operation {
     public function dispatch(\Amp\Artax\Request $request) {
         $response = $this->api->execute($request, $this);
         $this->response = $response;
-        return $response->getBody();
+        $instance = $this->api->instantiateResult($response, $this);
+
+        return $instance;
     }
 
     /**
@@ -183,7 +187,9 @@ class createPR implements \ArtaxServiceBuilder\Operation {
      * @param \Amp\Artax\Response $response The HTTP response.
      */
     public function processResponse(\Amp\Artax\Response $response) {
-        return $response->getBody();
+        $instance = $this->api->instantiateResult($response, $this);
+
+        return $instance;
     }
 
     /**
@@ -243,6 +249,15 @@ class createPR implements \ArtaxServiceBuilder\Operation {
      */
     public function getOriginalResponse() {
         return $this->originalResponse;
+    }
+
+    /**
+     * Return how the result of this operation should be instantiated.
+     *
+     * @return \Amp\Artax\Response
+     */
+    public function getResultInstantiationInfo() {
+        return null
     }
 
 

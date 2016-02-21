@@ -12,7 +12,7 @@ class RepoStatsCommitActivityHydrator implements Hydrator
     {
         $repoStatsCommitActivity = new RepoStatsCommitActivity();
         foreach ($data as $entry) {
-            $child = $dataMapper->instantiate('GithubService\Model\RepoStatsCommitActivityChild', $entry);
+            $child = $dataMapper->instantiateClass('GithubService\Model\RepoStatsCommitActivityChild', $entry);
             $repoStatsCommitActivity->repoStats[] = $child;
         }
 

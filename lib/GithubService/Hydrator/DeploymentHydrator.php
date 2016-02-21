@@ -23,10 +23,10 @@ class DeploymentHydrator implements Hydrator
         $deployment->url = $dataMapper->extractValue($data, 'url');
         
         $creator = $dataMapper->extractValue($data, 'creator');
-        $deployment->creator = $dataMapper->instantiate('GithubService\\Model\\User', $creator);
+        $deployment->creator = $dataMapper->instantiateClass('GithubService\\Model\\User', $creator);
         
         $payload = $dataMapper->extractValue($data, 'payload');
-        $deployment->payload = $dataMapper->instantiate('GithubService\\Model\\Payload', $payload);
+        $deployment->payload = $dataMapper->instantiateClass('GithubService\\Model\\Payload', $payload);
 
 
         return $deployment;

@@ -20,10 +20,10 @@ class PagesBuildHydrator implements Hydrator
 
         
         $error = $dataMapper->extractValue($data, 'error');
-        $payload->error = $dataMapper->instantiate('GithubService\Model\IndexingSuccess', $error);
+        $payload->error = $dataMapper->instantiateClass('GithubService\Model\IndexingSuccess', $error);
         
         $pusher = $dataMapper->extractValue($data, 'pusher');
-        $payload->pusher = $dataMapper->instantiate('GithubService\Model\User', $pusher);
+        $payload->pusher = $dataMapper->instantiateClass('GithubService\Model\User', $pusher);
 
         return $payload;
     }

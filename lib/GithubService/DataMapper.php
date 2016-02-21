@@ -63,7 +63,7 @@ class DataMapper
     }
     
 
-    public function instantiate($classname, $data)
+    public function instantiateClass($classname, $data)
     {
         if (array_key_exists($classname, $this->hydrators) === false) {
             throw new DataMapperException("Cannot instantiate - unregistered class $classname");
@@ -75,26 +75,26 @@ class DataMapper
         return $instance;
     }
     
-    /**
-     * Maps the properties that are in the $data param to the internal properties of the class,
-     * using the static::$dataMap 
-     * 
-     * @param $data
-     * @throws DataMapperException
-     */
-    function mapPropertiesFromData($instance, $data, DataMapList $dataMapList)
-    {
-        foreach($dataMapList as $dataMap) {
-            $dataFound = FALSE;
-
-            $sourceValue = self::extractValueFromData($data, $dataMap, $dataFound);
-            if ($dataFound == TRUE) {
-                $this->setPropertyFromValue($instance, $dataMap, $sourceValue);
-            }
-        }
-
-        //$this->finishMapping();
-    }
+//    /**
+//     * Maps the properties that are in the $data param to the internal properties of the class,
+//     * using the static::$dataMap 
+//     * 
+//     * @param $data
+//     * @throws DataMapperException
+//     */
+//    function mapPropertiesFromData($instance, $data, DataMapList $dataMapList)
+//    {
+//        foreach($dataMapList as $dataMap) {
+//            $dataFound = FALSE;
+//
+//            $sourceValue = self::extractValueFromData($data, $dataMap, $dataFound);
+//            if ($dataFound == TRUE) {
+//                $this->setPropertyFromValue($instance, $dataMap, $sourceValue);
+//            }
+//        }
+//
+//        //$this->finishMapping();
+//    }
 
     /**
      * Look in the $data for the value to be used for the mapping according to the rules set in $dataMapElement.
@@ -128,8 +128,6 @@ class DataMapper
         foreach($dataVariableNameArray as $dataVariableName) {
             if (is_array($value) == FALSE ||
                 array_key_exists($dataVariableName, $value) == FALSE) {
-//                if (array_key_exists('optional', $dataMapElement) == TRUE &&
-//                    $dataMapElement['optional'] == TRUE) {
                 if ($dataMapElement->optional === true) {
                     return null;  //This value shouldn't be used as $dataFound is not set to true.
                 }
@@ -218,7 +216,7 @@ class DataMapper
             foreach($sourceValue as $key => $sourceValueInstance) {
                 if($className != FALSE){
                     //$object = $className::createFromData($sourceValueInstance);
-                    $object = $this->instantiate($className, $sourceValue);
+                    $object = $this->instantiateClass($className, $sourceValue);
                     $value = $object;
                 }
                 else{
@@ -236,7 +234,7 @@ class DataMapper
         else{
             if($className != FALSE) {
                 //$object = $className::createFromData($sourceValue);
-                $object = $this->instantiate($className, $sourceValue);
+                $object = $this->instantiateClass($className, $sourceValue);
                 $instance->{$classVariableName} = $object;
             }
             else{
