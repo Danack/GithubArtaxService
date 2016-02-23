@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class Device extends \GithubService\Model\DataMapper {
-
+class Device
+{
     public $path = null;
 
     protected function getDataMap() {
@@ -13,6 +13,4 @@ class Device extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

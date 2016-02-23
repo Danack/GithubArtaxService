@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class Author extends \GithubService\Model\DataMapper {
-
+class Author 
+{
     public $date = null;
 
     public $email = null;
@@ -19,6 +19,4 @@ class Author extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

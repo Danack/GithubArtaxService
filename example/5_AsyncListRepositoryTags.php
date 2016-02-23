@@ -11,7 +11,7 @@ $autoloader = require __DIR__.'/../vendor/autoload.php';
 use GithubService\GithubArtaxService\GithubService;
 use Amp\Artax\Client as ArtaxClient;
 use ArtaxServiceBuilder\ResponseCache\NullResponseCache;
-use GithubService\Model\RepoTags;
+use GithubService\Model\Tags;
 use Amp\Artax\Response;
 
 
@@ -21,7 +21,7 @@ use Amp\Artax\Response;
 // uv extension -  UvReactor;
 // libevent extension - LibeventReactor;
 // otherwise a NativeReactor is used.
-$reactor = Amp\reactor();
+$reactor = \Amp\reactor();
 
 // The same reactor must be used by all objects that use a reactor
 $artaxClient = new ArtaxClient($reactor);
@@ -36,6 +36,7 @@ $artaxClient->setOption(
 // Create the GithubService with the prepared client
 $github = new GithubService(
     $artaxClient,
+    $reactor,
     new NullResponseCache(), //This is just an example, we don't cache anything
     'Danack/GithubArtaxService' //Change this to your github name/project
 );
@@ -53,7 +54,7 @@ $command = $github->listRepoTags(
 
 $listRepoTagsCallback = function (
     Exception $exception = null, 
-    RepoTags $repoTags,
+    Tags $repoTags,
     Response $response = null) use ($github) {
 
     if ($exception) {
@@ -100,7 +101,7 @@ echo "fin: ".(microtime(true) - $time)."\n";
 function getListRepoTagsPagingCallback($page) {
 
     $listRepoTagsPagingCallback = function (Exception $exception = null,
-                                            RepoTags $repoTags = null,
+                                            Tags $repoTags = null,
                                             Response $response = null) use ($page) {
 
         if ($exception) {

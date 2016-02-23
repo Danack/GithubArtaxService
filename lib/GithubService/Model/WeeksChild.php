@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class WeeksChild extends \GithubService\Model\DataMapper {
-
+class WeeksChild
+{
     public $a = null;
 
     public $c = null;
@@ -22,6 +22,4 @@ class WeeksChild extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

@@ -2,7 +2,7 @@
 
 namespace GithubService\Model;
 
-class Branches extends \GithubService\Model\DataMapper {
+class Branches  {
 
     /**
      * @var \GithubService\Model\ $bRANCHESChild

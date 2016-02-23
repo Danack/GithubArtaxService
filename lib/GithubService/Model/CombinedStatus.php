@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class CombinedStatus extends \GithubService\Model\DataMapper {
-
+class CombinedStatus
+{
     public $commitUrl = null;
 
     /**

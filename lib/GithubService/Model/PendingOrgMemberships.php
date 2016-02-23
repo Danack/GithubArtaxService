@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class PendingOrgMemberships extends \GithubService\Model\DataMapper {
-
+class PendingOrgMemberships
+{
     /**
      * @var \GithubService\Model\ActiveAdminOrgMembership $pENDINGORGMEMBERSHIPSChild
      */
@@ -18,6 +18,4 @@ class PendingOrgMemberships extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

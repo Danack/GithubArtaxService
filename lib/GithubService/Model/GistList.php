@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class GistList extends \GithubService\Model\DataMapper {
-
+class GistList
+{
     public $gists = [];
 
     protected function getDataMap() {

@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class PrivateUser extends \GithubService\Model\DataMapper {
-
+class PrivateUser
+{
     public $avatarUrl = null;
 
     public $bio = null;

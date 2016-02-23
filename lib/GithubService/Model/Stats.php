@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class Stats extends \GithubService\Model\DataMapper {
-
+class Stats
+{
     public $additions = null;
 
     public $deletions = null;
@@ -19,6 +19,4 @@ class Stats extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

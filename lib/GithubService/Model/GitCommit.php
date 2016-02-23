@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class GitCommit extends \GithubService\Model\DataMapper {
-
+class GitCommit
+{
     /**
      * @var \GithubService\Model\Author $author
      */
@@ -43,6 +43,5 @@ class GitCommit extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
 
 }

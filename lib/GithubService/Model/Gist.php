@@ -2,7 +2,7 @@
 
 namespace GithubService\Model;
 
-class Gist  // extends \GithubService\Model\DataMapper {
+class Gist
 {
     public $comments = null;
 
@@ -64,6 +64,4 @@ class Gist  // extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

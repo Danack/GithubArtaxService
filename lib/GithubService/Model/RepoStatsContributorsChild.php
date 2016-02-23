@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class RepoStatsContributorsChild extends \GithubService\Model\DataMapper {
-
+class RepoStatsContributorsChild
+{
     /**
      * @var \GithubService\Model\User $author
      */
@@ -25,6 +25,4 @@ class RepoStatsContributorsChild extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

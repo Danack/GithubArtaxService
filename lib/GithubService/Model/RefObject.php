@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class RefObject extends \GithubService\Model\DataMapper {
-
+class RefObject
+{
     public $sha = null;
 
     public $type = null;
@@ -19,6 +19,4 @@ class RefObject extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class Comments extends \GithubService\Model\DataMapper {
-
+class Comments
+{
     public $href = null;
 
     protected function getDataMap() {
@@ -13,6 +13,4 @@ class Comments extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

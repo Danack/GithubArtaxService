@@ -4,17 +4,6 @@ namespace GithubService;
 
 use GithubService\Model\DataMapperException;
 
-function is_indexable($item) {
-    if (is_object($item)) {
-        return true;
-    }
-    if (is_array($item)) {
-        return true;
-    }
-    
-    return false;
-}
-
 class DataMapper
 {
     /** @var \GithubService\Hydrator[] */
@@ -85,7 +74,6 @@ class DataMapper
         
         $dataVariableNameArray = $dataMapElement->propertyPath;
 
-        //$dataVariableNameArray = $dataMapElement[1];
         if ($dataVariableNameArray == NULL) {
             //value is likely to be a class that has been merged into the Json at the root level,
             //so pass back same array, so that the class that will be instantiated has access to all of it.
@@ -95,7 +83,7 @@ class DataMapper
 
         $value = $data;
 
-        foreach($dataVariableNameArray as $dataVariableName) {
+        foreach ($dataVariableNameArray as $dataVariableName) {
             if (is_array($value) == FALSE ||
                 array_key_exists($dataVariableName, $value) == FALSE) {
                 if ($dataMapElement->optional === true) {
@@ -178,14 +166,13 @@ class DataMapper
             return;
         }
 
-        if($multiple == TRUE){
+        if ($multiple == TRUE) {
             if ($instance->{$classVariableName} == NULL) {
                 $instance->{$classVariableName} = array();
             }
 
             foreach($sourceValue as $key => $sourceValueInstance) {
                 if($className != FALSE){
-                    //$object = $className::createFromData($sourceValueInstance);
                     $object = $this->instantiateClass($className, $sourceValue);
                     $value = $object;
                 }
@@ -201,13 +188,12 @@ class DataMapper
                 }
             }
         }
-        else{
+        else {
             if($className != FALSE) {
-                //$object = $className::createFromData($sourceValue);
                 $object = $this->instantiateClass($className, $sourceValue);
                 $instance->{$classVariableName} = $object;
             }
-            else{
+            else {
                 $instance->{$classVariableName} = $sourceValue;
             }
         }

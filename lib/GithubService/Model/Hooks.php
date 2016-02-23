@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class Hooks extends \GithubService\Model\DataMapper {
-
+class Hooks
+{
     public $activeHooks = null;
 
     public $inactiveHooks = null;
@@ -19,6 +19,4 @@ class Hooks extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

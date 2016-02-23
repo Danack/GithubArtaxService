@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class HistoryChild extends \GithubService\Model\DataMapper {
-
+class HistoryChild
+{
     /**
      * @var \GithubService\Model\Stats $changeStatus
      */

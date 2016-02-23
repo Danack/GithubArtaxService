@@ -2,14 +2,12 @@
 
 namespace GithubService\Model;
 
-class Commits extends \GithubService\Model\DataMapper {
-
+class Commits
+{
     /**
      * @var \GithubService\Model\Commit $commitsChild
      */
-    public $commitsChild = array(
-        
-    );
+    public $commitsChild = [];
 
     protected function getDataMap() {
         $dataMap = [
@@ -18,6 +16,4 @@ class Commits extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class CodeSearchV3ResultsHighlighting extends \GithubService\Model\DataMapper {
-
+class CodeSearchV3ResultsHighlighting
+{
     /**
      * @var \GithubService\Model\ $textMatches
      */
@@ -16,6 +16,4 @@ class CodeSearchV3ResultsHighlighting extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

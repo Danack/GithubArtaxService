@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class Collectd extends \GithubService\Model\DataMapper {
-
+class Collectd
+{
     public $enabled = null;
 
     public $encryption = null;
@@ -28,6 +28,4 @@ class Collectd extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

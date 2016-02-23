@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class Indices extends \GithubService\Model\DataMapper {
-
+class Indices
+{
     protected function getDataMap() {
         $dataMap = [
         ];

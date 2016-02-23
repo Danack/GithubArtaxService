@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class Organization extends \GithubService\Model\DataMapper {
-
+class Organization
+{
     public $avatarUrl = null;
 
     public $description = null;
@@ -25,6 +25,4 @@ class Organization extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

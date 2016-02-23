@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class Subject extends \GithubService\Model\DataMapper {
-
+class Subject
+{
     public $latestCommentUrl = null;
 
     public $title = null;
@@ -22,6 +22,4 @@ class Subject extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

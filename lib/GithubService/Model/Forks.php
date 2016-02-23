@@ -2,14 +2,12 @@
 
 namespace GithubService\Model;
 
-class Forks extends \GithubService\Model\DataMapper {
-
+class Forks
+{
     /**
      * @var \GithubService\Model\ $forksChild
      */
-    public $forksChild = array(
-        
-    );
+    public $forksChild = [];
 
     protected function getDataMap() {
         $dataMap = [
@@ -18,6 +16,4 @@ class Forks extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

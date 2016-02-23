@@ -2,10 +2,10 @@
 
 namespace GithubService\Model;
 
-class OauthAccess extends \GithubService\Model\DataMapper {
-
+class OauthAccess
+{
     /**
-     * @var \GithubService\Model\ $app
+     * @var \GithubService\Model\App
      */
     public $app = null;
 
@@ -21,12 +21,7 @@ class OauthAccess extends \GithubService\Model\DataMapper {
 
     public $noteUrl = null;
 
-    /**
-     * @var \GithubService\Model\Indices $scopes
-     */
-    public $scopes = array(
-        
-    );
+    public $scopes = [];
 
     public $token = null;
 
@@ -35,25 +30,18 @@ class OauthAccess extends \GithubService\Model\DataMapper {
     public $updatedAt = null;
 
     public $url = null;
+    
+    /**
+     * Allows this object to be used as an Authorization in
+     * the api calls.
+     * @return null|string
+     */
+    public function __toString()
+    {
+        if ($this->token === null) {
+            return null;
+        }
 
-    protected function getDataMap() {
-        $dataMap = [
-            ['app', 'app', 'class' => 'GithubService\\Model\\App'],
-            ['createdAt', 'created_at'],
-            ['fingerprint', 'fingerprint', 'optional' => true],
-            ['hashedToken', 'hashed_token', 'optional' => true],
-            ['id', 'id'],
-            ['note', 'note'],
-            ['noteUrl', 'note_url'],
-            ['scopes', 'scopes', 'multiple' => true, 'class' => 'GithubService\\Model\\Indices'],
-            ['token', 'token'],
-            ['tokenLastEight', 'token_last_eight', 'optional' => true],
-            ['updatedAt', 'updated_at'],
-            ['url', 'url'],
-        ];
-
-        return $dataMap;
+        return "token ".$this->hashedToken;
     }
-
-
 }

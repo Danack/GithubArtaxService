@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class Permissions extends \GithubService\Model\DataMapper {
-
+class Permissions
+{
     public $admin = null;
 
     public $pull = null;
@@ -19,6 +19,4 @@ class Permissions extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

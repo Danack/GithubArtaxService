@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class Ntp extends \GithubService\Model\DataMapper {
-
+class Ntp
+{
     public $primaryServer = null;
 
     public $secondaryServer = null;
@@ -16,6 +16,4 @@ class Ntp extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

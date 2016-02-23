@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class IssuesStats extends \GithubService\Model\DataMapper {
-
+class IssuesStats
+{
     public $open_issues;
     public $total_issues;
     public $closed_issues;

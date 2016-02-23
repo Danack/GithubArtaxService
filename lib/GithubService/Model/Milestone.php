@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class Milestone extends \GithubService\Model\DataMapper {
-
+class Milestone
+{
     public $closedAt = null;
 
     public $closedIssues = null;
@@ -58,6 +58,4 @@ class Milestone extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

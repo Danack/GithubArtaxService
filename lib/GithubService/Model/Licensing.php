@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class Licensing { //extends \GithubService\Model\DataMapper {
-
+class Licensing
+{
     public $daysUntilExpiration = null;
 
     public $expireAt = null;
@@ -28,6 +28,4 @@ class Licensing { //extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

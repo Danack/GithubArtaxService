@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class Smtp extends \GithubService\Model\DataMapper {
-
+class Smtp
+{
     public $address = null;
 
     public $authentication = null;
@@ -43,6 +43,4 @@ class Smtp extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

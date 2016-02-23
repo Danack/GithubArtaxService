@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class RepoStatsPunchCardInfo {
-
+class RepoStatsPunchCardInfo
+{
     public $day;
     
     public $hour;
@@ -25,6 +25,4 @@ class RepoStatsPunchCardInfo {
 
         return $instance;
     }
-    
-
 }

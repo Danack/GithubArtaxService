@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class MatchesChild extends \GithubService\Model\DataMapper {
-
+class MatchesChild
+{
     /**
      * @var \GithubService\Model\ $indices
      */
@@ -21,6 +21,4 @@ class MatchesChild extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

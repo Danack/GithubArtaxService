@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class CommitComment extends \GithubService\Model\DataMapper {
-
+class CommitComment
+{
     public $body = null;
 
     public $commitId = null;

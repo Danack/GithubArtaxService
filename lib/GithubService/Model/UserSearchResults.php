@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class UserSearchResults extends \GithubService\Model\DataMapper {
-
+class UserSearchResults
+{
     /**
      * @var \GithubService\Model\ $users
      */

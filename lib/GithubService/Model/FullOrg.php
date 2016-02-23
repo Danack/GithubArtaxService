@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class FullOrg extends \GithubService\Model\DataMapper {
-
+class FullOrg
+{
     public $avatarUrl = null;
 
     public $blog = null;

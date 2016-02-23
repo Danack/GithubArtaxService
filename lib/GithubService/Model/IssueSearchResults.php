@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class IssueSearchResults extends \GithubService\Model\DataMapper {
-
+class IssueSearchResults
+{
     /**
      * @var \GithubService\Model\ $issues
      */
@@ -16,6 +16,4 @@ class IssueSearchResults extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

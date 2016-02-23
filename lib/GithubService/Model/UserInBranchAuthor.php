@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class UserInBranchAuthor extends \GithubService\Model\DataMapper {
-
+class UserInBranchAuthor
+{
     public $avatar_url;
     public $gravatar_id;
     public $login;

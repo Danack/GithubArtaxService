@@ -3,8 +3,8 @@
 namespace GithubService\Model;
 
 
-class RepoStatsPunchCard extends \GithubService\Model\DataMapper {
-
+class RepoStatsPunchCard
+{
     /**
      * @var \GithubService\Model\RepoStatsPunchCardInfo[]
      */
@@ -23,6 +23,4 @@ class RepoStatsPunchCard extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

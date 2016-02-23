@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class GithubOauth extends \GithubService\Model\DataMapper {
-
+class GithubOauth
+{
     public $clientId = null;
 
     public $clientSecret = null;

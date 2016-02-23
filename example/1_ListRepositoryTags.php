@@ -5,20 +5,20 @@ $autoloader = require __DIR__.'/../vendor/autoload.php';
 use GithubService\GithubArtaxService\GithubService;
 use Amp\Artax\Client as ArtaxClient;
 use ArtaxServiceBuilder\ResponseCache\NullResponseCache;
-use GithubService\Model\RepoTags;
+use GithubService\Model\Tags;
 
 
-function displayTags(RepoTags $repoTags) {
+function displayTags(Tags $repoTags) {
     foreach ($repoTags as $nextRepoTag) {
         echo "Found tag: ".$nextRepoTag->name."\n";
     }
 }
 
-
 $github = new GithubService(
     new ArtaxClient(),
+    \Amp\reactor(),
     new NullResponseCache(), //This is just an example, we don't cache anything
-    'Danack/GithubArtaxService' //Change this to your github name/project
+    'Danack/GithubArtaxService' //Change this to any user-agent
 );
 
 echo "Tags on first page:\n";

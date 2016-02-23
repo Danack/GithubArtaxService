@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class Progress extends \GithubService\Model\DataMapper {
-
+class Progress
+{
     /**
      * @var \GithubService\Model\ $progressChild
      */

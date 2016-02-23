@@ -33,6 +33,7 @@ use GithubService\Hydrator\IssueEventHydrator;
 use GithubService\Hydrator\LicensingHydrator;
 use GithubService\Hydrator\MetaHydrator;
 use GithubService\Hydrator\OauthAccessHydrator;
+use GithubService\Hydrator\OauthAccessListHydrator;
 use GithubService\Hydrator\PagesHydrator;
 use GithubService\Hydrator\PagesBuildHydrator;
 use GithubService\Hydrator\PayloadHydrator;
@@ -59,6 +60,7 @@ use GithubService\Hydrator\SimplePublicKeyHydrator;
 use GithubService\Hydrator\StatusHydrator;
 use GithubService\Hydrator\SymlinkContentHydrator;
 use GithubService\Hydrator\TagHydrator;
+use GithubService\Hydrator\TagsHydrator;
 use GithubService\Hydrator\TagObjectHydrator;
 use GithubService\Hydrator\TemplateHydrator;
 use GithubService\Hydrator\TreeNewHydrator;
@@ -98,6 +100,7 @@ class GithubDataMapper extends DataMapper
         $this->registerType('GithubService\Model\Licensing', new LicensingHydrator());
         $this->registerType('GithubService\Model\Meta', new MetaHydrator());
         $this->registerType('GithubService\Model\OauthAccess', new OauthAccessHydrator());
+        $this->registerType('GithubService\Model\OauthAccessList', new OauthAccessListHydrator());
         $this->registerType('GithubService\Model\Pages', new PagesHydrator());
         $this->registerType('GithubService\Model\PagesBuild', new PagesBuildHydrator());
         $this->registerType('GithubService\Model\Payload', new PayloadHydrator());
@@ -124,6 +127,7 @@ class GithubDataMapper extends DataMapper
         $this->registerType('GithubService\Model\Subscription', new SubscriptionHydrator());
         $this->registerType('GithubService\Model\SymlinkContent', new SymlinkContentHydrator());
         $this->registerType('GithubService\Model\Tag', new TagHydrator());
+        $this->registerType('GithubService\Model\Tags', new TagsHydrator());
         $this->registerType('GithubService\Model\TagObject', new TagObjectHydrator());
         $this->registerType('GithubService\Model\Template', new TemplateHydrator());
         $this->registerType('GithubService\Model\User', new UserHydrator());
@@ -170,8 +174,6 @@ class GithubDataMapper extends DataMapper
     public function createFromResponse(Response $response, Operation $operation, $class)
     {
         $data = $this->decodeJson($response);
-        
-        //$class = 'GithubService\Model\Emojis';
 
         $instance = $this->instantiateClass($class, $data);
 

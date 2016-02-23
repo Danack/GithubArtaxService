@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class IssueEvent extends \GithubService\Model\DataMapper {
-
+class IssueEvent
+{
     /**
      * @var \GithubService\Model\User $actor
      */
@@ -31,6 +31,4 @@ class IssueEvent extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

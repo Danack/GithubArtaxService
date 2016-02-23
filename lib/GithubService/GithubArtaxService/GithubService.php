@@ -219,48 +219,46 @@ class GithubService extends GithubArtaxService
      * @param $maxAttempts int The maximum number of attempts. This only allows retries
      * for the two-factor auth failing, not the password
      *  
-     * @return \GithubService\Model\Authorization
+     * @return \GithubService\Model\OauthAccess
      */
     function createOrRetrieveAuth(
         $username,
         $password,
         callable $enterPasswordCallback,
         $scopes,
-        $applicationName,
-        $noteURL,
+        $note,
         $maxAttempts = 3
     ) {
         $basicToken = new BasicAuthToken($username, $password);
-
         $otp = false;
 
         for ($i = 0; $i < $maxAttempts; $i++) {
             try {
-                $currentAuthCommand = $this->listAuthorizations($basicToken);
 
-                if ($otp) {
-                    $currentAuthCommand->setOtp($otp);
-                }
+//                $currentAuthCommand = $this->getAuthorizations($basicToken->__toString());
+//
+//                if ($otp) {
+//                    $currentAuthCommand->setOtp($otp);
+//                }
+//
+//                $currentAuths = $currentAuthCommand->execute();
+//                $currentAuth = $currentAuths->findOauthAccessByNote($applicationName);
+//
+//                if ($currentAuth) {
+//                    // Already have current auth, no need to create a new one.
+//                    return $currentAuth;
+//                }
 
-                $currentAuths = $currentAuthCommand->execute();
-                $currentAuth = $currentAuths->findNoteAuthorization($applicationName);
-
-                if ($currentAuth) {
-                    // Already have current auth, no need to create a new one.
-                    return $currentAuth;
-                }
-
-                $createAuthToken = $this->createAuthToken(
-                    $basicToken,
+                $createAuthToken = $this->createAuthorization(
+                    $basicToken->__toString(),
                     $scopes,
-                    $applicationName,
-                    $noteURL
+                    $note
                 );
-                
+
+                $createAuthToken->setNote_url("http://www.github.com/danack/GithubArtaxService".time());
                 if ($otp) {
                     $createAuthToken->setOtp($otp);
                 }
-
                 $authResult = $createAuthToken->execute();
 
                 return $authResult;
@@ -288,7 +286,7 @@ class GithubService extends GithubArtaxService
     const SCOPE_USER_EMAIL = 'user:email'; //	Grants read access to a user’s email addresses.
 
     const SCOPE_USER_FOLLOW = 'user:follow'; //	Grants access to follow or unfollow other users.
-
+    
     const SCOPE_PUBLIC_REPO = 'public_repo'; //	Grants read/write access to code, commit statuses, and deployment statuses for public repositories and organizations.
 
     const SCOPE_REPO = 'repo'; //	Grants read/write access to code, commit statuses, and deployment statuses for public and private repositories and organizations.
@@ -337,9 +335,6 @@ class GithubService extends GithubArtaxService
         self::SCOPE_PUBLIC_KEY_WRITE  => "Create, list, and view details for public keys.",
         self::SCOPE_PUBLIC_KEY_ADMIN => "Fully manage public keys.",
     ];
-
-
-
 }
 
  

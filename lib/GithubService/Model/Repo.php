@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class Repo extends \GithubService\Model\DataMapper {
-
+class Repo
+{
     public $cloneUrl = null;
 
     public $createdAt = null;

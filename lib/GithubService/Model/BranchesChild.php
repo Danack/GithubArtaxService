@@ -2,7 +2,7 @@
 
 namespace GithubService\Model;
 
-class BranchesChild extends \GithubService\Model\DataMapper {
+class BranchesChild  {
 
     /**
      * @var \GithubService\Model\BlobAfterCreate $commit

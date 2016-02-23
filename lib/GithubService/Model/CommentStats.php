@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class CommentStats extends \GithubService\Model\DataMapper {
-
+class CommentStats
+{
     public $totalPullRequestComments;
     public $totalIssueComments;
     public $totalGistComments;

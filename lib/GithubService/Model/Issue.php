@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class Issue extends \GithubService\Model\DataMapper {
-
+class Issue
+{
     /**
      * @var \GithubService\Model\User $assignee
      */
@@ -73,6 +73,4 @@ class Issue extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

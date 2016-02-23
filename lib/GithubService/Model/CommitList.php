@@ -9,6 +9,5 @@ class CommitList
     /**
      * @var \GithubService\Model\Commit $commitsChild
      */
-    public $commitsChild = array(  
-    );
+    public $commitsChild = [];
 }

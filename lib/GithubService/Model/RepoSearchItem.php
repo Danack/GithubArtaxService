@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class RepoSearchItem extends \GithubService\Model\DataMapper {
-
+class RepoSearchItem
+{
     public $created = null;
 
     public $createdAt = null;
@@ -79,6 +79,4 @@ class RepoSearchItem extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class CurrentUser extends \GithubService\Model\DataMapper {
-
+class CurrentUser
+{
     public $href = null;
 
     public $type = null;
@@ -16,6 +16,4 @@ class CurrentUser extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

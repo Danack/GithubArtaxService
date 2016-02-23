@@ -51,14 +51,14 @@ return array(
         'uri' => '/authorizations',
         'description' => 'List your authorizations',
         'extends' => 'defaultGetOauthOperation',
-        "responseClass" => 'GithubService\Model\\GithubService\Model\OauthAccessList',
+        "responseClass" => 'GithubService\Model\OauthAccessList',
     ),
 
     'getAuthorization' => array(
         'uri' => '/authorizations/{id}',
         'description' => 'List your authorizations',
         'extends' => 'defaultGetOauthOperation',
-        "responseClass" => 'GithubService\Model\\GithubService\Model\OauthAccess',
+        "responseClass" => 'GithubService\Model\OauthAccess',
         'parameters' => array(
             'id' => [
                 'description' => 'Which authorization to get',
@@ -103,7 +103,6 @@ return array(
                 'location' => 'json',
                 'optional' => true
             ],
-            
         ),
         'status' => [201]
     ],
@@ -197,7 +196,7 @@ return array(
 
         'method' => 'PATCH',
         'uri' => '/authorizations/{id}',
-        "responseClass" => 'GithubService\Model\\GithubService\Model\OauthAccess',
+        "responseClass" => 'GithubService\Model\OauthAccess',
         'parameters' => array(
             'scopes' => [
                 'description' => 'Replaces the authorization scopes with these.',
@@ -239,7 +238,7 @@ return array(
     'checkAuthorization' => array(
         'extends' => 'stubBasicAuth',
         'method' => 'GET',
-        "responseClass" => 'GithubService\Model\\GithubService\Model\OauthAccessWithUser',
+        "responseClass" => 'GithubService\Model\OauthAccessWithUser',
         'uri' => '/applications/{client_id}/tokens/{access_token}',
         'parameters' => array(
             'client_id' => array(
@@ -260,7 +259,7 @@ application `client_id` and the password is its `client_secret`. Invalid tokens 
         'method' => 'POST',
         'extends' => 'stubBasicAuth',
         'uri' => '/applications/{client_id}/tokens/{access_token}',
-        "responseClass" => 'GithubService\Model\\GithubService\Model\OauthAccessWithUser',
+        "responseClass" => 'GithubService\Model\OauthAccessWithUser',
 
         'parameters' => array(
             'client_id' => array(

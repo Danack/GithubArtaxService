@@ -2,7 +2,7 @@
 
 namespace GithubService\Model;
 
-class Branch extends \GithubService\Model\DataMapper {
+class Branch  {
 
     /**
      * @var \GithubService\Model\ $commit
@@ -26,6 +26,4 @@ class Branch extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

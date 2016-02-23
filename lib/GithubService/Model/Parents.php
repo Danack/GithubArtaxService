@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class Parents extends \GithubService\Model\DataMapper {
-
+class Parents
+{
     /**
      * @var \GithubService\Model\BlobAfterCreate $parentsChild
      */
@@ -18,6 +18,4 @@ class Parents extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

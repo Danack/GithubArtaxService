@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class Timezone extends \GithubService\Model\DataMapper {
-
+class Timezone
+{
     public $identifier = null;
 
     protected function getDataMap() {
@@ -13,6 +13,4 @@ class Timezone extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

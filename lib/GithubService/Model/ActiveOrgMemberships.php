@@ -2,12 +2,12 @@
 
 namespace GithubService\Model;
 
-class ActiveOrgMemberships extends \GithubService\Model\DataMapper {
-
+class ActiveOrgMemberships
+{
     /**
      * @var \GithubService\Model\ActiveAdminOrgMembership $aCTIVEORGMEMBERSHIPS Child
      */
-    public $aCTIVEORGMEMBERSHIPS Child = array(
+    public $aCTIVEORGMEMBERSHIPSChild = array(
         
     );
 

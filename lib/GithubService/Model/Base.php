@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class Base extends \GithubService\Model\DataMapper {
-
+class Base 
+{
     public $label = null;
 
     public $ref = null;
@@ -31,6 +31,4 @@ class Base extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

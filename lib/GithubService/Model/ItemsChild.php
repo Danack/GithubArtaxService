@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class ItemsChild extends \GithubService\Model\DataMapper {
-
+class ItemsChild
+{
     public $avatarUrl = null;
 
     public $followersUrl = null;
@@ -49,6 +49,5 @@ class ItemsChild extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
 
 }

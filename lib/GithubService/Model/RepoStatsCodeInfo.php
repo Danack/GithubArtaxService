@@ -4,8 +4,8 @@ namespace GithubService\Model;
 
 use GithubService\GithubArtaxService\GithubArtaxServiceException;
 
-class RepoStatsCodeInfo {
-
+class RepoStatsCodeInfo
+{
     // Returns a weekly aggregate of the number of additions and deletions pushed to a repository.
     
     /**

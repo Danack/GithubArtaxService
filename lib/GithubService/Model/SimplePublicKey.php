@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class SimplePublicKey extends \GithubService\Model\DataMapper {
-
+class SimplePublicKey
+{
     public $id = null;
 
     public $key = null;
@@ -16,6 +16,4 @@ class SimplePublicKey extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

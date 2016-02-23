@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class Ldap extends \GithubService\Model\DataMapper {
-
+class Ldap
+{
     public $adminGroup = null;
 
     /**
@@ -28,9 +28,7 @@ class Ldap extends \GithubService\Model\DataMapper {
     /**
      * @var \GithubService\Model\Indices $userGroups
      */
-    public $userGroups = array(
-        
-    );
+    public $userGroups = [];
 
     protected function getDataMap() {
         $dataMap = [

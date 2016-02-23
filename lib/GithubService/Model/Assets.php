@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class Assets extends \GithubService\Model\DataMapper {
-
+class Assets
+{
     /**
      * @var \GithubService\Model\ $assetsChild
      */
@@ -18,6 +18,4 @@ class Assets extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

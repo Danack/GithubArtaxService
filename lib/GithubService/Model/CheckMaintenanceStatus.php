@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class CheckMaintenanceStatus extends \GithubService\Model\DataMapper {
-
+class CheckMaintenanceStatus
+{
     /**
      * @var \GithubService\Model\ $connectionServices
      */

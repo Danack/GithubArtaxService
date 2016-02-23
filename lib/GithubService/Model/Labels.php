@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class Labels extends \GithubService\Model\DataMapper {
-
+class Labels
+{
     /**
      * @var \GithubService\Model\ $labelsChild
      */
@@ -18,6 +18,4 @@ class Labels extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

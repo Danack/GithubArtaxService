@@ -2,7 +2,7 @@
 
 namespace GithubService\Model;
 
-class PagesBuild 
+class PagesBuild
 {
     public $commit = null;
 
@@ -40,6 +40,4 @@ class PagesBuild
 
         return $dataMap;
     }
-
-
 }

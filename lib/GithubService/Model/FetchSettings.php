@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class FetchSettings extends \GithubService\Model\DataMapper {
-
+class FetchSettings
+{
     /**
      * @var \GithubService\Model\Enterprise
      */
@@ -24,6 +24,4 @@ class FetchSettings extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

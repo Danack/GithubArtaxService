@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class ConfigStatuses extends \GithubService\Model\DataMapper {
-
+class ConfigStatuses
+{
     /**
      * @var \GithubService\Model\ $progress
      */
@@ -19,6 +19,4 @@ class ConfigStatuses extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

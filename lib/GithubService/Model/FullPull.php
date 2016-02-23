@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class FullPull extends \GithubService\Model\DataMapper {
-
+class FullPull
+{
     public $additions = null;
 
     /**

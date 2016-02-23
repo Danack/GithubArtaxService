@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class Deployment extends \GithubService\Model\DataMapper {
-
+class Deployment
+{
     public $createdAt = null;
 
     /**
@@ -52,6 +52,4 @@ class Deployment extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

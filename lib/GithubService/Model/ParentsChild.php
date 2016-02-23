@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class ParentsChild extends \GithubService\Model\DataMapper {
-
+class ParentsChild
+{
     public $htmlUrl = null;
 
     public $sha = null;
@@ -19,6 +19,4 @@ class ParentsChild extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

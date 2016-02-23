@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class TemplateList extends \GithubService\Model\DataMapper implements \IteratorAggregate {
-
+class TemplateList  implements \IteratorAggregate 
+{
     public $name = [];
 
     protected function getDataMap() {

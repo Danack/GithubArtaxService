@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class Gittag extends \GithubService\Model\DataMapper {
-
+class Gittag
+{
     public $message = null;
 
     /**

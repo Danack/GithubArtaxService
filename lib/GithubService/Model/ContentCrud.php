@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class ContentCrud extends \GithubService\Model\DataMapper {
-
+class ContentCrud
+{
     /**
      * @var \GithubService\Model\ $commit
      */
@@ -22,6 +22,4 @@ class ContentCrud extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

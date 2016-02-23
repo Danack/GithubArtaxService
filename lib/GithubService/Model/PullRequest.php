@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class PullRequest extends \GithubService\Model\DataMapper {
-
+class PullRequest
+{
     public $diffUrl = null;
 
     public $htmlUrl = null;
@@ -19,6 +19,4 @@ class PullRequest extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

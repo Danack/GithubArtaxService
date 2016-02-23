@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class TextMatchesChild extends \GithubService\Model\DataMapper {
-
+class TextMatchesChild
+{
     public $fragment = null;
 
     /**
@@ -28,6 +28,4 @@ class TextMatchesChild extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

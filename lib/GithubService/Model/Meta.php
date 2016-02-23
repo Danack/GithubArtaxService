@@ -32,6 +32,4 @@ class Meta
 
         return $dataMap;
     }
-
-
 }

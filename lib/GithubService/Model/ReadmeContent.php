@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class ReadmeContent extends \GithubService\Model\DataMapper {
-
+class ReadmeContent
+{
     public $content = null;
 
     public $downloadUrl = null;

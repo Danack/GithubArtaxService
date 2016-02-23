@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class CommitComparison extends \GithubService\Model\DataMapper {
-
+class CommitComparison
+{
     public $aheadBy = null;
 
     /**

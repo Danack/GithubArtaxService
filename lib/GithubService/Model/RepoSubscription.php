@@ -15,19 +15,4 @@ class RepoSubscription
     public $subscribed = null;
 
     public $url = null;
-
-//    protected function getDataMap() {
-//        $dataMap = [
-//            ['createdAt', 'created_at'],
-//            ['ignored', 'ignored'],
-//            ['reason', 'reason'],
-//            ['repositoryUrl', 'repository_url'],
-//            ['subscribed', 'subscribed'],
-//            ['url', 'url'],
-//        ];
-//
-//        return $dataMap;
-//    }
-
-
 }

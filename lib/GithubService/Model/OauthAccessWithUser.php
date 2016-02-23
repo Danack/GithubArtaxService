@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class OauthAccessWithUser extends \GithubService\Model\DataMapper {
-
+class OauthAccessWithUser
+{
     /**
      * @var \GithubService\Model\App $app
      */
@@ -60,6 +60,4 @@ class OauthAccessWithUser extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

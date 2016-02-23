@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class IssueComment extends \GithubService\Model\DataMapper {
-
+class IssueComment
+{
     public $body = null;
 
     public $createdAt = null;

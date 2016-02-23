@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class UserInSearchResult extends \GithubService\Model\DataMapper {
-
+class UserInSearchResult
+{
     public $email;
     public $location;
     public $publicGistCount ;
@@ -19,8 +19,6 @@ class UserInSearchResult extends \GithubService\Model\DataMapper {
     public $followingCount ;
     public $followersCount;
     public $publicRepoCount;
-
-
 
     protected function getDataMap() {
         $dataMap = [
@@ -43,6 +41,4 @@ class UserInSearchResult extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

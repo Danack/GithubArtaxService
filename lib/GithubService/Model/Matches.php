@@ -2,14 +2,12 @@
 
 namespace GithubService\Model;
 
-class Matches extends \GithubService\Model\DataMapper {
-
+class Matches
+{
     /**
      * @var \GithubService\Model\ $matchesChild
      */
-    public $matchesChild = array(
-        
-    );
+    public $matchesChild = [];
 
     protected function getDataMap() {
         $dataMap = [
@@ -18,6 +16,4 @@ class Matches extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

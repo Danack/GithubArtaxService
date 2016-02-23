@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class OrgMemberships extends \GithubService\Model\DataMapper {
-
+class OrgMemberships
+{
     /**
      * @var \GithubService\Model\ActiveAdminOrgMembership $oRGMEMBERSHIPSChild
      */

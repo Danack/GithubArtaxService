@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class AssetsChild extends \GithubService\Model\DataMapper {
-
+class AssetsChild
+{
     public $browserDownloadUrl = null;
 
     public $contentType = null;

@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class FullGist extends \GithubService\Model\DataMapper {
-
+class FullGist
+{
     public $comments = null;
 
     public $commentsUrl = null;

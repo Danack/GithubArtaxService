@@ -9,6 +9,7 @@ use ArtaxServiceBuilder\ResponseCache\FileResponseCache;
 
 $github = new GithubService(
     new ArtaxClient(),
+    \Amp\reactor(),
     new FileResponseCache(__DIR__."/fileCache"),
     'Danack/GithubArtaxService' //Change this to your github name/project
 );

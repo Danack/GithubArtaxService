@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class Gists extends \GithubService\Model\DataMapper {
-
+class Gists
+{
     public $privateGists = null;
 
     public $publicGists = null;
@@ -19,6 +19,4 @@ class Gists extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

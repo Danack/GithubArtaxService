@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class StatusesChild extends \GithubService\Model\DataMapper {
-
+class StatusesChild
+{
     public $context = null;
 
     public $createdAt = null;
@@ -34,6 +34,4 @@ class StatusesChild extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

@@ -4,28 +4,28 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "eaf3cc426c280180c6c353ca1640fab5",
+    "hash": "eb5cc766d043f41c7011c678a302cce1",
     "packages": [
         {
             "name": "amphp/amp",
-            "version": "v0.16.0",
+            "version": "v1.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/amp.git",
-                "reference": "446e09a95d8fe5d4368802f7b126095c5e54415c"
+                "reference": "4b667478f4b70a62e0f3abe7cfb8250e5a11ce0f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/amp/zipball/446e09a95d8fe5d4368802f7b126095c5e54415c",
-                "reference": "446e09a95d8fe5d4368802f7b126095c5e54415c",
+                "url": "https://api.github.com/repos/amphp/amp/zipball/4b667478f4b70a62e0f3abe7cfb8250e5a11ce0f",
+                "reference": "4b667478f4b70a62e0f3abe7cfb8250e5a11ce0f",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.4.0"
+                "php": ">=5.5"
             },
-            "suggest": {
-                "pecl/libevent": "Extension for libevent backends (high performance use cases).",
-                "php-uv": "Extension for libuv backends (high performance use cases)."
+            "require-dev": {
+                "fabpot/php-cs-fixer": "~1.9",
+                "phpunit/phpunit": "~4.8"
             },
             "type": "library",
             "extra": {
@@ -57,38 +57,42 @@
             "keywords": [
                 "async",
                 "concurrency",
-                "future",
-                "libevent",
-                "libuv",
+                "event",
                 "non-blocking",
                 "promise"
             ],
-            "time": "2015-02-18 14:59:48"
+            "time": "2016-02-22 22:17:50"
         },
         {
             "name": "amphp/artax",
-            "version": "v1.0.2",
+            "version": "2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/artax.git",
-                "reference": "b6b8641fec94f4bdb8d1ea8d6ea6352a5de03ecb"
+                "reference": "6679833f65b055533e8777a2a2cb248b8e573877"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/artax/zipball/b6b8641fec94f4bdb8d1ea8d6ea6352a5de03ecb",
-                "reference": "b6b8641fec94f4bdb8d1ea8d6ea6352a5de03ecb",
+                "url": "https://api.github.com/repos/amphp/artax/zipball/6679833f65b055533e8777a2a2cb248b8e573877",
+                "reference": "6679833f65b055533e8777a2a2cb248b8e573877",
                 "shasum": ""
             },
             "require": {
-                "amphp/amp": "~0.16.0",
-                "php": ">=5.4.0",
-                "rdlowrey/nbsock": "~0.6.0"
+                "amphp/amp": "^1",
+                "amphp/socket": "^0.9",
+                "php": ">=5.5.0"
             },
             "require-dev": {
                 "fabpot/php-cs-fixer": "~1.9",
-                "phpunit/phpunit": "^4.8"
+                "phpunit/phpunit": "~4.8"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.x-dev",
+                    "dev-1.x": "1.x-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "Amp\\Artax\\": "lib/"
@@ -115,37 +119,36 @@
                 "parallel",
                 "rest"
             ],
-            "time": "2016-01-23 18:30:33"
+            "time": "2016-02-04 23:58:31"
         },
         {
-            "name": "amphp/dns",
-            "version": "v0.4.2",
+            "name": "amphp/cache",
+            "version": "v0.1.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/amphp/dns.git",
-                "reference": "e4578f504a855078b339e3a4d6da7f4e1f8f4723"
+                "url": "https://github.com/amphp/cache.git",
+                "reference": "26709c198dcee686557801eda6d9345f3cfa8874"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/dns/zipball/e4578f504a855078b339e3a4d6da7f4e1f8f4723",
-                "reference": "e4578f504a855078b339e3a4d6da7f4e1f8f4723",
+                "url": "https://api.github.com/repos/amphp/cache/zipball/26709c198dcee686557801eda6d9345f3cfa8874",
+                "reference": "26709c198dcee686557801eda6d9345f3cfa8874",
                 "shasum": ""
             },
             "require": {
-                "amphp/amp": "~0.16.0",
-                "daverandom/libdns": "~1.0",
-                "php": ">=5.4.0"
+                "amphp/amp": "^1"
             },
             "require-dev": {
-                "mockery/mockery": ">=0.9.1",
-                "phpunit/phpunit": "~4.1.0",
-                "predis/predis": "~0.8.6",
-                "rdlowrey/auryn": ">=0.13.0"
+                "fabpot/php-cs-fixer": "~1.9",
+                "phpunit/phpunit": "~4.8"
+            },
+            "suggest": {
+                "amphp/redis": "For redis cache driver support"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Amp\\Dns\\": "lib"
+                    "Amp\\Cache\\": "lib/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -154,12 +157,76 @@
             ],
             "authors": [
                 {
-                    "name": "Chris Wright",
-                    "email": "addr@daverandom.com",
-                    "role": "Creator / Lead Developer"
+                    "name": "Niklas Keller",
+                    "email": "me@kelunik.com"
+                },
+                {
+                    "name": "Daniel Lowrey",
+                    "email": "rdlowrey@php.net"
                 }
             ],
-            "description": "Asynchronous DNS resolution built on the Amp concurrency framework",
+            "description": "A promise-aware caching API built on the amp concurrency framework",
+            "homepage": "https://github.com/amphp/cache",
+            "time": "2015-09-08 22:26:20"
+        },
+        {
+            "name": "amphp/dns",
+            "version": "v0.8.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/amphp/dns.git",
+                "reference": "2f8103f1738fe48553b80733076c987234d8f49e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/amphp/dns/zipball/2f8103f1738fe48553b80733076c987234d8f49e",
+                "reference": "2f8103f1738fe48553b80733076c987234d8f49e",
+                "shasum": ""
+            },
+            "require": {
+                "amphp/amp": "^1",
+                "amphp/cache": "^0.1",
+                "amphp/file": "^0.1",
+                "daverandom/libdns": "^1",
+                "php": ">=5.5"
+            },
+            "require-dev": {
+                "fabpot/php-cs-fixer": "^1.9",
+                "phpunit/phpunit": "^4.8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Amp\\Dns\\": "lib"
+                },
+                "files": [
+                    "lib/constants.php",
+                    "lib/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bob Weinand",
+                    "email": "bobwei9@hotmail.com"
+                },
+                {
+                    "name": "Niklas Keller",
+                    "email": "me@kelunik.com"
+                },
+                {
+                    "name": "Daniel Lowrey",
+                    "email": "rdlowrey@php.net"
+                },
+                {
+                    "name": "Chris Wright",
+                    "email": "addr@daverandom.com"
+                }
+            ],
+            "description": "Async DNS resolution built on the amp concurrency framework",
             "homepage": "https://github.com/amphp/dns",
             "keywords": [
                 "amp",
@@ -168,7 +235,121 @@
                 "dns",
                 "resolve"
             ],
-            "time": "2015-02-18 16:18:40"
+            "time": "2015-12-23 13:56:14"
+        },
+        {
+            "name": "amphp/file",
+            "version": "v0.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/amphp/file.git",
+                "reference": "cb3b8e536b744727f7cd78645fc879f787b24e96"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/amphp/file/zipball/cb3b8e536b744727f7cd78645fc879f787b24e96",
+                "reference": "cb3b8e536b744727f7cd78645fc879f787b24e96",
+                "shasum": ""
+            },
+            "require": {
+                "amphp/amp": "^1",
+                "php": ">=5.5"
+            },
+            "require-dev": {
+                "fabpot/php-cs-fixer": "~1.9",
+                "phpunit/phpunit": "~4.8"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Amp\\File\\": "lib"
+                },
+                "files": [
+                    "lib/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Daniel Lowrey",
+                    "email": "rdlowrey@php.net"
+                }
+            ],
+            "description": "An async filesystem library built on the amp concurrency framework",
+            "homepage": "https://github.com/amphp/file",
+            "keywords": [
+                "amp",
+                "amphp",
+                "async",
+                "disk",
+                "file",
+                "non-blocking",
+                "static"
+            ],
+            "time": "2016-02-08 01:02:23"
+        },
+        {
+            "name": "amphp/socket",
+            "version": "v0.9.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/amphp/socket.git",
+                "reference": "e30103523cd65072814dc5f9b44b5fc05d38c2e3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/amphp/socket/zipball/e30103523cd65072814dc5f9b44b5fc05d38c2e3",
+                "reference": "e30103523cd65072814dc5f9b44b5fc05d38c2e3",
+                "shasum": ""
+            },
+            "require": {
+                "amphp/amp": "^1",
+                "amphp/dns": "~0.8.0",
+                "php": ">=5.5"
+            },
+            "require-dev": {
+                "fabpot/php-cs-fixer": "~1.9",
+                "phpunit/phpunit": "~4.8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Amp\\Socket\\": "lib/"
+                },
+                "files": [
+                    "lib/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Daniel Lowrey",
+                    "email": "rdlowrey@gmail.com"
+                }
+            ],
+            "description": "Async socket connection tools for the amp concurrency framework",
+            "homepage": "https://github.com/amphp/socket",
+            "keywords": [
+                "amp",
+                "async",
+                "encryption",
+                "non-blocking",
+                "sockets",
+                "tcp",
+                "tls"
+            ],
+            "time": "2016-02-09 23:47:29"
         },
         {
             "name": "danack/artaxservicebuilder",
@@ -271,6 +452,7 @@
                 {
                     "name": "Dan Ackroyd",
                     "email": "Danack@basereality.com",
+                    "homepage": "http://www.basereality.com",
                     "role": "Developer"
                 }
             ],
@@ -309,59 +491,6 @@
                 "dns"
             ],
             "time": "2015-04-02 15:42:15"
-        },
-        {
-            "name": "rdlowrey/nbsock",
-            "version": "v0.6.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/rdlowrey/nbsock.git",
-                "reference": "a13e3f22a3446311a69ab7e4b128c07711db508a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/rdlowrey/nbsock/zipball/a13e3f22a3446311a69ab7e4b128c07711db508a",
-                "reference": "a13e3f22a3446311a69ab7e4b128c07711db508a",
-                "shasum": ""
-            },
-            "require": {
-                "amphp/amp": "~0.16.0",
-                "amphp/dns": "~0.4.0",
-                "php": ">=5.4.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Nbsock\\": "lib/"
-                },
-                "files": [
-                    "lib/functions.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Daniel Lowrey",
-                    "email": "rdlowrey@gmail.com",
-                    "role": "Creator / Lead Developer"
-                }
-            ],
-            "description": "Non-blocking socket connection/encryption using the Amp concurrency framework",
-            "homepage": "https://github.com/rdlowrey/nbsock",
-            "keywords": [
-                "amp",
-                "async",
-                "encryption",
-                "non-blocking",
-                "sockets",
-                "tcp",
-                "tls"
-            ],
-            "abandoned": "amphp/socket",
-            "time": "2015-02-18 16:23:30"
         }
     ],
     "packages-dev": [
@@ -792,12 +921,12 @@
             "version": "v0.14.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/rdlowrey/auryn.git",
+                "url": "https://github.com/rdlowrey/Auryn.git",
                 "reference": "bfee56a9e0d2e71b04f04236cb8eff2f8cb1c4fa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rdlowrey/auryn/zipball/bfee56a9e0d2e71b04f04236cb8eff2f8cb1c4fa",
+                "url": "https://api.github.com/repos/rdlowrey/Auryn/zipball/bfee56a9e0d2e71b04f04236cb8eff2f8cb1c4fa",
                 "reference": "bfee56a9e0d2e71b04f04236cb8eff2f8cb1c4fa",
                 "shasum": ""
             },

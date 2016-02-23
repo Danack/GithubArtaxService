@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class RepoInEvent extends \GithubService\Model\DataMapper {
-
+class RepoInEvent
+{
     public $url = null;
 
     public $name = null;

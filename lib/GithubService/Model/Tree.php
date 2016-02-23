@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class Tree extends \GithubService\Model\DataMapper {
-
+class Tree
+{
     /**
      * @var \GithubService\Model\ $treeChild
      */
@@ -21,6 +21,4 @@ class Tree extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

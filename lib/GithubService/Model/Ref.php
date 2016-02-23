@@ -3,8 +3,7 @@
 namespace GithubService\Model;
 
 class Ref
-{ //extends \GithubService\Model\DataMapper {
-
+{
     /**
      * @var \GithubService\Model\Object $object
      */
@@ -13,7 +12,5 @@ class Ref
     public $ref = null;
 
     public $url = null;
-
-
 
 }

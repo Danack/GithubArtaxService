@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class Pulls extends \GithubService\Model\DataMapper {
-
+class Pulls
+{
     public $mergeablePulls = null;
 
     public $mergedPulls = null;
@@ -22,6 +22,4 @@ class Pulls extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

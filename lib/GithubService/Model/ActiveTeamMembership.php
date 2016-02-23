@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class ActiveTeamMembership extends \GithubService\Model\DataMapper {
-
+class ActiveTeamMembership
+{
     public $state = null;
 
     public $url = null;
@@ -16,6 +16,4 @@ class ActiveTeamMembership extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

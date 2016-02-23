@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class OauthAccessList extends \GithubService\Model\DataMapper {
-
+class OauthAccessList
+{
     /**
      * @var \GithubService\Model\OauthAccess[]
      */
@@ -16,6 +16,19 @@ class OauthAccessList extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
+    
+        /**
+     * @param $note
+     * @return OauthAccess|null
+     */
+    public function findOauthAccessByNote($note)
+    {
+        foreach($this->accessList as $authorization) {
+            if (strcmp($authorization->note, $note) === 0) {
+                return $authorization;
+            }
+        }
 
-
+        return null;
+    }
 }

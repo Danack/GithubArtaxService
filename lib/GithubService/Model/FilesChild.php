@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class FilesChild extends \GithubService\Model\DataMapper {
-
+class FilesChild
+{
     public $additions = null;
 
     public $blobUrl = null;
@@ -34,6 +34,4 @@ class FilesChild extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

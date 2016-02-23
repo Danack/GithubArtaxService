@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class RepoStatsCommitActivityChild extends \GithubService\Model\DataMapper {
-
+class RepoStatsCommitActivityChild
+{
     /**
      * @var \GithubService\Model\Indices $days
      */

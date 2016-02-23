@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class CodeSearchV3Results extends \GithubService\Model\DataMapper {
-
+class CodeSearchV3Results
+{
     public $incompleteResults = null;
 
     /**
@@ -22,6 +22,4 @@ class CodeSearchV3Results extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

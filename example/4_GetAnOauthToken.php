@@ -1,72 +1,78 @@
 <?php
 
+use ArtaxServiceBuilder\Oauth2Token;
 use GithubService\GithubArtaxService\GithubService;
 use Amp\Artax\Client as ArtaxClient;
 use ArtaxServiceBuilder\ResponseCache\NullResponseCache;
-use ArtaxServiceBuilder\Oauth2Token;
 
 $autoloader = require __DIR__.'/../vendor/autoload.php';
 
 $github = new GithubService(
     new ArtaxClient(),
+    \Amp\reactor(),
     new NullResponseCache(), //This is just an example, we don't cache anything
     'Danack/GithubArtaxService' //Change this to your github name/project
 );
 
 
-echo "Enter username:\n";
-$username = trim(fgets(STDIN));
+$existingToken = @file_get_contents(__DIR__."/../../github_oauth_token.txt");
 
-
-echo "Enter password:\n";
-$password = trim(fgets(STDIN));
-
-
-
-/**
- * @param $instruction
- * @return string
- */
-$enterPasswordCallback = function ($instruction) {
-    echo $instruction."\n";
-    $oneTimePassword = trim(fgets(STDIN));
-
-    return $oneTimePassword;
-};
-
-$noteURL = 'http://www.github.com/danack/GithubArtaxService';
-$applicationName = 'GetOauthTokenTest';
-// List of the scopes required. An empty list is used to get a token
-// with no access, just to avoid the 50 reqs/hour limit for unsigned
-// api calls. 
-$scopes = []; 
-
-try {
-
-    //Attempt to either create or retrieve an Oauth token
-    $authResult = $github->createOrRetrieveAuth(
-        $username,
-        $password,
-        $enterPasswordCallback,
-        $scopes,
-        $applicationName,
-        $noteURL,
-        $maxAttempts = 3
-    );
-
-    echo "Token is: ".$authResult->token.", keep it secret.\n";
+if ($existingToken) {
+    $token = new Oauth2Token($existingToken);
 }
-catch(ArtaxServiceBuilder\BadResponseException $badResponseException) {
-    echo "Something went wrong trying to retrieve an oauth token:\n";
-    echo $badResponseException->getMessage();
-    exit(-1);
-}
+else {
+    echo "Enter username:\n";
+    $username = trim(fgets(STDIN));
 
+    echo "Enter password (warning - not masked for this example):\n";
+    $password = trim(fgets(STDIN));
+
+    /**
+     * @param $instruction
+     * @return string
+     */
+    $enterPasswordCallback = function ($instruction) {
+        echo $instruction."\n";
+        $oneTimePassword = trim(fgets(STDIN));
+
+        return $oneTimePassword;
+    };
+
+    $noteURL = 'http://www.github.com/danack/GithubArtaxService';
+    $note = $noteURL;//"I really don't know why this is giving a new token.";
+    //$applicationName = 'GetOauthTokenTest';
+    // List of the scopes required. An empty list is used to get a token
+    // with no access, just to avoid the 50 reqs/hour limit for unsigned
+    // api calls. 
+    $scopes = [\GithubService\GithubArtaxService\GithubService::SCOPE_PUBLIC_REPO];
+
+    try {
+        //Attempt to either create or retrieve an Oauth token
+        $authResult = $github->createOrRetrieveAuth(
+            $username,
+            $password,
+            $enterPasswordCallback,
+            $scopes,
+            $note,
+            $maxAttempts = 3
+        );
+
+        echo "Token is: ".$authResult->token.", keep it secret.\n";
+    }
+    catch (ArtaxServiceBuilder\BadResponseException $badResponseException) {
+        echo "Something went wrong trying to retrieve an oauth token:\n";
+        echo $badResponseException->getMessage();
+        echo "\n";
+        exit(-1);
+    }
+
+    $token = $authResult;
+}
 
 // Okay we have an authorization, lets test it.
 // This api call will be signed and so able to do 5000 requests per hour
 $repoTags = $github->listRepoTags(
-    $authResult,
+    $token,
     'Danack',
     'GithubArtaxService'
 )->execute();

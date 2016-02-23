@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class Thread extends \GithubService\Model\DataMapper {
-
+class Thread
+{
     public $id = null;
 
     public $lastReadAt = null;
@@ -40,6 +40,4 @@ class Thread extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class SymlinkContent extends \GithubService\Model\DataMapper {
-
+class SymlinkContent
+{
     public $downloadUrl = null;
 
     public $gitUrl = null;
@@ -47,6 +47,4 @@ class SymlinkContent extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

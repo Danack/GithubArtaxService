@@ -4,7 +4,6 @@ namespace GithubService\Model;
 
 class Template
 {
-
     public $name = null;
 
     public $source = null;
@@ -17,6 +16,4 @@ class Template
 
         return $dataMap;
     }
-
-
 }

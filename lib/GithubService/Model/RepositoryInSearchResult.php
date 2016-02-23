@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class RepositoryInSearchResult extends \GithubService\Model\DataMapper {
-
+class RepositoryInSearchResult
+{
     /**
      * @var \GithubService\Model\User $owner
      */

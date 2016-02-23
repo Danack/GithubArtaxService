@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class UsersStats extends \GithubService\Model\DataMapper {
-
+class UsersStats
+{
     public $totalUsers;
     public $suspendedUsers;
     public $adminUsers;

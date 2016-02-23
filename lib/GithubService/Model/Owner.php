@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class Owner extends \GithubService\Model\DataMapper {
-
+class Owner
+{
     public $avatarUrl = null;
 
     public $gravatarId = null;
@@ -31,6 +31,4 @@ class Owner extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

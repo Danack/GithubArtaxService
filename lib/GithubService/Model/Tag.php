@@ -14,15 +14,4 @@ class Tag
     public $tarballUrl = null;
 
     public $zipballUrl = null;
-
-//    protected function getDataMap() {
-//        $dataMap = [
-//            ['commit', 'commit', 'class' => 'GithubService\\Model\\BlobAfterCreate'],
-//            ['name', 'name'],
-//            ['tarballUrl', 'tarball_url'],
-//            ['zipballUrl', 'zipball_url'],
-//        ];
-//
-//        return $dataMap;
-//    }
 }

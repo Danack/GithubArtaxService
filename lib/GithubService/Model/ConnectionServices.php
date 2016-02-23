@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class ConnectionServices extends \GithubService\Model\DataMapper {
-
+class ConnectionServices
+{
     /**
      * @var \GithubService\Model\ $connectionServicesChild
      */
@@ -18,6 +18,4 @@ class ConnectionServices extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

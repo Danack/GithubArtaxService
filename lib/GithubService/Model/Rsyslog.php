@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class Rsyslog extends \GithubService\Model\DataMapper {
-
+class Rsyslog
+{
     public $enabled = null;
 
     public $protocolName = null;
@@ -19,6 +19,4 @@ class Rsyslog extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

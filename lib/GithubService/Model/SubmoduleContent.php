@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class SubmoduleContent extends \GithubService\Model\DataMapper {
-
+class SubmoduleContent
+{
     public $downloadUrl = null;
 
     public $gitUrl = null;
@@ -47,6 +47,4 @@ class SubmoduleContent extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

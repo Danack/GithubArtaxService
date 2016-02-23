@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class GetAuthorizedSshKeysChild extends \GithubService\Model\DataMapper {
-
+class GetAuthorizedSshKeysChild
+{
     public $key = null;
 
     public $prettyPrint = null;
@@ -16,6 +16,4 @@ class GetAuthorizedSshKeysChild extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

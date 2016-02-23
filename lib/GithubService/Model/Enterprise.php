@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class Enterprise extends \GithubService\Model\DataMapper {
-
+class Enterprise
+{
     public $adminPassword = null;
 
     /**
@@ -136,6 +136,4 @@ class Enterprise extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

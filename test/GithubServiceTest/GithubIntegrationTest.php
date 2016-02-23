@@ -30,7 +30,7 @@ class GithubIntegrationTest extends \PHPUnit_Framework_TestCase
         list($reactor, $githubAPI) = $this->getReactorAndAPI();
         $command = $githubAPI->listRepoTags(null, "Danack", "GithubArtaxService");
         $repoTags = $command->call();
-        $this->assertInstanceOf('GithubService\Model\RepoTags', $repoTags);
+        $this->assertInstanceOf('GithubService\Model\Tags', $repoTags);
         $numberOfTags = count($repoTags->repoTags);
         $this->assertGreaterThanOrEqual(4, $numberOfTags);
     }

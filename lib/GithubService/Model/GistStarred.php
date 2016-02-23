@@ -6,8 +6,8 @@ use ArtaxServiceBuilder\Operation;
 use Amp\Artax\Response;
 use ArtaxServiceBuilder\BadResponseException;
 
-class GistStarred { //extends \GithubService\Model\DataMapper {
-
+class GistStarred
+{
     public $iStarred = null;
 
     static function createFromResponse(Response $response, Operation $operation) {

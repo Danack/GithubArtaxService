@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class IssueSearchItem extends \GithubService\Model\DataMapper {
-
+class IssueSearchItem
+{
     public $body = null;
 
     public $comments = null;
@@ -17,9 +17,7 @@ class IssueSearchItem extends \GithubService\Model\DataMapper {
     /**
      * @var \GithubService\Model\Indices $labels
      */
-    public $labels = array(
-        
-    );
+    public $labels = [];
 
     public $number = null;
 

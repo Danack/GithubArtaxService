@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class Repos extends \GithubService\Model\DataMapper {
-
+class Repos
+{
     public $forkRepos = null;
 
     public $orgRepos = null;
@@ -28,6 +28,4 @@ class Repos extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

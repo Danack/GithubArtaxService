@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class GistHistory extends \GithubService\Model\DataMapper {
-
+class GistHistory
+{
     /**
      * @var \GithubService\Model\HistoryChild $gISTHISTORYChild
      */
@@ -16,6 +16,4 @@ class GistHistory extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

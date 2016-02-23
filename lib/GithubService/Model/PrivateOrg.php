@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class PrivateOrg extends \GithubService\Model\DataMapper {
-
+class PrivateOrg
+{
     public $avatarUrl = null;
 
     public $billingEmail = null;

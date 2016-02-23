@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class RepoList extends \GithubService\Model\DataMapper {
-
+class RepoList
+{
     /**
      * @var \GithubService\Model\Ref $rEFSChild
      */
@@ -16,6 +16,4 @@ class RepoList extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

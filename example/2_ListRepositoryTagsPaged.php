@@ -5,7 +5,7 @@ require_once "1_ListRepositoryTags.php";
 // This example follows on from example 1
     
 /** @var $github GithubService\GithubArtaxService\GithubService */
-/** @var $repoTags GithubService\Model\RepoTags  */
+/** @var $repoTags GithubService\Model\Tags  */
 
 
 echo "Following pagination:\n";

@@ -4,8 +4,8 @@
 namespace GithubService\Model;
 
 
-class CommitInfo { // extends DataMapper{
-
+class CommitInfo
+{
     public $url;
 
     public $authorName;
@@ -20,45 +20,5 @@ class CommitInfo { // extends DataMapper{
     public $treeURL;
     public $treeSHA;
     public $commentCount;
-
-//    protected function getDataMap() {
-//        $dataMap = array(
-//            ['url', 'url'],
-//            ['authorName', ['author', 'name']],
-//            ['authorEmail', ['author', 'email']],
-//            ['authorDate', ['author', 'date']],
-//            ['committerName', ['committer', 'name']],
-//            ['committerEmail', ['committer', 'email']],
-//            ['committerDate', ['committer', 'date']],
-//            ['message', 'message'],
-//            ['treeURL', ['tree', 'url']],
-//            ['treeSHA', ['tree', 'sha']],
-//            ['commentCount', 'comment_count', 'optional' => true],
-//        );
-//
-//        return $dataMap;
-//    }
-    
-    
-//"url": "https://api.github.com/repos/octocat/Hello-World/git/commits/6dcb09b5b57875f334f61aebed695e2e4193db5e",
-//"author": {
-//"name": "Monalisa Octocat",
-//"email": "support@github.com",
-//"date": "2011-04-14T16:00:49Z"
-//},
-//"committer": {
-//    "name": "Monalisa Octocat",
-//        "email": "support@github.com",
-//        "date": "2011-04-14T16:00:49Z"
-//      },
-//      "message": "Fix all the bugs",
-//      "tree": {
-//    "url": "https://api.github.com/repos/octocat/Hello-World/tree/6dcb09b5b57875f334f61aebed695e2e4193db5e",
-//        "sha": "6dcb09b5b57875f334f61aebed695e2e4193db5e"
-//      },
-//      "comment_count": 0
-//    },
-    
 }
-
  

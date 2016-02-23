@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class File { //extends \GithubService\Model\DataMapper {
-
+class File
+{
     public $name;
     
     public $language = null;

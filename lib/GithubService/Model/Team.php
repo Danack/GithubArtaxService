@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class Team extends \GithubService\Model\DataMapper {
-
+class Team
+{
     public $description = null;
 
     public $id = null;
@@ -34,6 +34,4 @@ class Team extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

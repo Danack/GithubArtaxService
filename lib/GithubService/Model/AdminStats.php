@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class AdminStats extends \GithubService\Model\DataMapper {
-
+class AdminStats
+{
     /**
      * @var \GithubService\Model\ $comments
      */

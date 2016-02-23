@@ -170,7 +170,7 @@ class updateAuthorization implements \ArtaxServiceBuilder\Operation {
     /**
      * Apply any filters necessary to the parameter
      *
-     * @return \GithubService\Model\GithubService\Model\OauthAccess
+     * @return \GithubService\Model\OauthAccess
      * @param string $name The name of the parameter to get.
      */
     public function getFilteredParameter($name) {
@@ -239,7 +239,7 @@ class updateAuthorization implements \ArtaxServiceBuilder\Operation {
     /**
      * Create and execute the operation, then return the processed  response.
      *
-     * @return mixed|\GithubService\Model\GithubService\Model\OauthAccess
+     * @return mixed|\GithubService\Model\OauthAccess
      */
     public function call() {
         $request = $this->createRequest();
@@ -257,7 +257,7 @@ class updateAuthorization implements \ArtaxServiceBuilder\Operation {
     /**
      * Execute the operation, returning the parsed response
      *
-     * @return \GithubService\Model\GithubService\Model\OauthAccess
+     * @return \GithubService\Model\OauthAccess
      */
     public function execute() {
         $request = $this->createRequest();
@@ -279,7 +279,7 @@ class updateAuthorization implements \ArtaxServiceBuilder\Operation {
      * Dispatch the request for this operation and process the response. Allows you to
      * modify the request before it is sent.
      *
-     * @return \GithubService\Model\GithubService\Model\OauthAccess
+     * @return \GithubService\Model\OauthAccess
      * @param \Amp\Artax\Request $request The request to be processed
      */
     public function dispatch(\Amp\Artax\Request $request) {
@@ -294,7 +294,7 @@ class updateAuthorization implements \ArtaxServiceBuilder\Operation {
      * Dispatch the request for this operation and process the response asynchronously.
      * Allows you to modify the request before it is sent.
      *
-     * @return \GithubService\Model\GithubService\Model\OauthAccess
+     * @return \GithubService\Model\OauthAccess
      * @param \Amp\Artax\Request $request The request to be processed
      * @param callable $callable The callable that processes the response
      */
@@ -306,7 +306,7 @@ class updateAuthorization implements \ArtaxServiceBuilder\Operation {
      * Dispatch the request for this operation and process the response. Allows you to
      * modify the request before it is sent.
      *
-     * @return \GithubService\Model\GithubService\Model\OauthAccess
+     * @return \GithubService\Model\OauthAccess
      * @param \Amp\Artax\Response $response The HTTP response.
      */
     public function processResponse(\Amp\Artax\Response $response) {
@@ -319,7 +319,7 @@ class updateAuthorization implements \ArtaxServiceBuilder\Operation {
      * Determine whether the response should be processed. Override this method to have
      * a per-operation decision, otherwise the function is the API class will be used.
      *
-     * @return \GithubService\Model\GithubService\Model\OauthAccess
+     * @return \GithubService\Model\OauthAccess
      */
     public function shouldResponseBeProcessed(\Amp\Artax\Response $response) {
         return $this->api->shouldResponseBeProcessed($response);
@@ -340,7 +340,7 @@ class updateAuthorization implements \ArtaxServiceBuilder\Operation {
      * Override this method to have a per-operation decision, otherwise the
      * functionfrom the API class will be used.
      *
-     * @return \GithubService\Model\GithubService\Model\OauthAccess
+     * @return \GithubService\Model\OauthAccess
      */
     public function shouldUseCachedResponse(\Amp\Artax\Response $response) {
         return $this->api->shouldUseCachedResponse($response);
@@ -350,7 +350,7 @@ class updateAuthorization implements \ArtaxServiceBuilder\Operation {
      * Determine whether the response should be cached. Override this method to have a
      * per-operation decision, otherwise the function from the API class will be used.
      *
-     * @return \GithubService\Model\GithubService\Model\OauthAccess
+     * @return \GithubService\Model\OauthAccess
      */
     public function shouldResponseBeCached(\Amp\Artax\Response $response) {
         return $this->api->shouldResponseBeCached($response);
@@ -380,7 +380,7 @@ class updateAuthorization implements \ArtaxServiceBuilder\Operation {
      * @return \Amp\Artax\Response
      */
     public function getResultInstantiationInfo() {
-        return ['instantiate' => 'GithubService\\Model\\GithubService\\Model\\OauthAccess'];
+        return ['instantiate' => 'GithubService\\Model\\OauthAccess'];
     }
 
 

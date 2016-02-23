@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class RepoStatsParticipation extends \GithubService\Model\DataMapper {
-
+class RepoStatsParticipation
+{
     /**
      * @var \GithubService\Model\Indices $all
      */
@@ -26,6 +26,4 @@ class RepoStatsParticipation extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

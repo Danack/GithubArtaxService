@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class Links extends \GithubService\Model\DataMapper {
-
+class Links
+{
     /**
      * @var \GithubService\Model\Comments $html
      */
@@ -28,6 +28,4 @@ class Links extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

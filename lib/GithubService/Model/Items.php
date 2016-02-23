@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class Items extends \GithubService\Model\DataMapper {
-
+class Items
+{
     /**
      * @var \GithubService\Model\ $itemsChild
      */

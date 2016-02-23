@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class ProgressChild extends \GithubService\Model\DataMapper {
-
+class ProgressChild
+{
     public $key = null;
 
     public $status = null;
@@ -16,6 +16,4 @@ class ProgressChild extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

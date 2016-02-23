@@ -4,9 +4,8 @@
 namespace GithubService\Model;
 
 
-class Commit extends DataMapper {
-    
-
+class Commit 
+{
     public $url;
     public $sha;
     public $htmlURL;

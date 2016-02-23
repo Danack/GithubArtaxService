@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class CreatedRelease extends \GithubService\Model\DataMapper {
-
+class CreatedRelease
+{
     /**
      * @var \GithubService\Model\Indices $assets
      */
@@ -69,6 +69,4 @@ class CreatedRelease extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

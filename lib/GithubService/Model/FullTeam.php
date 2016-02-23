@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class FullTeam extends \GithubService\Model\DataMapper {
-
+class FullTeam
+{
     public $description = null;
 
     public $id = null;

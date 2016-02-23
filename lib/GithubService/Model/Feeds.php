@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class Feeds extends \GithubService\Model\DataMapper {
-
+class Feeds
+{
     public $currentUserActorUrl = null;
 
     public $currentUserOrganizationUrl = null;
@@ -44,6 +44,4 @@ class Feeds extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

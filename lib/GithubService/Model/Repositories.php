@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class Repositories extends \GithubService\Model\DataMapper {
-
+class Repositories
+{
     /**
      * @var \GithubService\Model\RepoSearchItem $repositoriesChild
      */

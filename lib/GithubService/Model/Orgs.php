@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class Orgs extends \GithubService\Model\DataMapper {
-
+class Orgs
+{
     public $disabledOrgs = null;
 
     public $totalOrgs = null;
@@ -22,6 +22,4 @@ class Orgs extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

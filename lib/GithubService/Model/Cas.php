@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class Cas extends \GithubService\Model\DataMapper {
-
+class Cas
+{
     public $url = null;
 
     protected function getDataMap() {

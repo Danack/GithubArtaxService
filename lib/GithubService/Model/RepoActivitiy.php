@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class RepoActivitiy extends \GithubService\Model\DataMapper {
-
+class RepoActivitiy
+{
     // a - Number of additions
     public $added = null;
 

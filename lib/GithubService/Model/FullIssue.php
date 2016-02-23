@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class FullIssue extends \GithubService\Model\DataMapper {
-
+class FullIssue
+{
     /**
      * @var \GithubService\Model\User $assignee
      */

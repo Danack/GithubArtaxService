@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class CurrentUserOrganizations extends \GithubService\Model\DataMapper {
-
+class CurrentUserOrganizations
+{
     /**
      * @var \GithubService\Model\CurrentUser $currentUserOrganizationsChild
      */
@@ -18,6 +18,4 @@ class CurrentUserOrganizations extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

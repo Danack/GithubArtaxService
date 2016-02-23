@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class DirectoryContent extends \GithubService\Model\DataMapper {
-
+class DirectoryContent
+{
     /**
      * @var \GithubService\Model\Content $dIRECTORYCONTENTChild
      */
@@ -18,6 +18,4 @@ class DirectoryContent extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

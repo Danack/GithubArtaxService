@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class PagesStats extends \GithubService\Model\DataMapper {
-
+class PagesStats
+{
     public $cname = null;
 
     public $custom404 = null;
@@ -22,6 +22,4 @@ class PagesStats extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

@@ -59,15 +59,15 @@ function is_indexable($item) {
  */
 abstract class DataMapper {
 
-    /**
-     * @var  \ArtaxServiceBuilder\Service\GithubPaginator|null
-     */
-    public $pager;
-
-    /**
-     * @var
-     */
-    public $oauthScopes = null;
+//    /**
+//     * @var  \ArtaxServiceBuilder\Service\GithubPaginator|null
+//     */
+//    public $pager;
+//
+//    /**
+//     * @var
+//     */
+//    public $oauthScopes = null;
 
     /**
      * @return mixed

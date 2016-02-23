@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class Contributor extends \GithubService\Model\DataMapper {
-
+class Contributor
+{
     public $avatarUrl = null;
 
     public $contributions = null;
@@ -64,6 +64,4 @@ class Contributor extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

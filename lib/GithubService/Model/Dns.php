@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class Dns extends \GithubService\Model\DataMapper {
-
+class Dns
+{
     public $primaryNameserver = null;
 
     public $secondaryNameserver = null;
@@ -16,6 +16,4 @@ class Dns extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

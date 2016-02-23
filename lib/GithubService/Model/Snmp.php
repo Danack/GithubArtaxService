@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class Snmp extends \GithubService\Model\DataMapper {
-
+class Snmp
+{
     public $community = null;
 
     public $enabled = null;
@@ -16,6 +16,4 @@ class Snmp extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class Subscription extends \GithubService\Model\DataMapper {
-
+class Subscription
+{
     public $createdAt = null;
 
     public $ignored = null;
@@ -28,6 +28,4 @@ class Subscription extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

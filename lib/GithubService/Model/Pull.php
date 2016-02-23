@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class Pull extends \GithubService\Model\DataMapper {
-
+class Pull
+{
     /**
      * @var \GithubService\Model\Base $base
      */

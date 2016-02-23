@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class TreeNew extends \GithubService\Model\DataMapper {
-
+class TreeNew
+{
     public $sha = null;
 
     /**
@@ -22,6 +22,4 @@ class TreeNew extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

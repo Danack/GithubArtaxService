@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class CreateDownload extends \GithubService\Model\DataMapper {
-
+class CreateDownload
+{
     public $accesskeyid = null;
 
     public $acl = null;
@@ -67,6 +67,4 @@ class CreateDownload extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

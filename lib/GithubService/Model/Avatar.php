@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class Avatar extends \GithubService\Model\DataMapper {
-
+class Avatar 
+{
     public $enabled = null;
 
     public $uri = null;
@@ -16,6 +16,4 @@ class Avatar extends \GithubService\Model\DataMapper {
 
         return $dataMap;
     }
-
-
 }

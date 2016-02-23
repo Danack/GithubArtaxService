@@ -2,8 +2,8 @@
 
 namespace GithubService\Model;
 
-class GithubSsl extends \GithubService\Model\DataMapper {
-
+class GithubSsl
+{
     public $cert = null;
 
     public $enabled = null;
