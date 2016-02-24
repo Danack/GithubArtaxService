@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class Feeds
 {
+    use GithubTrait;
+    use SafeAccess;
+
     public $currentUserActorUrl = null;
 
     public $currentUserOrganizationUrl = null;

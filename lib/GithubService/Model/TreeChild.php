@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class TreeChild
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $mode = null;
 
     public $path = null;

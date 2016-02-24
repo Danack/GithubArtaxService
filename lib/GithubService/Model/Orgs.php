@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class Orgs
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $disabledOrgs = null;
 
     public $totalOrgs = null;

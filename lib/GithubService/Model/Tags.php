@@ -7,6 +7,7 @@ namespace GithubService\Model;
 class Tags implements \IteratorAggregate
 {
     use GithubTrait;
+    use SafeAccess;
     
     /** @var  \GithubService\Model\Tag[] */
     public $repoTags = [];

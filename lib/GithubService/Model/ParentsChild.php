@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class ParentsChild
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $htmlUrl = null;
 
     public $sha = null;

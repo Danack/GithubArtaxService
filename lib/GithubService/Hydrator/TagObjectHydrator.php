@@ -3,19 +3,17 @@
 namespace GithubService\Hydrator;
 
 use GithubService\Hydrator;
-use GithubService\DataMapper;
+use GithubService\HydratorRegistry;
 use GithubService\Model\TagObject;
-
-
 
 class TagObjectHydrator implements Hydrator
 {
-    public function hydrate(array $data, DataMapper $dataMapper)
+    public function hydrate(array $data, HydratorRegistry $hydratorRegistry)
     {
         $tagObject = new TagObject();
-        $tagObject->url = $dataMapper->extractValue($data, 'url');
-        $tagObject->sha = $dataMapper->extractValue($data, 'sha');
-        $tagObject->type = $dataMapper->extractValue($data, 'type');
+        $tagObject->url = $hydratorRegistry->extractValue($data, 'url');
+        $tagObject->sha = $hydratorRegistry->extractValue($data, 'sha');
+        $tagObject->type = $hydratorRegistry->extractValue($data, 'type');
 
         return $tagObject;
     }

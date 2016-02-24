@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class FullPull
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $additions = null;
 
     /**

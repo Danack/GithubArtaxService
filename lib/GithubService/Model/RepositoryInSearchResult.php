@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class RepositoryInSearchResult
 {
+    use GithubTrait;
+    use SafeAccess;
+
     /**
      * @var \GithubService\Model\User $owner
      */

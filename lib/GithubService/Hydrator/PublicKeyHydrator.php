@@ -3,20 +3,20 @@
 namespace GithubService\Hydrator;
 
 use GithubService\Hydrator;
-use GithubService\DataMapper;
+use GithubService\HydratorRegistry;
 use GithubService\Model\PublicKey;
 
 class PublicKeyHydrator implements Hydrator
 {
-    public function hydrate(array $data, DataMapper $dataMapper)
+    public function hydrate(array $data, HydratorRegistry $hydratorRegistry)
     {
         $publicKey = new PublicKey();
-        $publicKey->createdAt = $dataMapper->extractValue($data, 'created_at');
-        $publicKey->id = $dataMapper->extractValue($data, 'id');
-        $publicKey->key = $dataMapper->extractValue($data, 'key');
-        $publicKey->title = $dataMapper->extractValue($data, 'title');
-        $publicKey->url = $dataMapper->extractValue($data, 'url');
-        $publicKey->verified = $dataMapper->extractValue($data, 'verified');
+        $publicKey->createdAt = $hydratorRegistry->extractValue($data, 'created_at');
+        $publicKey->id = $hydratorRegistry->extractValue($data, 'id');
+        $publicKey->key = $hydratorRegistry->extractValue($data, 'key');
+        $publicKey->title = $hydratorRegistry->extractValue($data, 'title');
+        $publicKey->url = $hydratorRegistry->extractValue($data, 'url');
+        $publicKey->verified = $hydratorRegistry->extractValue($data, 'verified');
 
         return $publicKey;
     }

@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class ItemsChild
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $avatarUrl = null;
 
     public $followersUrl = null;

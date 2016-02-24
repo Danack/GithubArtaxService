@@ -4,6 +4,8 @@ namespace GithubService\Model;
 
 class RepoStatsCommitActivityChild
 {
+    use GithubTrait;
+    use SafeAccess;
     /**
      * @var \GithubService\Model\Indices $days
      */

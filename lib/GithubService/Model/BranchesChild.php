@@ -2,7 +2,10 @@
 
 namespace GithubService\Model;
 
-class BranchesChild  {
+class BranchesChild
+{
+    use GithubTrait;
+    use SafeAccess;
 
     /**
      * @var \GithubService\Model\BlobAfterCreate $commit

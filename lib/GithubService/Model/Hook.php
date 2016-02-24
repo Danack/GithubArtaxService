@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class Hook
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $active = null;
 
     /**

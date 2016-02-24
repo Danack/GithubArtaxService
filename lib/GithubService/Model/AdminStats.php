@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class AdminStats
 {
+    use GithubTrait;
+    use SafeAccess;
+
     /**
      * @var \GithubService\Model\ $comments
      */

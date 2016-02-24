@@ -4,10 +4,11 @@ namespace GithubService\Model;
 
 class Ref
 {
-    /**
-     * @var \GithubService\Model\Object $object
-     */
-    public $object = null;
+    use GithubTrait;
+    use SafeAccess;
+    
+    /** @var \GithubService\Model\RefObject $refObject */
+    public $refObject = null;
 
     public $ref = null;
 

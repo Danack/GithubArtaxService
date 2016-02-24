@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class GistComment
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $body = null;
 
     public $createdAt = null;

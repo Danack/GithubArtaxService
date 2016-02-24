@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class CurrentUser
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $href = null;
 
     public $type = null;

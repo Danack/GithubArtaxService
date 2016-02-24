@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class Tree
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     /**
      * @var \GithubService\Model\ $treeChild
      */

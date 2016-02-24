@@ -8,6 +8,9 @@ use ArtaxServiceBuilder\BadResponseException;
 
 class GistStarred
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $iStarred = null;
 
     static function createFromResponse(Response $response, Operation $operation) {

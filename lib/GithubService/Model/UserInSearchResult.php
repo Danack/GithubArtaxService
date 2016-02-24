@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class UserInSearchResult
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $email;
     public $location;
     public $publicGistCount ;

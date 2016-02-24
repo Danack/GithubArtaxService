@@ -8,7 +8,7 @@ use GithubService\OneTimePasswordAppException;
 use GithubService\OneTimePasswordSMSException;
 use ArtaxServiceBuilder\Oauth2Token;
 use ArtaxServiceBuilder\BadResponseException;
-use GithubService\Model\DataMapperException;
+use GithubService\Model\HydratorException;
 
 
 require_once dirname(dirname(__DIR__))."/clavis.php";
@@ -41,7 +41,7 @@ catch (BadResponseException $bre) {
     
     echo $bre->getResponse()->getBody();
 }
-catch (DataMapperException $dme) {
+catch (HydratorException $dme) {
     echo $dme->displayProblem();
 }
     

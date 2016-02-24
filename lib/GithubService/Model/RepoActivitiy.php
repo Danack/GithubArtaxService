@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class RepoActivitiy
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     // a - Number of additions
     public $added = null;
 

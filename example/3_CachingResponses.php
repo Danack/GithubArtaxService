@@ -15,7 +15,7 @@ $github = new GithubService(
 );
 
 $command = $github->listRepoTags(
-    null,   //No authentication means we will be IP limited to 50 requets /hour
+    null,   //No authentication means we will be IP limited to 50 requests/hour
     'php',
     'php-src'
 );

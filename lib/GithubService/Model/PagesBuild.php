@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class PagesBuild
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $commit = null;
 
     public $createdAt = null;

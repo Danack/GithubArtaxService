@@ -4,12 +4,13 @@ namespace GithubService\Model;
 
 class OrgMemberships
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     /**
      * @var \GithubService\Model\ActiveAdminOrgMembership $oRGMEMBERSHIPSChild
      */
-    public $oRGMEMBERSHIPSChild = array(
-        
-    );
+    public $oRGMEMBERSHIPSChild = [];
 
     protected function getDataMap() {
         $dataMap = [

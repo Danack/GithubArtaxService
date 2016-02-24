@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class Gist
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $comments = null;
 
     public $commentsUrl = null;
@@ -15,7 +18,7 @@ class Gist
     public $description = null;
 
     /**
-     * @var \GithubService\Model\Files $files
+     * @var \GithubService\Model\FileList[] $files
      */
     public $files = null;
 

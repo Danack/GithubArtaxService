@@ -3,16 +3,16 @@
 namespace GithubService\Hydrator;
 
 use GithubService\Hydrator;
-use GithubService\DataMapper;
+use GithubService\HydratorRegistry;
 use GithubService\Model\Config;
 
 class ConfigHydrator implements Hydrator
 {
-    public function hydrate(array $data, DataMapper $dataMapper)
+    public function hydrate(array $data, HydratorRegistry $hydratorRegistry)
     {
         $config = new Config();
-        $config->contentType = $dataMapper->extractValue($data, 'content_type');
-        $config->url = $dataMapper->extractValue($data, 'url');
+        $config->contentType = $hydratorRegistry->extractValue($data, 'content_type');
+        $config->url = $hydratorRegistry->extractValue($data, 'url');
 
         return $config;
     }

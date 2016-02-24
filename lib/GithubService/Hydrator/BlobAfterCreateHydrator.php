@@ -3,12 +3,12 @@
 namespace GithubService\Hydrator;
 
 use GithubService\Hydrator;
-use GithubService\DataMapper;
+use GithubService\HydratorRegistry;
 use GithubService\Model\BlobAfterCreate;
 
 class BlobAfterCreateHydrator implements Hydrator
 {
-    public function hydrate(array $data, DataMapper $dataMapper)
+    public function hydrate(array $data, HydratorRegistry $hydratorRegistry)
     {
         $blobAfterCreate = new BlobAfterCreate();
 

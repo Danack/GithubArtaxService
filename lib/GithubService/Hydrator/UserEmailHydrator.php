@@ -3,17 +3,17 @@
 namespace GithubService\Hydrator;
 
 use GithubService\Hydrator;
-use GithubService\DataMapper;
+use GithubService\HydratorRegistry;
 use GithubService\Model\UserEmail;
 
 class UserEmailHydrator implements Hydrator
 {
-    public function hydrate(array $data, DataMapper $dataMapper)
+    public function hydrate(array $data, HydratorRegistry $hydratorRegistry)
     {
         $commitInfo = new UserEmail();
-        $commitInfo->email = $dataMapper->extractValue($data, 'email');
-        $commitInfo->primary = $dataMapper->extractValue($data, 'primary');
-        $commitInfo->verified = $dataMapper->extractValue($data, 'verified');
+        $commitInfo->email = $hydratorRegistry->extractValue($data, 'email');
+        $commitInfo->primary = $hydratorRegistry->extractValue($data, 'primary');
+        $commitInfo->verified = $hydratorRegistry->extractValue($data, 'verified');
 
         return $commitInfo;
     }

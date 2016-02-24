@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class History
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     /**
      * @var \GithubService\Model\ $historyChild
      */

@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class Event
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     /**
      * @var \GithubService\Model\Author $actor
      */

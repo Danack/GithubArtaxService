@@ -3,7 +3,7 @@
 namespace GithubService\Hydrator;
 
 use GithubService\Hydrator;
-use GithubService\DataMapper;
+use GithubService\HydratorRegistry;
 use GithubService\Model\GistFork;
 use GithubService\Model\GistForks;
 
@@ -12,11 +12,11 @@ use GithubService\Model\GistForks;
 
 class GistForksHydrator implements Hydrator
 {
-    public function hydrate(array $data, DataMapper $dataMapper)
+    public function hydrate(array $data, HydratorRegistry $hydratorRegistry)
     {
         $gistForks = new GistForks();
         foreach ($data as $entry) {
-            $gistForks->gistForklist[] = $dataMapper->instantiateClass('GithubService\Model\GistFork', $entry);  
+            $gistForks->gistForklist[] = $hydratorRegistry->instantiateClass('GithubService\Model\GistFork', $entry);  
         }
  
         return $gistForks;

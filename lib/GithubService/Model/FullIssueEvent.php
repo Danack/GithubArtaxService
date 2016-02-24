@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class FullIssueEvent
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     /**
      * @var \GithubService\Model\User $actor
      */

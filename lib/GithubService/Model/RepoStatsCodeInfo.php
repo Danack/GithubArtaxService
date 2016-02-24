@@ -6,8 +6,10 @@ use GithubService\GithubArtaxService\GithubArtaxServiceException;
 
 class RepoStatsCodeInfo
 {
+    use GithubTrait;
+    use SafeAccess;
     // Returns a weekly aggregate of the number of additions and deletions pushed to a repository.
-    
+
     /**
      * @var \GithubService\Model\Indices $rEPOSTATSCODEFREQUENCYChild
      */

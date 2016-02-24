@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class CommitComment
 {
+    use GithubTrait;
+    use SafeAccess;
+
     public $body = null;
 
     public $commitId = null;

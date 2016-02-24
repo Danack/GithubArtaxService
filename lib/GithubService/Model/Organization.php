@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class Organization
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $avatarUrl = null;
 
     public $description = null;

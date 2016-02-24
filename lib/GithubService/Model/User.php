@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class User
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $avatarUrl = null;
 
     public $eventsUrl = null;

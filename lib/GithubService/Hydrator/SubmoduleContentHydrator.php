@@ -3,25 +3,24 @@
 namespace GithubService\Hydrator;
 
 use GithubService\Hydrator;
-use GithubService\DataMapper;
+use GithubService\HydratorRegistry;
 use GithubService\Model\SubmoduleContent;
-
 
 class SubmoduleContentHydrator implements Hydrator
 {
-    public function hydrate(array $data, DataMapper $dataMapper)
+    public function hydrate(array $data, HydratorRegistry $hydratorRegistry)
     {
         $submoduleContent = new SubmoduleContent();
-        $submoduleContent->downloadUrl = $dataMapper->extractValue($data, 'download_url');
-        $submoduleContent->gitUrl = $dataMapper->extractValue($data, 'git_url');
-        $submoduleContent->htmlUrl = $dataMapper->extractValue($data, 'html_url');
-        $submoduleContent->name = $dataMapper->extractValue($data, 'name');
-        $submoduleContent->path = $dataMapper->extractValue($data, 'path');
-        $submoduleContent->sha = $dataMapper->extractValue($data, 'sha');
-        $submoduleContent->size = $dataMapper->extractValue($data, 'size');
-        $submoduleContent->submoduleGitUrl = $dataMapper->extractValue($data, 'submodule_git_url');
-        $submoduleContent->type = $dataMapper->extractValue($data, 'type');
-        $submoduleContent->url = $dataMapper->extractValue($data, 'url');
+        $submoduleContent->downloadUrl = $hydratorRegistry->extractValue($data, 'download_url');
+        $submoduleContent->gitUrl = $hydratorRegistry->extractValue($data, 'git_url');
+        $submoduleContent->htmlUrl = $hydratorRegistry->extractValue($data, 'html_url');
+        $submoduleContent->name = $hydratorRegistry->extractValue($data, 'name');
+        $submoduleContent->path = $hydratorRegistry->extractValue($data, 'path');
+        $submoduleContent->sha = $hydratorRegistry->extractValue($data, 'sha');
+        $submoduleContent->size = $hydratorRegistry->extractValue($data, 'size');
+        $submoduleContent->submoduleGitUrl = $hydratorRegistry->extractValue($data, 'submodule_git_url');
+        $submoduleContent->type = $hydratorRegistry->extractValue($data, 'type');
+        $submoduleContent->url = $hydratorRegistry->extractValue($data, 'url');
 
         return $submoduleContent;
     }

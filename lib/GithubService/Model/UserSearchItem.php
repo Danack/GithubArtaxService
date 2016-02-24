@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class UserSearchItem
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $created = null;
 
     public $createdAt = null;

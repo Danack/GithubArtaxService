@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class IssueComment
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $body = null;
 
     public $createdAt = null;

@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class Base 
 {
+    use GithubTrait;
+    use SafeAccess;
+
     public $label = null;
 
     public $ref = null;

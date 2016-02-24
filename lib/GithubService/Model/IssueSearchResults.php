@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class IssueSearchResults
 {
+    use GithubTrait;
+    use SafeAccess;
+
     /**
      * @var \GithubService\Model\ $issues
      */

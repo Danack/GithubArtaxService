@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class CombinedStatus
 {
+    use GithubTrait;
+    use SafeAccess;
+
     public $commitUrl = null;
 
     /**

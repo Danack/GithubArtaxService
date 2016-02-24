@@ -3,9 +3,11 @@
 
 namespace GithubService\Model;
 
-
 class Commit 
 {
+    use GithubTrait;
+    use SafeAccess;
+
     public $url;
     public $sha;
     public $htmlURL;

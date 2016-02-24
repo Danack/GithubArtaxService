@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class ActiveAdminOrgMembership 
 {
+    use GithubTrait;
+    use SafeAccess;
+
     /**
      * @var \GithubService\Model\ $organization
      */
@@ -34,6 +37,4 @@ class ActiveAdminOrgMembership
 
         return $dataMap;
     }
-
-
 }

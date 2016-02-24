@@ -3,17 +3,17 @@
 namespace GithubService\Hydrator;
 
 use GithubService\Hydrator;
-use GithubService\DataMapper;
+use GithubService\HydratorRegistry;
 use GithubService\Model\RefObject;
 
 class RefObjectHydrator implements Hydrator
 {
-    public function hydrate(array $data, DataMapper $dataMapper)
+    public function hydrate(array $data, HydratorRegistry $hydratorRegistry)
     {
         $commitInfo = new RefObject();
-        $commitInfo->sha = $dataMapper->extractValue($data, 'sha');
-        $commitInfo->type = $dataMapper->extractValue($data, 'type');
-        $commitInfo->url = $dataMapper->extractValue($data, 'url');
+        $commitInfo->sha = $hydratorRegistry->extractValue($data, 'sha');
+        $commitInfo->type = $hydratorRegistry->extractValue($data, 'type');
+        $commitInfo->url = $hydratorRegistry->extractValue($data, 'url');
 
         return $commitInfo;
     }

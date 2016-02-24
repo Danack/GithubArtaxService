@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class Links
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     /**
      * @var \GithubService\Model\Comments $html
      */

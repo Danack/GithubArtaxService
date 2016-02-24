@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class Item
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $path = null;
     public $repository = null;
     public $score = null;

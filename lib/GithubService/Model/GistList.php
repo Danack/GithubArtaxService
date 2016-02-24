@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class GistList
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $gists = [];
 
     protected function getDataMap() {

@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class CodeSearchV3Results
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $incompleteResults = null;
 
     /**

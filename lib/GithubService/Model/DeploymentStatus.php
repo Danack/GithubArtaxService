@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class DeploymentStatus
 {
+    use GithubTrait;
+    use SafeAccess;
+
     public $createdAt = null;
 
     /**

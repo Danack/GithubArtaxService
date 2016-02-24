@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class LabelsChild
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $color = null;
 
     public $name = null;

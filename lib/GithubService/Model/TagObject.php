@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class TagObject
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $url;
     public $sha;
     public $type;

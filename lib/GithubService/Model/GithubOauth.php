@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class GithubOauth
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $clientId = null;
 
     public $clientSecret = null;

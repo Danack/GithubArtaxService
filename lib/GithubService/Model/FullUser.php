@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class FullUser
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $avatarUrl = null;
 
     public $bio = null;

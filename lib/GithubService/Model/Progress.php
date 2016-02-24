@@ -4,12 +4,13 @@ namespace GithubService\Model;
 
 class Progress
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     /**
      * @var \GithubService\Model\ $progressChild
      */
-    public $progressChild = array(
-        
-    );
+    public $progressChild = [];
 
     protected function getDataMap() {
         $dataMap = [

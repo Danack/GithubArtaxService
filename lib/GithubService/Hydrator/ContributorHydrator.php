@@ -3,33 +3,33 @@
 namespace GithubService\Hydrator;
 
 use GithubService\Hydrator;
-use GithubService\DataMapper;
+use GithubService\HydratorRegistry;
 use GithubService\Model\Contributor;
 
 
 class ContributorHydrator implements Hydrator
 {
-    public function hydrate(array $data, DataMapper $dataMapper)
+    public function hydrate(array $data, HydratorRegistry $hydratorRegistry)
     {
         $blob = new Contributor();
-        $blob->avatarUrl = $dataMapper->extractValue($data, 'avatar_url');
-        $blob->contributions = $dataMapper->extractValue($data, 'contributions');
-        $blob->eventsUrl = $dataMapper->extractValue($data, 'events_url');
-        $blob->followersUrl = $dataMapper->extractValue($data, 'followers_url');
-        $blob->followingUrl = $dataMapper->extractValue($data, 'following_url');
-        $blob->gistsUrl = $dataMapper->extractValue($data, 'gists_url');
-        $blob->gravatarId = $dataMapper->extractValue($data, 'gravatar_id');
-        $blob->htmlUrl = $dataMapper->extractValue($data, 'html_url');
-        $blob->id = $dataMapper->extractValue($data, 'id');
-        $blob->login = $dataMapper->extractValue($data, 'login');
-        $blob->organizationsUrl = $dataMapper->extractValue($data, 'organizations_url');
-        $blob->receivedEventsUrl = $dataMapper->extractValue($data, 'received_events_url');
-        $blob->reposUrl = $dataMapper->extractValue($data, 'repos_url');
-        $blob->siteAdmin = $dataMapper->extractValue($data, 'site_admin');
-        $blob->starredUrl = $dataMapper->extractValue($data, 'starred_url');
-        $blob->subscriptionsUrl = $dataMapper->extractValue($data, 'subscriptions_url');
-        $blob->type = $dataMapper->extractValue($data, 'type');
-        $blob->url = $dataMapper->extractValue($data, 'url');
+        $blob->avatarUrl = $hydratorRegistry->extractValue($data, 'avatar_url');
+        $blob->contributions = $hydratorRegistry->extractValue($data, 'contributions');
+        $blob->eventsUrl = $hydratorRegistry->extractValue($data, 'events_url');
+        $blob->followersUrl = $hydratorRegistry->extractValue($data, 'followers_url');
+        $blob->followingUrl = $hydratorRegistry->extractValue($data, 'following_url');
+        $blob->gistsUrl = $hydratorRegistry->extractValue($data, 'gists_url');
+        $blob->gravatarId = $hydratorRegistry->extractValue($data, 'gravatar_id');
+        $blob->htmlUrl = $hydratorRegistry->extractValue($data, 'html_url');
+        $blob->id = $hydratorRegistry->extractValue($data, 'id');
+        $blob->login = $hydratorRegistry->extractValue($data, 'login');
+        $blob->organizationsUrl = $hydratorRegistry->extractValue($data, 'organizations_url');
+        $blob->receivedEventsUrl = $hydratorRegistry->extractValue($data, 'received_events_url');
+        $blob->reposUrl = $hydratorRegistry->extractValue($data, 'repos_url');
+        $blob->siteAdmin = $hydratorRegistry->extractValue($data, 'site_admin');
+        $blob->starredUrl = $hydratorRegistry->extractValue($data, 'starred_url');
+        $blob->subscriptionsUrl = $hydratorRegistry->extractValue($data, 'subscriptions_url');
+        $blob->type = $hydratorRegistry->extractValue($data, 'type');
+        $blob->url = $hydratorRegistry->extractValue($data, 'url');
 
         return $blob;
     }

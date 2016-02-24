@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class RepoStatsPunchCardInfo
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $day;
     
     public $hour;

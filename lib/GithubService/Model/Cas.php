@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class Cas
 {
+    use GithubTrait;
+    use SafeAccess;
+
     public $url = null;
 
     protected function getDataMap() {
@@ -13,6 +16,4 @@ class Cas
 
         return $dataMap;
     }
-
-
 }

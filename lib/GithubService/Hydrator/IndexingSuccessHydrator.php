@@ -3,17 +3,17 @@
 namespace GithubService\Hydrator;
 
 use GithubService\Hydrator;
-use GithubService\DataMapper;
+use GithubService\HydratorRegistry;
 use GithubService\Model\IndexingSuccess;
 
 
 
 class IndexingSuccessHydrator implements Hydrator
 {
-    public function hydrate(array $data, DataMapper $dataMapper)
+    public function hydrate(array $data, HydratorRegistry $hydratorRegistry)
     {
         $payload = new IndexingSuccess();
-        $payload->message = $dataMapper->extractValue($data, 'message');
+        $payload->message = $hydratorRegistry->extractValue($data, 'message');
 
         return $payload;
     }

@@ -3,27 +3,27 @@
 namespace GithubService\Hydrator;
 
 use GithubService\Hydrator;
-use GithubService\DataMapper;
+use GithubService\HydratorRegistry;
 use GithubService\Model\PagesBuild;
 
 class PagesBuildHydrator implements Hydrator
 {
-    public function hydrate(array $data, DataMapper $dataMapper)
+    public function hydrate(array $data, HydratorRegistry $hydratorRegistry)
     {
         $payload = new PagesBuild();
-        $payload->commit = $dataMapper->extractValue($data, 'commit');
-        $payload->createdAt = $dataMapper->extractValue($data, 'created_at');
-        $payload->duration = $dataMapper->extractValue($data, 'duration');
-        $payload->status = $dataMapper->extractValue($data, 'status');
-        $payload->updatedAt = $dataMapper->extractValue($data, 'updated_at');
-        $payload->url = $dataMapper->extractValue($data, 'url');
+        $payload->commit = $hydratorRegistry->extractValue($data, 'commit');
+        $payload->createdAt = $hydratorRegistry->extractValue($data, 'created_at');
+        $payload->duration = $hydratorRegistry->extractValue($data, 'duration');
+        $payload->status = $hydratorRegistry->extractValue($data, 'status');
+        $payload->updatedAt = $hydratorRegistry->extractValue($data, 'updated_at');
+        $payload->url = $hydratorRegistry->extractValue($data, 'url');
 
         
-        $error = $dataMapper->extractValue($data, 'error');
-        $payload->error = $dataMapper->instantiateClass('GithubService\Model\IndexingSuccess', $error);
+        $error = $hydratorRegistry->extractValue($data, 'error');
+        $payload->error = $hydratorRegistry->instantiateClass('GithubService\Model\IndexingSuccess', $error);
         
-        $pusher = $dataMapper->extractValue($data, 'pusher');
-        $payload->pusher = $dataMapper->instantiateClass('GithubService\Model\User', $pusher);
+        $pusher = $hydratorRegistry->extractValue($data, 'pusher');
+        $payload->pusher = $hydratorRegistry->instantiateClass('GithubService\Model\User', $pusher);
 
         return $payload;
     }

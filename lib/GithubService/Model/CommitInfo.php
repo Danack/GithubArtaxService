@@ -1,11 +1,12 @@
 <?php
 
-
 namespace GithubService\Model;
-
 
 class CommitInfo
 {
+    use GithubTrait;
+    use SafeAccess;
+
     public $url;
 
     public $authorName;

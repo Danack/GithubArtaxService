@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class AssetsChild
 {
+    use GithubTrait;
+    use SafeAccess;
+
     public $browserDownloadUrl = null;
 
     public $contentType = null;

@@ -2,35 +2,30 @@
 
 namespace GithubService\Hydrator;
 
-use GithubService\DataMapper;
 use GithubService\Hydrator;
+use GithubService\HydratorRegistry;
 use GithubService\Model\UserInSearchResult;
-
-
-
-
 
 class UserInSearchResultHydrator implements Hydrator
 {
-    public function hydrate(array $data, DataMapper $dataMapper)
+    public function hydrate(array $data, HydratorRegistry $hydratorRegistry)
     {
         $userInSearchResult = new UserInSearchResult();
-
-        $userInSearchResult->email = $dataMapper->extractValue($data, 'email');
-        $userInSearchResult->location = $dataMapper->extractValue($data, 'location');
-        $userInSearchResult->publicGistCount = $dataMapper->extractValue($data, 'public_gist_count');
-        $userInSearchResult->gravatarId = $dataMapper->extractValue($data, 'gravatar_id');
-        $userInSearchResult->type = $dataMapper->extractValue($data, 'type');
-        $userInSearchResult->login = $dataMapper->extractValue($data, 'login');
-        $userInSearchResult->blog = $dataMapper->extractValue($data, 'blog');
-        $userInSearchResult->createdAt = $dataMapper->extractValue($data, 'created_at');
-        $userInSearchResult->id = $dataMapper->extractValue($data, 'id');
-        $userInSearchResult->created = $dataMapper->extractValue($data, 'created');
-        $userInSearchResult->company = $dataMapper->extractValue($data, 'company');
-        $userInSearchResult->name = $dataMapper->extractValue($data, 'name');
-        $userInSearchResult->followingCount = $dataMapper->extractValue($data, 'following_count');
-        $userInSearchResult->followersCount = $dataMapper->extractValue($data, 'followers_count');
-        $userInSearchResult->followersCount = $dataMapper->extractValue($data, 'public_repo_count');
+        $userInSearchResult->email = $hydratorRegistry->extractValue($data, 'email');
+        $userInSearchResult->location = $hydratorRegistry->extractValue($data, 'location');
+        $userInSearchResult->publicGistCount = $hydratorRegistry->extractValue($data, 'public_gist_count');
+        $userInSearchResult->gravatarId = $hydratorRegistry->extractValue($data, 'gravatar_id');
+        $userInSearchResult->type = $hydratorRegistry->extractValue($data, 'type');
+        $userInSearchResult->login = $hydratorRegistry->extractValue($data, 'login');
+        $userInSearchResult->blog = $hydratorRegistry->extractValue($data, 'blog');
+        $userInSearchResult->createdAt = $hydratorRegistry->extractValue($data, 'created_at');
+        $userInSearchResult->id = $hydratorRegistry->extractValue($data, 'id');
+        $userInSearchResult->created = $hydratorRegistry->extractValue($data, 'created');
+        $userInSearchResult->company = $hydratorRegistry->extractValue($data, 'company');
+        $userInSearchResult->name = $hydratorRegistry->extractValue($data, 'name');
+        $userInSearchResult->followingCount = $hydratorRegistry->extractValue($data, 'following_count');
+        $userInSearchResult->followersCount = $hydratorRegistry->extractValue($data, 'followers_count');
+        $userInSearchResult->followersCount = $hydratorRegistry->extractValue($data, 'public_repo_count');
 
         return $userInSearchResult;
     }

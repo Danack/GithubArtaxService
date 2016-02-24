@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class StatusesChild
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $context = null;
 
     public $createdAt = null;

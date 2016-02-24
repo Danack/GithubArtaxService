@@ -2,8 +2,13 @@
 
 namespace GithubService\Model;
 
+use GithubService\GithubArtaxService\GithubArtaxServiceException;
+
 class OauthAccess
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     /**
      * @var \GithubService\Model\App
      */
@@ -39,9 +44,13 @@ class OauthAccess
     public function __toString()
     {
         if ($this->token === null) {
-            return null;
+            throw new GithubArtaxServiceException("Token is null, Oauth token can't be used.");
+        }
+        
+        if (strlen($this->token) === 0) {
+            throw new GithubArtaxServiceException("Token is zero length. Oauth token can't be used. Original token must be stored when creating Oauth tokens.");
         }
 
-        return "token ".$this->hashedToken;
+        return "token ".$this->token;
     }
 }

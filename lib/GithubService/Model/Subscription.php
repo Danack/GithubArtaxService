@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class Subscription
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $createdAt = null;
 
     public $ignored = null;

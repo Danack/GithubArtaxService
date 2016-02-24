@@ -70,7 +70,7 @@ use GithubService\Hydrator\UserInSearchResultHydrator;
 use GithubService\Hydrator\UserSearchItemHydrator;
 use GithubService\Hydrator\CommitListHydrator;
 
-class GithubDataMapper extends DataMapper
+class GithubHydratorRegistry extends HydratorRegistry
 {
     public function __construct()
     {
@@ -174,12 +174,12 @@ class GithubDataMapper extends DataMapper
     public function createFromResponse(Response $response, Operation $operation, $class)
     {
         $data = $this->decodeJson($response);
-
         $instance = $this->instantiateClass($class, $data);
-
         //Header based information needs to be added after the array
         
         //Some of the data is embedded in a header.
+        // X-OAuth-Scopes lists the scopes your token has authorized.
+        // X-Accepted-OAuth-Scopes lists the scopes that the action checks for.
         if ($response->hasHeader('X-OAuth-Scopes')) {
             $oauthHeaderValues = $response->getHeader('X-OAuth-Scopes');
             $oauthScopes = [];
@@ -189,10 +189,12 @@ class GithubDataMapper extends DataMapper
             $instance->oauthScopes = $oauthScopes;
         }
         
-        $instance->pager = GithubPaginator::constructFromResponse($response);
+        $pager = GithubPaginator::constructFromResponse($response);
+        
+        if ($pager) {
+            $instance->pager = $pager;
+        }
 
         return $instance;
     }
-
-    
 }

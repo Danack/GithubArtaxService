@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class RepoInEvent
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $url = null;
 
     public $name = null;

@@ -3,7 +3,7 @@
 namespace GithubService\Hydrator;
 
 use GithubService\Hydrator;
-use GithubService\DataMapper;
+use GithubService\HydratorRegistry;
 use GithubService\Model\CommitInfo;
 
 
@@ -11,21 +11,21 @@ use GithubService\Model\CommitInfo;
 
 class CommitInfoHydrator implements Hydrator
 {
-    public function hydrate(array $data, DataMapper $dataMapper)
+    public function hydrate(array $data, HydratorRegistry $hydratorRegistry)
     {
         $commitInfo = new CommitInfo();
 
-        $commitInfo->url = $dataMapper->extractValue($data, 'url');
-        $commitInfo->authorName = $dataMapper->extractValueByPath($data, ['author', 'name']);
-        $commitInfo->authorEmail = $dataMapper->extractValueByPath($data,  ['author', 'email']);
-        $commitInfo->authorDate = $dataMapper->extractValueByPath($data,  ['author', 'date']);
-        $commitInfo->committerName = $dataMapper->extractValueByPath($data,  ['committer', 'name']);
-        $commitInfo->committerEmail = $dataMapper->extractValueByPath($data,  ['committer', 'email']);
-        $commitInfo->committerDate = $dataMapper->extractValueByPath($data,  ['committer', 'date']);
-        $commitInfo->message = $dataMapper->extractValue($data, 'message');
-        $commitInfo->treeURL = $dataMapper->extractValueByPath($data, ['tree', 'url']);
-        $commitInfo->treeSHA = $dataMapper->extractValueByPath($data, ['tree', 'sha']);
-        $commitInfo->commentCount = $dataMapper->extractValue($data, 'comment_count', true);
+        $commitInfo->url = $hydratorRegistry->extractValue($data, 'url');
+        $commitInfo->authorName = $hydratorRegistry->extractValueByPath($data, ['author', 'name']);
+        $commitInfo->authorEmail = $hydratorRegistry->extractValueByPath($data,  ['author', 'email']);
+        $commitInfo->authorDate = $hydratorRegistry->extractValueByPath($data,  ['author', 'date']);
+        $commitInfo->committerName = $hydratorRegistry->extractValueByPath($data,  ['committer', 'name']);
+        $commitInfo->committerEmail = $hydratorRegistry->extractValueByPath($data,  ['committer', 'email']);
+        $commitInfo->committerDate = $hydratorRegistry->extractValueByPath($data,  ['committer', 'date']);
+        $commitInfo->message = $hydratorRegistry->extractValue($data, 'message');
+        $commitInfo->treeURL = $hydratorRegistry->extractValueByPath($data, ['tree', 'url']);
+        $commitInfo->treeSHA = $hydratorRegistry->extractValueByPath($data, ['tree', 'sha']);
+        $commitInfo->commentCount = $hydratorRegistry->extractValue($data, 'comment_count', true);
 
         return $commitInfo;
     }

@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class UserInBranchAuthor
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $avatar_url;
     public $gravatar_id;
     public $login;

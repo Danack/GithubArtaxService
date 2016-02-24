@@ -14,10 +14,13 @@ $github = new GithubService(
     'Danack/GithubArtaxService' //Change this to your github name/project
 );
 
+$tokenFileLocation = __DIR__."/../../github_oauth_token.txt";
 
-$existingToken = @file_get_contents(__DIR__."/../../github_oauth_token.txt");
+$existingToken = @file_get_contents($tokenFileLocation);
+$existingToken = trim($existingToken);
 
 if ($existingToken) {
+    echo "Using token from file $tokenFileLocation \n";
     $token = new Oauth2Token($existingToken);
 }
 else {
@@ -39,8 +42,8 @@ else {
     };
 
     $noteURL = 'http://www.github.com/danack/GithubArtaxService';
-    $note = $noteURL;//"I really don't know why this is giving a new token.";
-    //$applicationName = 'GetOauthTokenTest';
+    $note = "Testing Oauth creation: ".time(); //This must be unique to create a new Oaut key
+    
     // List of the scopes required. An empty list is used to get a token
     // with no access, just to avoid the 50 reqs/hour limit for unsigned
     // api calls. 
@@ -58,10 +61,14 @@ else {
         );
 
         echo "Token is: ".$authResult->token.", keep it secret.\n";
+        file_put_contents($tokenFileLocation, $authResult->token);
+        echo "Token stored in ".$tokenFileLocation."\n";
     }
     catch (ArtaxServiceBuilder\BadResponseException $badResponseException) {
         echo "Something went wrong trying to retrieve an oauth token:\n";
         echo $badResponseException->getMessage();
+        echo "Body is:\n";
+        var_dump($badResponseException->getResponse()->getBody());
         echo "\n";
         exit(-1);
     }

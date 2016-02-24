@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class SimplePublicKey
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $id = null;
 
     public $key = null;

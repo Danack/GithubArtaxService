@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class Customer
 {
+    use GithubTrait;
+    use SafeAccess;
+
     public $email = null;
 
     public $name = null;

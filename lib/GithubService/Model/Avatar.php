@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class Avatar 
 {
+    use GithubTrait;
+    use SafeAccess;
+
     public $enabled = null;
 
     public $uri = null;

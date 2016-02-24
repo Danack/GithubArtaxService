@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class FullOrg
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $avatarUrl = null;
 
     public $blog = null;

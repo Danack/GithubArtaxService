@@ -3,17 +3,17 @@
 namespace GithubService\Hydrator;
 
 use GithubService\Hydrator;
-use GithubService\DataMapper;
+use GithubService\HydratorRegistry;
 use GithubService\Model\RepoStatsCodeFrequency;
 
 class RepoStatsCodeFrequencyHydrator implements Hydrator
 {
-    public function hydrate(array $data, DataMapper $dataMapper)
+    public function hydrate(array $data, HydratorRegistry $hydratorRegistry)
     {
         $repoStatsCodeInfo = new RepoStatsCodeFrequency();
 
         foreach ($data as $entry) {
-            $codeInfo = $dataMapper->instantiateClass('GithubService\Model\RepoStatsCodeInfo', $entry);
+            $codeInfo = $hydratorRegistry->instantiateClass('GithubService\Model\RepoStatsCodeInfo', $entry);
             $repoStatsCodeInfo->repoStats[] = $codeInfo; 
         }
 

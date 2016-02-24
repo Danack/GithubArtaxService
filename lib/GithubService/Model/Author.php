@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class Author 
 {
+    use GithubTrait;
+    use SafeAccess;
+
     public $date = null;
 
     public $email = null;

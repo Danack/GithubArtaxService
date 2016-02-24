@@ -3,20 +3,17 @@
 namespace GithubService\Hydrator;
 
 use GithubService\Hydrator;
-use GithubService\DataMapper;
-
+use GithubService\HydratorRegistry;
 use GithubService\Model\BranchCommit;
-
-
 
 class BranchCommitHydrator implements Hydrator
 {
-    public function hydrate(array $data, DataMapper $dataMapper)
+    public function hydrate(array $data, HydratorRegistry $hydratorRegistry)
     {
         $blob = new BranchCommit();
-        $blob->name = $dataMapper->extractValue($data, 'name');
-        $blob->url = $dataMapper->extractValueByPath($data, ['commit', 'url']);
-        $blob->sha = $dataMapper->extractValueByPath($data, ['commit', 'sha']);
+        $blob->name = $hydratorRegistry->extractValue($data, 'name');
+        $blob->url = $hydratorRegistry->extractValueByPath($data, ['commit', 'url']);
+        $blob->sha = $hydratorRegistry->extractValueByPath($data, ['commit', 'sha']);
 
         return $blob;
     }

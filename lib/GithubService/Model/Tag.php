@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class Tag 
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     /**
      * @var \GithubService\Model\BlobAfterCreate $commit
      */

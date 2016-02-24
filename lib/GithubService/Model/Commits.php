@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class Commits
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     /**
      * @var \GithubService\Model\Commit $commitsChild
      */

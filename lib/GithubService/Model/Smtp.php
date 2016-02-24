@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class Smtp
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $address = null;
 
     public $authentication = null;

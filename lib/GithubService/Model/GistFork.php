@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class GistFork 
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $createdAt = null;
     public $id = null;
     public $updatedAt = null;

@@ -2,7 +2,10 @@
 
 namespace GithubService\Model;
 
-class Branch  {
+class Branch
+{
+    use GithubTrait;
+    use SafeAccess;
 
     /**
      * @var \GithubService\Model\ $commit

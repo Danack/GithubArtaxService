@@ -3,17 +3,17 @@
 namespace GithubService\Hydrator;
 
 use GithubService\Hydrator;
-use GithubService\DataMapper;
+use GithubService\HydratorRegistry;
 use GithubService\Model\Tags;
 
 
 class TagsHydrator implements Hydrator
 {
-    public function hydrate(array $data, DataMapper $dataMapper)
+    public function hydrate(array $data, HydratorRegistry $hydratorRegistry)
     {
         $tags = new Tags();
         foreach ($data as $entry) {
-            $tags->repoTags[] = $dataMapper->instantiateClass('GithubService\\Model\\Tag', $entry);
+            $tags->repoTags[] = $hydratorRegistry->instantiateClass('GithubService\\Model\\Tag', $entry);
         }
 
         return $tags;

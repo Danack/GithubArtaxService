@@ -3,17 +3,17 @@
 namespace GithubService\Hydrator;
 
 use GithubService\Hydrator;
-use GithubService\DataMapper;
+use GithubService\HydratorRegistry;
 use GithubService\Model\RepoStatsPunchCardInfo;
 
 class RepoStatsPunchCardInfoHydrator implements Hydrator
 {
-    public function hydrate(array $data, DataMapper $dataMapper)
+    public function hydrate(array $data, HydratorRegistry $hydratorRegistry)
     {
         $punchCardInfo = new RepoStatsPunchCardInfo();
-        $punchCardInfo->day = $dataMapper->extractValue($data, 0);
-        $punchCardInfo->hour = $dataMapper->extractValue($data, 1);
-        $punchCardInfo->numberCommits = $dataMapper->extractValue($data, 2);
+        $punchCardInfo->day = $hydratorRegistry->extractValue($data, 0);
+        $punchCardInfo->hour = $hydratorRegistry->extractValue($data, 1);
+        $punchCardInfo->numberCommits = $hydratorRegistry->extractValue($data, 2);
 
         return $punchCardInfo;
     }

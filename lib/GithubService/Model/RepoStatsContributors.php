@@ -4,6 +4,8 @@ namespace GithubService\Model;
 
 class RepoStatsContributors
 {
+    use GithubTrait;
+    use SafeAccess;
     /**
      * @var \GithubService\Model\ $rEPOSTATSCONTRIBUTORSChild
      */

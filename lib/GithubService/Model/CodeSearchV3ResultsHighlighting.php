@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class CodeSearchV3ResultsHighlighting
 {
+    use GithubTrait;
+    use SafeAccess;
+
     /**
      * @var \GithubService\Model\ $textMatches
      */

@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class Milestone
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $closedAt = null;
 
     public $closedIssues = null;

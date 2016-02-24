@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class CommentStats
 {
+    use GithubTrait;
+    use SafeAccess;
+
     public $totalPullRequestComments;
     public $totalIssueComments;
     public $totalGistComments;

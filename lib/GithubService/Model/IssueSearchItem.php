@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class IssueSearchItem
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $body = null;
 
     public $comments = null;

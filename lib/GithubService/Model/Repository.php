@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class Repository
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $description = null;
 
     public $fork = null;

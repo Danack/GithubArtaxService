@@ -3,23 +3,23 @@
 namespace GithubService\Hydrator;
 
 use GithubService\Hydrator;
-use GithubService\DataMapper;
+use GithubService\HydratorRegistry;
 use GithubService\Model\IssueComment;
 
 
 class IssueCommentHydrator implements Hydrator
 {
-    public function hydrate(array $data, DataMapper $dataMapper)
+    public function hydrate(array $data, HydratorRegistry $hydratorRegistry)
     {
         $issueComment = new IssueComment();
-        $issueComment->body = $dataMapper->extractValue($data, 'body');
-        $issueComment->createdAt = $dataMapper->extractValue($data, 'created_at');
-        $issueComment->htmlUrl = $dataMapper->extractValue($data, 'html_url');
-        $issueComment->id = $dataMapper->extractValue($data, 'id');
-        $issueComment->updatedAt = $dataMapper->extractValue($data, 'updated_at');
-        $issueComment->url = $dataMapper->extractValue($data, 'url');
-        $user = $dataMapper->extractValue($data, 'user');
-        $issueComment->user = $dataMapper->instantiateClass('GithubService\Model\User', $user);
+        $issueComment->body = $hydratorRegistry->extractValue($data, 'body');
+        $issueComment->createdAt = $hydratorRegistry->extractValue($data, 'created_at');
+        $issueComment->htmlUrl = $hydratorRegistry->extractValue($data, 'html_url');
+        $issueComment->id = $hydratorRegistry->extractValue($data, 'id');
+        $issueComment->updatedAt = $hydratorRegistry->extractValue($data, 'updated_at');
+        $issueComment->url = $hydratorRegistry->extractValue($data, 'url');
+        $user = $hydratorRegistry->extractValue($data, 'user');
+        $issueComment->user = $hydratorRegistry->instantiateClass('GithubService\Model\User', $user);
 
         return $issueComment;
     }

@@ -4,12 +4,13 @@ namespace GithubService\Model;
 
 class CurrentUserOrganizations
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     /**
      * @var \GithubService\Model\CurrentUser $currentUserOrganizationsChild
      */
-    public $currentUserOrganizationsChild = array(
-        
-    );
+    public $currentUserOrganizationsChild = [];
 
     protected function getDataMap() {
         $dataMap = [

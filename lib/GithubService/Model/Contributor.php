@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class Contributor
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $avatarUrl = null;
 
     public $contributions = null;

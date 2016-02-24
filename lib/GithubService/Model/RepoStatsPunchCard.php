@@ -5,6 +5,8 @@ namespace GithubService\Model;
 
 class RepoStatsPunchCard
 {
+    use GithubTrait;
+    use SafeAccess;
     /**
      * @var \GithubService\Model\RepoStatsPunchCardInfo[]
      */

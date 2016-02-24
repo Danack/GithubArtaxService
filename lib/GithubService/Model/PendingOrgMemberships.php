@@ -4,12 +4,13 @@ namespace GithubService\Model;
 
 class PendingOrgMemberships
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     /**
      * @var \GithubService\Model\ActiveAdminOrgMembership $pENDINGORGMEMBERSHIPSChild
      */
-    public $pENDINGORGMEMBERSHIPSChild = array(
-        
-    );
+    public $pENDINGORGMEMBERSHIPSChild = [];
 
     protected function getDataMap() {
         $dataMap = [

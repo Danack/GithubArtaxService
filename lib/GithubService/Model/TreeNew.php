@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class TreeNew
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $sha = null;
 
     /**

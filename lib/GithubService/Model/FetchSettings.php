@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class FetchSettings
 {
+    use GithubTrait;
+    use SafeAccess;
+
     /**
      * @var \GithubService\Model\Enterprise
      */

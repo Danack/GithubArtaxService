@@ -3,22 +3,22 @@
 namespace GithubService\Hydrator;
 
 use GithubService\Hydrator;
-use GithubService\DataMapper;
+use GithubService\HydratorRegistry;
 use GithubService\Model\Meta;
 
 
 class MetaHydrator implements Hydrator
 {
-    public function hydrate(array $data, DataMapper $dataMapper)
+    public function hydrate(array $data, HydratorRegistry $hydratorRegistry)
     {
         $meta = new Meta();
-        $meta->githubServicesSha = $dataMapper->extractValue($data, 'github_services_sha');
-        $meta->verifiablePasswordAuthentication = $dataMapper->extractValue($data, 'verifiable_password_authentication');
-        $git = $dataMapper->extractValue($data, 'git');
+        $meta->githubServicesSha = $hydratorRegistry->extractValue($data, 'github_services_sha');
+        $meta->verifiablePasswordAuthentication = $hydratorRegistry->extractValue($data, 'verifiable_password_authentication');
+        $git = $hydratorRegistry->extractValue($data, 'git');
         //TODO - check valid array
         $meta->git = $git;
         
-        $hooks = $dataMapper->extractValue($data, 'hooks');
+        $hooks = $hydratorRegistry->extractValue($data, 'hooks');
         //TODO - check valid array
         $meta->hooks = $hooks;
 

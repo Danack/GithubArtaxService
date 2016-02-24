@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class Ntp
 {
+    use GithubTrait;
+    use SafeAccess;
+
     public $primaryServer = null;
 
     public $secondaryServer = null;

@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class Collectd
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $enabled = null;
 
     public $encryption = null;

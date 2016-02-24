@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class CreatedRelease
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     /**
      * @var \GithubService\Model\Indices $assets
      */

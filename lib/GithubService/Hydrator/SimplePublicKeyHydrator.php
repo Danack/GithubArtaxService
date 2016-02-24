@@ -3,17 +3,17 @@
 namespace GithubService\Hydrator;
 
 use GithubService\Hydrator;
-use GithubService\DataMapper;
+use GithubService\HydratorRegistry;
 use GithubService\Model\SimplePublicKey;
 
 
 class SimplePublicKeyHydrator implements Hydrator
 {
-    public function hydrate(array $data, DataMapper $dataMapper)
+    public function hydrate(array $data, HydratorRegistry $hydratorRegistry)
     {
         $simplePublicKey = new SimplePublicKey();
-        $simplePublicKey->id = $dataMapper->extractValue($data, 'id');
-        $simplePublicKey->key = $dataMapper->extractValue($data, 'key');
+        $simplePublicKey->id = $hydratorRegistry->extractValue($data, 'id');
+        $simplePublicKey->key = $hydratorRegistry->extractValue($data, 'key');
 
         return $simplePublicKey;
     }

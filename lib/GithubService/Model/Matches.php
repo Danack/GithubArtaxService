@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class Matches
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     /**
      * @var \GithubService\Model\ $matchesChild
      */

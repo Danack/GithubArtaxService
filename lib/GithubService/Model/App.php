@@ -2,8 +2,11 @@
 
 namespace GithubService\Model;
 
-class App 
+class App
 {
+    use GithubTrait;
+    use SafeAccess;
+
     public $clientId = null;
 
     public $name = null;

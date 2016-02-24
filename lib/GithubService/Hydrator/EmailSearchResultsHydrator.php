@@ -2,20 +2,20 @@
 
 namespace GithubService\Hydrator;
 
-use GithubService\DataMapper;
 use GithubService\Hydrator;
+use GithubService\HydratorRegistry;
 use GithubService\Model\EmailSearchResults;
 
 
 
 class EmailSearchResultsHydrator implements Hydrator
 {
-    public function hydrate(array $data, DataMapper $dataMapper)
+    public function hydrate(array $data, HydratorRegistry $hydratorRegistry)
     {
         $emailSearchResults = new EmailSearchResults();
         foreach ($data as $key => $value) {
-            $user = $dataMapper->extractValue($data, 'user');
-            $emailSearchResults->user = $dataMapper->instantiateClass(
+            $user = $hydratorRegistry->extractValue($data, 'user');
+            $emailSearchResults->user = $hydratorRegistry->instantiateClass(
                 'GithubService\\Model\\UserInSearchResult',
                 $user
             );

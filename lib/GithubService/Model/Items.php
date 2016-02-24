@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class Items
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     /**
      * @var \GithubService\Model\ $itemsChild
      */

@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class FilesChild
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $additions = null;
 
     public $blobUrl = null;

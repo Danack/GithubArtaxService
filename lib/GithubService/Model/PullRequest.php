@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class PullRequest
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $diffUrl = null;
 
     public $htmlUrl = null;

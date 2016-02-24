@@ -3,21 +3,18 @@
 namespace GithubService\Hydrator;
 
 use GithubService\Hydrator;
-use GithubService\DataMapper;
+use GithubService\HydratorRegistry;
 use GithubService\Model\Ref;
-
-
-
 
 class RefHydrator implements Hydrator
 {
-    public function hydrate(array $data, DataMapper $dataMapper)
+    public function hydrate(array $data, HydratorRegistry $hydratorRegistry)
     {
         $ref = new Ref();
-        $refObjectData = $dataMapper->extractValue($data, 'object');
-        $ref->refObject = $dataMapper->instantiateClass('GithubService\Model\RefObject', $refObjectData);
-        $ref->ref = $dataMapper->extractValue($data, 'ref');
-        $ref->url = $dataMapper->extractValue($data, 'url');
+        $refObjectData = $hydratorRegistry->extractValue($data, 'object');
+        $ref->refObject = $hydratorRegistry->instantiateClass('GithubService\Model\RefObject', $refObjectData);
+        $ref->ref = $hydratorRegistry->extractValue($data, 'ref');
+        $ref->url = $hydratorRegistry->extractValue($data, 'url');
 
         return $ref;
     }

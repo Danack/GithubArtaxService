@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class UserSearchResults
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     /**
      * @var \GithubService\Model\ $users
      */

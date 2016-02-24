@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class ActiveOrgMemberships
 {
+    use GithubTrait;
+    use SafeAccess;
+
     /**
      * @var \GithubService\Model\ActiveAdminOrgMembership $aCTIVEORGMEMBERSHIPS Child
      */

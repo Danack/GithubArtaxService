@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class Pulls
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $mergeablePulls = null;
 
     public $mergedPulls = null;

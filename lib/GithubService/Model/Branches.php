@@ -2,7 +2,10 @@
 
 namespace GithubService\Model;
 
-class Branches  {
+class Branches
+{
+    use GithubTrait;
+    use SafeAccess;
 
     /**
      * @var \GithubService\Model\ $bRANCHESChild

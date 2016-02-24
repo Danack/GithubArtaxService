@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class Pull
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     /**
      * @var \GithubService\Model\Base $base
      */

@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class PrivateOrg
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $avatarUrl = null;
 
     public $billingEmail = null;

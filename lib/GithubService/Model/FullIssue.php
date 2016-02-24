@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class FullIssue
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     /**
      * @var \GithubService\Model\User $assignee
      */

@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class Gists
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $privateGists = null;
 
     public $publicGists = null;

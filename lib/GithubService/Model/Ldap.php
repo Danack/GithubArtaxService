@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class Ldap
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $adminGroup = null;
 
     /**

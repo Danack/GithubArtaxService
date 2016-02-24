@@ -4,12 +4,13 @@ namespace GithubService\Model;
 
 class DirectoryContent
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     /**
      * @var \GithubService\Model\Content $dIRECTORYCONTENTChild
      */
-    public $dIRECTORYCONTENTChild = array(
-        
-    );
+    public $dIRECTORYCONTENTChild = [];
 
     protected function getDataMap() {
         $dataMap = [

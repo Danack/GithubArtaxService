@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class Repos
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $forkRepos = null;
 
     public $orgRepos = null;

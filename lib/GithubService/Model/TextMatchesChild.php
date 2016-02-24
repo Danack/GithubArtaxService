@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class TextMatchesChild
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $fragment = null;
 
     /**

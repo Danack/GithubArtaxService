@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class FullTeam
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $description = null;
 
     public $id = null;

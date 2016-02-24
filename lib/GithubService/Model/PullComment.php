@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class PullComment
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $body = null;
 
     public $commitId = null;

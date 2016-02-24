@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class OauthAccessList
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     /**
      * @var \GithubService\Model\OauthAccess[]
      */

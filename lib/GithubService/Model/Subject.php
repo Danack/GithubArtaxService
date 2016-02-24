@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class Subject
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $latestCommentUrl = null;
 
     public $title = null;

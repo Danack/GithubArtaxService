@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class ConnectionServicesChild
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $name = null;
 
     public $number = null;

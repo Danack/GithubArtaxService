@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class GetAuthorizedSshKeysChild
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $key = null;
 
     public $prettyPrint = null;

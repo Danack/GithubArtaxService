@@ -3,16 +3,16 @@
 namespace GithugServiceTest;
 
 use GithubService\GithubArtaxService\GithubArtaxService;
-use GithubService\GithubDataMapper;
+use GithubService\GithubHydratorRegistry;
 
 /**
  * @group refactoring
  */
-class GithubDataMapperTest extends \PHPUnit_Framework_TestCase
+class GithubHydratorRegistryTest extends \PHPUnit_Framework_TestCase
 {
     function testEmojis()
     {
-        $dataMapper = new GithubDataMapper();
+        $dataMapper = new GithubHydratorRegistry();
         $contents = file_get_contents(__DIR__."/../fixtures/data/githubJSON/EMOJIS.json");
         $data = json_decode($contents, true);
         $emojiList = $dataMapper->instantiateClass('GithubService\Model\EmojiList', $data);
@@ -118,12 +118,12 @@ class GithubDataMapperTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider additionProvider
      */
-    function testDataParsing($expectedClassname, $dataFile )
+    function testDataParsing($expectedClassname, $dataFile)
     {
         $json = file_get_contents(__DIR__.'/../fixtures/data/githubJSON/'.$dataFile.'.json');
         $className = 'GithubService\Model\\'.$expectedClassname;
         $data = json_decode($json, true);
-        $dataMapper = new GithubDataMapper();
+        $dataMapper = new GithubHydratorRegistry();
 
         $instance = $dataMapper->instantiateClass($className, $data);
         $this->assertInstanceOf(

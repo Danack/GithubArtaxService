@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class Weeks
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     /**
      * @var \GithubService\Model\ $weeksChild
      */

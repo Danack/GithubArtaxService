@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class Download
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $contentType = null;
 
     public $description = null;

@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class GithubSsl
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $cert = null;
 
     public $enabled = null;

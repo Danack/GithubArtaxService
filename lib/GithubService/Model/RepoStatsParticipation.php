@@ -4,6 +4,8 @@ namespace GithubService\Model;
 
 class RepoStatsParticipation
 {
+    use GithubTrait;
+    use SafeAccess;
     /**
      * @var \GithubService\Model\Indices $all
      */

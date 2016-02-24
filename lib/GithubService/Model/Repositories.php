@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class Repositories
 {
+    use GithubTrait;
+    use SafeAccess;
+
     /**
      * @var \GithubService\Model\RepoSearchItem $repositoriesChild
      */

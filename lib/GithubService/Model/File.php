@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class File
 {
+    use GithubTrait;
+    use SafeAccess;
+
     public $name;
     
     public $language = null;

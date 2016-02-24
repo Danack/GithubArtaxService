@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class ReadmeContent
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $content = null;
 
     public $downloadUrl = null;

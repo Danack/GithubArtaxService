@@ -3,21 +3,21 @@
 namespace GithubService\Hydrator;
 
 use GithubService\Hydrator;
-use GithubService\DataMapper;
+use GithubService\HydratorRegistry;
 use GithubService\Model\TreeNew;
 
 
 class TreeNewHydrator implements Hydrator
 {
-    public function hydrate(array $data, DataMapper $dataMapper)
+    public function hydrate(array $data, HydratorRegistry $hydratorRegistry)
     {
         $treeNew = new TreeNew();
-        $treeNew->mode = $dataMapper->extractValue($data, 'mode');
-        $treeNew->path = $dataMapper->extractValue($data, 'path');
-        $treeNew->sha = $dataMapper->extractValue($data, 'sha');
-        $treeNew->size = $dataMapper->extractValue($data, 'size', true);
-        $treeNew->type = $dataMapper->extractValue($data, 'type');
-        $treeNew->url = $dataMapper->extractValue($data, 'url');
+        $treeNew->mode = $hydratorRegistry->extractValue($data, 'mode');
+        $treeNew->path = $hydratorRegistry->extractValue($data, 'path');
+        $treeNew->sha = $hydratorRegistry->extractValue($data, 'sha');
+        $treeNew->size = $hydratorRegistry->extractValue($data, 'size', true);
+        $treeNew->type = $hydratorRegistry->extractValue($data, 'type');
+        $treeNew->url = $hydratorRegistry->extractValue($data, 'url');
 
         return $treeNew;
     }

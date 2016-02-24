@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class RefObject
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $sha = null;
 
     public $type = null;

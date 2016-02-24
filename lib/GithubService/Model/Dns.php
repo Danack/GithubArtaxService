@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class Dns
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $primaryNameserver = null;
 
     public $secondaryNameserver = null;

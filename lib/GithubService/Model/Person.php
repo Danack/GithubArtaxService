@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class Person 
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $login;
     public $id;
     public $avatarURL;

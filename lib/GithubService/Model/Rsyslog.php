@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class Rsyslog
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $enabled = null;
 
     public $protocolName = null;

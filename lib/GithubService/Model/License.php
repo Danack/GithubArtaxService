@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class License
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $evaluation = null;
 
     public $expireAt = null;

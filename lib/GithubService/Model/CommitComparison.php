@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class CommitComparison
 {
+    use GithubTrait;
+    use SafeAccess;
+
     public $aheadBy = null;
 
     /**

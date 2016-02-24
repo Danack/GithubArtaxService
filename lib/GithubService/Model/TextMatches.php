@@ -4,12 +4,13 @@ namespace GithubService\Model;
 
 class TextMatches
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     /**
      * @var \GithubService\Model\ $textMatchesChild
      */
-    public $textMatchesChild = array(
-        
-    );
+    public $textMatchesChild = [];
 
     protected function getDataMap() {
         $dataMap = [

@@ -3,16 +3,16 @@
 namespace GithubService\Hydrator;
 
 use GithubService\Hydrator;
-use GithubService\DataMapper;
+use GithubService\HydratorRegistry;
 use GithubService\Model\CommitParent;
 
 class CommitParentHydrator implements Hydrator
 {
-    public function hydrate(array $data, DataMapper $dataMapper)
+    public function hydrate(array $data, HydratorRegistry $hydratorRegistry)
     {
         $commitInfo = new CommitParent();
-        $commitInfo->url = $dataMapper->extractValue($data, 'url');
-        $commitInfo->sha = $dataMapper->extractValue($data, 'sha');
+        $commitInfo->url = $hydratorRegistry->extractValue($data, 'url');
+        $commitInfo->sha = $hydratorRegistry->extractValue($data, 'sha');
 
         return $commitInfo;
     }

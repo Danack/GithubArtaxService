@@ -3,7 +3,6 @@
 
 namespace GithubService\Model;
 
-
 /**
  * Class BranchCommit Used by RepoBranches.
  * 
@@ -12,8 +11,11 @@ namespace GithubService\Model;
  * 
  * @package GithubService\Model
  */
-class BranchCommit extends DataMapper {
-
+class BranchCommit
+{
+    use GithubTrait;
+    use SafeAccess;
+    
     public $name;
 
     public $url;

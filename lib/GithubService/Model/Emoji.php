@@ -1,11 +1,12 @@
 <?php
 
-
 namespace GithubService\Model;
-
 
 class Emoji
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $name;
     public $url;
 

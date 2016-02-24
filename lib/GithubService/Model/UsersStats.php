@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class UsersStats
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $totalUsers;
     public $suspendedUsers;
     public $adminUsers;

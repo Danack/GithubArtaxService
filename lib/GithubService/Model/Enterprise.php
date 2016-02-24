@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class Enterprise
 {
+    use GithubTrait;
+    use SafeAccess;
+
     public $adminPassword = null;
 
     /**

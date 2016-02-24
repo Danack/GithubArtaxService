@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class Owner
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $avatarUrl = null;
 
     public $gravatarId = null;

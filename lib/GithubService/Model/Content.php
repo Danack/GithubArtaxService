@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class Content
 {
+    use GithubTrait;
+    use SafeAccess;
+
     public $downloadUrl = null;
 
     public $gitUrl = null;

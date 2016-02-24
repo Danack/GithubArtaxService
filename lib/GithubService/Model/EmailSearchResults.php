@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class EmailSearchResults 
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     /**
      * @var \GithubService\Model\UserInSearchResult
      */

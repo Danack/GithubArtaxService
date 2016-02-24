@@ -8,12 +8,12 @@
 
 $autoloader = require __DIR__.'/../vendor/autoload.php';
 
-use GithubService\GithubArtaxService\GithubService;
-use Amp\Artax\Client as ArtaxClient;
-use ArtaxServiceBuilder\ResponseCache\NullResponseCache;
-use GithubService\Model\Tags;
-use Amp\Artax\Response;
 
+use Amp\Artax\Client as ArtaxClient;
+use Amp\Artax\Response;
+use ArtaxServiceBuilder\ResponseCache\NullResponseCache;
+use GithubService\GithubArtaxService\GithubService;
+use GithubService\Model\Tags;
 
 
 // Create the appropriate Amp reactor for your system. This depends on
@@ -23,14 +23,14 @@ use Amp\Artax\Response;
 // otherwise a NativeReactor is used.
 $reactor = \Amp\reactor();
 
-// The same reactor must be used by all objects that use a reactor
-$artaxClient = new ArtaxClient($reactor);
+$artaxClient = new ArtaxClient();
+
 
 // The reactor keeps running while the socket is open. Set a short
 // timeout to avoid waiting around too long
 $artaxClient->setOption(
     \Amp\Artax\Client::OP_MS_KEEP_ALIVE_TIMEOUT,
-    1    //3 seconds
+    1    // 3 seconds
 );
 
 // Create the GithubService with the prepared client
@@ -38,7 +38,7 @@ $github = new GithubService(
     $artaxClient,
     $reactor,
     new NullResponseCache(), //This is just an example, we don't cache anything
-    'Danack/GithubArtaxService' //Change this to your github name/project
+    'Danack/GithubArtaxService' // Change this to your github name/project
 );
 
 
@@ -48,8 +48,6 @@ $command = $github->listRepoTags(
     'php',
     'php-src'
 );
-
-
 
 
 $listRepoTagsCallback = function (

@@ -2,19 +2,19 @@
 
 namespace GithubService\Hydrator;
 
-use GithubService\DataMapper;
 use GithubService\Hydrator;
+use GithubService\HydratorRegistry;
 use GithubService\Model\App;
 
 
 class AppHydrator implements Hydrator
 {
-    public function hydrate(array $data, DataMapper $dataMapper)
+    public function hydrate(array $data, HydratorRegistry $hydratorRegistry)
     {
         $app = new App();
-        $app->clientId = $dataMapper->extractValue($data, 'client_id');
-        $app->name = $dataMapper->extractValue($data, 'name');
-        $app->url = $dataMapper->extractValue($data, 'url');
+        $app->clientId = $hydratorRegistry->extractValue($data, 'client_id');
+        $app->name = $hydratorRegistry->extractValue($data, 'name');
+        $app->url = $hydratorRegistry->extractValue($data, 'url');
 
         return $app;
     }

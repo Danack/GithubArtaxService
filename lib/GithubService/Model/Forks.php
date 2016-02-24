@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class Forks
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     /**
      * @var \GithubService\Model\ $forksChild
      */

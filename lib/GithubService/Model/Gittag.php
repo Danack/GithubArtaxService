@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class Gittag
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $message = null;
 
     /**

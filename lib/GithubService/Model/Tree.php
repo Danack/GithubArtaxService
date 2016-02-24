@@ -4,12 +4,13 @@ namespace GithubService\Model;
 
 class Tree
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     /**
      * @var \GithubService\Model\ $treeChild
      */
-    public $treeChild = array(
-        
-    );
+    public $treeChild = [];
 
     protected function getDataMap() {
         $dataMap = [

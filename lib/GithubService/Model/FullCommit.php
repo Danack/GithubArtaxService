@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class FullCommit
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     /**
      * @var \GithubService\Model\User $author
      */
@@ -22,7 +25,7 @@ class FullCommit
     public $committer = null;
 
     /**
-     * @var \GithubService\Model\Files $files
+     * @var \GithubService\Model\FileList $files
      */
     public $files = null;
 

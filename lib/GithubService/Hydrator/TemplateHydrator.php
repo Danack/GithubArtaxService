@@ -2,17 +2,17 @@
 
 namespace GithubService\Hydrator;
 
-use GithubService\DataMapper;
 use GithubService\Hydrator;
+use GithubService\HydratorRegistry;
 use GithubService\Model\Template;
 
 class TemplateHydrator implements Hydrator
 {
-    public function hydrate(array $data, DataMapper $dataMapper)
+    public function hydrate(array $data, HydratorRegistry $hydratorRegistry)
     {
         $template = new Template();
-        $template->name = $dataMapper->extractValue($data, 'name');
-        $template->source = $dataMapper->extractValue($data, 'source');
+        $template->name = $hydratorRegistry->extractValue($data, 'name');
+        $template->source = $hydratorRegistry->extractValue($data, 'source');
 
         return $template;
     }

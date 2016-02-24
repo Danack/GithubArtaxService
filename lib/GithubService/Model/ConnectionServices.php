@@ -4,12 +4,13 @@ namespace GithubService\Model;
 
 class ConnectionServices
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     /**
      * @var \GithubService\Model\ $connectionServicesChild
      */
-    public $connectionServicesChild = array(
-        
-    );
+    public $connectionServicesChild = [];
 
     protected function getDataMap() {
         $dataMap = [

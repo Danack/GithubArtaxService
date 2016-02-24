@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class TemplateList  implements \IteratorAggregate 
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $name = [];
 
     protected function getDataMap() {

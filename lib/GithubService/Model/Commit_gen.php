@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class Commit
 {
+    use GithubTrait;
+    use SafeAccess;
+
     /**
      * @var \GithubService\Model\Author $author
      */

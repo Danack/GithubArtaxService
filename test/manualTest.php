@@ -6,7 +6,7 @@ use ArtaxServiceBuilder\ResponseCache\NullResponseCache;
 use Amp\Artax\Client as ArtaxClient;
 use ArtaxServiceBuilder\BadResponseException;
 use ArtaxServiceBuilder\Oauth2Token;
-use GithubService\Model\DataMapperException;
+use GithubService\Model\HydratorException;
 
 require_once "testBootstrap.php";
 
@@ -48,6 +48,6 @@ catch (BadResponseException $bre) {
     echo "Bad response: ". $bre->getResponse()->getBody()."\n";
     echo "Uri was: ".$bre->getResponse()->getOriginalRequest()->getUri()."\n";
 }
-catch (DataMapperException $dme) {
+catch (HydratorException $dme) {
     echo $dme->displayProblem();
 }

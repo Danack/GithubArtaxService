@@ -4,12 +4,13 @@ namespace GithubService\Model;
 
 class Parents
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     /**
      * @var \GithubService\Model\BlobAfterCreate $parentsChild
      */
-    public $parentsChild = array(
-        
-    );
+    public $parentsChild = [];
 
     protected function getDataMap() {
         $dataMap = [

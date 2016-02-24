@@ -3,17 +3,17 @@
 namespace GithubService\Hydrator;
 
 use GithubService\Hydrator;
-use GithubService\DataMapper;
+use GithubService\HydratorRegistry;
 use GithubService\Model\Branches;
 
 class BranchesHydrator implements Hydrator
 {
-    public function hydrate(array $data, DataMapper $dataMapper)
+    public function hydrate(array $data, HydratorRegistry $hydratorRegistry)
     {
         $branches = new Branches();
 
         foreach ($data as $entry) {
-            $object = $dataMapper->instantiateClass('GithubService\Model\BranchCommit', $entry);
+            $object = $hydratorRegistry->instantiateClass('GithubService\Model\BranchCommit', $entry);
             $branches->branchList[] = $object;
         }
 

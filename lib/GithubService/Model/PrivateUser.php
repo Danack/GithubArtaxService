@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class PrivateUser
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $avatarUrl = null;
 
     public $bio = null;

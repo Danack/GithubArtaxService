@@ -3,15 +3,15 @@
 namespace GithubService\Hydrator;
 
 use GithubService\Hydrator;
-use GithubService\DataMapper;
+use GithubService\HydratorRegistry;
 use GithubService\Model\Payload;
 
 class PayloadHydrator implements Hydrator
 {
-    public function hydrate(array $data, DataMapper $dataMapper)
+    public function hydrate(array $data, HydratorRegistry $hydratorRegistry)
     {
         $payload = new Payload();
-        $payload->task = $dataMapper->extractValue($data, 'task');
+        $payload->task = $hydratorRegistry->extractValue($data, 'task');
 
         return $payload;
     }

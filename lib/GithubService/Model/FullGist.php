@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class FullGist
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $comments = null;
 
     public $commentsUrl = null;

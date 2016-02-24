@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class Repo
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $cloneUrl = null;
 
     public $createdAt = null;

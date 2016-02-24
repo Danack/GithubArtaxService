@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class CheckMaintenanceStatus
 {
+    use GithubTrait;
+    use SafeAccess;
+
     /**
      * @var \GithubService\Model\ $connectionServices
      */

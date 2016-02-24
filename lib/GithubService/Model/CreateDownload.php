@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class CreateDownload
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $accesskeyid = null;
 
     public $acl = null;

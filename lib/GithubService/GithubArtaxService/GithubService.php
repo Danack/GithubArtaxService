@@ -9,13 +9,13 @@ use Amp\Artax\Request;
 use Amp\Promise;
 use Amp\Reactor;
 use ArtaxServiceBuilder\BadResponseException;
+use ArtaxServiceBuilder\BasicAuthToken;
+use ArtaxServiceBuilder\Operation;
 use ArtaxServiceBuilder\ResponseCache;
 use GithubService\OneTimePasswordAppException;
 use GithubService\OneTimePasswordSMSException;
 use GithubService\RateLimitException;
-use ArtaxServiceBuilder\BasicAuthToken;
-use ArtaxServiceBuilder\Operation;
-use GithubService\GithubDataMapper;
+use GithubService\GithubHydratorRegistry;
 
 /**
  * Class GithubService 
@@ -25,7 +25,7 @@ use GithubService\GithubDataMapper;
  */
 class GithubService extends GithubArtaxService
 {
-    protected $githubDataMapper;
+    protected $githubHydratorRegistry;
     
     /**
      * @var \GithubService\RateLimit
@@ -35,7 +35,7 @@ class GithubService extends GithubArtaxService
     public function __construct(Client $client, Reactor $reactor, ResponseCache $responseCache, $userAgent)
     {
         parent::__construct($client, $reactor, $responseCache, $userAgent);
-        $this->githubDataMapper = new GithubDataMapper();
+        $this->githubHydratorRegistry = new GithubHydratorRegistry();
     }
 
     /**
@@ -75,7 +75,7 @@ class GithubService extends GithubArtaxService
         if ($instantiationInfo !== null) {
             if (array_key_exists('instantiate', $instantiationInfo) == true) {
                 $classname = $instantiationInfo['instantiate'];
-                return $this->githubDataMapper->createFromResponse($response, $operation, $classname);
+                return $this->githubHydratorRegistry->createFromResponse($response, $operation, $classname);
             }
         }
 
@@ -203,8 +203,7 @@ class GithubService extends GithubArtaxService
     }
 
     /**
-     * Creates an Oauth token for a named application, or retrieves the current Oauth 
-     * token if one already exists for the named application.
+     * Creates an Oauth token for a named application.
      * 
      * @param $username string The username to create the oauth token for
      * @param $password string The password of the user
@@ -227,6 +226,7 @@ class GithubService extends GithubArtaxService
         callable $enterPasswordCallback,
         $scopes,
         $note,
+        $noteURL = "http://www.github.com/danack/GithubArtaxService",
         $maxAttempts = 3
     ) {
         $basicToken = new BasicAuthToken($username, $password);
@@ -234,28 +234,13 @@ class GithubService extends GithubArtaxService
 
         for ($i = 0; $i < $maxAttempts; $i++) {
             try {
-
-//                $currentAuthCommand = $this->getAuthorizations($basicToken->__toString());
-//
-//                if ($otp) {
-//                    $currentAuthCommand->setOtp($otp);
-//                }
-//
-//                $currentAuths = $currentAuthCommand->execute();
-//                $currentAuth = $currentAuths->findOauthAccessByNote($applicationName);
-//
-//                if ($currentAuth) {
-//                    // Already have current auth, no need to create a new one.
-//                    return $currentAuth;
-//                }
-
                 $createAuthToken = $this->createAuthorization(
                     $basicToken->__toString(),
                     $scopes,
                     $note
                 );
 
-                $createAuthToken->setNote_url("http://www.github.com/danack/GithubArtaxService".time());
+                $createAuthToken->setNote_url($noteURL);
                 if ($otp) {
                     $createAuthToken->setOtp($otp);
                 }

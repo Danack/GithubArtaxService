@@ -3,30 +3,30 @@
 namespace GithubService\Hydrator;
 
 use GithubService\Hydrator;
-use GithubService\DataMapper;
+use GithubService\HydratorRegistry;
 use GithubService\Model\Deployment;
 
 class DeploymentHydrator implements Hydrator
 {
-    public function hydrate(array $data, DataMapper $dataMapper)
+    public function hydrate(array $data, HydratorRegistry $hydratorRegistry)
     {
         $deployment = new Deployment();
-        $deployment->createdAt = $dataMapper->extractValue($data, 'created_at');
-        $deployment->description = $dataMapper->extractValue($data, 'description');
-        $deployment->environment = $dataMapper->extractValue($data, 'environment');
-        $deployment->id = $dataMapper->extractValue($data, 'id');
-        $deployment->ref = $dataMapper->extractValue($data, 'ref');
-        $deployment->sha = $dataMapper->extractValue($data, 'sha');
-        $deployment->statusesUrl = $dataMapper->extractValue($data, 'statuses_url');
-        $deployment->task = $dataMapper->extractValue($data, 'task');
-        $deployment->updatedAt = $dataMapper->extractValue($data, 'updated_at');
-        $deployment->url = $dataMapper->extractValue($data, 'url');
+        $deployment->createdAt = $hydratorRegistry->extractValue($data, 'created_at');
+        $deployment->description = $hydratorRegistry->extractValue($data, 'description');
+        $deployment->environment = $hydratorRegistry->extractValue($data, 'environment');
+        $deployment->id = $hydratorRegistry->extractValue($data, 'id');
+        $deployment->ref = $hydratorRegistry->extractValue($data, 'ref');
+        $deployment->sha = $hydratorRegistry->extractValue($data, 'sha');
+        $deployment->statusesUrl = $hydratorRegistry->extractValue($data, 'statuses_url');
+        $deployment->task = $hydratorRegistry->extractValue($data, 'task');
+        $deployment->updatedAt = $hydratorRegistry->extractValue($data, 'updated_at');
+        $deployment->url = $hydratorRegistry->extractValue($data, 'url');
         
-        $creator = $dataMapper->extractValue($data, 'creator');
-        $deployment->creator = $dataMapper->instantiateClass('GithubService\\Model\\User', $creator);
+        $creator = $hydratorRegistry->extractValue($data, 'creator');
+        $deployment->creator = $hydratorRegistry->instantiateClass('GithubService\\Model\\User', $creator);
         
-        $payload = $dataMapper->extractValue($data, 'payload');
-        $deployment->payload = $dataMapper->instantiateClass('GithubService\\Model\\Payload', $payload);
+        $payload = $hydratorRegistry->extractValue($data, 'payload');
+        $deployment->payload = $hydratorRegistry->instantiateClass('GithubService\\Model\\Payload', $payload);
 
 
         return $deployment;

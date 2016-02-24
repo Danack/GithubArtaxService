@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class Thread
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $id = null;
 
     public $lastReadAt = null;

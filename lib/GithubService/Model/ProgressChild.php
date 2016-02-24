@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class ProgressChild
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $key = null;
 
     public $status = null;

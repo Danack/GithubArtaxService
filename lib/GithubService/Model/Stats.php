@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class Stats
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $additions = null;
 
     public $deletions = null;

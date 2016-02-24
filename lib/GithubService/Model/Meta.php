@@ -4,12 +4,13 @@ namespace GithubService\Model;
 
 class Meta
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     /**
      * @var \GithubService\Model\Indices $git
      */
-    public $git = array(
-        
-    );
+    public $git = [];
 
     public $githubServicesSha = null;
 

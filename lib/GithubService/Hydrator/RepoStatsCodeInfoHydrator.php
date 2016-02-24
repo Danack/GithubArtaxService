@@ -3,17 +3,17 @@
 namespace GithubService\Hydrator;
 
 use GithubService\Hydrator;
-use GithubService\DataMapper;
+use GithubService\HydratorRegistry;
 use GithubService\Model\RepoStatsCodeInfo;
 
 class RepoStatsCodeInfoHydrator implements Hydrator
 {
-    public function hydrate(array $data, DataMapper $dataMapper)
+    public function hydrate(array $data, HydratorRegistry $hydratorRegistry)
     {
         $repoStatsCodeInfo = new RepoStatsCodeInfo();
-        $repoStatsCodeInfo->startOfWeek = $dataMapper->extractValue($data, 0);
-        $repoStatsCodeInfo->additions = $dataMapper->extractValue($data, 1);
-        $repoStatsCodeInfo->deletions = $dataMapper->extractValue($data, 1);
+        $repoStatsCodeInfo->startOfWeek = $hydratorRegistry->extractValue($data, 0);
+        $repoStatsCodeInfo->additions = $hydratorRegistry->extractValue($data, 1);
+        $repoStatsCodeInfo->deletions = $hydratorRegistry->extractValue($data, 1);
 
         return $repoStatsCodeInfo;
     }

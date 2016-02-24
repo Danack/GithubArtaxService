@@ -4,6 +4,9 @@ namespace GithubService\Model;
 
 class Pages
 {
+    use GithubTrait;
+    use SafeAccess;
+    
     public $cname = null;
 
     public $custom404 = null;
