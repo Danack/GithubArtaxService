@@ -43,81 +43,45 @@ return array(
         //
         //Reaching a timeout does not necessarily mean that search results are incomplete.
         //More results might have been found, but also might not.
+
     'searchRepos' => array(
         //## Search repositories
-        //
-        //Find repositories via various criteria. This method returns up to 100 results [per page](/v3/#pagination).
-        //
-        //    GET /search/repositories
-        //
-        //### Parameters
-        //
-        //Name | Type | Description
-        //-----|------|--------------
-        //`q`|`string`| The search keywords, as well as any qualifiers.
-        //`sort`|`string`| The sort field. One of `stars`, `forks`, or `updated`. Default: results are sorted by best match.
-        //`order`|`string`| The sort order if `sort` parameter is provided. One of `asc` or `desc`. Default: `desc`
-        //
-        //The `q` search term can also contain any combination of the supported repository search qualifiers as described by the in-browser [repository search documentation](https://help.github.com/articles/searching-repositories/) and [search syntax documentation](https://help.github.com/articles/search-syntax/):
-        //
-        //* [`in`](https://help.github.com/articles/searching-repositories#scope-the-search-fields)
-        // Qualifies which fields are searched. With this qualifier you can restrict the
-        // search to just the repository name, description, readme, or
-        // any combination of these.
-        //* [`size`](https://help.github.com/articles/searching-repositories#search-based-on-the-size-of-a-repository)
-        //  Finds repositories that match a certain size (in kilobytes).
-        //* [`forks`](https://help.github.com/articles/searching-repositories#search-based-on-the-number-of-forks-the-parent-repository-has)
-        //  Filters repositories based on the number of forks.
-        //* [`fork`](https://help.github.com/articles/searching-repositories#search-based-on-the-number-of-forks-the-parent-repository-has) Filters whether forked repositories should be included (`true`) or only forked repositories should be returned (`only`).
-        //* [`created` or `pushed`](https://help.github.com/articles/searching-repositories#search-based-on-when-a-repository-was-created-or-last-updated)
-        //  Filters repositories based on date of creation, or when they were last updated.
-        //* [`user` or `repo`](https://help.github.com/articles/searching-repositories#search-within-a-users-or-organizations-repositories)
-        //  Limits searches to a specific user or repository.
-        //* [`language`](https://help.github.com/articles/searching-repositories#search-based-on-the-main-language-of-a-repository)
-        //  Searches repositories based on the language they're written in.
-        //* [`stars`](https://help.github.com/articles/searching-repositories#search-based-on-the-number-of-stars-a-repository-has)
-        //  Searches repositories based on the number of stars.
-        //
-        //<h4 id="repository-search-example">Example</h4>
-        //
-        //Suppose you want to search for popular Tetris repositories written in Assembly.
-        //Your query might look like this.
-        //
-        //    https://api.github.com/search/repositories?q=tetris+language:assembly&sort=stars&order=desc
-        //
-        //In this request, we're searching for repositories with the word `tetris` in the
-        //name, the description, or the README. We're limiting the results to only find
-        //repositories where the primary language is Assembly. We're sorting by stars in
-        //descending order, so that the most popular repositories appear first in the
-        //search results.
-        //
-        //== headers 200, {:pagination => default_pagination_rels, 'X-RateLimit-Limit' => 20, 'X-RateLimit-Remaining' => 19} 
-        //== json(:repo_search_v3_results) 
-        //
-        //### Highlighting Repository Search Results
-        //
-        //Some API consumers will want to highlight the matching search terms when
-        //displaying search results. The API offers additional metadata to support this
-        //use case. To get this metadata in your search results, specify the `text-match`
-        //media type in your Accept header. For example, via curl, the above query would
-        //look like this:
-        //
-        //    curl -H 'Accept: application/vnd.github.v3.text-match+json' \
-        //      'https://api.github.com/search/repositories?q=tetris+language:assembly&sort=stars&order=desc'
-        //
-        //This produces the same JSON payload as above, with an extra key called
-        //`text_matches`, an array of objects. These objects provide information such as
-        //the position of your search terms within the text, as well as the property that
-        //included the search term.
-        //
-        //When searching for repositories, you can get text match metadata for the
-        //**name** and **description** fields. (See the section on [text match metadata
-        //](#text-match-metadata) for full details.)
-        //
-        //Here's an example response:
-        //
-        //== json(:repo_search_v3_results_highlighting) 
+        "description" => "Find repositories via various criteria. This method returns up to 100 results per page",
+        'extends' => 'defaultGetOauthOperation',
+        'uri' => '/search/repositories',
+        'responseClass' => 'GithubService\Model\SearchRepos',
+        'parameters' => array(
+            'q' => array(
+                "location" => "query",
+                'type' => 'string',
+                "description" => "The search keywords, as well as any qualifiers.",
+            ),
+
+//    in Qualifies which fields are searched. With this qualifier you can restrict the search to just the repository name, description, readme, or any combination of these.
+//    size Finds repositories that match a certain size (in kilobytes).
+//    forks Filters repositories based on the number of forks.
+//    fork Filters whether forked repositories should be included (true) or only forked repositories should be returned (only).
+//    created or pushed Filters repositories based on date of creation, or when they were last updated.
+//    user or repo Limits searches to a specific user or repository.
+//    language Searches repositories based on the language they're written in.
+//    stars Searches repositories based on the number of stars.
+
+            'sort' => array(
+                "location" => "query",
+                'type' => 'string',
+                "description" => "One of stars, forks, or updated, Default, best match",
+                'optional' => true
+            ),
+            'order' => array(
+                "location" => "query",
+                'type' => 'string',
+                "description" => "The sort order if sort parameter is provided. One of asc or desc. Default: desc",
+                'optional' => true
+            ),
+        ),
     ),
+
+    
     'searchCode' => array(
         //## Search code
         //

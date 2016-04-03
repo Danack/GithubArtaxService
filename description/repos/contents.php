@@ -335,6 +335,35 @@ return array(
         ),
     ),
     
+        'getDevArchiveLink' => array(
+        'uri' => '/repos/{owner}/{repo}/{archive_format}/',
+        'extends' => 'defaultGetOauthOperation',
+
+        'summary' => 'This method will return a 302 to a URL to download a tarball or zipball archive for a repository. Please make sure your HTTP framework is configured to follow redirects or you will need to use the Location header to make a second GET request.',
+
+        'parameters' => array(
+            'owner' => array(
+                "location" => "uri",
+                'required' => 'true'
+            ),
+            'repo' => array(
+                "location" => "uri",
+                'required' => 'true'
+            ),
+            'archive_format' => array(
+                "location" => "uri",
+                'required' => 'true',
+                'default' =>  'tarball',
+                'description' => 'Can be either tarball or zipball. Default: tarball'
+            ),
+        ),
+    ),
+    
+    
+    
+    
+    
+    
     //Update a file
     //https://developer.github.com/v3/repos/contents/#update-a-file
     'updateFile' => array(

@@ -21,8 +21,21 @@ return array(
         //
         //Note: The returned email is the user's publicly visible email address
         //(or `null` if the user has not [specified a public email address in their profile](https://github.com/settings/profile)).
+        
+        "description" => "Get a single user",
+        'extends' => 'defaultGetOauthOperation',
+        'uri' => '/users/{username}',
+        'responseClass' => 'GithubService\Model\User',
+        'parameters' => array(
+            'username' => array(
+                "location" => "uri",
+                'type' => 'string',
+                "description" => "The github name of the user.",
+            ),
+        ),
     ),
-    
+
+        
     'getSelfUser' => array(
         //## Get the authenticated user
         //
@@ -32,6 +45,12 @@ return array(
         //
         //== headers 200 
         //== json :private_user 
+        
+        
+        "description" => "Get the authenticated user",
+        'extends' => 'defaultGetOauthOperation',
+        'uri' => '/user',
+        'responseClass' => 'GithubService\Model\User',
     ),
     'updateSelfUser' => array(
         //## Update the authenticated user

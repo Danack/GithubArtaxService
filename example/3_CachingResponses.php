@@ -5,7 +5,7 @@ $autoloader = require __DIR__.'/../vendor/autoload.php';
 use GithubService\GithubArtaxService\GithubService;
 use Amp\Artax\Client as ArtaxClient;
 use ArtaxServiceBuilder\ResponseCache\FileResponseCache;
-
+use GithubService\AuthToken\NullToken;
 
 $github = new GithubService(
     new ArtaxClient(),
@@ -15,7 +15,7 @@ $github = new GithubService(
 );
 
 $command = $github->listRepoTags(
-    null,   //No authentication means we will be IP limited to 50 requests/hour
+    new NullToken(),   //No authentication means we will be IP limited to 50 requests/hour
     'php',
     'php-src'
 );

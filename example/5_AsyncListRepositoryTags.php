@@ -12,9 +12,9 @@ $autoloader = require __DIR__.'/../vendor/autoload.php';
 use Amp\Artax\Client as ArtaxClient;
 use Amp\Artax\Response;
 use ArtaxServiceBuilder\ResponseCache\NullResponseCache;
+use GithubService\AuthToken\NullToken;
 use GithubService\GithubArtaxService\GithubService;
 use GithubService\Model\Tags;
-
 
 // Create the appropriate Amp reactor for your system. This depends on
 // which extensions you have loaded:
@@ -44,7 +44,7 @@ $github = new GithubService(
 
 //Get the first page of data
 $command = $github->listRepoTags(
-    null,   //No authentication means we will be IP limited to 50 requets /hour
+    new NullToken(),   //No authentication means we will be IP limited to 50 requets /hour
     'php',
     'php-src'
 );
@@ -68,7 +68,7 @@ $listRepoTagsCallback = function (
     $pages = $repoTags->pager->getAllKnownPages();
     foreach ($pages as $page) {
         $command = $github->listRepoTagsPaginate(
-            null,
+            new NullToken(),
             $page
         );
 
@@ -76,7 +76,6 @@ $listRepoTagsCallback = function (
         echo "Fetching asynchronously: $page \n";
         $command->executeAsync($callback);
     }
-    
 };
 
 // This prepares the request but it is not executed until the reactor starts running

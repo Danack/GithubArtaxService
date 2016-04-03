@@ -1,6 +1,7 @@
 <?php
 
-use ArtaxServiceBuilder\Oauth2Token;
+
+use GithubService\AuthToken\Oauth2Token;
 use GithubService\GithubArtaxService\GithubService;
 use Amp\Artax\Client as ArtaxClient;
 use ArtaxServiceBuilder\ResponseCache\NullResponseCache;
@@ -73,7 +74,8 @@ else {
         exit(-1);
     }
 
-    $token = $authResult;
+    //$token = $authResult;
+    $token = new Oauth2Token($authResult->token);
 }
 
 // Okay we have an authorization, lets test it.

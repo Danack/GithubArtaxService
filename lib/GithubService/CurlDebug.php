@@ -31,6 +31,7 @@ class CurlDebug
         }
 
         $body = $request->getBody();
+
         if ($body !== null) {
             $commandLines[] = '-d "'.addslashes($body).'"';
         }

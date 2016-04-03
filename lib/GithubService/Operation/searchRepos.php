@@ -47,8 +47,15 @@ class searchRepos implements \ArtaxServiceBuilder\Operation {
         $this->response = $response;
     }
 
-    public function __construct(\GithubService\GithubArtaxService\GithubArtaxService $api) {
+    public function __construct(\GithubService\GithubArtaxService\GithubArtaxService $api, \GithubService\AuthToken $authorization, $userAgent, $q) {
+        $defaultParams = [
+            'Accept' => 'application/vnd.github.v3+json',
+        ];
+        $this->setParams($defaultParams);
         $this->api = $api;
+        $this->parameters['Authorization'] = $authorization;
+        $this->parameters['userAgent'] = $userAgent;
+        $this->parameters['q'] = $q;
     }
 
     public function setAPI(\GithubService\GithubArtaxService\GithubArtaxService $api) {
@@ -56,6 +63,136 @@ class searchRepos implements \ArtaxServiceBuilder\Operation {
     }
 
     public function setParams(array $params) {
+        if (array_key_exists('Accept', $params)) {
+            $this->parameters['Accept'] = $params['Accept'];
+        }
+        if (array_key_exists('Authorization', $params)) {
+            $this->parameters['Authorization'] = $params['Authorization'];
+        }
+        if (array_key_exists('userAgent', $params)) {
+            $this->parameters['userAgent'] = $params['userAgent'];
+        }
+        if (array_key_exists('perPage', $params)) {
+            $this->parameters['perPage'] = $params['perPage'];
+        }
+        if (array_key_exists('otp', $params)) {
+            $this->parameters['otp'] = $params['otp'];
+        }
+        if (array_key_exists('q', $params)) {
+            $this->parameters['q'] = $params['q'];
+        }
+        if (array_key_exists('sort', $params)) {
+            $this->parameters['sort'] = $params['sort'];
+        }
+        if (array_key_exists('order', $params)) {
+            $this->parameters['order'] = $params['order'];
+        }
+    }
+
+    /**
+     * Set Accept
+     *
+     * @return $this
+     */
+    public function setAccept($Accept) {
+        $this->parameters['Accept'] = $Accept;
+
+        return $this;
+    }
+
+    /**
+     * Set Authorization
+     *
+     * The token to use for the request. This should either be an a complete token in
+     * the format appropriate format e.g. 'token 123567890' for an oauth token, or
+     * '"Basic ".base64_encode($username.":".$password)"' for a Basic token or anything
+     * that can be cast to a string in the correct format e.g. an 
+     * \ArtaxServiceBuilder\BasicAuthToken object.
+     *
+     * @return $this
+     */
+    public function setAuthorization(\GithubService\AuthToken $Authorization) {
+        $this->parameters['Authorization'] = $Authorization;
+
+        return $this;
+    }
+
+    /**
+     * Set userAgent
+     *
+     * The user-agent which allows Github to recognise your application.
+     *
+     * @return $this
+     */
+    public function setUserAgent($userAgent) {
+        $this->parameters['userAgent'] = $userAgent;
+
+        return $this;
+    }
+
+    /**
+     * Set perPage
+     *
+     * The number of items to get per page.
+     *
+     * @return $this
+     */
+    public function setPerPage($perPage) {
+        $this->parameters['perPage'] = $perPage;
+
+        return $this;
+    }
+
+    /**
+     * Set otp
+     *
+     * The one time password.
+     *
+     * @return $this
+     */
+    public function setOtp($otp) {
+        $this->parameters['otp'] = $otp;
+
+        return $this;
+    }
+
+    /**
+     * Set q
+     *
+     * The search keywords, as well as any qualifiers.
+     *
+     * @return $this
+     */
+    public function setQ($q) {
+        $this->parameters['q'] = $q;
+
+        return $this;
+    }
+
+    /**
+     * Set sort
+     *
+     * One of stars, forks, or updated, Default, best match
+     *
+     * @return $this
+     */
+    public function setSort($sort) {
+        $this->parameters['sort'] = $sort;
+
+        return $this;
+    }
+
+    /**
+     * Set order
+     *
+     * The sort order if sort parameter is provided. One of asc or desc. Default: desc
+     *
+     * @return $this
+     */
+    public function setOrder($order) {
+        $this->parameters['order'] = $order;
+
+        return $this;
     }
 
     public function getParameters() {
@@ -65,7 +202,7 @@ class searchRepos implements \ArtaxServiceBuilder\Operation {
     /**
      * Apply any filters necessary to the parameter
      *
-     * @return mixed
+     * @return \GithubService\Model\SearchRepos
      * @param string $name The name of the parameter to get.
      */
     public function getFilteredParameter($name) {
@@ -75,6 +212,18 @@ class searchRepos implements \ArtaxServiceBuilder\Operation {
 
         $value = $this->parameters[$name];
 
+        switch ($name) {
+
+            case ('Authorization'): {
+                $args = [];
+                $value = call_user_func_array([$value, 'getToken'], $args);
+                break;
+            }
+
+
+            default:{}
+
+        }
 
         return $value;
     }
@@ -87,13 +236,45 @@ class searchRepos implements \ArtaxServiceBuilder\Operation {
     public function createRequest() {
         $request = new \Amp\Artax\Request();
         $url = null;
-        $request->setMethod('');
+        $request->setMethod('GET');
 
+        $queryParameters = [];
 
+        if (array_key_exists('Accept', $this->parameters) == true) {
+        $value = $this->getFilteredParameter('Accept');
+            $request->setHeader('Accept', $value);
+        }
+        $value = $this->getFilteredParameter('Authorization');
+        if ($value != null) {
+            $request->setHeader('Authorization', $value);
+        }
+        $value = $this->getFilteredParameter('userAgent');
+        $request->setHeader('User-Agent', $value);
+        if (array_key_exists('perPage', $this->parameters) == true) {
+        $value = $this->getFilteredParameter('perPage');
+            $queryParameters['per_page'] = $value;
+        }
+        if (array_key_exists('otp', $this->parameters) == true) {
+        $value = $this->getFilteredParameter('otp');
+            $request->setHeader('X-GitHub-OTP', $value);
+        }
+        $value = $this->getFilteredParameter('q');
+        $queryParameters['q'] = $value;
+        if (array_key_exists('sort', $this->parameters) == true) {
+        $value = $this->getFilteredParameter('sort');
+            $queryParameters['sort'] = $value;
+        }
+        if (array_key_exists('order', $this->parameters) == true) {
+        $value = $this->getFilteredParameter('order');
+            $queryParameters['order'] = $value;
+        }
 
         //Parameters are parsed and set, lets prepare the request
         if ($url == null) {
-            $url = "https://api.github.com";
+            $url = "https://api.github.com/search/repositories";
+        }
+        if (count($queryParameters)) {
+            $url = $url.'?'.http_build_query($queryParameters, '', '&', PHP_QUERY_RFC3986);
         }
         $request->setUri($url);
 
@@ -116,7 +297,7 @@ class searchRepos implements \ArtaxServiceBuilder\Operation {
     /**
      * Create and execute the operation, then return the processed  response.
      *
-     * @return mixed|\
+     * @return mixed|\GithubService\Model\SearchRepos
      */
     public function call() {
         $request = $this->createRequest();
@@ -134,7 +315,7 @@ class searchRepos implements \ArtaxServiceBuilder\Operation {
     /**
      * Execute the operation, returning the parsed response
      *
-     * @return mixed
+     * @return \GithubService\Model\SearchRepos
      */
     public function execute() {
         $request = $this->createRequest();
@@ -156,7 +337,7 @@ class searchRepos implements \ArtaxServiceBuilder\Operation {
      * Dispatch the request for this operation and process the response. Allows you to
      * modify the request before it is sent.
      *
-     * @return mixed
+     * @return \GithubService\Model\SearchRepos
      * @param \Amp\Artax\Request $request The request to be processed
      */
     public function dispatch(\Amp\Artax\Request $request) {
@@ -171,7 +352,7 @@ class searchRepos implements \ArtaxServiceBuilder\Operation {
      * Dispatch the request for this operation and process the response asynchronously.
      * Allows you to modify the request before it is sent.
      *
-     * @return mixed
+     * @return \GithubService\Model\SearchRepos
      * @param \Amp\Artax\Request $request The request to be processed
      * @param callable $callable The callable that processes the response
      */
@@ -183,7 +364,7 @@ class searchRepos implements \ArtaxServiceBuilder\Operation {
      * Dispatch the request for this operation and process the response. Allows you to
      * modify the request before it is sent.
      *
-     * @return mixed
+     * @return \GithubService\Model\SearchRepos
      * @param \Amp\Artax\Response $response The HTTP response.
      */
     public function processResponse(\Amp\Artax\Response $response) {
@@ -196,7 +377,7 @@ class searchRepos implements \ArtaxServiceBuilder\Operation {
      * Determine whether the response should be processed. Override this method to have
      * a per-operation decision, otherwise the function is the API class will be used.
      *
-     * @return mixed
+     * @return \GithubService\Model\SearchRepos
      */
     public function shouldResponseBeProcessed(\Amp\Artax\Response $response) {
         return $this->api->shouldResponseBeProcessed($response);
@@ -217,7 +398,7 @@ class searchRepos implements \ArtaxServiceBuilder\Operation {
      * Override this method to have a per-operation decision, otherwise the
      * functionfrom the API class will be used.
      *
-     * @return mixed
+     * @return \GithubService\Model\SearchRepos
      */
     public function shouldUseCachedResponse(\Amp\Artax\Response $response) {
         return $this->api->shouldUseCachedResponse($response);
@@ -227,7 +408,7 @@ class searchRepos implements \ArtaxServiceBuilder\Operation {
      * Determine whether the response should be cached. Override this method to have a
      * per-operation decision, otherwise the function from the API class will be used.
      *
-     * @return mixed
+     * @return \GithubService\Model\SearchRepos
      */
     public function shouldResponseBeCached(\Amp\Artax\Response $response) {
         return $this->api->shouldResponseBeCached($response);
@@ -257,7 +438,7 @@ class searchRepos implements \ArtaxServiceBuilder\Operation {
      * @return \Amp\Artax\Response
      */
     public function getResultInstantiationInfo() {
-        return null;
+        return ['instantiate' => 'GithubService\\Model\\SearchRepos'];
     }
 
 

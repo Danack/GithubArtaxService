@@ -6,6 +6,7 @@ use GithubService\GithubArtaxService\GithubService;
 use Amp\Artax\Client as ArtaxClient;
 use ArtaxServiceBuilder\ResponseCache\NullResponseCache;
 use GithubService\Model\Tags;
+use GithubService\AuthToken\NullToken;
 
 
 function displayTags(Tags $repoTags) {
@@ -24,7 +25,7 @@ $github = new GithubService(
 echo "Tags on first page:\n";
 //Get the first page of data
 $command = $github->listRepoTags(
-    null,   //No authentication means we will be IP limited to 50 requets /hour
+    new NullToken(),   //No authentication means we will be IP limited to 50 requets /hour
     'php',
     'php-src'
 );

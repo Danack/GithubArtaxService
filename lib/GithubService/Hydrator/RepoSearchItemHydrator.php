@@ -11,10 +11,12 @@ class RepoSearchItemHydrator implements Hydrator
     public function hydrate(array $data, HydratorRegistry $hydratorRegistry)
     {
         $repoSearchItem = new RepoSearchItem();
-        $repoSearchItem->created = $hydratorRegistry->extractValue($data, 'created');
+        //$repoSearchItem->created = $hydratorRegistry->extractValue($data, 'created');
+        $repoSearchItem->created = $hydratorRegistry->extractValue($data, 'created', true);
         $repoSearchItem->createdAt = $hydratorRegistry->extractValue($data, 'created_at');
         $repoSearchItem->description = $hydratorRegistry->extractValue($data, 'description');
-        $repoSearchItem->followers = $hydratorRegistry->extractValue($data, 'followers');
+        //$repoSearchItem->followers = $hydratorRegistry->extractValue($data, 'followers');
+        $repoSearchItem->followers = $hydratorRegistry->extractValue($data, 'followers', true);
         $repoSearchItem->fork = $hydratorRegistry->extractValue($data, 'fork');
         $repoSearchItem->forks = $hydratorRegistry->extractValue($data, 'forks');
         $repoSearchItem->hasDownloads = $hydratorRegistry->extractValue($data, 'has_downloads');

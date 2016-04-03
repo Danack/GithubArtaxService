@@ -47,7 +47,7 @@ class getGitIgnoreTemplate implements \ArtaxServiceBuilder\Operation {
         $this->response = $response;
     }
 
-    public function __construct(\GithubService\GithubArtaxService\GithubArtaxService $api, $authorization, $userAgent, $type) {
+    public function __construct(\GithubService\GithubArtaxService\GithubArtaxService $api, \GithubService\AuthToken $authorization, $userAgent, $type) {
         $defaultParams = [
             'Accept' => 'application/vnd.github.v3+json',
         ];
@@ -105,7 +105,7 @@ class getGitIgnoreTemplate implements \ArtaxServiceBuilder\Operation {
      *
      * @return $this
      */
-    public function setAuthorization($Authorization) {
+    public function setAuthorization(\GithubService\AuthToken $Authorization) {
         $this->parameters['Authorization'] = $Authorization;
 
         return $this;
@@ -184,8 +184,7 @@ class getGitIgnoreTemplate implements \ArtaxServiceBuilder\Operation {
 
             case ('Authorization'): {
                 $args = [];
-                $args[] = $value;
-                $value = call_user_func_array('strval', $args);
+                $value = call_user_func_array([$value, 'getToken'], $args);
                 break;
             }
 

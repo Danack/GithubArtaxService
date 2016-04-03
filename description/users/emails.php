@@ -7,18 +7,11 @@ return array(
 //Management of email addresses via the API requires that you are
 //authenticated through basic auth or OAuth with the user scope.
 
-
     'listUserEmails' => array(
-        //## List email addresses for a user
-        //
-        //    GET /user/emails
-        //
-        //This endpoint is accessible with the user:email scope.
-        //
-        //### Response
-        //
-        //== headers 200, :pagination => default_pagination_rels 
-        //== json(:user_email) {|e| [e]} 
+        "description" => "List email addresses for a user",
+        'extends' => 'defaultGetOauthOperation',
+        'uri' => '/user/emails',
+        'responseClass' => 'GithubService\Model\UserEmail',
     ),
 
 
@@ -58,6 +51,23 @@ return array(
         //    "verified" => false
         //  },
         //] 
+        
+        "description" => "Add email address",
+        'extends' => 'defaultGetOauthOperation',
+        'uri' => '/user/emails',
+        'httpMethod' => 'POST',
+        'responseClass' => 'GithubService\Model\UserEmail',
+        'parameters' => array(
+            'username' => array(
+                "location" => "json",
+                'type' => 'string or array',
+                "description" => "A single email address or an array of addresses",
+                //== json ["octocat@github.com", "support@github.com"]
+            ),
+        ),
+        
+
+
 
     ),
     'deleteUserEmail' => array(

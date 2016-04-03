@@ -2,3 +2,8 @@ vendor
 danack-code
 example/fileCache
 test/tmp
+example/download
+example/testExtract/blahblah/WhichBrowser-Parser-0ff616d
+example/testExtract
+var
+phpserver.pid

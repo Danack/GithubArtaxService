@@ -3,7 +3,7 @@
 namespace GithubService\Iterator;
 
 use GithubService\GithubService;
-use GithubService\Model\AccessResponse;
+use GithubService\AuthToken;
 
 class ListRepoCommitsIterator implements \Iterator {
 
@@ -20,9 +20,9 @@ class ListRepoCommitsIterator implements \Iterator {
     private $command;
 
     /**
-     * @var \GithubService\Model\AccessResponse
+     * @var \GithubService\AuthToken
      */
-    private $accessResponse;
+    private $oauthToken;
 
     /**
      * @var bool Flag to prevent anyone re-using this iterator. They should copy the values out...
@@ -32,12 +32,12 @@ class ListRepoCommitsIterator implements \Iterator {
 
     function __construct(
         GithubService $api,
-        AccessResponse $accessResponse,
+        AuthToken $oauthToken,
         \GithubService\Operation\listRepoCommits $listRepoCommits,
         $maxPages = 5
     ) {
         $this->api = $api;
-        $this->accessResponse = $accessResponse;
+        $this->oauthToken = $oauthToken;
         //Command doesn't get executed until needed.
         $this->command = $listRepoCommits;
         $this->maxPages = $maxPages;
@@ -70,7 +70,7 @@ class ListRepoCommitsIterator implements \Iterator {
         if ($this->commits->pager) {
             if ($this->commits->pager->nextLink) {
                 $this->command = $this->api->listRepoCommitsPaginate(
-                    $this->accessResponse->accessToken,
+                    $this->oauthToken,
                     $this->commits->pager->nextLink->url
                 );
             }

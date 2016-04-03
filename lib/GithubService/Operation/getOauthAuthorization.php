@@ -47,17 +47,12 @@ class getOauthAuthorization implements \ArtaxServiceBuilder\Operation {
         $this->response = $response;
     }
 
-    public function __construct(\GithubService\GithubArtaxService\GithubArtaxService $api, $userAgent, $client_id, $client_secret, $code, $redirect_uri) {
-        $defaultParams = [
-            'Accept' => 'application/vnd.github.v3+json',
-        ];
-        $this->setParams($defaultParams);
+    public function __construct(\GithubService\GithubArtaxService\GithubArtaxService $api, $userAgent, $client_id, $client_secret, $code) {
         $this->api = $api;
         $this->parameters['userAgent'] = $userAgent;
         $this->parameters['client_id'] = $client_id;
         $this->parameters['client_secret'] = $client_secret;
         $this->parameters['code'] = $code;
-        $this->parameters['redirect_uri'] = $redirect_uri;
     }
 
     public function setAPI(\GithubService\GithubArtaxService\GithubArtaxService $api) {
@@ -65,9 +60,6 @@ class getOauthAuthorization implements \ArtaxServiceBuilder\Operation {
     }
 
     public function setParams(array $params) {
-        if (array_key_exists('Accept', $params)) {
-            $this->parameters['Accept'] = $params['Accept'];
-        }
         if (array_key_exists('userAgent', $params)) {
             $this->parameters['userAgent'] = $params['userAgent'];
         }
@@ -80,20 +72,12 @@ class getOauthAuthorization implements \ArtaxServiceBuilder\Operation {
         if (array_key_exists('code', $params)) {
             $this->parameters['code'] = $params['code'];
         }
+        if (array_key_exists('state', $params)) {
+            $this->parameters['state'] = $params['state'];
+        }
         if (array_key_exists('redirect_uri', $params)) {
             $this->parameters['redirect_uri'] = $params['redirect_uri'];
         }
-    }
-
-    /**
-     * Set Accept
-     *
-     * @return $this
-     */
-    public function setAccept($Accept) {
-        $this->parameters['Accept'] = $Accept;
-
-        return $this;
     }
 
     /**
@@ -149,6 +133,19 @@ class getOauthAuthorization implements \ArtaxServiceBuilder\Operation {
     }
 
     /**
+     * Set state
+     *
+     * The unguessable random string you optionally provided in Step 1.
+     *
+     * @return $this
+     */
+    public function setState($state) {
+        $this->parameters['state'] = $state;
+
+        return $this;
+    }
+
+    /**
      * Set redirect_uri
      *
      * string The URL in your app where users will be sent after authorization. See
@@ -193,29 +190,33 @@ class getOauthAuthorization implements \ArtaxServiceBuilder\Operation {
         $url = null;
         $request->setMethod('POST');
 
-        $queryParameters = [];
 
-        if (array_key_exists('Accept', $this->parameters) == true) {
-        $value = $this->getFilteredParameter('Accept');
-            $request->setHeader('Accept', $value);
-        }
+        $jsonParams = [];
         $value = $this->getFilteredParameter('userAgent');
         $request->setHeader('User-Agent', $value);
         $value = $this->getFilteredParameter('client_id');
-        $queryParameters['client_id'] = $value;
+        $jsonParams['client_id'] = $value;
         $value = $this->getFilteredParameter('client_secret');
-        $queryParameters['client_secret'] = $value;
+        $jsonParams['client_secret'] = $value;
         $value = $this->getFilteredParameter('code');
-        $queryParameters['code'] = $value;
+        $jsonParams['code'] = $value;
+        if (array_key_exists('state', $this->parameters) == true) {
+        $value = $this->getFilteredParameter('state');
+            $jsonParams['state'] = $value;
+        }
+        if (array_key_exists('redirect_uri', $this->parameters) == true) {
         $value = $this->getFilteredParameter('redirect_uri');
-        $queryParameters['redirect_uri'] = $value;
+            $jsonParams['redirect_uri'] = $value;
+        }
 
         //Parameters are parsed and set, lets prepare the request
+        if (count($jsonParams)) {
+            $jsonBody = json_encode($jsonParams);
+            $request->setHeader("Content-Type", "application/json");
+            $request->setBody($jsonBody);
+        }
         if ($url == null) {
             $url = "https://github.com/login/oauth/access_token";
-        }
-        if (count($queryParameters)) {
-            $url = $url.'?'.http_build_query($queryParameters, '', '&', PHP_QUERY_RFC3986);
         }
         $request->setUri($url);
 

@@ -5,6 +5,7 @@ use ArtaxServiceBuilder\ResponseCache\NullResponseCache;
 use Amp\Artax\Client as ArtaxClient;
 use Amp\NativeReactor;
 use ArtaxServiceBuilder\BadResponseException;
+use GithubService\AuthToken\NullToken;
 
 //include_once dirname(__DIR__)."/../../githubArtaxServiceConfig.php";
 
@@ -28,7 +29,7 @@ class GithubIntegrationTest extends \PHPUnit_Framework_TestCase
     function testRepoTags() {
         /** @var  $githubAPI GithubService */
         list($reactor, $githubAPI) = $this->getReactorAndAPI();
-        $command = $githubAPI->listRepoTags(null, "Danack", "GithubArtaxService");
+        $command = $githubAPI->listRepoTags(new NullToken(), "Danack", "GithubArtaxService");
         $repoTags = $command->call();
         $this->assertInstanceOf('GithubService\Model\Tags', $repoTags);
         $numberOfTags = count($repoTags->repoTags);
@@ -43,7 +44,7 @@ class GithubIntegrationTest extends \PHPUnit_Framework_TestCase
     function testListEmojis() {
         /** @var  $githubAPI GithubService */
         list($reactor, $githubAPI) = $this->getReactorAndAPI();
-        $command = $githubAPI->listEmojis(null);
+        $command = $githubAPI->listEmojis(new NullToken());
         $emojiList = $command->call();
         $this->assertInstanceOf('GithubService\Model\EmojiList', $emojiList);
     }
@@ -55,7 +56,7 @@ class GithubIntegrationTest extends \PHPUnit_Framework_TestCase
     function testListRepoCommits() {
         /** @var  $githubAPI GithubService */
         list($reactor, $githubAPI) = $this->getReactorAndAPI();
-        $command = $githubAPI->listRepoCommits(null, 'Danack', 'GithubArtaxService');
+        $command = $githubAPI->listRepoCommits(new NullToken(), 'Danack', 'GithubArtaxService');
         $commitList = $command->call();
         $this->assertInstanceOf('GithubService\Model\CommitList', $commitList);
     }

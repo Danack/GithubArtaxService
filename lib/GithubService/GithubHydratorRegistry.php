@@ -8,6 +8,7 @@ use ArtaxServiceBuilder\Operation;
 use ArtaxServiceBuilder\Service\GithubPaginator;
 use GithubService\GithubArtaxService\GithubArtaxServiceException;
 
+use GithubService\Hydrator\AccessResponseHydrator;
 use GithubService\Hydrator\AppHydrator;
 use GithubService\Hydrator\BlobHydrator;
 use GithubService\Hydrator\BlobAfterCreateHydrator;
@@ -69,11 +70,18 @@ use GithubService\Hydrator\UserHydrator;
 use GithubService\Hydrator\UserInSearchResultHydrator;
 use GithubService\Hydrator\UserSearchItemHydrator;
 use GithubService\Hydrator\CommitListHydrator;
+use HTTP2\HTTP2;
+use GithubService\Hydrator\UserEmailListHydrator;
+use GithubService\Hydrator\SearchReposHydrator;
+use GithubService\Hydrator\SearchReposItemHydrator;
+use GithubService\Hydrator\OwnerSearchHydrator;
+
 
 class GithubHydratorRegistry extends HydratorRegistry
 {
     public function __construct()
     {
+        $this->registerType('GithubService\Model\AccessResponse', new AccessResponseHydrator());
         $this->registerType('GithubService\Model\App', new AppHydrator());
         $this->registerType('GithubService\Model\Blob', new BlobHydrator());
         $this->registerType('GithubService\Model\BlobAfterCreate', new BlobAfterCreateHydrator());
@@ -101,6 +109,7 @@ class GithubHydratorRegistry extends HydratorRegistry
         $this->registerType('GithubService\Model\Meta', new MetaHydrator());
         $this->registerType('GithubService\Model\OauthAccess', new OauthAccessHydrator());
         $this->registerType('GithubService\Model\OauthAccessList', new OauthAccessListHydrator());
+        $this->registerType('GithubService\Model\OwnerSearch', new OwnerSearchHydrator());
         $this->registerType('GithubService\Model\Pages', new PagesHydrator());
         $this->registerType('GithubService\Model\PagesBuild', new PagesBuildHydrator());
         $this->registerType('GithubService\Model\Payload', new PayloadHydrator());
@@ -121,6 +130,12 @@ class GithubHydratorRegistry extends HydratorRegistry
         $this->registerType('GithubService\Model\RepoStatsPunchCard', new RepoStatsPunchCardHydrator());
         $this->registerType('GithubService\Model\RepoStatsPunchCardInfo', new RepoStatsPunchCardInfoHydrator());
         $this->registerType('GithubService\Model\RepoSubscription', new RepoSubscriptionHydrator());
+        $this->registerType('GithubService\Model\SearchRepos', new SearchReposHydrator());
+        $this->registerType('GithubService\Model\SearchRepoItem', new SearchReposItemHydrator());
+        
+
+        
+        
         $this->registerType('GithubService\Model\SimplePublicKey', new SimplePublicKeyHydrator());
         $this->registerType('GithubService\Model\Status', new StatusHydrator());
         $this->registerType('GithubService\Model\SubmoduleContent', new SubmoduleContentHydrator());
@@ -136,6 +151,7 @@ class GithubHydratorRegistry extends HydratorRegistry
         //Needs refactoring.
         //$this->registerType('GithubService\Model\TreeNew', new TreeNewHydrator());
         $this->registerType('GithubService\Model\UserEmail', new UserEmailHydrator());
+        $this->registerType('GithubService\Model\UserEmailList', new UserEmailListHydrator());        
         $this->registerType('GithubService\Model\UserSearchItem', new UserSearchItemHydrator());
     }
     
@@ -171,9 +187,48 @@ class GithubHydratorRegistry extends HydratorRegistry
         return $data;
     }
     
+            
+    protected function extractData(Response $response)
+    {
+        $contentType = null;
+        if ($response->hasHeader('Content-Type') === false) {
+            throw new GithubArtaxServiceException("Content-Type header not set in response.");
+        }
+
+        $contentTypeHeaders = $response->getHeader('Content-Type');
+
+        foreach ($contentTypeHeaders as $contentTypeHeader) {
+            $parts = explode(';', $contentTypeHeader);
+            foreach ($parts as $part) {
+                switch ($part) {
+                    case 'application/x-www-form-urlencoded': {
+                        $formEncoded = $response->getBody();
+                        $data = [];
+                        parse_str($formEncoded, $data);
+                        return $data;
+                    }
+                    case 'application/json': {
+                        return $this->decodeJson($response);
+                        
+                    }
+                }
+            }
+        }
+        
+        $headersString = implode(',', $contentTypeHeaders);
+        
+        throw new GithubArtaxServiceException("Could not determine how to extract data from $headersString");
+    }
+    
+    
     public function createFromResponse(Response $response, Operation $operation, $class)
     {
-        $data = $this->decodeJson($response);
+        $data = $this->extractData($response);
+        
+        if (array_key_exists('error_description', $data) === true) {
+            throw new GithubArtaxServiceException($response, "Error in response: ".$data['error_description']);
+        }
+
         $instance = $this->instantiateClass($class, $data);
         //Header based information needs to be added after the array
         

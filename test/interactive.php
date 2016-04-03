@@ -8,7 +8,7 @@ use GithubService\OneTimePasswordAppException;
 use GithubService\OneTimePasswordSMSException;
 use ArtaxServiceBuilder\Oauth2Token;
 use ArtaxServiceBuilder\BadResponseException;
-use GithubService\Model\HydratorException;
+use GithubService\Hydrator\HydratorException;
 
 
 require_once dirname(dirname(__DIR__))."/clavis.php";
@@ -19,7 +19,6 @@ require_once "testBootstrap.php";
  * This test cannot be run automatically. It requires the user to read
  * the one-time-password sent to their phone.
  */
-
 
 /** @var  $injector Provider */
 $injector = createProvider();

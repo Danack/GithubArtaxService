@@ -1,8 +1,10 @@
 <?php
 
 
-namespace GithubService\Model;
+namespace GithubService\Hydrator;
 
+// GithubService\Hydrator\HydratorException
+// GithubService\Hydrator\HydratorException
 
 class HydratorException extends \Exception
 {

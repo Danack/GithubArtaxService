@@ -76,15 +76,4 @@ function checkAuthResult() {
         echo "Exception processing response: ".$fae->getMessage();
     }
 }
-
-
- 
-
-
-
- 
-
-
-
-
  

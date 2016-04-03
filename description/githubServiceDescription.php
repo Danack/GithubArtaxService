@@ -29,12 +29,16 @@ $service = array (
                     'sentAs' => 'Authorization',
                     "filters" => array(
                         array(
-                            "method" => 'strval',
-                            "args" => ["@value"]
+                            "method" => 'getToken',
+                            //"args" => ["@value"]
                         )
+//                        array(
+//                            "function" => 'strval',
+//                            "args" => ["@value"]
+//                        )
                     ),
                     'skipIfNull' => true,
-                    'type' => 'string'
+                    'type' => 'GithubService\AuthToken'
                 ),
                 'userAgent' => $userAgentParam,
                 'perPage' => array(
@@ -60,23 +64,28 @@ $service = array (
             "responseClass" => 'GithubService\Model\AccessResponse',
             'summary' => 'Retrieve the Outh2 token for an application. You should have directed the user to https://github.com/login/oauth/authorize with client_id etc set before calling this.',
             'parameters' => [
-                'Accept' => $acceptParam,
                 'userAgent' => $userAgentParam,
                 'client_id' => [
                     'description' => 'string Required. The client ID you received from GitHub when you registered.',
-                    'location' => 'query'
+                    'location' => 'json'
                 ],
                 'client_secret' => [
                     'description' => 'string Required. The client secret you received from GitHub when you registered.',
-                    'location' => 'query'
+                    'location' => 'json'
                 ],
                 'code' => [
                     'description' => 'string Required. The code you received as a response to Step 1.',
-                    'location' => 'query'
+                    'location' => 'json'
+                ],
+                'state' => [
+                    'description' => 'The unguessable random string you optionally provided in Step 1.',
+                    'location' => 'json',
+                    'optional' => true
                 ],
                 'redirect_uri' => [
-                    'location' => 'query',
-                    'description' =>  'string The URL in your app where users will be sent after authorization. See details below about redirect urls.'
+                    'location' => 'json',
+                    'description' =>  'string The URL in your app where users will be sent after authorization. See details below about redirect urls.',
+                    'optional' => true
                 ]
             ]
         ],
@@ -94,8 +103,6 @@ $service = array (
 
 
 $externalFiles = array(
-
-
     "activity/events/types.php",
     "activity/events.php",
     "activity/feeds.php",
@@ -150,11 +157,10 @@ $externalFiles = array(
     //"search/legacy.php",
     "search.php",
 //    "users/administration.php",
-//    "users/emails.php",
+    "users/emails.php",
 //    "users/followers.php",
 //    "users/keys.php",
-//    "users.php",
-
+    "users.php",
 
 );
 

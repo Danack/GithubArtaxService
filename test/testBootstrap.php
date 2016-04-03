@@ -1,6 +1,6 @@
 <?php
 
-use Auryn\Provider;
+use Auryn\Injector;
 
 error_reporting(E_ALL);
 
@@ -25,7 +25,7 @@ function prepareArtaxClient(Amp\Artax\Client $client) {
  * @return Provider
  */
 function createProvider($implementations = array(), $shareClasses = array()) {
-    $provider = new Provider();
+    $provider = new Injector();
 
     $provider->define(
         'GithubService\GithubArtaxService\GithubArtaxService',

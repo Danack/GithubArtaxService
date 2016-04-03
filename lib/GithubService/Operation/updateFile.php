@@ -47,7 +47,7 @@ class updateFile implements \ArtaxServiceBuilder\Operation {
         $this->response = $response;
     }
 
-    public function __construct(\GithubService\GithubArtaxService\GithubArtaxService $api, $authorization, $userAgent, $path, $owner, $repo, $content, $sha, $branch, $message) {
+    public function __construct(\GithubService\GithubArtaxService\GithubArtaxService $api, \GithubService\AuthToken $authorization, $userAgent, $path, $owner, $repo, $content, $sha, $branch, $message) {
         $defaultParams = [
             'Accept' => 'application/vnd.github.v3+json',
         ];
@@ -135,7 +135,7 @@ class updateFile implements \ArtaxServiceBuilder\Operation {
      *
      * @return $this
      */
-    public function setAuthorization($Authorization) {
+    public function setAuthorization(\GithubService\AuthToken $Authorization) {
         $this->parameters['Authorization'] = $Authorization;
 
         return $this;
@@ -314,8 +314,7 @@ class updateFile implements \ArtaxServiceBuilder\Operation {
 
             case ('Authorization'): {
                 $args = [];
-                $args[] = $value;
-                $value = call_user_func_array('strval', $args);
+                $value = call_user_func_array([$value, 'getToken'], $args);
                 break;
             }
 

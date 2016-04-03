@@ -25,10 +25,14 @@ class CommitHydrator implements Hydrator
         $commit->commitInfo = $hydratorRegistry->instantiateClass('GithubService\Model\CommitInfo', $commitInfo);
 
         $author = $hydratorRegistry->extractValue($data, 'author');
-        $commit->author = $hydratorRegistry->instantiateClass('GithubService\Model\Person', $author);
+        if ($author) {
+            $commit->author = $hydratorRegistry->instantiateClass('GithubService\Model\Person', $author);
+        }
 
         $committer = $hydratorRegistry->extractValue($data, 'committer');
-        $commit->committer = $hydratorRegistry->instantiateClass('GithubService\Model\Person', $committer);
+        if ($committer) {
+            $commit->committer = $hydratorRegistry->instantiateClass('GithubService\Model\Person', $committer);
+        }
         
         return $commit;
     }

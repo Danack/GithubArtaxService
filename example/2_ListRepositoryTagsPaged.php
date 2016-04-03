@@ -2,6 +2,7 @@
 
 require_once "1_ListRepositoryTags.php";
 
+use GithubService\AuthToken\NullToken;
 // This example follows on from example 1
     
 /** @var $github GithubService\GithubArtaxService\GithubService */
@@ -17,7 +18,7 @@ if ($repoTags->pager) {
     foreach ($pages as $page) {
         echo "Page: ".$page."\n";
         $command = $github->listRepoTagsPaginate(
-            null,
+            new NullToken(),
             $page
         );
         $nextRepoTags = $command->execute();

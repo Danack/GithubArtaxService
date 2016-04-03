@@ -6,15 +6,15 @@ use ArtaxServiceBuilder\ResponseCache\NullResponseCache;
 use Amp\Artax\Client as ArtaxClient;
 use ArtaxServiceBuilder\BadResponseException;
 use ArtaxServiceBuilder\Oauth2Token;
-use GithubService\Model\HydratorException;
+use GithubService\Hydrator\HydratorException;
 
 require_once "testBootstrap.php";
 
 $injector = createProvider();
 
-$reactor = \Amp\getReactor();
+$reactor = \Amp\reactor();
 $cache = new NullResponseCache();
-$client = new ArtaxClient($reactor);
+$client = new ArtaxClient();
 $client->setOption(ArtaxClient::OP_MS_CONNECT_TIMEOUT, 5000);
 $client->setOption(ArtaxClient::OP_MS_KEEP_ALIVE_TIMEOUT, 1000);
 $githubAPI = new GithubService($client, $reactor, $cache, "Danack/test");

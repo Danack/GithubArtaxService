@@ -8,7 +8,7 @@ class Commits
     use SafeAccess;
     
     /**
-     * @var \GithubService\Model\Commit $commitsChild
+     * @var \GithubService\Model\Commit[] $commitsChild
      */
     public $commitsChild = [];
 

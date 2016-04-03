@@ -32,8 +32,12 @@ class GithubService extends GithubArtaxService
      */
     private $rateLimit;
 
-    public function __construct(Client $client, Reactor $reactor, ResponseCache $responseCache, $userAgent)
+    public function __construct(Client $client, Reactor $reactor, ResponseCache $responseCache, $userAgent = null)
     {
+        if ($userAgent === null) {
+            $userAgent = 'GithubArtaxService';
+        }
+        
         parent::__construct($client, $reactor, $responseCache, $userAgent);
         $this->githubHydratorRegistry = new GithubHydratorRegistry();
     }
@@ -262,6 +266,25 @@ class GithubService extends GithubArtaxService
 
         throw new GithubArtaxServiceException("Failed to create or retrieve oauth token.");
     }
+
+    
+    /**
+     * @param $clientID
+     * @param $scopes
+     * @param $redirectURI
+     * @param $secret
+     * @return string
+     */
+    public static function createAuthURL($clientID, $scopes, $redirectURI, $secret) {
+        $url = "https://github.com/login/oauth/authorize";
+        $url .= '?client_id='.urlencode($clientID);
+        $url .= '&scope='.urlencode(implode(',', $scopes));
+        //$url .= '&redirect_uri='.urlencode($redirectURI);
+        $url .= '&state='.urlencode($secret);
+    
+        return $url;
+    }
+
 
 
     //(no scope) Grants read-only access to public information (includes public user profile info, public repository info, and gists)

@@ -2,7 +2,7 @@
 
 namespace GithubService\Model;
 
-class CommitList
+class CommitList implements \IteratorAggregate
 {
     use GithubTrait;
     use SafeAccess;
@@ -11,4 +11,9 @@ class CommitList
      * @var \GithubService\Model\Commit $commitsChild
      */
     public $commitsChild = [];
+    
+    public function getIterator()
+    {
+        return new \ArrayIterator($this->commitsChild);
+    }
 }

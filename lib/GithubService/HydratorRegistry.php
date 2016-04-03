@@ -2,7 +2,7 @@
 
 namespace GithubService;
 
-use GithubService\Model\HydratorException;
+use GithubService\Hydrator\HydratorException;
 
 class HydratorRegistry
 {

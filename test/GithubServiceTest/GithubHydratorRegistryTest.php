@@ -98,6 +98,7 @@ class GithubHydratorRegistryTest extends \PHPUnit_Framework_TestCase
             // ['RepoStatsParticipation', 'REPO_STATS_PARTICIPATION'],
             ['RepoStatsPunchCard', 'REPO_STATS_PUNCH_CARD'],
             ['RepoSubscription', 'REPO_SUBSCRIPTION'],
+            ['SearchRepos', 'SEARCH_REPOS'],            
             ['SimplePublicKey', 'SIMPLE_PUBLIC_KEY'],
             ['Status', 'STATUS'],
             ['SubmoduleContent', 'SUBMODULE_CONTENT'],
@@ -110,6 +111,7 @@ class GithubHydratorRegistryTest extends \PHPUnit_Framework_TestCase
             //['Tree', 'TREE'],
             //['TreeNew', 'TREE_NEW'],
             ['UserEmail', 'USER_EMAIL'],
+            ['UserEmailList', 'user_email_list'],
             ['UserSearchItem', 'USER_SEARCH_ITEM'],
             //['UserSearchResults', 'USER_SEARCH_RESULTS'], Need to check what is current version
         );
